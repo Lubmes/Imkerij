@@ -1,0 +1,25 @@
+nl:
+  activerecord:
+    models:
+      user: 
+        one: Gebruiker
+        other: Gebruikers
+    attributes:
+      user:
+        email: E-mail
+        password: Wachtwoord
+        password_confirmation: Wachtwoord bevestigen
+        firstname: Voornaam
+        lastname: Achternaam
+        street: Straat
+        number: Huisnummer
+        postcode: Postcode
+        city: Woonplaats
+        country: Land
+        admin: Adminrechten
+      category:
+        name: Naam
+      product:
+        name: Naam
+        description: Omschrijving
+        category: Categorie

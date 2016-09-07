@@ -1,5 +1,19 @@
 @import "w3";
+@import "categories";
+@import "products";
 
 body {
 	@extend .w3-container;
+}
+
+#navigation {
+	@extend .w3-navbar;
+	@extend .w3-bottombar;
+	.profile {
+		@extend .w3-right;
+	}
+}
+
+#flash-messages {
+	@extend .w3-center;
 }

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.feature 'User kan inloggen', :pending do
+RSpec.feature 'User kan inloggen' do
+  let(:user) { FactoryGirl.create(:user) }
 
-  scenario 'bij het afrekenen' do
+  xscenario 'bij het afrekenen' do
     let!(:basket) { FactoryGirl.create(:basket) } # met producten ! nog toevoegen !
 
     visit basket_path(basket)
@@ -15,7 +16,15 @@ RSpec.feature 'User kan inloggen', :pending do
     expect(page).to eq basket_path(basket)
   end
 
-  scenario 'vóór het afrekenen', :pending do
+  scenario 'vóór het afrekenen' do
     # in de winkelomgeving ...
+    visit '/categories' # MAAK HIER PRODUCTS VAN
+    click_link 'inloggen'
+    fill_in "E-mail", with: user.email
+    fill_in "Wachtwoord", with: "password"
+    click_button "Log in"
+
+    expect(page).to have_content "U bent succesvol ingelogd."
+    expect(page).to have_content "Ingelogd als #{user.email}"
   end
 end

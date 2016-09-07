@@ -9,10 +9,21 @@
   </head>
 
   <body>
-        
+    <ul id='navigation'>
+      <li><%= link_to 'home', root_path %></li>
+      <li><%= link_to 'winkel', categories_path %></li>
+      <div class='profile'>
+        <li><%= link_to 'inloggen', new_user_session_path %></li>
+        <li><%= link_to 'log uit', destroy_user_session_path, method: :delete %></li>
+        <li><%= link_to 'nieuwe account', new_user_registration_path %></li>
+      </div>
+    </ul>
+
+    <div id='flash-messages'>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+    </div>
 
-	    <%= yield %>
+    <%= yield %>
   </body>
 </html>

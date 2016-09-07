@@ -1,0 +1,52 @@
+// Place all the styles related to the categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin categories-col {
+	@extend .w3-col;
+	@extend .m2;
+}
+@mixin products-col {
+	@extend .w3-col;
+	@extend .m3;
+	@extend .w3-margin-left;
+}
+@mixin model-table {
+	table {
+		@extend .w3-table;
+		@extend .w3-border;
+		@extend .w3-margin-bottom;
+	}
+}
+.cat-col { @include categories-col }
+.prod-col { @include products-col }
+
+#shop-actions {
+	@extend .w3-navbar;
+	@extend .w3-border-bottom;
+	li a {
+		@extend .w3-margin-bottom;
+		@extend .w3-margin-right;
+		@extend .w3-hover-light-grey;
+		@extend .w3-hover-text-teal;
+	}
+}
+
+#model-actions {
+	@extend .w3-small;
+	tr {
+		@extend .w3-hover-light-grey;
+		@extend .w3-hover-text-khaki;
+	}
+	a {
+		text-decoration: none;
+	}
+}
+header {
+	@extend .w3-row;
+	@extend .w3-text-grey;
+}
+#category {
+	@extend .w3-row;
+	@include model-table;
+}
