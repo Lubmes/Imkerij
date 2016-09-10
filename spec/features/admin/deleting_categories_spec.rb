@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Admin kan categorieën verwijderen' do
   let!(:category) { FactoryGirl.create(:category, name: 'Kaarsen') }
-  let(:admin) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:user, :admin) }
 
   before do
     login_as(admin)
