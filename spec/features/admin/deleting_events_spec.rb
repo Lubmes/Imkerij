@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin kan agendapunten verwijderen', :pending do
-  let!(:event) { FactoryGirl.create(:event, title: 'Vlindernacht', 
+RSpec.feature 'Admin kan agendapunten verwijderen' do
+  let!(:event) { FactoryGirl.create(:event, name: 'Vlindernacht', 
                                             description: 'Verhalen van een vlinderexpert.', 
-                                            at: 14.days.from_now) }
-  let(:user) { FactoryGirl.create(:user, :admin) }
+                                            date: 14.days.from_now) }
+  let(:admin) { FactoryGirl.create(:user, :admin) }
 
   before do
-    login_as(:admin)
+    login_as(admin)
     visit events_path
   end
 
   scenario 'met succes' do
-    page.find('li', :text => 'Vlindernacht').click_link 'Verwijderen'
+    page.find('.event', :text => 'Vlindernacht').click_link 'VERWIJDER'
 
     expect(page).to have_content 'Agendapunt is verwijderd.'
     expect(page).to have_no_content 'Vlindernacht'

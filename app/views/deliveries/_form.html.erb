@@ -1,0 +1,34 @@
+<%= form.fields_for :deliveries do |deliveries_form| %>
+
+<tr>
+  <div class="field">
+    <th><%= deliveries_form.label :address_street_name %></th>
+    <td><%= deliveries_form.text_field :address_street_name %></td>
+  </div>
+</tr>
+<tr>
+  <div class="field">
+    <th><%= deliveries_form.label :address_street_number %></th>
+    <td><%= deliveries_form.text_field :address_street_number %></td>
+  </div>
+</tr>
+<tr>
+  <div class="field">
+    <th><%= deliveries_form.label :address_zip_code %></th>
+    <td><%= deliveries_form.text_field :address_zip_code %></td>
+  </div>
+</tr>
+<tr>
+    <div class="field">
+      <th><%= deliveries_form.label :address_city %></th>
+      <td><%= deliveries_form.text_field :address_city %></td>
+    </div>
+</tr>
+<tr>
+    <div class="field">
+      <th><%= deliveries_form.label :address_country %></th>
+      <td><%= deliveries_form.text_field :address_country %></td>
+    </div>
+</tr>
+
+<% end %>

@@ -1,0 +1,57 @@
+<table>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <thead>
+    <tr>
+      <th colspan='2'><h5>Sign Up</h5></th>
+    </tr>
+  </thead>
+  
+  <%= devise_error_messages! %>
+
+  <tbody>
+    <tr>
+      <div class="field">
+        <th><%= f.label :email %></th>
+        <td><%= f.email_field :email, autofocus: true %></td>
+      </div>
+    </tr>
+    <tr>
+      <div class="field">
+        <th><%= f.label :password %></th>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <td><%= f.password_field :password, autocomplete: "off" %></td>
+      </div>
+    </tr>
+    <tr>
+      <div class="field">
+        <th><%= f.label :password_confirmation %></th>
+        <td><%= f.password_field :password_confirmation, autocomplete: "off" %></td>
+      </div>
+    </tr>
+    <tr>
+      <div class="field">
+        <th><%= f.label :first_name %></th>
+        <td><%= f.text_field :first_name %></td>
+      </div>
+    </tr>
+    <tr>
+      <div class="field">
+        <th><%= f.label :last_name %></th>
+        <td><%= f.text_field :last_name %></td>
+      </div>
+    </tr>
+    <%= render 'deliveries/form', form: f %>
+  </tbody>
+
+  <tfoot class='model-actions'>
+    <tr>
+      <div class="actions">
+        <td colspan='2'><%= f.submit "Regristreer" %></td>
+      </div>
+    </tr>
+<% end %>
+    <%= render "devise/shared/links" unless current_page? check_out_order_path %>
+  </tfoot>
+</table>

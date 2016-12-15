@@ -20,4 +20,16 @@ RSpec.feature 'Admin kan nieuwe producten toevoegen' do
     expect(page).to have_content 'Propolis lollie'
     # expect(page).to have_content 0.80
   end
+
+  scenario 'met invalide details' do
+    fill_in 'Naam', with: ''
+    fill_in 'Omschrijving', with: ''
+    # fill_in 'Prijs', with: ''
+    click_button 'Opslaan'
+
+    expect(page).to have_content 'Product is niet toegevoegd'
+    expect(page).to have_content 'moet opgegeven zijn'
+    expect(page).to have_content 'moet opgegeven zijn'
+    # expect(page).to have_content 'Product is toegevoegd' # iets met de prijs
+  end
 end

@@ -36,7 +36,7 @@ RSpec.feature 'User kan zich aanmelden' do
     click_button 'Regristreer'
 
     expect(page).to have_content('U bent ingeschreven.')
-    expect(page).to eq categories_path
+    expect(page).to have_current_path(categories_path)
   end
 
 end

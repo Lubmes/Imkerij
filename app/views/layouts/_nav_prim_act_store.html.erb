@@ -1,0 +1,5 @@
+<% if policy(:category).admin_action? %>
+	<ul id='primary-actions'>
+		<li><%= link_to 'nieuwe categorie', [:new, :category] %></li>
+	</ul>
+<% end %>

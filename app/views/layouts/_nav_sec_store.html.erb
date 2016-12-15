@@ -1,0 +1,5 @@
+<ul id='sec-nav'>
+	<% @categories.each do |category| %>
+		<li><%= link_to category.name.downcase, "#cat-#{category.id}" %></li>
+	<% end %>
+</ul>

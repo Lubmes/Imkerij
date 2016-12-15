@@ -1,0 +1,61 @@
+<%= form_for [event] do |f| %>
+<div id='form' class='event-col'>
+
+  <!-- Event -->
+	<table>
+    <!-- Naam -->
+		<tr>
+			<th><%= f.label :name %></td>
+ 			<td><%= f.text_field :name, size: 30 %>
+      </td>
+  	</tr>
+    <% if event.errors[:name].any? %>
+      <tr id='errors'>
+        <th></th><td><% event.errors[:name].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <!-- Omschrijving -->
+  	<tr>
+		  <th><%= f.label :description %></td>
+  		<td><%= f.text_area :description, size: '30x10' %></td>
+  	</tr>
+    <% if event.errors[:description].any? %>
+      <tr id='errors'>
+        <th></th><td><% event.errors[:description].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <!-- Tijdstip -->
+    <tr>
+      <th><%= f.label :date %></td>
+      <td><%= f.text_field :date, id: 'flatpickr-input' %></td>
+    </tr>
+    <% if event.errors[:date].any? %>
+      <tr id='errors'>
+        <th></th><td><% event.errors[:date].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= f.submit "Opslaan" %>
+
+</div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    flatpickr('#flatpickr-input', {
+			enableTime: true,
+			locale: "nl",
+			time_24hr: true
+		});
+  });
+</script>

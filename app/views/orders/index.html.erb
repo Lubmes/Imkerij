@@ -1,0 +1,28 @@
+<% content_for :navigation do %>
+	<%= render 'layouts/nav_sec_admin' %>
+<% end %>
+
+<div id='orders'>
+	<table id='paid'>
+
+		<thead>
+			<tr>
+				<th>Klant</th>
+				<th>Laatst bewerkt</th>
+				<th>Bedrag</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+
+		<% @orders.each do |order| %>
+
+				<tr class='order'>
+					<td><%= link_to "#{order.customer.first_name} #{order.customer.last_name}", [order.customer] %></td>
+					<td><%= I18n.l(order.updated_at, format: :long) %></td>
+					<td><%= currency_symbol + " " + order.total %></td>
+					<td><%= order.status ? order.status : "niet opgeslagen"  %></td>
+				</tr>
+
+		<% end %>
+	</table>
+</div>

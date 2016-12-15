@@ -1,0 +1,23 @@
+#controls {
+	@extend .w3-center;
+	a {
+		text-decoration: none;
+		@extend .w3-hover-text-khaki;
+	}
+}
+.co-order-col {
+	@extend .w3-col;
+	@extend .m4;
+}
+.co-user-col {
+	@extend .w3-col;
+	@extend .m5;
+	@extend .w3-right;
+}
+#payment {
+	@extend .w3-row;
+	@include model-table;
+	#user {
+		@extend .w3-padding-left;
+	}
+}

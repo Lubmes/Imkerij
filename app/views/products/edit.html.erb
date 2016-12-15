@@ -1,1 +1,26 @@
-<%= render 'form', category: @category, product: @product %>
+<div id='shop-edit'>
+	<div id='details' class='details-col'>
+		<%= render 'form', category: @category, product: @product %>
+	</div>
+
+	<div id='pictures' class='pictures-col'>
+		<% @product.pictures.each do |picture| %>
+			<div id='picture'>
+				<table>
+					<tbody>
+						<tr>
+							<%= image_tag picture.image.url %>
+						</tr>
+					</tbody>
+				  <tfoot id='model-actions'>
+				  	<tr>
+					  	<td colspan='2'>
+								<%= link_to 'VERWIJDER', [@category, picture], method: :delete %>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+				</div>
+		<% end %>
+	</div>
+</div>

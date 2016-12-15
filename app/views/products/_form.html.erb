@@ -1,8 +1,81 @@
-<%= form_for [category, product] do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
-  <%= f.label :description %>
-  <%= f.text_field :description %><br>
+<%= form_for [category, product], html: { multipart: true } do |f| %>
+<div id='form' class='prod-col'>
+
+  <!-- Product -->
+	<table>
+    <!-- Naam -->
+		<tr>
+			<th><%= f.label :name %></td>
+ 			<td><%= f.text_field :name, size: 30 %></td>
+  	</tr>
+    <% if product.errors[:name].any? %>
+      <tr id='errors'>
+        <th></th><td><% product.errors[:name].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <!-- Omschrijving -->
+  	<tr>
+		  <th><%= f.label :description %></td>
+  		<td><%= f.text_area :description, size: '30x10' %></td>
+  	</tr>
+    <% if product.errors[:description].any? %>
+      <tr id='errors'>
+        <th></th><td><% product.errors[:description].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <!-- Prijs -->
+    <tr>
+      <th><%= f.label :price %></td>
+      <td><%= f.text_field :price, size: 10 %></td>
+    </tr>
+    <% if product.errors[:price].any? %>
+      <tr id='errors'>
+        <th></th><td><% product.errors[:price].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+		<% end %>
+		<!-- BTW -->
+    <tr>
+      <th><%= f.label :sales_tax %></td>
+      <td><%= f.text_field :sales_tax, size: 10 %></td>
+    </tr>
+    <% if product.errors[:sales_tax].any? %>
+      <tr id='errors'>
+        <th></th><td><% product.errors[:sales_tax].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+      </tr>
+		<% end %>
+		<!-- Gewicht -->
+    <tr>
+      <th><%= f.label :mail_weight %> (gr)</td>
+      <td><%= f.text_field :mail_weight, size: 10 %></td>
+    </tr>
+    <% if product.errors[:mail_weight].any? %>
+      <tr id='errors'>
+        <th></th><td><% product.errors[:mail_weight].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+
+    <tr>
+      <th><%= f.label :pictures %></th>
+      <td><%= file_field_tag 'images[]', type: :file, multiple: true %></td>
+    </tr>
+  </table>
 
   <%= f.submit "Opslaan" %>
+
+</div>
 <% end %>

@@ -1,5 +1,26 @@
-<%= form_for category do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit "Opslaan" %>
+<%= form_for category, html: { multipart: true } do |f| %>
+  <div id=form>
+  	<!-- Categorie -->
+  	<table>
+  		<!-- Naam -->
+  		<tr>
+  			<th><%= f.label :name %></th>
+   			<td><%= f.text_field :name %>  
+        </td>
+    	</tr>
+      <% if category.errors[:name].any? %>
+        <tr id='errors'>
+          <th></th><td><% category.errors[:name].each do |msg| %>
+              <%= "- #{msg}" %><br>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <th><%= f.label :pictures %></th>
+        <td><%= file_field_tag 'images[]', type: :file, multiple: true %></td>
+      </tr>
+    </table>
+    <%= f.submit "Opslaan" %>
+  </div>
 <% end %>

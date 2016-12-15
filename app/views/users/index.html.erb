@@ -1,0 +1,14 @@
+<% content_for :navigation do %>
+	<%= render 'layouts/nav_sec_admin' %>
+	<%= render 'layouts/nav_prim_act_users' %>
+<% end %>
+
+<div id='users'>
+	<% @users.each do |user| %>
+	<div class="user">
+		<div class="user-col">
+			<%= render user %>
+		</div>
+	</div>
+	<% end %>
+</div>

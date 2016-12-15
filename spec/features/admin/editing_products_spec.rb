@@ -13,7 +13,7 @@ RSpec.feature 'Admin kan producten bijwerken' do
   end
 
   scenario 'met valide details' do
-    page.find('#product', :text => 'Honingpot 200ml').click_link 'BIJWERKEN'
+    page.find('.product', :text => 'Honingpot 200ml').click_link 'BIJWERKEN'
     fill_in 'Naam', with: 'Honingpot 200ml Spec. Edition'
     fill_in 'Omschrijving', with: 'Gelimiteerde uitgave, wees er snel bij!'
     # fill_in 'Prijs', with: 3.50

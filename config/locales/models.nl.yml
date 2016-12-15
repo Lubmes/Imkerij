@@ -1,7 +1,9 @@
 nl:
+  "true": Ja
+  "false": Nee
   activerecord:
     models:
-      user: 
+      user:
         one: Gebruiker
         other: Gebruikers
     attributes:
@@ -9,17 +11,66 @@ nl:
         email: E-mail
         password: Wachtwoord
         password_confirmation: Wachtwoord bevestigen
-        firstname: Voornaam
-        lastname: Achternaam
-        street: Straat
-        number: Huisnummer
-        postcode: Postcode
-        city: Woonplaats
-        country: Land
+        first_name: Voornaam
+        last_name: Achternaam
         admin: Adminrechten
+        remember_me: Onthoud mij
+      delivery:
+        address_street_name: Straat
+        address_street_number: Huisnummer
+        address_zip_code: Postcode
+        address_city: Woonplaats
+        address_country: Land
+      event:
+        name: Naam
+        description: Omschrijving
+        date: Tijdstip
       category:
         name: Naam
       product:
         name: Naam
         description: Omschrijving
+        price: Prijs
+        sales_tax:  BTW
+        mail_weight: Verzendgewicht
         category: Categorie
+        pictures: Foto's
+      picture:
+        visable: Zichtbaar
+      booking:
+        product_quantity: Aantal
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "%{attribute} moet opgegeven zijn."
+            password:
+              blank: "%{attribute} moet opgegeven zijn."
+            password_confirmation:
+              blank: Wachtwoord bevestiging moet opgegeven zijn.
+            first_name:
+              blank: "%{attribute} moet opgegeven zijn."
+            last_name:
+              blank: "%{attribute} moet opgegeven zijn."
+            address_street_name:
+              blank: "%{attribute} moet opgegeven zijn."
+            address_street_number:
+              blank: "%{attribute} moet opgegeven zijn."
+            address_zip_code:
+              blank: "%{attribute} moet opgegeven zijn."
+            address_city:
+              blank: "%{attribute} moet opgegeven zijn."
+            address_country:
+              blank: "%{attribute} moet opgegeven zijn."
+        event:
+          attributes:
+            date:
+              in_future: moet in de toekomst zijn
+
+  devise:
+    shared:
+      log_in: Inloggen
+      sign_up: Nieuwe account
+      forgot_password: Wachtwoord vergeten?

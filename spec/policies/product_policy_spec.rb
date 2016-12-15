@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProductPolicy do
-  context 'permissions' do
+  context 'toegang' do
     subject { ProductPolicy.new(user, product) }
   
     let(:user) { FactoryGirl.create :user }
@@ -9,27 +9,24 @@ RSpec.describe ProductPolicy do
     let(:product) { FactoryGirl.create :product,
                                         category: category }
 
-    context 'for anonymous users' do
+    context 'voor anonieme gebruikers' do
       let(:user) { nil }
 
-      it { should_not permit_action :create }
-      it { should_not permit_action :update }
-      it { should_not permit_action :destroy }
+      it { should forbid_edit_and_update_actions }
+      it { should forbid_action :destroy }
     end
 
-    context "for random users" do
-      let(:random_user) { FactoryGirl.create :user }
+    context "voor willekeurige gebruikers" do
+      let(:user) { FactoryGirl.create :user }
 
-      it { should_not permit_action :create }
-      it { should_not permit_action :update }
-      it { should_not permit_action :destroy }
+      it { should forbid_edit_and_update_actions }
+      it { should forbid_action :destroy }
     end
 
-    context 'for admins' do
+    context 'voor administrators' do
       let(:user) { FactoryGirl.create :user, :admin }
 
-      it { should permit_action :create }
-      it { should permit_action :update }
+      it { should permit_edit_and_update_actions }
       it { should permit_action :destroy }
     end
   end

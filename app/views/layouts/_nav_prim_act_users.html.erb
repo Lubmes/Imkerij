@@ -1,0 +1,5 @@
+<% if policy(:user).create? %>
+	<ul id='primary-actions'>
+		<li><%= link_to 'nieuwe gebruiker', new_user_path %></li>
+	</ul>
+<% end %>

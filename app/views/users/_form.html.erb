@@ -1,0 +1,126 @@
+<%= form_for user do |f| %>
+<div id=form class='user-col'>
+
+	<table>
+    <div id='password'>
+      <tr>
+        <th><%= f.label :password %></th>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br/>
+        <td><%= f.text_field :password %></td>
+      </tr>
+    </div>
+
+		<tr>
+			<th><%= f.label :email %></td>
+			<td><%= f.text_field :email %></td>
+		</tr>
+		<% if user.errors[:email].any? %>
+      <tr id='errors'>
+        <th></th><td><% user.errors[:email].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<tr>
+			<th><%= f.label :first_name %></td>
+			<td><%= f.text_field :first_name %></td>
+		</tr>
+		<% if user.errors[:first_name].any? %>
+      <tr id='errors'>
+        <th></th><td><% user.errors[:first_name].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<tr>
+			<th><%= f.label :last_name %></td>
+			<td><%= f.text_field :last_name %></td>
+		</tr>
+		<% if user.errors[:last_name].any? %>
+      <tr id='errors'>
+        <th></th><td><% user.errors[:last_name].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+		<!-- PREVIOUS ADDRESS -->
+		<tr>
+			<th><%= f.label :address_street_name %></td>
+			<td><%= f.text_field :address_street_name %></td>
+		</tr>
+		<% if user.errors[:address_street_name].any? %>
+      <tr id='errors'>
+        <th></th><td><% user.errors[:address_street_name].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<tr>
+			<th><%= f.label :address_street_number %></td>
+			<td><%= f.text_field :address_street_number %></td>
+		</tr>
+		<% if user.errors[:address_street_number].any? %>
+      <tr id='errors'>
+        <th></th><td><% user.errors[:address_street_number].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<tr>
+			<th><%= f.label :address_zip_code %></td>
+			<td><%= f.text_field :address_zip_code %></td>
+		</tr>
+		<% if user.errors[:address_zip_code].any? %>
+      <tr id='errors'>
+        <th></th><td><% user.errors[:address_zip_code].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<tr>
+			<th><%= f.label :address_city %></td>
+			<td><%= f.text_field :address_city %></td>
+		</tr>
+		<% if user.errors[:address_city].any? %>
+      <tr id='errors'>
+        <th></th><td><% user.errors[:address_city].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<tr>
+			<th><%= f.label :address_country %></td>
+			<td><%= f.text_field :address_country %></td>
+		</tr>
+		<% if user.errors[:address_country].any? %>
+      <tr id='errors'>
+        <th></th><td><% user.errors[:address_country].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<!-- PREVIOUS ADDRESS -->
+
+    <% if current_user.admin? %>
+			<tr>
+				<th><%= f.label :admin %></td>
+				<td><%= f.check_box :admin %></td>
+			</tr>
+		<% end %>
+	</table>
+
+  <%= f.submit "Opslaan" %>
+
+</div>
+<% end %>

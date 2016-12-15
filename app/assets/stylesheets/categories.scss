@@ -2,51 +2,68 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@mixin categories-col {
+// Cat Index / Shop Display
+.shopping-col {
 	@extend .w3-col;
-	@extend .m2;
+	@extend .m8;
 }
-@mixin products-col {
+.cat-col {
 	@extend .w3-col;
-	@extend .m3;
-	@extend .w3-margin-left;
+	@extend .m4;
 }
-@mixin model-table {
-	table {
-		@extend .w3-table;
-		@extend .w3-border;
-		@extend .w3-margin-bottom;
-	}
+.prod-col {
+	@extend .w3-col;
+	@extend .m8;
 }
-.cat-col { @include categories-col }
-.prod-col { @include products-col }
-
-#shop-actions {
-	@extend .w3-navbar;
-	@extend .w3-border-bottom;
-	li a {
-		@extend .w3-margin-bottom;
-		@extend .w3-margin-right;
-		@extend .w3-hover-light-grey;
-		@extend .w3-hover-text-teal;
-	}
-}
-
-#model-actions {
-	@extend .w3-small;
-	tr {
-		@extend .w3-hover-light-grey;
-		@extend .w3-hover-text-khaki;
-	}
-	a {
-		text-decoration: none;
-	}
+.order-col {
+	@extend .w3-col;
+	@extend .m4;
+	@extend .w3-right;
 }
 header {
 	@extend .w3-row;
 	@extend .w3-text-grey;
+	.prod-col, .order-col {
+		@extend .w3-padding-left;
+	}
 }
-#category {
+#store{
 	@extend .w3-row;
 	@include model-table;
+	#order {
+		@extend .w3-padding-left;
+	}
+}
+.category {
+	@extend .w3-row;
+	.prod-col {
+		@extend .w3-padding-left;
+	}
+}
+// Gallery
+.gallery {
+	.gallery-picture {
+		@extend .w3-padding-bottom;
+	}
+}
+.cat-picture {
+	@extend .w3-center;
+	img {
+		width: 75%;
+	}
+}
+.prod-picture {
+	@extend .w3-show-inline-block;
+	img {
+		width: 100%;
+	}
+}
+#products {
+	.gallery {
+		@extend .w3-row-padding;
+		.prod-picture {
+			@extend .w3-third;
+			@extend .m2;
+		}
+	}
 }

@@ -1,3 +1,26 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#admin-info {
+	@extend .w3-margin-top;
+	@extend .w3-row;
+	@include model-table;
+	table {
+		@extend .w3-col;
+		@extend .m6;
+	}
+}
+
+#months {
+	small {
+		@extend .w3-text-dark-grey;
+	}
+	@extend .w3-margin-bottom;
+	.month {
+		h4 {
+			@extend .w3-margin-top;
+			@extend .w3-margin-bottom;
+		}	
+	}
+}

@@ -1,0 +1,5 @@
+<% if policy(:event).admin_action? %>
+	<ul id='primary-actions'>
+		<li><%= link_to 'nieuw agendapunt', new_event_path %></li>
+	</ul>
+<% end %>

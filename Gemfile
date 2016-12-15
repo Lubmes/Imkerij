@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.0"
+ruby "2.3.1"
 
 gem 'rails', '~> 5.0.0'
 gem 'pg', '~> 0.18'
@@ -12,10 +12,19 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.2'
 gem 'pundit', '~> 1.1'
+gem 'money-rails', '~> 1.7'
+gem 'paperclip', '~> 5.1'
+gem 'active_link_to'
+gem 'mollie-api-ruby', '~> 2.0'
+gem 'flatpickr_rails', '~> 0.0.2'
+gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
+# Grafieken
+gem 'chartkick', '~> 2.1', '>= 2.1.1'
+gem 'groupdate'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'rspec-rails', '~> 3.5', '>= 3.5.1'
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
 end
 
 group :development do
@@ -26,10 +35,12 @@ group :development do
 end
 
 group :test do
-  gem "capybara", "~> 2.4"
-  gem "factory_girl_rails", "~> 4.7"
-  gem "selenium-webdriver", "~> 2.45"
-  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'  
+  gem 'pundit-matchers', '~> 1.1'
+  gem 'capybara', '~> 2.10', '>= 2.10.1'
+  gem 'factory_girl_rails', '~> 4.7'
+  # gem 'selenium-webdriver', '~> 2.53.4'
+  gem 'poltergeist'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
   gem "email_spec", "~> 1.6.0"
 end
 

@@ -1,0 +1,13 @@
+<div id='shop-edit'>
+	<div id='details' class='details-col'>
+		<%= render @product, category: @product.category %>
+	</div>
+
+	<div id='pictures' class='pictures-col'>
+		<% @product.pictures.each do |picture| %>
+			<div class='picture'>
+				<%= render picture, imageable_model: @product %>
+			</div>
+		<% end %>
+	</div>
+</div>

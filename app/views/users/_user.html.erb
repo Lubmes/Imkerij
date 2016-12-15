@@ -1,0 +1,35 @@
+<table>
+	<tbody>
+		<tr>
+			<th><%= User.human_attribute_name('email') %></th>
+			<td><%= user.email %></td>
+		</tr>
+		<tr>
+			<th><%= User.human_attribute_name('first_name') %></th>
+			<td><%= user.first_name %></td>
+		</tr>
+		<tr>
+			<th><%= User.human_attribute_name('last_name') %></th>
+			<td><%= user.last_name %></td>
+		</tr>
+		<% if current_user.admin? %>
+			<tr>
+				<th><%= User.human_attribute_name('admin') %></th>
+				<td><%= I18n.t(user.admin) %></td>
+			</tr>
+		<% end %>
+
+	  <tfoot class='model-actions'>
+	  	<% if policy(user).show? && current_page?(action: 'index') %>
+				<tr>
+					<td colspan='2'><%= link_to 'INZIEN', [user] %></td>
+				</tr>
+			<% end %>
+			<% if policy(user).edit? %>
+				<tr>
+					<td colspan='2'><%= link_to 'BIJWERKEN', [:edit, user] %></td>
+				</tr>
+			<% end %>
+		</tfoot>
+	</tbody>
+</table>

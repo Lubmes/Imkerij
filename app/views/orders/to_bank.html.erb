@@ -1,0 +1,20 @@
+<h1>Afrekenen</h1>
+<div id='controls'>
+	<%= link_to 'Betalen', '#' %>
+</div>
+
+<header>
+	<h4 class='co-order-col'>Uw bestelling</h4>
+	<h4 class='co-user-col'>Verzendadres</h4>
+</header>
+
+<div id='payment'>
+	<div id='order' class='co-order-col'>
+		<%= render @order %>
+	</div>
+	<div class="user">
+		<div class="co-user-col">
+			<%= render @user %>
+		</div>
+	</div>
+</div>

@@ -5,6 +5,10 @@ class CategoryPolicy < ApplicationPolicy
     end
   end
 
+  def new?
+    create?
+  end
+
   def create?
     user.try(:admin)
   end

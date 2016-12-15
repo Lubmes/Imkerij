@@ -1,0 +1,63 @@
+<table class='product'>
+  <thead>
+    <td colspan='2'>
+      <div class='gallery'>
+        <% product.pictures.each do |picture| %>
+          <div class='prod-picture'>
+            <%= render 'pictures/gallery_picture', picture: picture %>
+          </div>
+        <% end %>
+      </div>
+    </td>
+  </thead>
+  <tbody>
+	  <tr>
+	  	<th><%= Product.human_attribute_name :name %></th>
+	    <td><%= product.name %></td>
+    </tr>
+    <tr>
+	    <th><%= Product.human_attribute_name :description %></th>
+	    <% if current_page?(action: 'index') %>
+		    <td><%= truncate(product.description, length: 160) { link_to "meer", [category, product] } %></td>
+		  <% else %>
+		  	<td><%= product.description %></td>
+		  <% end %>
+	  </tr>
+    <tr>
+	    <th><%= Product.human_attribute_name :price %></th>
+	    <td><%= currency_symbol %> <%= product.price %></td>
+	  </tr>
+    <tr>
+      <th><%= Product.human_attribute_name :sales_tax %></th>
+      <td><%= product.sales_tax %> %</td>
+    </tr>
+    <tr>
+      <th><%= Product.human_attribute_name :mail_weight %></th>
+      <td><%= product.mail_weight %> gr</td>
+    </tr>
+  </tbody>
+  <tfoot class='model-actions'>
+
+  	<%= render 'bookings/form', product: product, booking: @booking %>
+
+	  <% if policy(category).admin_action? %>
+	  	<% if current_page?(action: 'index') %>
+				<tr>
+					<td colspan='2'><%= link_to 'INZIEN', [category, product] %></td>
+				</tr>
+			<% end %>
+	  	<tr>
+		  	<td colspan='2'>
+		  		<%= link_to 'VERWIJDER', [category, product],
+		  				 method: :delete,
+		  				 data: { confirm: 'Weet je zeker dat je dit product wil verwijderen?' } %>
+		  	</td>
+		  </tr>
+		  <tr>
+		  	<td colspan='2'>
+		  		<%= link_to 'BIJWERKEN', [:edit, category, product] %>
+		  	</td>
+	  	</tr>
+  	<% end %>
+  </tfoot>
+</table>

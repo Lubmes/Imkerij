@@ -10,7 +10,7 @@ RSpec.feature 'Admin kan categorieën verwijderen' do
   end
 
   scenario 'met succes' do  
-    page.find('#category', :text => 'Kaarsen').click_link 'VERWIJDER'
+    page.find('.category', :text => 'Kaarsen').click_link 'VERWIJDER'
   
     expect(page).to have_content 'Categorie is verwijderd.'
     expect(page).to have_no_content 'Kaarsen'

@@ -1,0 +1,47 @@
+<% content_for :navigation do %>
+	<%= render 'layouts/nav_sec_admin' %>
+<% end %>
+
+<header>
+	<h4 class='user-col'>Gebruiker</h4>
+	<h4 class='orders-col'>Te verwerken</h4>
+</header>
+
+<div class='user'>
+	<div class='user-col'>
+		<%= render @user %>
+	</div>
+
+	<div class='orders-col'>
+			<div id='order'>
+				<% if @order.nil? %>
+					<p>Geen</p>
+				<% else %>
+					<%= render @order %>
+				<% end %>
+			</div>
+
+		<div id='orders'>
+			<header>
+				<h4>Verzonden</h4>
+			</header>
+			<% @user.orders.each do |order| %>
+				<table>
+					<tr>
+						<th>Aangemaakt</th>
+						<td><%= l(order.created_at, format: :long) %></td>
+					</tr>
+					<tr>
+						<th>Status</th>
+						<td><%= order.status ? order.status : "niet opgeslagen"  %></td>
+					</tr>
+					<tr>
+						<th>Totaalbedrag</th>
+						<td><%= currency_symbol %> <%= order.total %></td>
+					</tr>
+				</table>
+			<% end %>
+		</div>
+	</div>
+</div>
+

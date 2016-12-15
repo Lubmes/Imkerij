@@ -1,0 +1,29 @@
+<% content_for :navigation do %>
+	<%= render 'layouts/nav_sec_admin' %>
+<% end %>
+
+<div id=admin-info>
+	<table>
+		<tbody>
+			<tr>
+				<td>Totaalbedrag over alle orders</td>
+				<td><%= currency_symbol %> <%= Order.sum_of_all_orders %></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div id='months'>
+	<h4>Totaaloverzicht <small><%= currency_symbol %> / dag</small></h4>
+	<%= area_chart (Order.group_by_day(:updated_at).sum(:total_cents)).transform_values { |v| 
+					(v.fdiv(100)).round(2) }, 
+				colors: ['#4c997f'], 
+				label: "€ dagtotaal" %>
+	<div class='month'>
+		<h4><%= I18n.l(Time.now, format: "%B").capitalize %> <small><%= currency_symbol %> / dag</small></h4>
+		<%= column_chart Order.group_by_day_of_month(:updated_at).sum(:total_cents).transform_values { |v| 
+						(v.fdiv(100)).round(2) }, 
+					colors: ['#65cca9'], 
+					label: "€ dagtotaal" %>
+	</div>
+</div>

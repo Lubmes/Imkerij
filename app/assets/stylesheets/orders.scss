@@ -1,0 +1,11 @@
+// Place all the styles related to the orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#orders {
+	@extend .w3-margin-top;
+	tr.order {
+		@extend .w3-hover-light-grey;
+		@extend .w3-hover-text-cyan;
+	}
+}

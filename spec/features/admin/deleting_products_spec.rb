@@ -13,7 +13,7 @@ RSpec.feature 'Admin kan producten verwijderen' do
   end
 
   scenario 'met succes' do
-    page.find('#product', :text => 'Honingpot 200ml').click_link 'VERWIJDER'
+    page.find('.product', :text => 'Honingpot 200ml').click_link 'VERWIJDER'
 
     expect(page).to have_content 'Product is verwijderd.'
     expect(page).to have_no_content 'Honingpot 200ml'

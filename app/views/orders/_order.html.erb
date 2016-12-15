@@ -1,0 +1,31 @@
+<table>
+	<tr>
+		<th>Status</th>
+		<td><%= @order.status ? @order.status : "niet opgeslagen" %></td>
+	</tr>
+	<tr>
+		<th>Totaal</th>
+		<td><%= currency_symbol %> <%= @order.total %></td>
+	</tr>
+	<tfoot class='model-actions'>
+  	<% if @order.bookings.any? %>
+	  	<tr>
+		  	<td colspan='2'>
+		  		<%= link_to 'LEEGMAKEN', [:empty, @order] %>
+		  	</td>
+	  	</tr>
+  	<tr>
+	  	<td colspan='2'>
+	  		<%= link_to 'AFREKENEN', [:check_out, @order] %>
+	  	</td>
+  	</tr>
+  	<% end %>
+  </tfoot>
+	
+</table>
+
+<% @order.bookings.order(created_at: :asc).each do |booking| %>
+	<div class='booking'>
+		<%= render booking %>
+	</div>
+<% end %>

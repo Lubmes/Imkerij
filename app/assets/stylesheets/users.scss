@@ -1,0 +1,56 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+h1 {
+	@extend .w3-center;
+}
+.user-col {
+	@extend .w3-col;
+	@extend .m5;
+}
+.orders-col {
+	@extend .w3-col;
+	@extend .m4;
+	margin-left: 8%;
+}
+#users {
+	@extend .w3-margin-top;
+}
+#admin-actions {
+	@extend .w3-navbar;
+	@extend .w3-border-bottom;
+	li a {
+		@extend .w3-margin-bottom;
+		@extend .w3-margin-right;
+		@extend .w3-hover-light-grey;
+		@extend .w3-hover-text-teal;
+	}
+}
+@mixin model-table {
+	table {
+		@extend .w3-table;
+		@extend .w3-border;
+		@extend .w3-margin-bottom;
+	}
+}
+.user {
+	@extend .w3-row;
+	@include model-table;
+}
+#orders {
+	@include model-table;
+}
+#password {
+	// @extend .w3-border;
+}
+// log-in
+#log-in {
+	@extend .w3-margin-top;
+	@extend .w3-center;
+	@include model-table;
+	.user-col {
+		@extend .w3-center;
+		// 29% = 3.5 columns
+		margin-left: 29%;
+	}
+}

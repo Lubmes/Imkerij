@@ -1,0 +1,48 @@
+#main-nav, #sec-nav, #primary-actions, #flash-messages {
+	@extend .w3-navbar;
+}
+
+#main-nav {
+	@extend .w3-bottombar;
+	@extend .w3-margin-0;
+	.profile {
+		@extend .w3-right;
+	}
+	a.active {
+		@extend .w3-teal;
+	}
+}
+#sec-nav {
+	@extend .w3-margin-0;
+	@extend .w3-border-bottom;
+	a {
+		@extend .w3-wide;
+		@extend .w3-hover-pale-yellow;
+	}
+	a.active {
+		@extend .w3-teal;
+		@extend .w3-hover-teal;
+	}
+}
+#primary-actions {
+	@extend .w3-border-bottom;
+	li a {
+		@extend .w3-margin-right;
+		@extend .w3-hover-light-grey;
+		@extend .w3-hover-text-teal;
+	}
+}
+#flash-messages {
+	@extend .w3-center;
+	@extend .w3-margin-0;
+	.notice, .alert {
+		@extend .w3-border-bottom;
+		@extend .w3-margin-0;
+	}
+	.notice {
+		@extend .w3-border-green;
+	}
+	.alert {
+		@extend .w3-border-red;
+	}
+}
