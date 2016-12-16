@@ -21,6 +21,11 @@ gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
 # Grafieken
 gem 'chartkick', '~> 2.1', '>= 2.1.1'
 gem 'groupdate'
+# Use Capistrano for deployment
+gem 'capistrano-rails', group: :development
+gem 'capistrano-rvm', group: :development
+gem 'capistrano-bundler', group: :development
+gem 'capistrano-passenger', group: :development
 
 group :development, :test do
   gem 'byebug', platform: :mri
