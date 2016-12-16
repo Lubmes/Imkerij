@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
     @order.sum_all_bookings
     @order.save
     respond_to do |format|
-      format.html { redirect_to categories_path }
+      format.html { redirect_to shop_path }
       format.js { render layout: false }
     end
   end
