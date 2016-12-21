@@ -15,7 +15,7 @@ gem 'pundit', '~> 1.1'
 gem 'money-rails', '~> 1.7'
 gem 'paperclip', '~> 5.1'
 gem 'active_link_to'
-gem 'mollie-api-ruby', '~> 2.0'
+# gem 'mollie-api-ruby', '~> 2.0'
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
 # Grafieken
