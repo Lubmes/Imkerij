@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  require 'Mollie/API/Client'
+  # require 'Mollie/API/Client'
 
   before_action :set_order, only: [:show, :empty, :check_out, :to_bank]
   before_action :set_user, only: [:check_out, :to_bank]
