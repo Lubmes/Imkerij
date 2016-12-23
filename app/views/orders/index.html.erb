@@ -19,7 +19,7 @@
 				<tr class='order'>
 					<td><%= link_to "#{order.customer.first_name} #{order.customer.last_name}", [order.customer] %></td>
 					<td><%= I18n.l(order.updated_at, format: :long) %></td>
-					<td><%= currency_symbol + " " + order.total %></td>
+					<td><%= currency_symbol + " " + order.total_price %></td>
 					<td><%= order.status ? order.status : "niet opgeslagen"  %></td>
 				</tr>
 

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.feature 'User kan zijn mandje vullen', js: true do
+RSpec.feature 'User kan zijn mandje vullen', js: true, pending: true do
   let!(:category) { FactoryGirl.create(:category, name: 'Honing') }
-  let!(:cheap_product) { FactoryGirl.create(:product, name: 'Propolis lollie', 
+  let!(:cheap_product) { FactoryGirl.create(:product, name: 'Propolis lollie',
                                                       price: '0,80',
                                                       category: category) }
-  let!(:expensive_product) { FactoryGirl.create(:product, name: 'Honingpot 400ml', 
+  let!(:expensive_product) { FactoryGirl.create(:product, name: 'Honingpot 400ml',
                                                           price: '3,95',
                                                           category: category) }
 
@@ -28,7 +28,7 @@ RSpec.feature 'User kan zijn mandje vullen', js: true do
     product_from_shop = page.find('.product', :text => 'Propolis lollie')
     product_from_shop.fill_in 'Aantal', with: 5
     product_from_shop.click_button('VOEG TOE AAN MANDJE')
-    
+
     within('#order') do
       product_in_basket = page.find('.booking', :text => 'Propolis lollie')
       expect(product_in_basket).to have_content '5'
@@ -38,7 +38,7 @@ RSpec.feature 'User kan zijn mandje vullen', js: true do
 
   xcontext 'en na het vullen' do
     scenario 'opslaan' do
-      
+
     end
 
     scenario 'leegmaken' do

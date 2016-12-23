@@ -1,21 +1,15 @@
 Rails.application.routes.draw do
+
   devise_for :users, path: 'u', controllers: { registrations: "registrations" }
   resources 'users' do
     resources 'orders'
   end
 
-  resources 'orders', only: [:index] do
-    member do
-      get 'empty'
-      get 'check_out'
-      get 'to_bank'
-    end
-  end
-
   root 'welcome#home'
   get 'admin', to: 'welcome#admin'
+  resources 'events'
+  get 'shop', to: 'shop#index', as: 'shop'
 
-  get 'shop', to: 'categories#index', as: 'shop'
   resources 'categories', except: [:index] do
     resources 'products'
     resources 'pictures' do
@@ -31,6 +25,16 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources 'bookings'
-  resources 'events'
+
+  resources 'orders', only: [:index] do
+    member do
+      get 'empty'
+      get 'check_out'
+      get 'to_bank'
+      get 'confirmation'
+    end
+  end
+
 end

@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.feature 'Admin kan producten bijwerken' do
   let!(:category) { FactoryGirl.create(:category, name: 'Honing' )}
-  let!(:product) { FactoryGirl.create(:product, name: 'Honingpot 200ml', 
+  let!(:product) { FactoryGirl.create(:product, name: 'Honingpot 200ml',
                                                 description: 'Honing uit Veere.',
                                                 category: category )}
   let(:admin) { FactoryGirl.create(:user, :admin) }
 
   before do
     login_as(admin)
-    visit categories_path
+    visit shop_path
   end
 
   scenario 'met valide details' do

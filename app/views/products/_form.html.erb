@@ -57,7 +57,7 @@
 		<!-- Gewicht -->
     <tr>
       <th><%= f.label :mail_weight %> (gr)</td>
-      <td><%= f.text_field :mail_weight, size: 10 %></td>
+      <td><%= f.number_field :mail_weight, size: 10 %></td>
     </tr>
     <% if product.errors[:mail_weight].any? %>
       <tr id='errors'>

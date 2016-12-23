@@ -18,14 +18,28 @@ RSpec.feature 'User kan inloggen' do
 
   scenario 'vóór het afrekenen' do
     # in de winkelomgeving ...
-    visit '/categories'
+    visit shop_url
     click_link 'inloggen'
     fill_in "E-mail", with: user.email
     fill_in "Wachtwoord", with: "password"
     click_button "Log in"
 
     expect(page).to have_content "U bent succesvol ingelogd."
-    expect(page).to have_content "#{user.firstname}"
-    expect(page).to have_current_path(categories_path)
+    expect(page).to have_content "#{user.first_name}"
+    expect(page).to have_current_path shop_path 
   end
+
+  # Nog vorm te geven:
+  # scenario 'vóór het afrekenen met een gevuld mandje' do
+  #   # in de winkelomgeving ...
+  #   visit '/categories'
+  #   click_link 'inloggen'
+  #   fill_in "E-mail", with: user.email
+  #   fill_in "Wachtwoord", with: "password"
+  #   click_button "Log in"
+  #
+  #   expect(page).to have_content "U bent succesvol ingelogd."
+  #   expect(page).to have_content "#{user.firstname}"
+  #   expect(page).to have_current_path(categories_path)
+  # end
 end

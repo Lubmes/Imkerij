@@ -23,8 +23,8 @@
 			<% if user_signed_in? %>
 				<%= render @user %>
 			<% else %>
-				<%= render 'devise/registrations/form' %>
-				<%= render 'devise/sessions/form' %>
+				<%= render 'devise/registrations/form', with_header: true %>
+				<%= render 'devise/sessions/form', with_header: true %>
 			<% end %>
 		</div>
 	</div>

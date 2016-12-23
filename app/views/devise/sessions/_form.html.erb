@@ -1,11 +1,12 @@
 <table>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-    <thead>
-      <tr>
-        <th colspan='2'><h5>Log In</h5></th>
-      </tr>
-    </thead>
+    <% if with_header %>
+      <thead>
+        <tr>
+          <th colspan='2'><h5>Log In</h5></th>
+        </tr>
+      </thead>
+    <% end %>
 
     <tbody>
       <tr>

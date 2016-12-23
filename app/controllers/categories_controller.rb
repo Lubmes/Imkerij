@@ -1,15 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:edit, :update]
 
-  def index
-    skip_authorization
-    @categories = Category.all.order(id: :asc)
-    # Voor het inzien van wat al geselecteerd is.
-    @order = current_order
-    # Voor het aanslaan van een nieuwe booking.
-    @booking = current_order.bookings.build
-  end
-
   def new
     @category = Category.new
     authorize @category
@@ -26,7 +17,7 @@ class CategoriesController < ApplicationController
         end
       end
       flash[:notice] = 'Categorie is toegevoegd.'
-      redirect_to categories_path
+      redirect_to shop_path
     else
       flash.now[:alert] = 'Categorie is niet toegevoegd.'
       render 'new'
@@ -46,7 +37,7 @@ class CategoriesController < ApplicationController
         end
       end
       flash[:notice] = "Categorie is bijgewerkt."
-      redirect_to categories_path
+      redirect_to shop_path
     else
       flash.now[:alert] = "Categorie is niet bijgewerkt."
       render 'edit'
@@ -58,7 +49,7 @@ class CategoriesController < ApplicationController
     authorize @category
     @category.destroy
     flash[:notice] = 'Categorie is verwijderd.'
-    redirect_to categories_path
+    redirect_to shop_path
   end
 
   private

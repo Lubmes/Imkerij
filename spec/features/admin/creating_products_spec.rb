@@ -6,14 +6,16 @@ RSpec.feature 'Admin kan nieuwe producten toevoegen' do
 
   before do
     login_as(admin)
-    visit categories_path
+    visit shop_path
     click_link 'NIEUW PRODUCT'
   end
 
   scenario 'met valide details' do
     fill_in 'Naam', with: 'Propolis lollie'
     fill_in 'Omschrijving', with: 'Een lollie van propolis. Propolis heeft gigantisch veel gezonde eigenschappen.'
-    # fill_in 'Prijs', with: 0.80    
+    fill_in 'Prijs', with: '0,80'
+    fill_in 'Verzendgewicht', with: 10
+
     click_button 'Opslaan'
 
     expect(page).to have_content 'Product is toegevoegd'

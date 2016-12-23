@@ -50,6 +50,7 @@
     <% end %>
 
 		<!-- PREVIOUS ADDRESS -->
+		<% if false %>
 		<tr>
 			<th><%= f.label :address_street_name %></td>
 			<td><%= f.text_field :address_street_name %></td>
@@ -110,6 +111,7 @@
         </td>
       </tr>
     <% end %>
+		<% end %>
 		<!-- PREVIOUS ADDRESS -->
 
     <% if current_user.admin? %>

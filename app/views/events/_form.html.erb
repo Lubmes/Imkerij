@@ -33,7 +33,7 @@
     <!-- Tijdstip -->
     <tr>
       <th><%= f.label :date %></td>
-      <td><%= f.text_field :date, id: 'flatpickr-input' %></td>
+      <td><%= f.text_field :date, id: 'datetimejs-input' %></td>
     </tr>
     <% if event.errors[:date].any? %>
       <tr id='errors'>
@@ -52,7 +52,7 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    flatpickr('#flatpickr-input', {
+    flatpickr('#datetimejs-input', {
 			enableTime: true,
 			locale: "nl",
 			time_24hr: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201113022) do
+ActiveRecord::Schema.define(version: 20161222113958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 20161201113022) do
     t.integer  "product_id"
     t.string   "product_name"
     t.integer  "product_quantity"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "product_price_cents",    default: 0,     null: false
-    t.string   "product_price_currency", default: "EUR", null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.integer  "product_price_cents",                            default: 0,     null: false
+    t.string   "product_price_currency",                         default: "EUR", null: false
+    t.integer  "product_mail_weight"
+    t.decimal  "product_sales_tax",      precision: 3, scale: 1
     t.index ["order_id"], name: "index_bookings_on_order_id", using: :btree
     t.index ["product_id"], name: "index_bookings_on_product_id", using: :btree
   end
@@ -66,11 +68,12 @@ ActiveRecord::Schema.define(version: 20161201113022) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "status"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "total_cents",    default: 0,     null: false
-    t.string   "total_currency", default: "EUR", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "total_price_cents",    default: 0,     null: false
+    t.string   "total_price_currency", default: "EUR", null: false
     t.integer  "customer_id"
+    t.integer  "total_mail_weight"
     t.index ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   end
 

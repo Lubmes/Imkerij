@@ -6,7 +6,7 @@ RSpec.feature 'Admin kan categorieën bijwerken' do
 
   before do
     login_as(admin)
-    visit categories_path
+    visit shop_path
   end
 
   scenario 'met valide details' do

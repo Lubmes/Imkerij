@@ -1,0 +1,7 @@
+<div class='gallery'>
+  <% category.pictures.each do |picture| %>
+    <div class='cat-picture'>
+      <%= render 'pictures/gallery_picture', picture: picture %>
+    </div>
+  <% end %>
+</div>

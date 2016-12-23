@@ -15,11 +15,6 @@ RSpec.feature 'Admins kan nieuwe gebruikers toevoegen' do
     fill_in 'Wachtwoord', with: 'password'
     fill_in 'Voornaam', with: 'Jan'
     fill_in 'Achternaam', with: 'Jagerman'
-    fill_in 'Straat', with: 'Jaagpad'
-    fill_in 'Huisnummer', with: '23'
-    fill_in 'Postcode', with: '1234AB'
-    fill_in 'Woonplaats', with: 'Middelburg'
-    fill_in 'Land', with: 'Nederland'
     click_button 'Opslaan'
 
     expect(page).to have_content 'Gebruiker is toegevoegd.'
@@ -30,11 +25,6 @@ RSpec.feature 'Admins kan nieuwe gebruikers toevoegen' do
     fill_in 'Wachtwoord', with: 'password'
     fill_in 'Voornaam', with: 'Jan'
     fill_in 'Achternaam', with: 'Jagerman'
-    fill_in 'Straat', with: 'Jaagpad'
-    fill_in 'Huisnummer', with: '23'
-    fill_in 'Postcode', with: '1234AB'
-    fill_in 'Woonplaats', with: 'Middelburg'
-    fill_in 'Land', with: 'Nederland'
     # Adminrechten
     check 'Adminrechten'
     click_button 'Opslaan'

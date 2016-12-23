@@ -5,6 +5,6 @@ class CreateOrders < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_monetize :orders, :total
+    add_monetize :orders, :total_price
   end
 end

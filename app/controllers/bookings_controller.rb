@@ -10,6 +10,8 @@ class BookingsController < ApplicationController
       booking = Booking.new(booking_params)
       booking.product_name  = product.name
       booking.product_price = product.price
+      booking.product_sales_tax = product.sales_tax
+      booking.product_mail_weight = product.mail_weight
       @order.bookings << booking
     else
       booking.product_quantity = params[:booking][:product_quantity]
@@ -27,7 +29,6 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     @bookings = @order.bookings
-    # @order.save
     update_order
   end
 

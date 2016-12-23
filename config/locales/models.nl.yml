@@ -6,6 +6,7 @@ nl:
       user:
         one: Gebruiker
         other: Gebruikers
+        minimum_password_length: "minimaal %{count} karakters"
     attributes:
       user:
         email: E-mail
@@ -39,6 +40,15 @@ nl:
         visable: Zichtbaar
       booking:
         product_quantity: Aantal
+        product_price: Product prijs
+        product_sales_tax: BTW
+        product_mail_weight: Product verzendgewicht
+        total_price: Totaalbedrag
+        total_mail_weight: Totaal verzendgewicht
+      order:
+        status: Orderstatus
+        total_price: Totaalbedrag
+        total_mail_weight: Totaal verzendgewicht
 
     errors:
       models:

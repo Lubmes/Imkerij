@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
         end
       end
       flash[:notice] = 'Product is toegevoegd.'
-      redirect_to categories_path
+      redirect_to shop_path
     else
       flash.now[:alert] = 'Product is niet toegevoegd.'
       render 'new'
@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
         end
       end
       flash[:notice] = "Product is bijgewerkt."
-      redirect_to categories_path
+      redirect_to shop_path
     else
       flash.now[:alert] = "Product is niet bijgewerkt."
       render 'edit'
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
     @product.destroy
     flash[:notice] = 'Product is verwijderd.'
 
-    redirect_to categories_path
+    redirect_to shop_path
   end
 
   private

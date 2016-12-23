@@ -5,8 +5,8 @@
 
 <header>
 	<div class='shopping-col'>
-		<h4 class='cat-col'>Categorieën</h4>
-		<h4 class='prod-col'>Producten</h4>
+		<h4 class='cat-col'>Gallerie</h4>
+		<h4 class='prod-col'>Winkel</h4>
 	</div>
 	<h4 class='order-col'>Order</h4>
 </header>
@@ -17,9 +17,10 @@
 			<div id='cat-<%= category.id %>'>
 			<div class='category'>
 				<div class='cat-col'>
-					<%= render category %>
+					<%= render 'category_gallery', category: category %>
 				</div>
 				<div id='products' class='prod-col'>
+					<%= render category %>
 					<% category.products.each do |product| %>
 						<%= render product, category: category %>
 					<% end %>

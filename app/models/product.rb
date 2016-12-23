@@ -9,7 +9,8 @@ class Product < ApplicationRecord
   # Validaties
   validates :name, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 500 }
-  # validates :price, presence: true
+  validates :mail_weight, presence: true, numericality: { greater_than: 0 }
+  validates :price, presence: true
   # validates :price, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }
 
   def sales_tax=(val)

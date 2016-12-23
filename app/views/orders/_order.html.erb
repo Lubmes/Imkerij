@@ -1,11 +1,15 @@
 <table>
 	<tr>
-		<th>Status</th>
+		<th><%= Order.human_attribute_name :status %></th>
 		<td><%= @order.status ? @order.status : "niet opgeslagen" %></td>
 	</tr>
 	<tr>
-		<th>Totaal</th>
-		<td><%= currency_symbol %> <%= @order.total %></td>
+		<th><%= Order.human_attribute_name :total_price %></th>
+		<td><%= currency_symbol %> <%= @order.total_price %></td>
+	</tr>
+	<tr>
+		<th><%= Order.human_attribute_name :total_mail_weight %></th>
+		<td><%= @order.total_mail_weight %> gr</td>
 	</tr>
 	<tfoot class='model-actions'>
   	<% if @order.bookings.any? %>
@@ -21,7 +25,7 @@
   	</tr>
   	<% end %>
   </tfoot>
-	
+
 </table>
 
 <% @order.bookings.order(created_at: :asc).each do |booking| %>

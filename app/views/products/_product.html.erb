@@ -29,7 +29,7 @@
 	  </tr>
     <tr>
       <th><%= Product.human_attribute_name :sales_tax %></th>
-      <td><%= product.sales_tax %> %</td>
+      <td><%= number_with_precision(product.sales_tax, strip_insignificant_zeros: true) %> %</td>
     </tr>
     <tr>
       <th><%= Product.human_attribute_name :mail_weight %></th>

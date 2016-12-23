@@ -3,5 +3,6 @@ FactoryGirl.define do
     name 'Lollie'
     description 'Van honing.'
     price '3,25'
+    mail_weight '10'
   end
 end

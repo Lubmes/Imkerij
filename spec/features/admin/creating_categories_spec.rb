@@ -5,7 +5,7 @@ RSpec.feature 'Admin kan nieuwe categorieën toevoegen' do
 
   before do
     login_as(admin)
-    visit categories_path
+    visit shop_path
     click_link 'nieuwe categorie'
   end
 
