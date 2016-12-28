@@ -7,6 +7,12 @@ nl:
         one: Gebruiker
         other: Gebruikers
         minimum_password_length: "minimaal %{count} karakters"
+      category:
+        one: Categorie
+        other: Categorieën
+      event:
+        one: Agendapunt
+        other: Agendapunten
     attributes:
       user:
         email: E-mail
@@ -78,6 +84,12 @@ nl:
           attributes:
             date:
               in_future: moet in de toekomst zijn
+
+  helpers:
+    submit:
+      booking:
+        create: "VOEG TOE AAN MANDJE"
+        update: "PAS AAN IN MANDJE"
 
   devise:
     shared:

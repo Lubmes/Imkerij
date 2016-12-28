@@ -38,7 +38,7 @@
 		  </tr>
 	  	<tr>
 		  	<td colspan='2'>
-		  		<%= f.submit 'PAS AAN IN MANDJE' %>
+		  		<%= f.submit class: 'button' %>
 		  	<td>
 	  	</tr>
 	  <% end %>
@@ -46,7 +46,7 @@
 	  <% if true #policy(booking).admin_action? %>
 	  	<tr>
 		  	<td colspan='2'>
-		  		<%= link_to 'VERWIJDER', [booking], method: :delete, remote: true %>
+		  		<%= link_to 'VERWIJDER', [booking], method: :delete, remote: true, class: 'delete' %>
 		  	<td>
 		  </tr>
   	<% end %>

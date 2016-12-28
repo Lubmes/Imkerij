@@ -11,7 +11,7 @@ RSpec.feature 'Admin kan nieuwe categorieën toevoegen' do
 
   scenario 'met valide details' do
     fill_in 'Naam', with: 'Kaarsen'
-    click_button 'Opslaan'
+    click_button 'Categorie toevoegen'
 
     expect(page).to have_content 'Categorie is toegevoegd'
     expect(page).to have_content 'Kaarsen'
@@ -19,7 +19,7 @@ RSpec.feature 'Admin kan nieuwe categorieën toevoegen' do
 
   scenario 'met invalide details' do
     fill_in 'Naam', with: ''
-    click_button 'Opslaan'
+    click_button 'Categorie toevoegen'
 
     expect(page).to have_content 'Categorie is niet toegevoegd.'
     expect(page).to have_content 'moet opgegeven zijn'

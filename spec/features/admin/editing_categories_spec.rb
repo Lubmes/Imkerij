@@ -12,7 +12,7 @@ RSpec.feature 'Admin kan categorieën bijwerken' do
   scenario 'met valide details' do
     page.find('.category', :text => 'Kaarsen').click_link 'BIJWERKEN'
     fill_in 'Naam', with: 'Bijenkaarsen'
-    click_button 'Opslaan'
+    click_button 'Categorie bijwerken'
 
     expect(page).to have_content 'Categorie is bijgewerkt.'
     expect(page).to have_content 'Bijenkaarsen'

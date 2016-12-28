@@ -5,7 +5,7 @@
   		<!-- Naam -->
   		<tr>
   			<th><%= f.label :name %></th>
-   			<td><%= f.text_field :name %>  
+   			<td><%= f.text_field :name %>
         </td>
     	</tr>
       <% if category.errors[:name].any? %>
@@ -21,6 +21,6 @@
         <td><%= file_field_tag 'images[]', type: :file, multiple: true %></td>
       </tr>
     </table>
-    <%= f.submit "Opslaan" %>
+    <%= f.submit class: 'button' %>
   </div>
 <% end %>

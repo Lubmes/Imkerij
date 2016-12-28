@@ -17,3 +17,10 @@
 #app-content {
 	@extend .w3-container;
 }
+
+.button {
+	@extend .w3-btn-block;
+}
+.delete {
+	@extend .w3-text-orange;
+}

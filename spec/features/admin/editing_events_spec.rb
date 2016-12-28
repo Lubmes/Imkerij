@@ -16,7 +16,7 @@ RSpec.feature 'Admin kan agenda bijwerken' do
     fill_in 'Naam', with: 'Muggen- en vlindernacht'
     fill_in 'Omschrijving', with: 'Verhalen van een vlinderexpert. Muggenzalf aanwezig.'
     find('#datetimejs-input').set 21.days.from_now.beginning_of_day + 20.5.hours
-    click_button 'Opslaan'
+    click_button 'Agendapunt bijwerken'
 
     expect(page).to have_content 'Agendapunt is bijgewerkt.'
     expect(page).to have_content 'Muggen- en vlindernacht'

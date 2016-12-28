@@ -45,8 +45,13 @@ h1 {
 }
 // log-in
 #log-in {
-	@extend .w3-margin-top;
+	margin-top: 14%;
 	@extend .w3-center;
+	table {
+		@extend .w3-border-teal;
+		@extend .w3-bottombar;
+	}
+
 	@include model-table;
 	.user-col {
 		@extend .w3-center;

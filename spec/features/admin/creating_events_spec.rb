@@ -13,7 +13,7 @@ RSpec.feature 'Admin kan nieuwe agendapunten toevoegen' do
   	fill_in 'Naam', with: 'Vlindernacht'
   	fill_in 'Omschrijving', with: 'Verhalen van een vlinderexpert.'
     find('#datetimejs-input').set 14.days.from_now.beginning_of_day + 20.5.hours
-  	click_button 'Opslaan'
+  	click_button 'Agendapunt toevoegen'
 
     expect(page).to have_content 'Agendapunt is toegevoegd.'
   	expect(page).to have_content 'Vlindernacht'
@@ -25,7 +25,7 @@ RSpec.feature 'Admin kan nieuwe agendapunten toevoegen' do
     fill_in 'Naam', with: ''
     fill_in 'Omschrijving', with: ''
     find('#datetimejs-input').set ''
-    click_button 'Opslaan'
+    click_button 'Agendapunt toevoegen'
 
     expect(page).to have_content 'Agendapunt is niet toegevoegd.'
     expect(page).to have_content 'moet opgegeven zijn'

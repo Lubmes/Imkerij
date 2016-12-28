@@ -16,7 +16,7 @@ RSpec.feature 'Admin kan nieuwe producten toevoegen' do
     fill_in 'Prijs', with: '0,80'
     fill_in 'Verzendgewicht', with: 10
 
-    click_button 'Opslaan'
+    click_button 'Product toevoegen'
 
     expect(page).to have_content 'Product is toegevoegd'
     expect(page).to have_content 'Propolis lollie'
@@ -27,7 +27,7 @@ RSpec.feature 'Admin kan nieuwe producten toevoegen' do
     fill_in 'Naam', with: ''
     fill_in 'Omschrijving', with: ''
     # fill_in 'Prijs', with: ''
-    click_button 'Opslaan'
+    click_button 'Product toevoegen'
 
     expect(page).to have_content 'Product is niet toegevoegd'
     expect(page).to have_content 'moet opgegeven zijn'

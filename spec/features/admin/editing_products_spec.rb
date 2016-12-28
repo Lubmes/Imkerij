@@ -17,7 +17,7 @@ RSpec.feature 'Admin kan producten bijwerken' do
     fill_in 'Naam', with: 'Honingpot 200ml Spec. Edition'
     fill_in 'Omschrijving', with: 'Gelimiteerde uitgave, wees er snel bij!'
     # fill_in 'Prijs', with: 3.50
-    click_button 'Opslaan'
+    click_button 'Product bijwerken'
 
     expect(page).to have_content 'Product is bijgewerkt.'
     expect(page).to have_content 'Honingpot 200ml Spec. Edition'
