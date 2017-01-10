@@ -10,13 +10,18 @@
 
   <body>
 
-    <div id='navigation'>      
+    <div id='navigation'>
       <%= render 'layouts/nav_main' %>
       <% if content_for? :navigation %>
         <%= yield :navigation %>
       <% end %>
-      <%= render 'layouts/flash_messages' %>
     </div>
+
+    <br><br>
+    <% if content_for? :navigation_top_margin %>
+      <%= yield :navigation_top_margin %>
+    <% end %>
+    <%= render 'layouts/flash_messages' %>
 
     <div id='app-content'>
       <%= yield %>

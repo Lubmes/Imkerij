@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222113958) do
+ActiveRecord::Schema.define(version: 20170107120111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20161222113958) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "position"
   end
 
   create_table "deliveries", force: :cascade do |t|
@@ -73,7 +74,7 @@ ActiveRecord::Schema.define(version: 20161222113958) do
     t.integer  "total_price_cents",    default: 0,     null: false
     t.string   "total_price_currency", default: "EUR", null: false
     t.integer  "customer_id"
-    t.integer  "total_mail_weight"
+    t.integer  "total_mail_weight",    default: 0
     t.index ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   end
 
@@ -88,6 +89,7 @@ ActiveRecord::Schema.define(version: 20161222113958) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "position"
     t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
   end
 
@@ -101,6 +103,7 @@ ActiveRecord::Schema.define(version: 20161222113958) do
     t.string   "price_currency",                         default: "EUR", null: false
     t.integer  "mail_weight"
     t.decimal  "sales_tax",      precision: 3, scale: 1
+    t.integer  "position"
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
   end
 

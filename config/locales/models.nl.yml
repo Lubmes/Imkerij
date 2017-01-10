@@ -88,8 +88,8 @@ nl:
   helpers:
     submit:
       booking:
-        create: "VOEG TOE AAN MANDJE"
-        update: "PAS AAN IN MANDJE"
+        create: "VOEG TOE"
+        update: "PAS AAN"
 
   devise:
     shared:

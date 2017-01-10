@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # Devise
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_filter :store_current_location, :unless => :devise_controller?
+
 
   # als een gebruiker is ingelogd: current_user; anders: guest_user
   def current_or_guest_user
@@ -60,6 +62,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def store_current_location
+    store_location_for(:user, request.url)
+  end
 
   # # één keer aangeroepen wanneer de gebruiker inlogd, hier de code die nodig is
   # # voor de overgang van guest_user naar current_user.

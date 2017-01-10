@@ -2,10 +2,55 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#orders {
-	@extend .w3-margin-top;
-	tr.order {
-		@extend .w3-hover-light-grey;
-		@extend .w3-hover-text-cyan;
+#order {
+	.remove {
+		@extend .w3-text-grey;
+		@extend .w3-hover-text-brown;
+	}
+  .status {
+    @extend .w3-tag;
+    @extend .w3-margin;
+  }
+	.to-check-out {
+		@extend .w3-right;
+	}
+	thead {
+			@extend .w3-large;
+		.weight {
+			@extend .w3-medium;
+			@extend .w3-text-grey;
+		}
+	}
+  .booking-product small {
+			@extend .w3-text-grey;
+  }
+	table {
+		@extend .w3-padding-left;
+	}
+	.bookings {
+		.fa-close {
+		}
+		td {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+		.name {
+			padding-top: 7px;
+			padding-bottom: 4px;
+		}
+	}
+  .booking-form {
+		@extend .w3-show-inline-block;
+		.submit {
+			@extend .w3-center;
+			.button {
+				@extend .w3-small;
+				@extend .w3-border;
+				@extend .w3-white;
+				@extend .w3-border-khaki;
+				@extend .w3-round-xlarge;
+				@extend .w3-hover-border-brown;
+			}
+		}
 	}
 }

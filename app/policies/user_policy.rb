@@ -11,6 +11,7 @@ class UserPolicy < ApplicationPolicy
     def resolve
       if user.try(:admin)
         scope = User.all
+        scope = scope.where.not(first_name: 'guest')
       elsif user.nil?
         scope = []
       else
@@ -29,6 +30,10 @@ class UserPolicy < ApplicationPolicy
 
   def create?
     user.try(:admin)
+  end
+
+  def edit?
+    user.try(:admin) || user == record
   end
 
   def update?

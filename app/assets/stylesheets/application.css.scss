@@ -1,26 +1,28 @@
+@import 'font-awesome';
 @import 'w3';
 @import 'flatpickr';
 @import 'flatpickr.base16_flat';
-@import 'model_overview';
+
+@import 'dashboard';
+
 @import 'users';
-@import 'categories';
-@import 'products';
 @import 'events';
-@import 'welcome';
-@import 'products';
-@import 'pictures';
-@import 'shop_edit';
+@import 'record_zoom';
+@import 'record_tools';
+
 @import 'navigation';
 @import 'orders';
+
+@import 'shop';
+@import 'categories';
+@import 'products';
 @import 'payment';
+@import 'deliveries';
 
 #app-content {
 	@extend .w3-container;
 }
 
-.button {
-	@extend .w3-btn-block;
-}
-.delete {
-	@extend .w3-text-orange;
+img {
+	width: 100%;
 }

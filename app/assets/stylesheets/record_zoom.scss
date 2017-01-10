@@ -1,0 +1,15 @@
+#record-zoom {
+	@extend .w3-margin-top;
+	.main-col {
+		@extend .w3-col;
+		@extend .l4;
+	}
+	.extras-col {
+		@extend .w3-col;
+		@extend .l8;
+		@extend .w3-right;
+	}
+	#form {
+		@extend .w3-margin-0;
+	}
+}

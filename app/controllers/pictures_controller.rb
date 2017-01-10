@@ -1,7 +1,8 @@
 class PicturesController < ApplicationController
-  def visabile_toggle
+  def visability_toggle
     @picture = Picture.find(params[:id])
     @picture.toggle! :visable
+    @imageable = @picture.imageable
   end
 
   def destroy
@@ -15,6 +16,6 @@ class PicturesController < ApplicationController
   private
 
   def picture_params
-    permit.require(:picture).params([:product_id, :id])
+    permit.require(:picture).params([:id])
   end
 end

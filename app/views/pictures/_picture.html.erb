@@ -1,20 +1,23 @@
-<table id='picture_<%= picture.id %>'>
-	<tbody>
-		<tr>
-			<td colspan='2' class='image'><%= image_tag picture.image.url %></td>
-		</tr>
-	</tbody>
-  <tfoot class='model-actions'>
+<div id='picture_<%= picture.id %>'>
+			<div class='image'><%= image_tag picture.image.url %><div>
+  <ul class='record-actions'>
 	  <%= form_for [imageable_model, picture], remote: true do |f| %>
-			<tr>
-		    <th><%= f.label :visable %></th>
-		    <td><%= f.check_box :visable %></td>
-		  </tr>
+		    <li class="<%= picture.visable ? 'visable' : 'invisable' %>">
+					<%= link_to [:visability_toggle, imageable_model, picture], remote: true do %>
+						<% if picture.visable? %>
+							<i class="fa fa-eye"></i>
+						<% else %>
+							<i class="fa fa-eye-slash"></i>
+						<% end %>
+					<% end %>
+				</li>
 	 	<% end %>
-  	<tr>
-	  	<td colspan='2'>
-				<%= link_to 'VERWIJDER', [imageable_model, picture], method: :delete, remote: true %>
-			</td>
-		</tr>
-	</tfoot>
-</table>
+	  	<li colspan='2'>
+				<%= link_to [imageable_model, picture],
+							method: :delete,
+							remote: true  do%>
+					<i class="fa fa-trash-o"></i>
+				<% end %>
+			</li>
+	</ul>
+</div>

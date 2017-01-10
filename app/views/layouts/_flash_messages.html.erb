@@ -1,2 +1,15 @@
-<% if notice %>		<div id='flash-messages' class="notice"><%= notice %>	</p>	<% end %>
-<% if alert %>		<div id='flash-messages' class="alert"><%= alert %>		</p>	<% end %>
+<% if notice %>
+  <div id='flash-messages'>
+    <p class="notice">
+      <%= notice %>
+    </p>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div id='flash-messages'>
+    <p class="alert">
+      <%= alert %>
+    </p>
+  </div>
+<% end %>

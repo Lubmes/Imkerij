@@ -1,54 +1,45 @@
-<table>
-	<tbody>
-		<tr>
-			<th><%= Booking.human_attribute_name :name %></th>
-			<td><%= booking.product_name %><td>
-		</tr>
-		<tr>
-			<th><%= Booking.human_attribute_name :product_price %></th>
-			<td><%= currency_symbol %> <%= booking.product_price %><td>
-		</tr>
-		<tr>
-			<th><%= Booking.human_attribute_name :product_sales_tax %></th>
-			<td><%= number_with_precision(booking.product_sales_tax, strip_insignificant_zeros: true) %> %<td>
-		</tr>
-		<tr>
-			<th><%= Booking.human_attribute_name :product_mail_weight %></th>
-			<td><%= booking.product_mail_weight %><td>
-		</tr>
-		<tr>
-			<th><%= Booking.human_attribute_name :product_quantity %></th>
-			<td><%= booking.product_quantity %><td>
-		</tr>
-		<tr>
-			<th><%= Booking.human_attribute_name :total_price %></th>
-			<td><%= currency_symbol %> <%= booking.total_price %><td>
-		</tr>
-		<tr>
-			<th><%= Booking.human_attribute_name :total_mail_weight %></th>
-			<td><%= booking.total_mail_weight %> gr<td>
-		</tr>
-	</tbody>
-	<tfoot class='model-actions'>
-		<%= form_for booking, remote: true do |f| %>
-  		<%= f.hidden_field :product_id, value: booking.product.id unless booking.product.nil? %>
-	  	<tr>
-		    <th><%= Booking.human_attribute_name :product_quantity %></th>
-		    <td><%= f.number_field :product_quantity, value: booking.product_quantity, min: 1 %><td>
-		  </tr>
-	  	<tr>
-		  	<td colspan='2'>
-		  		<%= f.submit class: 'button' %>
-		  	<td>
-	  	</tr>
-	  <% end %>
+<tr>
+	<td class='name' colspan='4'>
+		<small><%= booking.product_name %></small>
+	</td>
+<tr>
 
-	  <% if true #policy(booking).admin_action? %>
-	  	<tr>
-		  	<td colspan='2'>
-		  		<%= link_to 'VERWIJDER', [booking], method: :delete, remote: true, class: 'delete' %>
-		  	<td>
-		  </tr>
-  	<% end %>
-  </tfoot>
-</table>
+<tr>
+	<% unless controller.action_name == 'to_bank' %>
+		<td class='remove'>
+	    <%= link_to [booking], method: :delete, remote: true do %>
+	      <i class='fa fa-close'></i>
+	    <% end %>
+		</td>
+	<% else %>
+		<td>
+		</td>
+	<% end %>
+
+	<td class='booking-product'>
+		<strong><%= currency_symbol %> <%= booking.product_price %> </strong>
+		<small>incl. <%= number_with_precision(booking.product_sales_tax, strip_insignificant_zeros: true) %> %</small>
+	</td>
+
+	<!-- Booking form -->
+	<% unless controller.action_name == 'to_bank' %>
+		<%= form_for booking, remote: true do |f| %>
+			<td class='booking-form'>
+				<div class='submit'>
+					&#183;
+					<%= f.hidden_field :product_id, value: booking.product.id unless booking.product.nil? %>
+					<%= f.number_field :product_quantity, value: booking.product_quantity, min: 1, max: 999 %>
+					<%= f.submit class: 'button' %>
+				</div>
+			</td>
+		<% end %>
+	<% else %>
+		<td>
+			&times; <%= booking.product_quantity %>
+		</td>
+	<% end %>
+
+	<td class='price'>
+		= <%= currency_symbol %> <%= booking.total_price %>
+	</td>
+</tr>

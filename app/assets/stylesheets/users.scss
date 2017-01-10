@@ -1,20 +1,62 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 h1 {
 	@extend .w3-center;
 }
-.user-col {
-	@extend .w3-col;
-	@extend .m5;
+.user {
+	table {
+		li {
+			@extend .w3-xlarge;
+		}
+		width: 100%;
+		@extend .w3-container;
+		@extend .w3-card;
+		@extend .w3-margin-bottom;
+		tbody {
+			tr {
+				th, td {
+					// @extend .w3-left;
+				}
+			}
+		}
+	}
 }
-.orders-col {
-	@extend .w3-col;
-	@extend .m4;
-	margin-left: 8%;
+#profile {
+	@extend .w3-row-padding;
+	.user-col {
+		@extend .w3-col;
+		@extend .l4;
+		.user {
+			@extend .w3-margin-top;
+		}
+	}
+	.orders-col {
+		@extend .w3-col;
+		@extend .l5;
+	}
+	.bookings {
+		@extend .w3-border-grey;
+		@extend .w3-leftbar;
+	}
+	#orders {
+		table {
+			@extend .w3-border;
+			@extend .w3-table;
+			.price {
+				@extend .w3-large;
+			}
+		}
+	}
 }
+// users index
 #users {
-	@extend .w3-margin-top;
+	@extend .w3-row-padding;
+	.user {
+		@extend .w3-col;
+		@extend .l6;
+	}
 }
 #admin-actions {
 	@extend .w3-navbar;
@@ -26,36 +68,79 @@ h1 {
 		@extend .w3-hover-text-teal;
 	}
 }
-@mixin model-table {
-	table {
-		@extend .w3-table;
-		@extend .w3-border;
-		@extend .w3-margin-bottom;
-	}
-}
 .user {
 	@extend .w3-row;
-	@include model-table;
 }
-#orders {
-	@include model-table;
-}
-#password {
-	// @extend .w3-border;
-}
+
+
 // log-in
 #log-in {
 	margin-top: 14%;
 	@extend .w3-center;
-	table {
-		@extend .w3-border-teal;
-		@extend .w3-bottombar;
-	}
-
-	@include model-table;
 	.user-col {
 		@extend .w3-center;
-		// 29% = 3.5 columns
-		margin-left: 29%;
+		@extend .w3-col;
+		@extend .l8;
+		margin-left: 16.67%;
+	}
+	table {
+		@extend .w3-table;
+		@extend .w3-border-teal;
+		@extend .w3-bottombar;
+		@extend .w3-padding-bottom;
+	}
+	tbody {
+		input {
+			width: 100%;
+		}
+	}
+	.record-actions {
+		@extend .w3-small;
+		td {
+			.button {
+				@extend .w3-btn;
+				@extend .w3-large;
+				@extend .w3-light-blue;
+				@extend .w3-text-deep-orange;
+			}
+			@extend .w3-center;
+		}
+	}
+}
+#payment {
+	.user {
+		h4 {
+			@extend .w3-center;
+			@extend .w3-large;
+			@extend .w3-text-dark-grey;
+		}
+		tbody {
+			th {
+				width: 45%;
+			}
+			td {
+				width: 100%;
+			}
+			label {
+				@extend .w3-left;
+			}
+			input {
+				width: 100%;
+			}
+		}
+		// @extend .w3-table;
+		tfoot.record-actions {
+			@extend .w3-small;
+			td {
+				.button {
+					@extend .w3-btn;
+					@extend .w3-large;
+					@extend .w3-light-blue;
+					@extend .w3-text-deep-orange;
+				}
+				@extend .w3-center;
+				@extend .w3-padding;
+			}
+		}
 	}
 }

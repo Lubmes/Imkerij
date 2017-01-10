@@ -4,10 +4,6 @@
 	</div>
 
 	<div id='pictures' class='pictures-col'>
-		<% @category.pictures.each do |picture| %>
-			<div class='picture'>
-				<%= render picture, imageable_model: @category %>
-			</div>
-		<% end %>
+		<%= render 'pictures/pictures', imageable_model: @category %>
 	</div>
 </div>

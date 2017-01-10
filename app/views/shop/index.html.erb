@@ -3,29 +3,37 @@
 	<%= render 'layouts/nav_prim_act_store' %>
 <% end %>
 
-<header>
-	<div class='shopping-col'>
-		<h4 class='cat-col'>Gallerie</h4>
-		<h4 class='prod-col'>Winkel</h4>
-	</div>
-	<h4 class='order-col'>Order</h4>
-</header>
-
-<div id='store'>
+<div id='store-front'>
 	<div id='categories' class='shopping-col'>
 		<% @categories.each do |category| %>
 			<div id='cat-<%= category.id %>'>
-			<div class='category'>
-				<div class='cat-col'>
-					<%= render 'categories/category_gallery', category: category %>
+				<div class='category'>
+					<div class='cat-col'>
+						<%= render 'categories/category_gallery', category: category %>
+					</div>
+					<div id='products' class='prod-col'>
+						<%= render category %>
+						<% category.products.each do |product| %>
+							<div class='product'>
+								<div class='info'>
+									<%= render 'products/product_head', product: product %>
+									<% if product.pictures.where(visable: true).any? %>
+										<%= render 'pictures/cover_picture',
+													picture: product.pictures.where(visable: true).first %>
+									<% end %>
+									<div class='main-content'>
+										<%= render product %>
+									</div>
+								</div>
+								<div class='add-booking'>
+									<%= render 'bookings/form_big',
+												product: product,
+												booking: product.bookings.build %>
+								</div>
+							</div>
+						<% end %>
+					</div>
 				</div>
-				<div id='products' class='prod-col'>
-					<%= render category %>
-					<% category.products.each do |product| %>
-						<%= render product, category: category %>
-					<% end %>
-				</div>
-			</div>
 			</div>
 		<% end %>
 	</div>

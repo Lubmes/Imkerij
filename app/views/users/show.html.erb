@@ -2,34 +2,35 @@
 	<%= render 'layouts/nav_sec_admin' %>
 <% end %>
 
-<header>
-	<h4 class='user-col'>Gebruiker</h4>
-	<h4 class='orders-col'>Te verwerken</h4>
-</header>
-
-<div class='user'>
+<div id='profile'>
 	<div class='user-col'>
-		<%= render @user %>
+		<div class="user">
+			<%= render @user %>
+		</div>
 	</div>
 
 	<div class='orders-col'>
-			<div id='order'>
-				<% if @order.nil? %>
-					<p>Geen</p>
-				<% else %>
-					<%= render @order %>
-				<% end %>
-			</div>
+		<header>
+			<h4>Te verwerken</h4>
+		</header>
+
+		<div id='order'>
+			<% if @order.nil? %>
+				<p>Geen</p>
+			<% else %>
+				<%= render @order %>
+			<% end %>
+		</div>
 
 		<div id='orders'>
 			<header>
-				<h4>Verzonden</h4>
+				<h4>Alle orders</h4>
 			</header>
 			<% @user.orders.each do |order| %>
 				<table>
 					<tr>
 						<th>Aangemaakt</th>
-						<td><%= l(order.created_at, format: :long) %></td>
+						<td><i><%= l(order.created_at, format: :long) %></i></td>
 					</tr>
 					<tr>
 						<th>Status</th>
@@ -37,7 +38,7 @@
 					</tr>
 					<tr>
 						<th>Totaalbedrag</th>
-						<td><%= currency_symbol %> <%= order.total_price %></td>
+						<td><strong><%= currency_symbol %> <%= order.total_price %></strong></td>
 					</tr>
 				</table>
 			<% end %>

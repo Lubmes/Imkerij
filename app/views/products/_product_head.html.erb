@@ -1,0 +1,34 @@
+<ul class='record-actions'>
+  <li>
+    <div class='up-down-action <%= "single-move" if product.first? || product.last? %>'>
+      <% unless product.first? %>
+        <%= link_to [:move_higher, product] do %>
+          <i class='fa fa-chevron-up'></i>
+        <% end %>
+      <% end %>
+      <% unless product.last? %>
+        <%= link_to [:move_lower, product] do %>
+          <i class='fa fa-chevron-down'></i>
+        <% end %>
+      <% end %>
+    </div>
+  </li>
+  <li>
+    <h5>
+      <%= product.name %>
+    </h5>
+  </li>
+  <li>
+    <%= link_to [:edit, product.category, product] do %>
+      <i class='fa fa-pencil'></i>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to [product.category, product],
+         method: :delete,
+         data: { confirm: 'Weet je zeker dat je dit product wil verwijderen?' },
+         class: 'delete' do %>
+      <i class='fa fa-trash-o'></i>
+    <% end %>
+  </li>
+</ul>

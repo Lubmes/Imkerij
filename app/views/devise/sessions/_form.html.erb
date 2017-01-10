@@ -3,7 +3,7 @@
     <% if with_header %>
       <thead>
         <tr>
-          <th colspan='2'><h5>Log In</h5></th>
+          <th colspan='2'><h4>Inloggen</h4></th>
         </tr>
       </thead>
     <% end %>
@@ -33,10 +33,10 @@
       <% end -%>
     </tbody>
 
-    <tfoot class='model-actions'>
+    <tfoot class='record-actions'>
       <tr>
-        <div class="actions">
-          <td colspan='2'><%= f.submit "Log in" %></td>
+        <div class="main-action">
+          <td colspan='2'><%= f.submit "Log in", class: 'button' %></td>
         </div>
       </tr>
     <% end %>

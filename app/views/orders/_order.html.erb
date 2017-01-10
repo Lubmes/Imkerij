@@ -1,35 +1,47 @@
-<table>
-	<tr>
-		<th><%= Order.human_attribute_name :status %></th>
-		<td><%= @order.status ? @order.status : "niet opgeslagen" %></td>
-	</tr>
-	<tr>
-		<th><%= Order.human_attribute_name :total_price %></th>
-		<td><%= currency_symbol %> <%= @order.total_price %></td>
-	</tr>
-	<tr>
-		<th><%= Order.human_attribute_name :total_mail_weight %></th>
-		<td><%= @order.total_mail_weight %> gr</td>
-	</tr>
-	<tfoot class='model-actions'>
-  	<% if @order.bookings.any? %>
-	  	<tr>
-		  	<td colspan='2'>
-		  		<%= link_to 'LEEGMAKEN', [:empty, @order] %>
-		  	</td>
-	  	</tr>
-  	<tr>
-	  	<td colspan='2'>
-	  		<%= link_to 'AFREKENEN', [:check_out, @order] %>
-	  	</td>
-  	</tr>
-  	<% end %>
-  </tfoot>
-
-</table>
-
-<% @order.bookings.order(created_at: :asc).each do |booking| %>
-	<div class='booking'>
-		<%= render booking %>
-	</div>
+<% unless controller.action_name == 'to_bank' %>
+	<% if @order.bookings.any? %>
+		<ul class='record-actions'>
+			<li>
+				<%= link_to [:empty, @order] do %>
+					<i class='fa fa-trash-o'></i>
+				<% end %>
+			</li>
+			<% unless controller.action_name == 'check_out' %>
+			<!-- ^ maak hiervan een content for block -->
+				<li class='to-check-out'>
+					<%= link_to [:check_out, @order] do %>
+						<small>AFREKENEN</small> <i class='fa fa-arrow-right'></i>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
 <% end %>
+
+<table class='bookings'>
+
+	<thead>
+		<tr>
+			<td>
+			</td>
+			<td>
+				<strong><%= currency_symbol %> <%= @order.total_price %></strong>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td class='weight'>
+				<i><%= @order.total_mail_weight %> gr</i>
+			</td>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @order.bookings.order(created_at: :desc).each do |booking| %>
+			<div class='booking'>
+				<%= render booking %>
+			</div>
+		<% end %>
+	</tbody>
+</table>

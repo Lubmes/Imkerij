@@ -2,46 +2,39 @@
 	<%= render 'layouts/nav_prim_act_events' %>
 <% end %>
 
-<header>
-	<h4 class='event-col'>Agendapunten</h4>
-</header>
-
 <div id='events'>
 	<% @events.each do |event| %>
 		<div class='event'>
+			<div class='image-col'>
+			</div>
 			<div class='event-col'>
-				<table>
-				  <tbody>
-					  <tr>
-					  	<th>Naam</th>
-					    <td><%= event.name %></td>
-					  </tr>
-					  <tr>
-					  	<th>Omschrijving</th>
-					    <td><%= event.description %></td>
-					  </tr>
-					  <tr>
-					  	<th>Tijd</th>
-					    <td><%= I18n.l(event.date, format: :long) %></td>
-					  </tr>
-				  </tbody>
-				  <% if policy(event).admin_action? %>
-					  <tfoot class='model-actions'>
-					  	<tr>
-						  	<td colspan='2'>
-							  		<%= link_to 'VERWIJDER', [event],
-											  				 method: :delete,
-											  				 data: { confirm: 'Weet je zeker dat je dit agendapunt wil verwijderen?' } %>
-						  	</td>
-					  	</tr>
-					  	<tr>
-						  	<td colspan='2'>
-						  		<%= link_to 'BIJWERKEN', [:edit, event] %>
-						  	</td>
-					  	</tr>
-					  </tfoot>
-					<% end %>
-				</table>
+					  <ul class=record-actions>
+							<li>
+							  <h3>
+									<small><%= I18n.l(event.date, format: :event_date) %></small>
+									<div class='time'><%= I18n.l(event.date, format: :event_time) %></div>
+									<%= event.name %>
+								</h3>
+							</li>
+							<% if policy(event).admin_action? %>
+								<li>
+									<%= link_to [:edit, event] do %>
+										<i class='fa fa-pencil'></i>
+									<% end %>
+								</li>
+								<li>
+									<%= link_to [event],
+															 method: :delete,
+															 data: { confirm: 'Weet je zeker dat je dit agendapunt wil verwijderen?' } do %>
+										<i class='fa fa-trash-o'></i>
+									<% end %>
+								</li>
+							<% end %>
+						</ul>
+
+					  <p>
+						  <%= event.description %>
+						</p>
 			</div>
 		</div>
 	<% end %>

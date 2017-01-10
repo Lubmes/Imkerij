@@ -2,68 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// Cat Index / Shop Display
-.shopping-col {
-	@extend .w3-col;
-	@extend .m8;
-}
-.cat-col {
-	@extend .w3-col;
-	@extend .m4;
-}
-.prod-col {
-	@extend .w3-col;
-	@extend .m8;
-}
-.order-col {
-	@extend .w3-col;
-	@extend .m4;
-	@extend .w3-right;
-}
-header {
-	@extend .w3-row;
-	@extend .w3-text-grey;
-	.prod-col, .order-col {
-		@extend .w3-padding-left;
-	}
-}
-#store{
-	@extend .w3-row;
-	@include model-table;
-	#order {
-		@extend .w3-padding-left;
-	}
-}
-.category {
+#store-front .category {
 	@extend .w3-row;
 	.prod-col {
 		@extend .w3-padding-left;
-	}
-}
-// Gallery
-.gallery {
-	.gallery-picture {
-		@extend .w3-padding-bottom;
-	}
-}
-.cat-picture {
-	@extend .w3-center;
-	img {
-		width: 75%;
-	}
-}
-.prod-picture {
-	@extend .w3-show-inline-block;
-	img {
-		width: 100%;
-	}
-}
-#products {
-	.gallery {
-		@extend .w3-row-padding;
-		.prod-picture {
-			@extend .w3-third;
-			@extend .m2;
-		}
 	}
 }

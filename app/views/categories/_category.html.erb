@@ -1,29 +1,40 @@
-<table>
-  <tbody>
-	  <tr>
-	  	<th><%= Category.human_attribute_name :name %></th>
-	    <td><%= category.name %></td>
-	  </tr>
-  </tbody>
-  <% if policy(category).admin_action? %>
-	  <tfoot class='model-actions'>
-	  	<tr>
-		  	<td colspan='2'>
-		  		<%= link_to 'VERWIJDER', [category],
-						  				 method: :delete,
-						  				 data: { confirm: 'Weet je zeker dat je deze categorie en de daarbij behorende producten wil verwijderen?' } %>
-		  	</td>
-	  	</tr>
-	  	<tr>
-		  	<td colspan='2'>
-		  		<%= link_to 'BIJWERKEN', [:edit, category] %>
-		  	</td>
-	  	</tr>
-	  	<tr>
-		  	<td colspan='2'>
-		  		<%= link_to 'NIEUW PRODUCT', [:new, category, :product] %>
-		  	</td>
-	  	</tr>
-	  </tfoot>
-	<% end %>
-</table>
+<header>
+<ul class='record-actions'>
+  <li>
+    <div class='up-down-action <%= "single-move" if category.first? || category.last? %>'>
+      <% unless category.first? %>
+        <%= link_to [:move_higher, category] do %>
+          <i class='fa fa-chevron-up'></i>
+        <% end %>
+      <% end %>
+      <% unless category.last? %>
+        <%= link_to [:move_lower, category] do %>
+          <i class='fa fa-chevron-down'></i>
+        <% end %>
+      <% end %>
+    </div>
+  </li>
+  <li>
+    <h3><%= category.name %></h3>
+  </li>
+  <li>
+    <%= link_to [:edit, category] do %>
+      <i class='fa fa-pencil'></i>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to [category], method: :delete,
+        data: { confirm: 'Weet je zeker dat je deze categorie en de daarbij behorende producten wil verwijderen?' } do %>
+      <i class='fa fa-trash-o'></i>
+    <% end %>
+  </li>
+</ul>
+
+<ul class='add-new-record'>
+  <li>
+    <%= link_to [:new, category, :product] do %>
+      <i class="fa fa-plus"></i> PRODUCT
+    <% end %>
+  </li>
+</ul>
+</header>

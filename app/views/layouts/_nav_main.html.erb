@@ -9,8 +9,8 @@
   <div class='profile'>
     <% if user_signed_in? %>
       <li>
-        <%= active_link_to "#{current_user.first_name} #{'(Admin)' if current_user.admin?}",
-        [current_user] %>
+        <%= active_link_to "<i class='fa fa-user-o'></i> #{current_user.first_name} #{'(Admin)' if current_user.admin?}".html_safe,
+              [current_user] %>
       </li>
       <li><%= link_to 'log uit', destroy_user_session_path, method: :delete %></li>
     <% end %>

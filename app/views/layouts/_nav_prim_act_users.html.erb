@@ -1,5 +1,13 @@
 <% if policy(:user).create? %>
-	<ul id='primary-actions'>
-		<li><%= link_to 'nieuwe gebruiker', new_user_path %></li>
+	<% content_for :navigation_top_margin do %>
+		<br><br><br>
+	<% end %>
+	
+	<ul id='primary-actions' class='add-new-record'>
+		<li>
+			<%= link_to [:new, :user], class: 'add-user' do %>
+				<i class='fa fa-plus'></i> GEBRUIKER
+			<% end %>
+		</li>
 	</ul>
 <% end %>

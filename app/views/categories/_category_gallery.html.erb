@@ -1,7 +1,7 @@
 <div class='gallery'>
-  <% category.pictures.each do |picture| %>
+  <% category.pictures.where(visable: true).each do |picture| %>
     <div class='cat-picture'>
-      <%= render 'pictures/gallery_picture', picture: picture %>
+      <%= render 'pictures/gallery_picture_shop', picture: picture %>
     </div>
   <% end %>
 </div>

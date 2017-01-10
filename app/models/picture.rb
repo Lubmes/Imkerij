@@ -1,4 +1,5 @@
 class Picture < ApplicationRecord
+  acts_as_list scope: :product
   belongs_to :imageable, polymorphic: true
 
   has_attached_file :image,

@@ -1,0 +1,45 @@
+#admin-info {
+	@extend .w3-margin;
+	@extend .w3-row;
+	table {
+		@extend .w3-col;
+		@extend .m4;
+    @extend .w3-table;
+		@extend .w3-bordered;
+	}
+}
+#months {
+	small {
+		@extend .w3-text-dark-grey;
+	}
+	@extend .w3-margin-bottom;
+	.month {
+		h4 {
+			@extend .w3-margin-top;
+			@extend .w3-margin-bottom;
+		}
+	}
+}
+// orders
+#orders {
+	@extend .w3-margin-top;
+	table {
+		@extend .w3-table;
+		// @extend .w3-bordered;
+	}
+	tr.order {
+		@extend .w3-hover-light-grey;
+	}
+	a {
+		text-decoration: none;
+		@extend .w3-text-cyan;
+		.fa {
+			@extend .w3-text-brown;
+		}
+	}
+	a:hover {
+		.fa, span {
+			@extend .w3-text-khaki;
+		}
+	}
+}

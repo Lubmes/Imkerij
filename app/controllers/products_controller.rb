@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update,
+                                     :destroy, :move_higher, :move_lower]
   before_action :set_category, only: [:new, :create, :edit, :update]
 
   def show
@@ -55,6 +56,16 @@ class ProductsController < ApplicationController
     @product.destroy
     flash[:notice] = 'Product is verwijderd.'
 
+    redirect_to shop_path
+  end
+
+  def move_higher
+    @product.move_higher
+    redirect_to shop_path
+  end
+
+  def move_lower
+    @product.move_lower
     redirect_to shop_path
   end
 

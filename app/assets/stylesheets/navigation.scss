@@ -1,10 +1,15 @@
+#navigation {
+	@extend .w3-top;
+}
+
 #main-nav, #sec-nav, #primary-actions, #flash-messages {
 	@extend .w3-navbar;
 }
 
 #main-nav {
+	background: rgba(255, 255, 255, 0.85);
 	@extend .w3-bottombar;
-	@extend .w3-margin-0;
+	// @extend .w3-margin-0;
 	.profile {
 		@extend .w3-right;
 	}
@@ -13,11 +18,12 @@
 	}
 }
 #sec-nav {
-	@extend .w3-margin-0;
-	@extend .w3-border-bottom;
+	// @extend .w3-margin-0;
+	@extend .w3-card-4;
+	@extend .w3-dark-grey;
 	a {
 		@extend .w3-wide;
-		@extend .w3-hover-pale-yellow;
+		@extend .w3-hover-teal;
 	}
 	a.active {
 		@extend .w3-teal;
@@ -25,16 +31,14 @@
 	}
 }
 #primary-actions {
-	@extend .w3-border-bottom;
 	li a {
-		@extend .w3-margin-right;
-		@extend .w3-hover-light-grey;
-		@extend .w3-hover-text-teal;
+		@extend .w3-small;
+		@extend .w3-margin;
 	}
 }
 #flash-messages {
 	@extend .w3-center;
-	@extend .w3-margin-0;
+	@extend .w3-margin-bottom;
 	.notice, .alert {
 		@extend .w3-border-bottom;
 		@extend .w3-margin-0;

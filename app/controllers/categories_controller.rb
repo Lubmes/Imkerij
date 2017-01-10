@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:edit, :update]
+  before_action :set_category, only: [:edit, :update, :move_lower, :move_higher]
 
   def new
     @category = Category.new
@@ -49,6 +49,16 @@ class CategoriesController < ApplicationController
     authorize @category
     @category.destroy
     flash[:notice] = 'Categorie is verwijderd.'
+    redirect_to shop_path
+  end
+
+  def move_higher
+    @category.move_higher
+    redirect_to shop_path
+  end
+
+  def move_lower
+    @category.move_lower
     redirect_to shop_path
   end
 

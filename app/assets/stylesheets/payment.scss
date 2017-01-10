@@ -1,22 +1,43 @@
 #controls {
 	@extend .w3-center;
+	h2 {
+		@extend .w3-large;
+	}
 	a {
 		text-decoration: none;
-		@extend .w3-hover-text-khaki;
+		// @extend .w3-hover-text-khaki;
+
+		@extend .w3-border;
+		@extend .w3-border-white;
+		@extend .w3-hover-border-cyan;
+		@extend .w3-round-xlarge;
+		@extend .w3-padding;
 	}
 }
 .co-order-col {
 	@extend .w3-col;
-	@extend .m4;
+	@extend .m5;
 }
 .co-user-col {
 	@extend .w3-col;
 	@extend .m5;
 	@extend .w3-right;
 }
+header {
+	.co-order-col, .co-user-col {
+		@extend .w3-text-grey;
+		@extend .w3-large;
+	}
+}
 #payment {
+	header {
+		@extend .w3-text-grey;
+		h3 {
+			@extend .w3-large;
+			@extend .w3-text-orange;
+		}
+	}
 	@extend .w3-row;
-	@include model-table;
 	#user {
 		@extend .w3-padding-left;
 	}

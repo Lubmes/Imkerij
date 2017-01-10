@@ -1,13 +1,15 @@
-<div id='shop-edit'>
-	<div id='details' class='details-col'>
-		<%= render @product, category: @product.category %>
+<div id='record-zoom' class='product'>
+
+	<div class='info'>
+		<%= render 'pictures/cover_picture',
+					picture: @product.pictures.where(visable: true).first %>
+
+		<div class='main-content'>
+			<%= render 'pictures/row_gallery',
+				pictures: @product.pictures.where(visable: true) %>
+			<%= render @product, category: @product.category %>
+			<%= render 'bookings/form_big', product: @product, booking: @booking %>
+		</div>
 	</div>
 
-	<div id='pictures' class='pictures-col'>
-		<% @product.pictures.each do |picture| %>
-			<div class='picture'>
-				<%= render picture, imageable_model: @product %>
-			</div>
-		<% end %>
-	</div>
 </div>

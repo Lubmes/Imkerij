@@ -1,31 +1,41 @@
-<h1>Afrekenen</h1>
 <div id='controls'>
+	<h2>AFREKENEN</h2>
 	<%= link_to 'Bevestig', [:to_bank, @order] %>
 </div>
 
 <header>
-	<h4 class='co-order-col'>Uw bestelling</h4>
-	<h4 class='co-user-col'>
+	<h3 class='co-order-col'>Controleer uw bestelling!</h3>
+	<h3 class='co-user-col'>
 		<% if user_signed_in? %>
-			Controleer uw gegevens!
+			Controleer uw verzendgegevens!
 		<% else %>
 			Uw gegevens zijn nodig voor verzending
 		<% end %>
-	</h4>
+	</h3>
 </header>
 
 <div id='payment'>
 	<div id='order' class='co-order-col'>
 		<%= render @order %>
 	</div>
+
 	<div class="user">
 		<div class="co-user-col">
 			<% if user_signed_in? %>
 				<%= render @user %>
+				<% unless @delivery.nil? %>
+					<%= render @delivery %>
+				<% else %>
+					<header>
+						<h3><i class='fa fa-plus'></i> ADRES</h3>
+					</header>
+					<%= render 'deliveries/form' %>
+				<% end %>
 			<% else %>
 				<%= render 'devise/registrations/form', with_header: true %>
 				<%= render 'devise/sessions/form', with_header: true %>
 			<% end %>
 		</div>
 	</div>
+
 </div>

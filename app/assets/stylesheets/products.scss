@@ -3,5 +3,71 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .product {
-	@include model-table;
+	@extend .w3-row;
+	@extend .w3-border-lime;
+	@extend .w3-leftbar;
+	ul {
+		@extend .w3-text-dark-grey;
+	}
+	.info {
+		@extend .w3-row-padding;
+		.cover-picture {
+			@extend .w3-col;
+			@extend .l4;
+		}
+		.main-content {
+			@extend .w3-col;
+			@extend .l8;
+		}
+	}
+	.add-booking {
+		@extend .w3-row;
+	}
+	@extend .w3-margin-bottom;
+}
+#store-front #products .product {
+	// "meer"-knop
+	.description a {
+		text-decoration: none;
+		padding: 6px;
+		@extend .w3-brown;
+		@extend .w3-hover-lime;
+		@extend .w3-round-xlarge;
+		@extend .w3-margin;
+		@extend .w3-small;
+	}
+}
+#record-zoom.product {
+	.row-gallery {
+		@extend .w3-row-padding;
+		.gallery-picture {
+			@extend .w3-col;
+			@extend .l4;
+			@extend .w3-margin-bottom;
+		}
+	}
+}
+
+.booking {
+	@extend .w3-margin;
+	.info {
+		@extend .w3-center;
+		.price {
+			@extend .w3-text-grey;
+		}
+	}
+	.submit {
+		@extend .w3-center;
+		.button {
+			@extend .w3-btn;
+			@extend .w3-transparent;
+			@extend .w3-border;
+			@extend .w3-border-khaki;
+			@extend .w3-round-xlarge;
+			@extend .w3-padding;
+			@extend .w3-margin;
+			@extend .w3-text-black;
+			@extend .w3-hover-border-brown;
+		}
+	}
 }

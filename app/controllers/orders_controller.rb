@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all.order(created_at: :desc)
+    @paid_orders = @orders
   end
 
   def empty
@@ -23,20 +24,25 @@ class OrdersController < ApplicationController
 
   def check_out
     @user = current_user
+    @delivery = @user.deliveries.first
   end
 
   def to_bank
     @user = current_user
+    if @user == nil
+      flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
+      render 'check_out'
+    end
     # In volgende actie?
-    mollie = Mollie::API::Client.new('test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr')
-    payment = mollie.payments.create({
-      :amount      => 10.00,
-      :description => 'My first payment',
-      :redirectUrl => 'http://localhost:3000/orders/1/check_out',
-      :metadata    => {
-          :order_id => '1'
-      }
-    })
+    # mollie = Mollie::API::Client.new('test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr')
+    # payment = mollie.payments.create({
+    #   :amount      => 10.00,
+    #   :description => 'My first payment',
+    #   :redirectUrl => 'http://localhost:3000/orders/1/check_out',
+    #   :metadata    => {
+    #       :order_id => '1'
+    #   }
+    # })
   end
 
   private
