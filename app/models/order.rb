@@ -25,4 +25,23 @@ class Order < ApplicationRecord
     sum = Order.sum(:total_price_cents)
     Money.new(sum)
   end
+
+  def self.sum_of_current_months_orders
+    @orders = Order.where(updated_at: Time.now.beginning_of_month..Time.now)
+    sum = @orders.sum(:total_price_cents)
+    Money.new(sum)
+  end
+
+  def self.sum_of_previous_months_orders
+    @orders = Order.where(
+      updated_at: (Time.now.beginning_of_month - 1.month)..Time.now.beginning_of_month)
+    sum = @orders.sum(:total_price_cents)
+    Money.new(sum)
+  end
+
+  def self.sum_of_todays_orders
+    @orders = Order.where(updated_at: Time.now.beginning_of_day..Time.now)
+    sum = @orders.sum(:total_price_cents)
+    Money.new(sum)
+  end
 end

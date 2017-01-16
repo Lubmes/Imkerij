@@ -1,22 +1,47 @@
-<table class='delivery'>
+<div class='delivery'>
+<table>
+  <tr>
+    <td colspan='2'>
+      <ul class='record-actions'>
+        <li><h4>Naar het adres</h4></li>
+        <% unless controller.action_name == 'to_bank' || controller.action_name == 'success' %>
+        <div class='table-actions'>
+          <li>
+            <%= link_to [:edit, delivery.sender, delivery] do %>
+              <i class='fa fa-pencil'></i>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to [delivery.sender, delivery],
+                  method: :delete,
+                  class: 'delete' do %>
+              <i class='fa fa-trash-o'></i>
+            <% end %>
+          </li>
+        </div>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
   <tr>
     <th><%= Delivery.human_attribute_name('address_street_name') %></th>
-    <td><%= user.address_street_name %></td>
+    <td><%= delivery.address_street_name %></td>
   </tr>
   <tr>
     <th><%= Delivery.human_attribute_name('address_street_number') %></th>
-    <td><%= user.address_street_number %></td>
+    <td><%= delivery.address_street_number %></td>
   </tr>
   <tr>
     <th><%= Delivery.human_attribute_name('address_zip_code') %></th>
-    <td><%= user.address_zip_code %></td>
+    <td><%= delivery.address_zip_code %></td>
   </tr>
   <tr>
     <th><%= Delivery.human_attribute_name('address_city') %></th>
-    <td><%= user.address_city %></td>
+    <td><%= delivery.address_city %></td>
   </tr>
   <tr>
     <th><%= Delivery.human_attribute_name('address_country') %></th>
-    <td><%= user.address_country %></td>
+    <td><%= delivery.address_country %></td>
   </tr>
+<table>
 </div>

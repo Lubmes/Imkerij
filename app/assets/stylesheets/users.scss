@@ -5,29 +5,26 @@
 h1 {
 	@extend .w3-center;
 }
+// Niet werkzaam in check out:
+// .user {
+// 	@extend .w3-row;
+// }
 .user {
 	table {
+		@extend .w3-card;
 		li {
 			@extend .w3-xlarge;
 		}
 		width: 100%;
-		@extend .w3-container;
-		@extend .w3-card;
-		@extend .w3-margin-bottom;
-		tbody {
-			tr {
-				th, td {
-					// @extend .w3-left;
-				}
-			}
-		}
+		@extend .w3-table;
 	}
+	@extend .w3-margin-bottom;
 }
 #profile {
 	@extend .w3-row-padding;
 	.user-col {
 		@extend .w3-col;
-		@extend .l4;
+		@extend .l5;
 		.user {
 			@extend .w3-margin-top;
 		}
@@ -42,11 +39,14 @@ h1 {
 	}
 	#orders {
 		table {
-			@extend .w3-border;
+			// @extend .w3-border;
 			@extend .w3-table;
 			.price {
 				@extend .w3-large;
 			}
+		}
+		.order {
+			@extend .w3-leftbar;
 		}
 	}
 }
@@ -68,11 +68,6 @@ h1 {
 		@extend .w3-hover-text-teal;
 	}
 }
-.user {
-	@extend .w3-row;
-}
-
-
 // log-in
 #log-in {
 	margin-top: 14%;
@@ -85,9 +80,10 @@ h1 {
 	}
 	table {
 		@extend .w3-table;
+		@extend .w3-border;
 		@extend .w3-border-teal;
 		@extend .w3-bottombar;
-		@extend .w3-padding-bottom;
+		@extend .w3-padding;
 	}
 	tbody {
 		input {
@@ -108,38 +104,43 @@ h1 {
 	}
 }
 #payment {
-	.user {
-		h4 {
-			@extend .w3-center;
-			@extend .w3-large;
-			@extend .w3-text-dark-grey;
-		}
-		tbody {
-			th {
-				width: 45%;
+	#user-info {
+		.user {
+			table {
+				@extend .w3-margin-bottom;
 			}
-			td {
-				width: 100%;
-			}
-			label {
-				@extend .w3-left;
-			}
-			input {
-				width: 100%;
-			}
-		}
-		// @extend .w3-table;
-		tfoot.record-actions {
-			@extend .w3-small;
-			td {
-				.button {
-					@extend .w3-btn;
-					@extend .w3-large;
-					@extend .w3-light-blue;
-					@extend .w3-text-deep-orange;
-				}
+			h4 {
 				@extend .w3-center;
-				@extend .w3-padding;
+				@extend .w3-large;
+				@extend .w3-text-dark-grey;
+			}
+			tbody {
+				th {
+					width: 45%;
+				}
+				td {
+					width: 100%;
+				}
+				label {
+					@extend .w3-left;
+				}
+				input {
+					width: 100%;
+				}
+			}
+			// @extend .w3-table;
+			tfoot.record-actions {
+				@extend .w3-small;
+				td {
+					.button {
+						@extend .w3-btn;
+						@extend .w3-large;
+						@extend .w3-light-blue;
+						@extend .w3-text-deep-orange;
+					}
+					@extend .w3-center;
+					@extend .w3-padding;
+				}
 			}
 		}
 	}

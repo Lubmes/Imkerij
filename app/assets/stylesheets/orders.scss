@@ -2,6 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.status-tag.open, .status-tag.problem, .status-tag.paid, .status-tag.sent {
+	@extend .w3-tag;
+	@extend .w3-text-black;
+}
+.status-tag.problem { @extend .w3-red; }
+.status-tag.paid { @extend .w3-orange; }
+.status-tag.sent { @extend .w3-green; }
+.status-tag.open { @extend .w3-light-blue; }
+#orders.guest {
+		@extend .w3-text-grey;
+}
+#profile {
+	#orders {
+		.order.problem { @extend .w3-border-red; }
+		.order.paid { @extend .w3-border-orange; }
+		.order.sent { @extend .w3-border-green; }
+		.order.open { @extend .w3-border-light-blue; }
+	}
+}
 #order {
 	.remove {
 		@extend .w3-text-grey;
@@ -19,6 +38,7 @@
 		.weight {
 			@extend .w3-medium;
 			@extend .w3-text-grey;
+			@extend .w3-padding-bottom;
 		}
 	}
   .booking-product small {
@@ -28,6 +48,11 @@
 		@extend .w3-padding-left;
 	}
 	.bookings {
+		td.name {
+			@extend .w3-border-top;
+			@extend .w3-padding-0;
+			@extend .w3-padding-bottom;
+		}
 		.fa-close {
 		}
 		td {

@@ -22,7 +22,7 @@
 	</td>
 
 	<!-- Booking form -->
-	<% unless controller.action_name == 'to_bank' %>
+	<% unless controller.action_name == 'to_bank' || controller.action_name == 'success' %>
 		<%= form_for booking, remote: true do |f| %>
 			<td class='booking-form'>
 				<div class='submit'>

@@ -1,4 +1,7 @@
-<% unless controller.action_name == 'to_bank' %>
+<% unless controller.action_name == 'to_bank' ||
+		controller.action_name == 'success' ||
+		order.status == 'paid' ||
+		order.status == 'sent' %>
 	<% if @order.bookings.any? %>
 		<ul class='record-actions'>
 			<li>

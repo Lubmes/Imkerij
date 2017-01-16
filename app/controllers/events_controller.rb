@@ -16,6 +16,9 @@ class EventsController < ApplicationController
     authorize @event
 
     if @event.save
+      if params[:image]
+        @event.pictures.create(image: params[:image])
+      end
       flash[:notice] = 'Agendapunt is toegevoegd.'
       redirect_to events_path
     else
@@ -31,6 +34,9 @@ class EventsController < ApplicationController
   def update
     authorize @event
     if @event.update(event_params)
+      if params[:image]
+        @event.pictures.create(image: params[:image])
+      end
       flash[:notice] = 'Agendapunt is bijgewerkt.'
       redirect_to events_path
     else

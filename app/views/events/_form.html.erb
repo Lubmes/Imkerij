@@ -1,4 +1,4 @@
-<%= form_for [event] do |f| %>
+<%= form_for [event], html: { multipart: true } do |f| %>
 <div id='form' class='event-col'>
 
   <!-- Event -->
@@ -43,6 +43,11 @@
         </td>
       </tr>
     <% end %>
+
+		<tr>
+			<th><%= f.label :picture %></th>
+			<td><%= file_field_tag 'image', type: :file, multiple: false %></td>
+    </tr>
   </table>
 
   <%= f.submit %>

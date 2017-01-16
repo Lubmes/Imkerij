@@ -19,7 +19,7 @@
 		<%= render @order %>
 	</div>
 
-	<div class="user">
+	<div id="user-info">
 		<div class="co-user-col">
 			<% if user_signed_in? %>
 				<%= render @user %>
@@ -27,13 +27,15 @@
 					<%= render @delivery %>
 				<% else %>
 					<header>
-						<h3><i class='fa fa-plus'></i> ADRES</h3>
+						<h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
 					</header>
-					<%= render 'deliveries/form' %>
+					<%= render 'deliveries/form', delivery: @user.deliveries.build %>
 				<% end %>
 			<% else %>
-				<%= render 'devise/registrations/form', with_header: true %>
-				<%= render 'devise/sessions/form', with_header: true %>
+				<div class='user'>
+					<%= render 'devise/registrations/form', with_header: true %>
+					<%= render 'devise/sessions/form', with_header: true %>
+				</div>
 			<% end %>
 		</div>
 	</div>

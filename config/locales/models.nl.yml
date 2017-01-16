@@ -1,6 +1,12 @@
 nl:
   "true": Ja
   "false": Nee
+  order_status:
+    problem: probleem
+    paid: betaald
+    open: open
+    sent: verzonden
+    
   activerecord:
     models:
       user:

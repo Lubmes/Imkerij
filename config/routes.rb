@@ -3,11 +3,14 @@ Rails.application.routes.draw do
   devise_for :users, path: 'u'#, controllers: { registrations: "registrations" }
   resources 'users' do
     resources 'orders'
+    resources 'deliveries'
   end
 
   root 'welcome#home'
   get 'admin', to: 'welcome#admin'
-  resources 'events'
+  resources 'events' do
+    resources 'pictures'
+  end
   get 'shop', to: 'shop#index', as: 'shop'
 
   resources 'categories', except: [:index] do
@@ -41,7 +44,7 @@ Rails.application.routes.draw do
       get 'empty'
       get 'check_out'
       get 'to_bank'
-      get 'confirmation'
+      get 'success'
     end
   end
 end

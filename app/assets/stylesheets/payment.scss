@@ -1,26 +1,10 @@
-#controls {
-	@extend .w3-center;
-	h2 {
-		@extend .w3-large;
-	}
-	a {
-		text-decoration: none;
-		// @extend .w3-hover-text-khaki;
-
-		@extend .w3-border;
-		@extend .w3-border-white;
-		@extend .w3-hover-border-cyan;
-		@extend .w3-round-xlarge;
-		@extend .w3-padding;
-	}
-}
 .co-order-col {
 	@extend .w3-col;
-	@extend .m5;
+	@extend .l5;
 }
 .co-user-col {
 	@extend .w3-col;
-	@extend .m5;
+	@extend .l5;
 	@extend .w3-right;
 }
 header {
@@ -29,16 +13,45 @@ header {
 		@extend .w3-large;
 	}
 }
+#controls {
+	@extend .w3-center;
+	h2 {
+		@extend .w3-large;
+	}
+	a {
+		text-decoration: none;
+		@extend .w3-border;
+		@extend .w3-border-white;
+		@extend .w3-hover-border-cyan;
+		@extend .w3-round-xlarge;
+		@extend .w3-padding;
+	}
+	a.success {
+		@extend .w3-text-brown;
+		@extend .w3-hover-border-white;
+		@extend .w3-hover-text-green;
+	}
+}
+#payment.to-bank {
+	@extend .w3-margin-top;
+	@extend .w3-border-dark-grey;
+	@extend .w3-topbar;
+}
 #payment {
 	header {
 		@extend .w3-text-grey;
-		h3 {
+		h3.add-address {
 			@extend .w3-large;
 			@extend .w3-text-orange;
 		}
 	}
 	@extend .w3-row;
+	#order {
+		.bookings {
+			@extend .w3-leftbar;
+		}
+	}
 	#user {
-		@extend .w3-padding-left;
+		// @extend .w3-padding-left;
 	}
 }

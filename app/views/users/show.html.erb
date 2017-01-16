@@ -1,12 +1,17 @@
+<% if policy(@order).admin_action? %>
 <% content_for :navigation do %>
 	<%= render 'layouts/nav_sec_admin' %>
+<% end %>
 <% end %>
 
 <div id='profile'>
 	<div class='user-col'>
-		<div class="user">
-			<%= render @user %>
-		</div>
+		<%= render @user %>
+		<% if false # @deliveries.any? %>
+			<% @deliveries.each do |delivery| %>
+				<%= render delivery %>
+			<% end %>
+		<% end %>
 	</div>
 
 	<div class='orders-col'>
@@ -27,21 +32,28 @@
 				<h4>Alle orders</h4>
 			</header>
 			<% @user.orders.each do |order| %>
-				<table>
+				<table class='order <%= order.status %>'>
 					<tr>
 						<th>Aangemaakt</th>
 						<td><i><%= l(order.created_at, format: :long) %></i></td>
 					</tr>
 					<tr>
 						<th>Status</th>
-						<td><%= order.status ? order.status : "niet opgeslagen"  %></td>
+						<td>
+							<span class='status-tag <%= order.status %>'>
+								<%= I18n.t "order_status.#{order.status}" %>
+							</span>
+						</td>
 					</tr>
 					<tr>
 						<th>Totaalbedrag</th>
-						<td><strong><%= currency_symbol %> <%= order.total_price %></strong></td>
+						<td>
+							<strong><%= currency_symbol %> <%= order.total_price %></strong>
+						</td>
 					</tr>
 				</table>
 			<% end %>
 		</div>
 	</div>
+
 </div>

@@ -1,7 +1,9 @@
 <div class='description'>
   <% if current_page?(action: 'index') %>
-    <%= truncate(product.description, length: 200) { link_to "meer", [product.category, product] } %>
+    <%= truncate(product.description, length: 200) %>
   <% else %>
     <%= product.description %>
   <% end %>
+  <br><br>
+  <%= link_to "meer informatie", [product.category, product] %>
 </div>

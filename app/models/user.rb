@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   # Associations
   has_many :orders, foreign_key: "customer_id"
-  has_many :deliveries, foreign_key: "sender_id"
+  has_many :deliveries, foreign_key: "sender_id", dependent: :destroy
 
   # Validations
   validates :first_name, presence: true

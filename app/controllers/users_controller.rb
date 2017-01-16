@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = policy_scope(User)
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def show
     authorize @user
     @order = @user.orders.last # Moet zijn opgesplitst in paid_-, send_- en stored_orders.
+    @deliveries = @user.deliveries
   end
 
   def new

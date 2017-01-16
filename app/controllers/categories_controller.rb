@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:edit, :update, :move_lower, :move_higher]
+  before_action :set_category, only: [:edit, :update, :destroy, :move_lower, :move_higher]
 
   def new
     @category = Category.new
@@ -45,7 +45,6 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
     authorize @category
     @category.destroy
     flash[:notice] = 'Categorie is verwijderd.'

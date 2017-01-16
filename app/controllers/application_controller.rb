@@ -37,13 +37,11 @@ class ApplicationController < ActionController::Base
   # als de gebruiker wel herkend wordt: vind onverwerkte order;
   # anders: maak een nieuwe aan.
   def current_order
-    # unless current_order.exists?
-      if user_signed_in?
-        current_order = Order.where(customer_id: current_user.id).first_or_initialize(status: :open)
-      else
-        current_order = Order.where(customer_id: guest_user.id).first_or_initialize(status: :open)
-      end
-    # end
+    if user_signed_in?
+      current_order = Order.where(customer_id: current_user.id, status: :open).first_or_initialize(status: :open)
+    else
+      current_order = Order.where(customer_id: guest_user.id).first_or_initialize(status: :open)
+    end
   end
 
   protected
@@ -67,7 +65,7 @@ class ApplicationController < ActionController::Base
     store_location_for(:user, request.url)
   end
 
-  # # één keer aangeroepen wanneer de gebruiker inlogd, hier de code die nodig is
+  # # Eén keer aangeroepen wanneer de gebruiker inlogd, hier de code die nodig is
   # # voor de overgang van guest_user naar current_user.
   def logging_in
     # Voorbeeld:

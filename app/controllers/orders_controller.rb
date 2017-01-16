@@ -1,15 +1,21 @@
 class OrdersController < ApplicationController
   # require 'Mollie/API/Client'
 
-  before_action :set_order, only: [:show, :empty, :check_out, :to_bank]
-  before_action :set_user, only: [:check_out, :to_bank]
+  before_action :set_order, only: [:show, :empty, :check_out, :to_bank, :success]
+  before_action :set_user, only: [:check_out, :to_bank, :success]
 
   def show
   end
 
   def index
     @orders = Order.all.order(created_at: :desc)
-    @paid_orders = @orders
+    @guest_orders = @orders.joins(:customer).where(users: {first_name: 'guest'})
+
+    @all_orders = @orders.joins(:customer).where.not(users: {first_name: 'guest'})
+    @open_orders = @all_orders.open
+    @problem_orders = @all_orders.problem
+    @paid_orders = @all_orders.paid
+    @sent_orders = @all_orders.sent
   end
 
   def empty
@@ -23,12 +29,11 @@ class OrdersController < ApplicationController
   end
 
   def check_out
-    @user = current_user
-    @delivery = @user.deliveries.first
+    @delivery = @user.deliveries.first unless @user.nil?
   end
 
   def to_bank
-    @user = current_user
+    @delivery = @user.deliveries.first unless @user.nil?
     if @user == nil
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
@@ -43,6 +48,16 @@ class OrdersController < ApplicationController
     #       :order_id => '1'
     #   }
     # })
+  end
+
+  def success
+    @delivery = @user.deliveries.first unless @user.nil?
+    if @user == nil
+      flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
+      render 'check_out'
+    end
+    @order.status = 'paid'
+    @order.save
   end
 
   private

@@ -23,6 +23,7 @@
 // orders
 #orders {
 	@extend .w3-margin-top;
+	@extend .w3-margin-bottom;
 	table {
 		@extend .w3-table;
 		// @extend .w3-bordered;
@@ -38,7 +39,7 @@
 		}
 	}
 	a:hover {
-		.fa, span {
+		span {
 			@extend .w3-text-khaki;
 		}
 	}

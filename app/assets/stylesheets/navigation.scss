@@ -45,8 +45,10 @@
 	}
 	.notice {
 		@extend .w3-border-green;
+		@extend .w3-text-light-green;
 	}
 	.alert {
 		@extend .w3-border-red;
+		@extend .w3-text-pink;
 	}
 }

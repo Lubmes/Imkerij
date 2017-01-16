@@ -1,4 +1,5 @@
 <ul class='record-actions'>
+  <% if policy(product).edit? %>
   <li>
     <div class='up-down-action <%= "single-move" if product.first? || product.last? %>'>
       <% unless product.first? %>
@@ -13,22 +14,27 @@
       <% end %>
     </div>
   </li>
+  <% end %>
   <li>
     <h5>
       <%= product.name %>
     </h5>
   </li>
-  <li>
-    <%= link_to [:edit, product.category, product] do %>
-      <i class='fa fa-pencil'></i>
-    <% end %>
-  </li>
-  <li>
-    <%= link_to [product.category, product],
-         method: :delete,
-         data: { confirm: 'Weet je zeker dat je dit product wil verwijderen?' },
-         class: 'delete' do %>
-      <i class='fa fa-trash-o'></i>
-    <% end %>
-  </li>
+  <% if policy(product).edit? %>
+    <li>
+      <%= link_to [:edit, product.category, product] do %>
+        <i class='fa fa-pencil'></i>
+      <% end %>
+    </li>
+  <% end %>
+  <% if policy(product).destroy? %>
+    <li>
+      <%= link_to [product.category, product],
+           method: :delete,
+           data: { confirm: 'Weet je zeker dat je dit product wil verwijderen?' },
+           class: 'delete' do %>
+        <i class='fa fa-trash-o'></i>
+      <% end %>
+    </li>
+  <% end %>
 </ul>

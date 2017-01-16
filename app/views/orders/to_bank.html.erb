@@ -1,20 +1,23 @@
-<h1>Afrekenen</h1>
 <div id='controls'>
-	<%= link_to 'Betalen', '#' %>
+	<h2>VERZENDING</h2>
+	<!-- tijdelijke link. -->
+	<!-- eigenlijk naar bank gaan met succes url bijgevoegd. -->
+	<%= link_to 'Betalen', [:success, @order] %>
 </div>
 
+<div id='payment' class='to-bank'>
 <header>
-	<h4 class='co-order-col'>Uw bestelling</h4>
-	<h4 class='co-user-col'>Verzending</h4>
+	<h3 class='co-order-col'>Uw bestelling</h3>
+	<h3 class='co-user-col'>Uw verzendgegevens</h3>
 </header>
 
-<div id='payment'>
 	<div id='order' class='co-order-col'>
 		<%= render @order %>
 	</div>
-	<div class="user">
+	<div class="user-info">
 		<div class="co-user-col">
 			<%= render @user %>
+			<%= render @delivery %>
 		</div>
 	</div>
 </div>

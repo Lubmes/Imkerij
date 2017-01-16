@@ -1,56 +1,46 @@
+<div class='user'>
 <table>
-	<thead>
-		<tr>
-			<td colspan='2'>
-				<ul class='record-actions'>
-				  <li>
-				    <h5><%= user.email %></h5>
-				  </li>
-					<% unless controller.action_name == 'to_bank' %>
-						<div class='table-actions'>
-							<% if policy(user).show? && current_page?(action: 'index') %>
-								<li>
-							    <%= link_to [user] do %>
-							      <i class='fa fa-user'></i>
-							    <% end %>
-							  </li>
-							<% end %>
-							<% if policy(user).edit? %>
-							  <li>
-							    <%= link_to [:edit, user] do %>
-							      <i class='fa fa-pencil'></i>
-							    <% end %>
-							  </li>
-							  <li>
-							    <%= link_to [user],
-							         method: :delete,
-							         data: { confirm: 'Weet je zeker dat u deze gebruiker wilt verwijderen?' },
-							         class: 'delete' do %>
-							      <i class='fa fa-trash-o'></i>
-							    <% end %>
-							  </li>
-							<% end %>
-						</div>
-					<% end %>
-				</ul>
-			</td>
-		</tr>
-	</thead>
+	<tr>
+		<td colspan='2'>
+			<ul class='record-actions'>
+			  <li><h4><%= user.email %></h4>
+			  </li>
+				<% unless controller.action_name == 'to_bank' ||
+							controller.action_name == 'success' %>
+					<div class='table-actions'>
+						<% if policy(user).show? && current_page?(action: 'index') %>
+							<li>
+						    <%= link_to [user] do %>
+						      <i class='fa fa-user'></i>
+						    <% end %>
+						  </li>
+						<% end %>
+						<% if policy(user).edit? %>
+						  <li>
+						    <%= link_to [:edit, user] do %>
+						      <i class='fa fa-pencil'></i>
+						    <% end %>
+						  </li>
+						<% end %>
+					</div>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
 
-	<tbody>
+	<tr>
+		<th><%= User.human_attribute_name('first_name') %></th>
+		<td><%= user.first_name %></td>
+	</tr>
+	<tr>
+		<th><%= User.human_attribute_name('last_name') %></th>
+		<td><%= user.last_name %></td>
+	</tr>
+	<% if current_user.admin? %>
 		<tr>
-			<th><%= User.human_attribute_name('first_name') %></th>
-			<td><%= user.first_name %></td>
+			<th><%= User.human_attribute_name('admin') %></th>
+			<td><%= I18n.t user.admin.to_s %></td>
 		</tr>
-		<tr>
-			<th><%= User.human_attribute_name('last_name') %></th>
-			<td><%= user.last_name %></td>
-		</tr>
-		<% if current_user.admin? %>
-			<tr>
-				<th><%= User.human_attribute_name('admin') %></th>
-				<td><%= I18n.t user.admin.to_s %></td>
-			</tr>
-		<% end %>
-	</tbody>
+	<% end %>
 </table>
+</div>

@@ -1,13 +1,47 @@
-<% content_for :navigation do %>
-	<%= render 'layouts/nav_sec_admin' %>
+<% if policy(:order).admin_action? %>
+	<% content_for :navigation do %>
+		<%= render 'layouts/nav_sec_admin' %>
+	<% end %>
 <% end %>
 
-<div id=admin-info>
-	<table>
+<div id='admin-info'>
+	<table id='order-sums'>
 		<tbody>
 			<tr>
 				<td>Totaalbedrag over alle orders</td>
 				<td><%= currency_symbol %> <%= Order.sum_of_all_orders %></td>
+			</tr>
+			<tr>
+				<td>Totaalbedrag deze maand</td>
+				<td><%= currency_symbol %> <%= Order.sum_of_current_months_orders %></td>
+			</tr>
+			<tr>
+				<td>Totaalbedrag vorige maand</td>
+				<td><%= currency_symbol %> <%= Order.sum_of_previous_months_orders %></td>
+			</tr>
+			<tr>
+				<td>Totaalbedrag vandaag </td>
+				<td><%= currency_symbol %> <%= Order.sum_of_todays_orders %></td>
+			</tr>
+		</tbody>
+	</table>
+	<table id='quantity-of-orders'>
+		<tbody>
+			<tr>
+				<td><span class='status-tag problem'>probleem</span></td>
+				<td><%= Order.where(status: :problem).count %></td>
+			</tr>
+			<tr>
+				<td><span class='status-tag paid'>betaald</span></td>
+				<td><%= Order.where(status: :paid).count %></td>
+			</tr>
+			<tr>
+				<td><span class='status-tag sent'>verzonden</span></td>
+				<td><%= Order.where(status: :sent).count %></td>
+			</tr>
+			<tr>
+				<td><span class='status-tag open'>open</span></td>
+				<td><%= Order.where(status: :open).count %></td>
 			</tr>
 		</tbody>
 	</table>

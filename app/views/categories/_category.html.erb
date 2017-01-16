@@ -1,40 +1,47 @@
 <header>
 <ul class='record-actions'>
-  <li>
-    <div class='up-down-action <%= "single-move" if category.first? || category.last? %>'>
-      <% unless category.first? %>
-        <%= link_to [:move_higher, category] do %>
-          <i class='fa fa-chevron-up'></i>
+  <% if policy(category).edit? %>
+    <li>
+      <div class='up-down-action <%= "single-move" if category.first? || category.last? %>'>
+        <% unless category.first? %>
+          <%= link_to [:move_higher, category] do %>
+            <i class='fa fa-chevron-up'></i>
+          <% end %>
         <% end %>
-      <% end %>
-      <% unless category.last? %>
-        <%= link_to [:move_lower, category] do %>
-          <i class='fa fa-chevron-down'></i>
+        <% unless category.last? %>
+          <%= link_to [:move_lower, category] do %>
+            <i class='fa fa-chevron-down'></i>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-  </li>
+      </div>
+    </li>
+  <% end %>
   <li>
     <h3><%= category.name %></h3>
   </li>
-  <li>
-    <%= link_to [:edit, category] do %>
-      <i class='fa fa-pencil'></i>
-    <% end %>
-  </li>
-  <li>
-    <%= link_to [category], method: :delete,
-        data: { confirm: 'Weet je zeker dat je deze categorie en de daarbij behorende producten wil verwijderen?' } do %>
-      <i class='fa fa-trash-o'></i>
-    <% end %>
-  </li>
+  <% if policy(category).edit? %>
+    <li>
+      <%= link_to [:edit, category] do %>
+        <i class='fa fa-pencil'></i>
+      <% end %>
+    </li>
+  <% end %>
+  <% if policy(category).destroy? %>
+    <li>
+      <%= link_to [category], method: :delete,
+          data: { confirm: 'Weet je zeker dat je deze categorie en de daarbij behorende producten wil verwijderen?' } do %>
+        <i class='fa fa-trash-o'></i>
+      <% end %>
+    </li>
+  <% end %>
 </ul>
-
-<ul class='add-new-record'>
-  <li>
-    <%= link_to [:new, category, :product] do %>
-      <i class="fa fa-plus"></i> PRODUCT
-    <% end %>
-  </li>
-</ul>
+<% if policy(:product).new? %>
+  <ul class='add-new-record'>
+    <li>
+      <%= link_to [:new, category, :product] do %>
+        <i class="fa fa-plus"></i> PRODUCT
+      <% end %>
+    </li>
+  </ul>
+<% end %>
 </header>
