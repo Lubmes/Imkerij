@@ -1,6 +1,6 @@
 class ShopController < ApplicationController
   def index
-    skip_authorization # relevant?
+    # skip_authorization # relevant?
     @categories = Category.all.order(position: :asc)
     # Voor het inzien van wat al geselecteerd is.
     @order = current_order

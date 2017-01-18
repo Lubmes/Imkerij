@@ -6,7 +6,7 @@ nl:
     paid: betaald
     open: open
     sent: verzonden
-    
+
   activerecord:
     models:
       user:
@@ -46,6 +46,7 @@ nl:
         price: Prijs
         sales_tax:  BTW
         mail_weight: Verzendgewicht
+        available: Beschikbaar?
         category: Categorie
         pictures: Foto's
       picture:

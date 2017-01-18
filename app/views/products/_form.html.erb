@@ -67,7 +67,19 @@
         </td>
       </tr>
     <% end %>
-
+		<!-- Beschikbaarheid -->
+    <tr>
+      <th><%= f.label :available %></td>
+      <td><%= f.check_box :available %></td>
+    </tr>
+    <% if product.errors[:available].any? %>
+      <tr id='errors'>
+        <th></th><td><% product.errors[:available].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
 
     <tr>
       <th><%= f.label :pictures %></th>

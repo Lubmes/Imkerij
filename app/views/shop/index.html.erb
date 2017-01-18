@@ -14,7 +14,7 @@
 					</div>
 					<div id='products' class='prod-col'>
 						<%= render category %>
-						<% category.products.each do |product| %>
+						<% policy_scope(category.products).each do |product| %>
 							<div class='product'>
 								<div class='info'>
 									<%= render 'products/product_head', product: product %>
