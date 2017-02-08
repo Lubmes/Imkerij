@@ -208,4 +208,5 @@ nl:
       short: "%d %b %H:%M"
       event_date: "%A %d %B"
       event_time: "%H:%M"
+      invoice: "%Y%m%d"
     pm: "'s middags"

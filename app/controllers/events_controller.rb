@@ -41,7 +41,7 @@ class EventsController < ApplicationController
       redirect_to events_path
     else
       flash.now[:alert] = 'Agendapunt is niet bijgewerkt.'
-      render [:edit, @event]
+      render 'edit'
     end
   end
 

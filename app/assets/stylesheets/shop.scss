@@ -22,6 +22,9 @@
 }
 
 #store-front {
+	img {
+		@extend .w3-round-jumbo;
+	}
   @extend .w3-margin-top;
 	@extend .w3-padding-top;
 	@extend .w3-row;
@@ -37,6 +40,7 @@
 				@extend .w3-padding-top;
 				@extend .w3-padding-bottom;
 		    @extend .w3-padding-left;
+				img { @extend .w3-round-xlarge;}
 			}
 		}
 	}
@@ -47,4 +51,26 @@
       @extend .w3-leftbar;
     }
   }
+}
+
+#shop-edit {
+	@extend .w3-margin-top;
+	#pictures { @extend .w3-row-padding; }
+	.picture-ajax {
+		@extend .w3-col;
+		@extend .l2;
+		img { @extend .w3-round-xlarge; }
+	}
+	#form {
+		@extend .w3-border-top;
+		@extend .w3-margin-left;
+		padding-top: 2%;
+		th {
+			text-align: right;
+			width: 18%;
+		}
+		.name td input, .description td textarea { width: 60%; }
+		.description td textarea { rows: 7; }
+		.button { @extend .w3-btn; }
+	}
 }

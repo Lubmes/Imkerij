@@ -1,0 +1,33 @@
+#invoice-pdf {
+  @extend .w3-tiny;
+  h1 { @extend .w3-large; }
+  h2 { @extend .w3-medium; }
+  h3 { @extend .w3-small; }
+  h4 {
+    @extend .w3-small;
+    @extend .w3-text-grey;
+  }
+  .status-tag { @extend .w3-tiny; }
+  .invoice-no {
+    @extend .w3-right;
+  }
+  .address {
+    // @extend .w3-padding-bottom;
+  }
+  .package, .invoice {
+    @extend .w3-show-inline-block;
+  }
+  .invoice {
+    margin-left: 33%;
+  }
+  table{
+    .sum { text-align: right; }
+    .paid .sum { border-top: black 1px solid;}
+    .total .sum { border-top: black 1px solid;}
+    tfoot {
+      th {
+        text-align: right;
+      }
+    }
+  }
+}

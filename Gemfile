@@ -23,6 +23,10 @@ gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
 # Grafieken
 gem 'chartkick', '~> 2.1', '>= 2.1.1'
 gem 'groupdate'
+# pdf's
+gem 'pdfkit'
+gem 'render_anywhere'
+gem 'wkhtmltopdf-binary'
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 gem 'capistrano-rvm', group: :development

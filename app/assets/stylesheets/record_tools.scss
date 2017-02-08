@@ -1,6 +1,6 @@
 .invisable {
 	@extend .w3-text-grey;
-	@extend .w3-hover-light-grey;
+	// @extend .w3-hover-light-grey;
 }
 
 .record-actions {
@@ -46,7 +46,6 @@
 @mixin record-table {
 	table {
 		@extend .w3-table;
-		// @extend .w3-border;
 		@extend .w3-margin-bottom;
 	}
 }

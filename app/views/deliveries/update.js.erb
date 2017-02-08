@@ -1,0 +1,3 @@
+$('.delivery-ajax').html("<%= j render 'deliveries/delivery',
+            card_title: "#{@delivery.address_zip_code}, #{@delivery.address_street_number}",
+            delivery: @delivery %>")

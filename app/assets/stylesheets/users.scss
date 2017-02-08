@@ -5,18 +5,17 @@
 h1 {
 	@extend .w3-center;
 }
-// Niet werkzaam in check out:
-// .user {
-// 	@extend .w3-row;
-// }
 .user {
+	@extend .w3-card;
+	@extend .w3-container;
 	table {
-		@extend .w3-card;
-		li {
-			@extend .w3-xlarge;
+		td, th {
+			padding-top: 0;
+		}
+		th {
+			text-align: left;
 		}
 		width: 100%;
-		@extend .w3-table;
 	}
 	@extend .w3-margin-bottom;
 }
@@ -31,33 +30,104 @@ h1 {
 	}
 	.orders-col {
 		@extend .w3-col;
-		@extend .l5;
+		@extend .l7;
 	}
 	.bookings {
 		@extend .w3-border-grey;
 		@extend .w3-leftbar;
+		width: 100%;
 	}
-	#orders {
-		table {
-			// @extend .w3-border;
-			@extend .w3-table;
-			.price {
-				@extend .w3-large;
+	#order-processing {
+		.fa-cogs {
+			@extend .w3-opacity;
+			@extend .w3-hover-opacity-off;
+			@extend .w3-text-grey;
+			@extend .w3-hover-text-indigo;
+		}
+		.correction {
+			@extend .w3-text-red;
+			small {
+				@extend .w3-opacity;
+				@extend .w3-text-red;
 			}
 		}
-		.order {
-			@extend .w3-leftbar;
+		table.bookings {
+			margin-bottom: 0;
+			padding-bottom: 1%;
+		}
+		.order-invoice {
+			.invoice-data {
+				// @extend .w3-border-light-grey;
+				// @extend .w3-topbar;
+			}
+		}
+	}
+	#processed {
+		.order-invoice {
+			@extend .w3-margin-bottom;
+		}
+	}
+	.order-invoice {
+		@extend .w3-container;
+		@extend .w3-leftbar;
+		.invoice-data {
+			@extend .w3-row;
+			// @extend .w3-panel;
+			// @extend .w3-padding-left;
+			@extend .w3-dark-grey;
+			@extend .w3-text-dark-grey;
+			// margin-top: 0;
+			.main-data {
+				@extend .w3-col;
+				@extend .l7;
+				@extend .w3-padding-medium;
+				@extend .w3-padding-left;
+				@extend .w3-margin-0;
+				.date {
+					@extend .w3-slim;
+				}
+				.price {
+					@extend .w3-large;
+				}
+				.paid {
+					@extend .w3-text-black;
+				}
+				.paid-back {
+					@extend .w3-text-red;
+				}
+			}
+			.addresses {
+				@extend .w3-col;
+				@extend .l5;
+				@extend .w3-right;
+				@extend .w3-padding-medium;
+				text-align: right;
+				.address {
+					@extend .w3-medium;
+					@extend .w3-text-black;
+				}
+			}
+		@extend .w3-margin-0;
+	}
+		.invoice-actions {
+			@extend .w3-btn-bar;
+			@extend .w3-light-grey;
+			a {
+				width: 25%;
+				@extend .w3-btn;
+				@extend .w3-show-inline-block;
+				@extend .w3-text-teal;
+				@extend .w3-padding-left;
+				@extend .w3-padding-right;
+			}
+			.print { @extend .w3-hover-indigo; }
+			.pdf { @extend .w3-hover-black; }
+			.problem { @extend .w3-hover-red; }
+			.mail { @extend .w3-hover-green; }
 		}
 	}
 }
-// users index
-#users {
-	@extend .w3-row-padding;
-	.user {
-		@extend .w3-col;
-		@extend .l6;
-	}
-}
+// nog nodig?
 #admin-actions {
 	@extend .w3-navbar;
 	@extend .w3-border-bottom;

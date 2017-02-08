@@ -1,12 +1,17 @@
 <%= form_for [category, product], html: { multipart: true } do |f| %>
-<div id='form' class='prod-col'>
+<div id='form'>
 
   <!-- Product -->
 	<table>
-    <!-- Naam -->
+		<!-- Categorieën  -->
 		<tr>
+			<th><%= f.label :category %></td>
+ 			<td><%= f.collection_select(:category_id, Category.all, :id, :name) %></td>
+  	</tr>
+    <!-- Naam -->
+		<tr class='name'>
 			<th><%= f.label :name %></td>
- 			<td><%= f.text_field :name, size: 30 %></td>
+ 			<td><%= f.text_field :name %></td>
   	</tr>
     <% if product.errors[:name].any? %>
       <tr id='errors'>
@@ -17,9 +22,9 @@
       </tr>
     <% end %>
     <!-- Omschrijving -->
-  	<tr>
+  	<tr class='description'>
 		  <th><%= f.label :description %></td>
-  		<td><%= f.text_area :description, size: '30x10' %></td>
+  		<td><%= f.text_area :description, rows: 14 %></td>
   	</tr>
     <% if product.errors[:description].any? %>
       <tr id='errors'>

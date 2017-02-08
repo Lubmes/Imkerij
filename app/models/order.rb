@@ -4,10 +4,12 @@ class Order < ApplicationRecord
   # Statuses
   enum status: { open: 0, paid: 1, stored: 2, sent: 3, problem: 4 }
   # Associations
+  belongs_to :package_delivery, class_name: 'Delivery', optional: true
   belongs_to :customer, class_name: 'User', optional: true
-  accepts_nested_attributes_for :customer
   has_many :bookings, dependent: :destroy
-  has_many :deliveries
+  has_many :invoices
+  # Nested attributes
+  accepts_nested_attributes_for :customer # Waarom? => invoice!
 
   def sum_all_bookings
     bookings = self.bookings

@@ -37,7 +37,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources 'bookings'
+  resources 'bookings' do
+    resources 'corrections'
+  end
 
   resources 'orders', only: [:index] do
     member do
@@ -45,6 +47,12 @@ Rails.application.routes.draw do
       get 'check_out'
       get 'to_bank'
       get 'success'
+    end
+    resources 'invoices', only: [:show] do
+      member do
+        get 'sent_out'
+      end
+      resource 'download', only: [:show]
     end
   end
 end

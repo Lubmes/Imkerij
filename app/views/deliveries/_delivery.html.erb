@@ -1,47 +1,21 @@
 <div class='delivery'>
-<table>
-  <tr>
-    <td colspan='2'>
-      <ul class='record-actions'>
-        <li><h4>Naar het adres</h4></li>
-        <% unless controller.action_name == 'to_bank' || controller.action_name == 'success' %>
-        <div class='table-actions'>
-          <li>
-            <%= link_to [:edit, delivery.sender, delivery] do %>
-              <i class='fa fa-pencil'></i>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to [delivery.sender, delivery],
-                  method: :delete,
-                  class: 'delete' do %>
-              <i class='fa fa-trash-o'></i>
-            <% end %>
-          </li>
-        </div>
-        <% end %>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <th><%= Delivery.human_attribute_name('address_street_name') %></th>
-    <td><%= delivery.address_street_name %></td>
-  </tr>
-  <tr>
-    <th><%= Delivery.human_attribute_name('address_street_number') %></th>
-    <td><%= delivery.address_street_number %></td>
-  </tr>
-  <tr>
-    <th><%= Delivery.human_attribute_name('address_zip_code') %></th>
-    <td><%= delivery.address_zip_code %></td>
-  </tr>
-  <tr>
-    <th><%= Delivery.human_attribute_name('address_city') %></th>
-    <td><%= delivery.address_city %></td>
-  </tr>
-  <tr>
-    <th><%= Delivery.human_attribute_name('address_country') %></th>
-    <td><%= delivery.address_country %></td>
-  </tr>
-<table>
+  <ul class='record-actions'>
+    <li><h4 class='address'><%= card_title %></h4></li>
+    <% unless controller.action_name == 'to_bank' || controller.action_name == 'success' %>
+      <div class='table-actions'>
+        <li>
+          <%= link_to [:edit, delivery.sender, delivery], remote: true do %>
+            <i class='fa fa-pencil'></i>
+          <% end %>
+        </li>
+      </div>
+    <% end %>
+  </ul>
+
+  <p>
+    <%= delivery.address_street_name %>
+    <%= delivery.address_street_number %><br>
+    <%= delivery.address_zip_code %><br>
+    <%= delivery.address_city %><br>
+  </p>
 </div>

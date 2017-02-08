@@ -20,16 +20,27 @@
 		}
 	}
 }
-// orders
+#users {
+	@extend .w3-row;
+	width: 100%;
+	.user {
+		@extend .w3-col;
+		@extend .l6;
+		width: 49%;
+		margin: 0 0.5%;
+	}
+}
 #orders {
 	@extend .w3-margin-top;
 	@extend .w3-margin-bottom;
 	table {
 		@extend .w3-table;
-		// @extend .w3-bordered;
 	}
 	tr.order {
 		@extend .w3-hover-light-grey;
+		@extend .w3-border-top;
+		@extend .w3-border-bottom;
+		@extend .w3-border-light-grey;
 	}
 	a {
 		text-decoration: none;

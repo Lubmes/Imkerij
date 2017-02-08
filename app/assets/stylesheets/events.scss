@@ -10,10 +10,9 @@
 			@extend .w3-col;
 			@extend .l4;
 			.cover-picture {
-
 				img {
 					@extend .w3-margin-top;
-				@extend .w3-round-jumbo;
+					@extend .w3-round-jumbo;
 				}
 			}
 		}
@@ -25,11 +24,23 @@
 		@extend .w3-margin-bottom;
 		.time {
 			@extend .w3-tag;
-			@extend .w3-text-khaki;
+			@extend .w3-text-yellow;
 			@extend .w3-show-inline-block;
 		}
 		small {
 			@extend .w3-text-grey;
 		}
+	}
+}
+#form.event {
+	th {
+		text-align: right;
+		@extend .w3-text-brown;
+	}
+	.name td input { width: 90%; }
+	.description td textarea { width: 90%; }
+	.button {
+		@extend .w3-btn;
+		@extend .w3-lime;
 	}
 }

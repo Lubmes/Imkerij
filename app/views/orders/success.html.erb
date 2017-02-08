@@ -3,6 +3,9 @@
 	<%= link_to shop_path, class: 'success' do %>
     <i class='fa fa-arrow-left'></i> terug naar winkel
   <% end %>
+	<%= link_to "Download PDF", order_invoice_download_path(@order, @invoice, format: "pdf"),
+			  target: "_blank",
+			  class: "download" %>
 </div>
 
 <div id='payment' class='to-bank'>
@@ -16,8 +19,8 @@
 	</div>
 	<div class="user-info">
 		<div class="co-user-col">
-			<%= render @user %>
-			<%= render @delivery %>
+			<%= render @order.customer %>
+			<%= render @order.package_delivery, card_title: "Verzendadres" %>
 		</div>
 	</div>
 </div>

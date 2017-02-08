@@ -3,6 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .product {
+	.description {
+		@extend .w3-text-dark-grey;
+	}
+	.description.unavailable, .unavailable {
+		@extend .w3-text-grey;
+	}
 	@extend .w3-row;
 	@extend .w3-border-lime;
 	@extend .w3-leftbar;
@@ -38,6 +44,7 @@
 	}
 }
 #record-zoom.product {
+	img { @extend .w3-round-jumbo; }
 	.row-gallery {
 		@extend .w3-row-padding;
 		.gallery-picture {
@@ -69,5 +76,14 @@
 			@extend .w3-text-black;
 			@extend .w3-hover-border-brown;
 		}
+	}
+}
+
+#shop-edit.product {
+	.picture-ajax img { @extend .w3-round-jumbo; }
+	#form { @extend .w3-border-lime; }
+	.button {
+		@extend .w3-lime;
+		width: 35%;
 	}
 }

@@ -1,0 +1,2 @@
+$('#order-ajax-<%= @order.id %>').fadeOut();
+$('#processed').html("<%= j render 'orders/processed', user: @order.customer %>")

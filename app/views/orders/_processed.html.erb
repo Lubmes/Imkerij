@@ -1,0 +1,12 @@
+<div id='orders'>
+  <header>
+    <h4>Verwerkt</h4>
+  </header>
+  <% if user.orders.where(status: :sent).any? %>
+    <% user.orders.where(status: :sent).each do |order| %>
+      <%= render 'orders/order_invoices', order: order %>
+    <% end %>
+  <% else %>
+    <p>Geen</p>
+  <% end %>
+</div>

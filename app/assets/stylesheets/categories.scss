@@ -8,3 +8,10 @@
 		@extend .w3-padding-left;
 	}
 }
+#shop-edit.category {
+	.button {
+		@extend .w3-brown;
+		width: 35%;
+	}
+	@extend .w3-margin-bottom;
+}

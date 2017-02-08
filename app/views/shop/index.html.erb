@@ -26,11 +26,13 @@
 										<%= render product %>
 									</div>
 								</div>
-								<div class='add-booking'>
-									<%= render 'bookings/form_big',
-												product: product,
-												booking: product.bookings.build %>
-								</div>
+								<% if policy(product.bookings.build).create? %>
+									<div class='add-booking'>
+										<%= render 'bookings/form_in_product',
+													product: product,
+													booking: product.bookings.build %>
+									</div>
+								<% end %>
 							</div>
 						<% end %>
 					</div>
@@ -40,6 +42,8 @@
 	</div>
 
 	<div id='order' class='order-col'>
-		<%= render @order %>
+		<div id='order-ajax-<%= @order.id %>'>
+			<%= render @order %>
+		</div>
 	</div>
 </div>

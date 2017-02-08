@@ -7,10 +7,24 @@ class DeliveriesController < ApplicationController
     if @delivery.save
       flash[:notice] = 'Adres is toegevoegd.'
       # redirect_to [:check_out, @order] # wijzig na js.
-      render 'orders/check_out'
+      # render 'orders/check_out'
     else
       flash.now[:alert] = 'Adres is niet toegevoegd.'
-      render 'orders/check_out'
+      # render 'orders/check_out'
+    end
+  end
+
+  def edit
+    @delivery = Delivery.find(params[:id])
+  end
+
+  def update
+    @delivery = Delivery.find(params[:id])
+    # authorize @delivery
+    if @delivery.update(delivery_params)
+      flash[:notice] = "Adres is bijgewerkt."
+    else
+      flash.now[:alert] = "Adres is niet bijgewerkt."
     end
   end
 

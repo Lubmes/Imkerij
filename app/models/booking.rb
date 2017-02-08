@@ -4,6 +4,7 @@ class Booking < ApplicationRecord
   # Associaties
   belongs_to :product, optional: true
   belongs_to :order
+  has_many :corrections, dependent: :destroy
   # Validations
   validates :product_quantity, presence: true,
               numericality: { only_integer: true, greater_than: 0 }

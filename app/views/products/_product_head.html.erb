@@ -1,4 +1,4 @@
-<ul class='record-actions'>
+<ul class='record-actions <%= 'unavailable' unless product.available %>'>
   <% if policy(product).edit? %>
   <li>
     <div class='up-down-action <%= "single-move" if product.first? || product.last? %>'>

@@ -1,20 +1,27 @@
 .delivery {
+  @extend .w3-card;
+  @extend .w3-container;
+  @extend .w3-padding-bottom;
   table {
-    @extend .w3-card;
-    @extend .w3-table;
-    input {
-      width: 100%;
+    @extend .w3-margin-top;
+    th {
+      text-align: left;
+      @extend .w3-padding-right;
+    }
+    // werkt niet om de een of andere rede
+    .field td input { width: 90%; }
+  }
+  p { @extend .w3-margin-0; }
+  .button-center {
+    @extend .w3-padding-medium;
+    @extend .w3-center;
+    .button {
+      @extend .w3-btn;
+      @extend .w3-border;
+      @extend .w3-border-orange;
+      @extend .w3-transparent;
+      @extend .w3-text-black;
     }
   }
-  @extend .w3-padding-bottom;
-  @extend .w3-center;
-  .button {
-    @extend .w3-btn;
-    @extend .w3-margin;
-    @extend .w3-border;
-    @extend .w3-border-orange;
-    @extend .w3-transparent;
-    @extend .w3-text-black;
-
-  }
+  @extend .w3-margin-bottom;
 }

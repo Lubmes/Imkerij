@@ -1,18 +1,17 @@
 <% unless controller.action_name == 'to_bank' ||
-		controller.action_name == 'success' ||
-		order.status == 'paid' ||
-		order.status == 'sent' %>
+					order.status == 'paid' ||
+					order.status == 'sent' %>
 	<% if @order.bookings.any? %>
 		<ul class='record-actions'>
 			<li>
-				<%= link_to [:empty, @order] do %>
+				<%= link_to [:empty, order] do %>
 					<i class='fa fa-trash-o'></i>
 				<% end %>
 			</li>
 			<% unless controller.action_name == 'check_out' %>
 			<!-- ^ maak hiervan een content for block -->
 				<li class='to-check-out'>
-					<%= link_to [:check_out, @order] do %>
+					<%= link_to [:check_out, order] do %>
 						<small>AFREKENEN</small> <i class='fa fa-arrow-right'></i>
 					<% end %>
 				</li>
@@ -21,30 +20,34 @@
 	<% end %>
 <% end %>
 
-<table class='bookings'>
+<table class='bookings <%= order.status%>'>
 
 	<thead>
 		<tr>
-			<td>
-			</td>
-			<td>
-				<strong><%= currency_symbol %> <%= @order.total_price %></strong>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			</td>
-			<td class='weight'>
-				<i><%= @order.total_mail_weight %> gr</i>
+			<td colspan='5' class='order-totals'>
+				<strong><%= currency_symbol %> <%= order.total_price %></strong>
+				<br>
+				<span class='weight'>
+					<i><%= order.total_mail_weight %> gr</i>
+				</span>
 			</td>
 		</tr>
 	</thead>
 
 	<tbody>
-		<% @order.bookings.order(created_at: :desc).each do |booking| %>
+		<% order.bookings.order(created_at: :desc).each do |booking| %>
 			<div class='booking'>
 				<%= render booking %>
 			</div>
 		<% end %>
 	</tbody>
 </table>
+
+<% unless controller.action_name == 'check_out' ||
+					controller.action_name == 'to_bank' ||
+					controller.action_name == 'success' %>
+
+	<% if order.invoices.any? %>
+		<%= render 'orders/order_invoices', order: order %>
+	<% end %>
+<% end %>

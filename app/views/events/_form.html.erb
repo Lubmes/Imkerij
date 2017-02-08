@@ -1,10 +1,42 @@
 <%= form_for [event], html: { multipart: true } do |f| %>
-<div id='form' class='event-col'>
+<div id='form' class='event'>
 
+	<div class='image-col'>
+		<% if event.pictures.any? %>
+			<%= render 'pictures/cover_picture', picture: event.pictures.first %>
+		<% end %>
+	</div>
+	<div class='event-col'>
   <!-- Event -->
 	<table>
-    <!-- Naam -->
+		<!-- Afbeelding -->
 		<tr>
+			<th><%= f.label :picture %></th>
+			<td><%= file_field_tag 'image', type: :file, multiple: false %></td>
+    </tr>
+		<% if event.errors[:pictures].any? %>
+      <tr id='errors'>
+        <th></th><td><% event.errors[:pictures].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<!-- Tijdstip -->
+    <tr>
+      <th><%= f.label :date %></td>
+      <td><%= f.text_field :date, id: 'datetimejs-input' %></td>
+    </tr>
+    <% if event.errors[:date].any? %>
+      <tr id='errors'>
+        <th></th><td><% event.errors[:date].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <!-- Naam -->
+		<tr class='name'>
 			<th><%= f.label :name %></td>
  			<td><%= f.text_field :name, size: 30 %>
       </td>
@@ -18,9 +50,9 @@
       </tr>
     <% end %>
     <!-- Omschrijving -->
-  	<tr>
+  	<tr class='description'>
 		  <th><%= f.label :description %></td>
-  		<td><%= f.text_area :description, size: '30x10' %></td>
+  		<td><%= f.text_area :description, rows: 10 %></td>
   	</tr>
     <% if event.errors[:description].any? %>
       <tr id='errors'>
@@ -30,28 +62,10 @@
         </td>
       </tr>
     <% end %>
-    <!-- Tijdstip -->
-    <tr>
-      <th><%= f.label :date %></td>
-      <td><%= f.text_field :date, id: 'datetimejs-input' %></td>
-    </tr>
-    <% if event.errors[:date].any? %>
-      <tr id='errors'>
-        <th></th><td><% event.errors[:date].each do |msg| %>
-            <%= "- #{msg}" %><br>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-		<tr>
-			<th><%= f.label :picture %></th>
-			<td><%= file_field_tag 'image', type: :file, multiple: false %></td>
-    </tr>
   </table>
 
-  <%= f.submit %>
-
+  <%= f.submit class: 'button' %>
+	</div>
 </div>
 <% end %>
 

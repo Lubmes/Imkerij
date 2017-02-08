@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107120111) do
+ActiveRecord::Schema.define(version: 20170117164435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 20170107120111) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "position"
+  end
+
+  create_table "corrections", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "booking_id"
+    t.integer "invoice_id"
+    t.index ["booking_id"], name: "index_corrections_on_booking_id", using: :btree
+    t.index ["invoice_id"], name: "index_corrections_on_invoice_id", using: :btree
   end
 
   create_table "deliveries", force: :cascade do |t|
@@ -67,6 +75,21 @@ ActiveRecord::Schema.define(version: 20170107120111) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.boolean  "closed",              default: false
+    t.integer  "total_mail_weight",   default: 0
+    t.integer  "order_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "paid_cents",          default: 0,     null: false
+    t.string   "paid_currency",       default: "EUR", null: false
+    t.integer  "paid_back_cents",     default: 0,     null: false
+    t.string   "paid_back_currency",  default: "EUR", null: false
+    t.integer  "invoice_delivery_id"
+    t.index ["invoice_delivery_id"], name: "index_invoices_on_invoice_delivery_id", using: :btree
+    t.index ["order_id"], name: "index_invoices_on_order_id", using: :btree
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer  "status"
     t.datetime "created_at",                           null: false
@@ -75,7 +98,9 @@ ActiveRecord::Schema.define(version: 20170107120111) do
     t.string   "total_price_currency", default: "EUR", null: false
     t.integer  "customer_id"
     t.integer  "total_mail_weight",    default: 0
+    t.integer  "package_delivery_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+    t.index ["package_delivery_id"], name: "index_orders_on_package_delivery_id", using: :btree
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -104,6 +129,7 @@ ActiveRecord::Schema.define(version: 20170107120111) do
     t.integer  "mail_weight"
     t.decimal  "sales_tax",      precision: 3, scale: 1
     t.integer  "position"
+    t.boolean  "available",                              default: true
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
   end
 
@@ -127,7 +153,12 @@ ActiveRecord::Schema.define(version: 20170107120111) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "corrections", "bookings"
+  add_foreign_key "corrections", "invoices"
   add_foreign_key "deliveries", "users", column: "sender_id"
+  add_foreign_key "invoices", "deliveries", column: "invoice_delivery_id"
+  add_foreign_key "invoices", "orders"
+  add_foreign_key "orders", "deliveries", column: "package_delivery_id"
   add_foreign_key "orders", "users", column: "customer_id"
   add_foreign_key "products", "categories"
 end

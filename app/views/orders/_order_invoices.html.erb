@@ -1,0 +1,63 @@
+<div class='order-invoice <%= order.status %>'>
+  <div class='invoice-data'>
+    <div class='main-data'>
+
+        <i class='date'><%= l(order.invoices.first.updated_at, format: :long) %> </i><br>
+
+        <strong class='price paid'><%= currency_symbol %> <%= order.invoices.first.paid %></strong>
+        <strong class='price paid-back'>
+          <% if order.invoices.first.paid_back == 0 %>
+          <% elsif order.invoices.first.paid_back < 0 %>
+            &minus; <%= currency_symbol %> <%= order.invoices.first.paid_back.abs %>
+          <% else %>
+             &plus; <%= currency_symbol %> <%= order.invoices.first.paid_back.abs %>
+          <% end %>
+        </strong><br>
+
+        <span class='weight'>
+					<i><%= order.total_mail_weight %> gr</i>
+				</span>
+
+    </div>
+
+    <% unless order.package_delivery.nil? %>
+      <div class='addresses'>
+        <% if order.package_delivery == order.invoices.first.invoice_delivery %>
+          Verzendadres:
+          <span class='address'>
+            <%= order.package_delivery.address_zip_code %>,
+            <%= order.package_delivery.address_street_number %>
+          </span>
+        <% else %>
+          Pakket:
+          <span class='address'>
+            <%= order.package_delivery.address_zip_code %>,
+            <%= order.package_delivery.address_street_number %>
+          </span>
+          Factuur:
+          <span class='address'>
+            <%= order.invoices.first.invoice_delivery.address_zip_code %>,
+            <%= order.invoices.first.invoice_delivery.address_street_number %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+
+
+
+  <div class='invoice-actions'>
+    <%= link_to "AFDRUKKEN","#",
+          class: 'print' %>
+    <%= link_to "PDF",
+          order_invoice_download_path(order, order.invoices.first, format: "pdf"),
+          target: "_blank",
+          class: "pdf" %>
+    <%= link_to "PROBLEEM","#",
+          class: 'problem' %>
+    <%= link_to "VERZONDEN", [:sent_out, order, order.invoices.first],
+          remote: true,
+          class: 'mail' %>
+  </div>
+
+  </div>
+</div>

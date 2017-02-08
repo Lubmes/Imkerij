@@ -1,15 +1,18 @@
-<% if policy(@order).admin_action? %>
-<% content_for :navigation do %>
-	<%= render 'layouts/nav_sec_admin' %>
-<% end %>
+<% if policy(:dashboard).show? %>
+	<% content_for :navigation do %>
+		<%= render 'layouts/nav_sec_admin' %>
+	<% end %>
 <% end %>
 
 <div id='profile'>
 	<div class='user-col'>
 		<%= render @user %>
-		<% if false # @deliveries.any? %>
+		<% if @deliveries.any? %>
 			<% @deliveries.each do |delivery| %>
-				<%= render delivery %>
+				<div class='delivery-ajax'>
+					<%= render delivery,
+								card_title: "#{delivery.address_zip_code}, #{delivery.address_street_number}" %>
+				</div>
 			<% end %>
 		<% end %>
 	</div>
@@ -19,40 +22,20 @@
 			<h4>Te verwerken</h4>
 		</header>
 
-		<div id='order'>
-			<% if @order.nil? %>
-				<p>Geen</p>
+		<div id='order-processing'>
+			<% if @user.orders.where(status: :paid).any? %>
+				<% @user.orders.where(status: :paid).each do |order| %>
+					<div id='order-ajax-<%= order.id %>'>
+						<%= render order %>
+					</div>
+				<% end %>
 			<% else %>
-				<%= render @order %>
+				<p>Geen</p>
 			<% end %>
 		</div>
 
-		<div id='orders'>
-			<header>
-				<h4>Alle orders</h4>
-			</header>
-			<% @user.orders.each do |order| %>
-				<table class='order <%= order.status %>'>
-					<tr>
-						<th>Aangemaakt</th>
-						<td><i><%= l(order.created_at, format: :long) %></i></td>
-					</tr>
-					<tr>
-						<th>Status</th>
-						<td>
-							<span class='status-tag <%= order.status %>'>
-								<%= I18n.t "order_status.#{order.status}" %>
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<th>Totaalbedrag</th>
-						<td>
-							<strong><%= currency_symbol %> <%= order.total_price %></strong>
-						</td>
-					</tr>
-				</table>
-			<% end %>
+		<div id='processed'>
+			<%= render 'orders/processed', user: @user %>
 		</div>
 	</div>
 

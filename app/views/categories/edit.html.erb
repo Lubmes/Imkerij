@@ -1,9 +1,9 @@
-<div id='shop-edit'>
-	<div id='details' class='details-col'>
-		<%= render 'form', category: @category %>
+<div id='shop-edit' class='category'>
+	<div id='pictures'>
+		<%= render 'pictures/edit_pictures', imageable_model: @category %>
 	</div>
 
-	<div id='pictures' class='pictures-col'>
-		<%= render 'pictures/pictures', imageable_model: @category %>
+	<div id='details'>
+		<%= render 'form', category: @category %>
 	</div>
 </div>

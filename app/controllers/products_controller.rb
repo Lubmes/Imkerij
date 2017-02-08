@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
   def update
     authorize @product
     if @product.update(product_params)
-      if params[:images]
+      if params[:images] # voor params
         params[:images].each do |image|
           @product.pictures.create(image: image)
         end

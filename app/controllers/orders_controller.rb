@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-  # require 'Mollie/API/Client'
-
   before_action :set_order, only: [:show, :empty, :check_out, :to_bank, :success]
   before_action :set_user, only: [:check_out, :to_bank, :success]
 
@@ -29,35 +27,35 @@ class OrdersController < ApplicationController
   end
 
   def check_out
+    # gebruiker selecteerd een adres uit zijn bestand.
     @delivery = @user.deliveries.first unless @user.nil?
   end
 
   def to_bank
+    # verzendadres moet aan order gekoppeld zijn! order = pakket.
     @delivery = @user.deliveries.first unless @user.nil?
+    @order.package_delivery = @delivery
+    if @order.package_delivery.nil?
+      flash.now[:alert] = 'U moet een verzendadres opgeven.'
+      render 'check_out'
+    end
     if @user == nil
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
     end
-    # In volgende actie?
-    # mollie = Mollie::API::Client.new('test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr')
-    # payment = mollie.payments.create({
-    #   :amount      => 10.00,
-    #   :description => 'My first payment',
-    #   :redirectUrl => 'http://localhost:3000/orders/1/check_out',
-    #   :metadata    => {
-    #       :order_id => '1'
-    #   }
-    # })
+    @order.save
   end
 
   def success
-    @delivery = @user.deliveries.first unless @user.nil?
     if @user == nil
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
     end
     @order.status = 'paid'
     @order.save
+    @invoice = @order.invoices.create(paid: @order.total_price,
+                                      total_mail_weight: @order.total_mail_weight,
+                                      invoice_delivery: @order.package_delivery)
   end
 
   private

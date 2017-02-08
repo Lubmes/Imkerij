@@ -1,0 +1,108 @@
+<div id='invoice-pdf'>
+<h1>F A C T U U R</h1>
+
+<div class='invoice-no'>
+  <%= "#{customer.email.upcase}-BEST#{customer.orders.count}-FACT#{order.invoices.count}-#{I18n.l invoice.updated_at, format: :invoice}" %>
+  <br>
+  <small>Laatst bewerkt: <%= I18n.l invoice.updated_at, format: :long %><br>
+    Status: <span class='status-tag'><%= I18n.t "order_status.#{order.status}" %></span>
+  </small>
+</div>
+<h2>Imkerij Poppendamme</h2>
+
+<h3>
+  <%= customer.first_name %>
+  <%= customer.last_name %>
+</h3>
+
+<div class='address'>
+  <div class='package'>
+    <h4>Pakket-verzendadres</h4>
+    <%= invoice.order.package_delivery.address_street_name %>
+    <%= invoice.order.package_delivery.address_street_number %><br>
+    <%= invoice.order.package_delivery.address_zip_code %><br>
+    <%= invoice.order.package_delivery.address_city %><br>
+  </div>
+  <div class='invoice'>
+    <h4>Factuur-verzendadres</h4>
+    <%= invoice.invoice_delivery.address_street_name %>
+    <%= invoice.invoice_delivery.address_street_number %><br>
+    <%= invoice.invoice_delivery.address_zip_code %><br>
+    <%= invoice.invoice_delivery.address_city %><br>
+  </div>
+</div>
+
+<hr>
+<table class='order-details'>
+  <thead>
+    <h4>Uw boekingen</h4>
+  </thead>
+  <!-- <hr> -->
+  <% invoice.order.bookings.each do |booking| %>
+    <tr>
+      <td><%= booking.product_name %></td>
+      <td><%= currency_symbol %> <%= booking.product_price %></td>
+      <td><small>incl. <%= number_with_precision(booking.product_sales_tax,
+                            strip_insignificant_zeros: true) %> %</small></td>
+      <td>&times;</td>
+      <td></td>
+      <td class='quantity'><%= booking.product_quantity %></td>
+      <td>&equals;</td>
+      <td></td>
+      <td><%= currency_symbol %></td>
+      <td class='sum'><%= booking.total_price %></td>
+    </tr>
+    <% booking.corrections.each do |correction| %>
+      <tr>
+        <td>&rdsh; Correctie</td>
+        <td><%= currency_symbol %> <%= booking.product_price %></td>
+        <td><small>incl. <%= number_with_precision(booking.product_sales_tax,
+                              strip_insignificant_zeros: true) %> %</small></td>
+        <td>&times;</td>
+        <td><%= "&minus;".html_safe if correction.quantity < 0 %></td>
+        <td class='quantity'><%= correction.quantity.abs %></td>
+        <td>&equals;</td>
+        <td><%= "&minus;".html_safe if correction.total_amount < 0 %></td>
+        <td><%= currency_symbol %></td>
+        <td class='sum'><%= correction.total_amount.abs %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  <tfoot>
+    <tr class='paid'>
+      <th colspan='6'>Bedrag van u ontvangen</th>
+      <td></td>
+      <td></td>
+      <td><%= currency_symbol %></td>
+      <td colspan='2' class='sum'><%= invoice.paid %></td>
+    </tr>
+    <% if invoice.paid_back != 0 %>
+    <tr>
+      <th colspan='6'>Bedrag door ons gerestitueerd</th>
+      <td></td>
+      <td><%= "&minus;".html_safe if invoice.paid_back < 0 %></td>
+      <td><%= currency_symbol %></td>
+      <td colspan='2' class='sum'><%= invoice.paid_back.abs %></td>
+    </tr>
+    <tr class='total'>
+      <th colspan='6'>Totale waarde ontvangen</th>
+      <td></td>
+      <td></td>
+      <td><%= currency_symbol %></td>
+      <td colspan='2' class='sum'><%= invoice.received_value %></td>
+    </tr>
+    <% end %>
+  </tfoot>
+<table>
+
+<hr>
+
+<% if invoice.paid_back != 0 %>
+  <p>
+    Onze excuses voor het niet volledig kunnen leveren van uw bestelling.<br>
+    Er is een restitutiebedrag overeenkomstig ons in gebreke zijn teruggestort op uw rekening.
+  </p>
+  <p>Wij hopen u hiermee voldoende te zijn tegemoet gekomen.</p>
+<% end %>
+
+</div>

@@ -38,6 +38,7 @@ nl:
         name: Naam
         description: Omschrijving
         date: Tijdstip
+        picture: Afbeelding
       category:
         name: Naam
       product:
@@ -91,12 +92,17 @@ nl:
           attributes:
             date:
               in_future: moet in de toekomst zijn
+            pictures:
+              blank: "Afbeelding moet opgegeven zijn."
 
   helpers:
     submit:
       booking:
         create: "VOEG TOE"
         update: "PAS AAN"
+      correction:
+        create: "CORRIGEER"
+        update: "CORRIGEER"
 
   devise:
     shared:

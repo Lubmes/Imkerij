@@ -2,70 +2,84 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.status-tag { @extend .w3-tag; }
 .status-tag.open, .status-tag.problem, .status-tag.paid, .status-tag.sent {
-	@extend .w3-tag;
 	@extend .w3-text-black;
 }
 .status-tag.problem { @extend .w3-red; }
 .status-tag.paid { @extend .w3-orange; }
 .status-tag.sent { @extend .w3-green; }
 .status-tag.open { @extend .w3-light-blue; }
-#orders.guest {
-		@extend .w3-text-grey;
-}
+#orders.guest { @extend .w3-text-grey; }
 #profile {
-	#orders {
-		.order.problem { @extend .w3-border-red; }
-		.order.paid { @extend .w3-border-orange; }
-		.order.sent { @extend .w3-border-green; }
-		.order.open { @extend .w3-border-light-blue; }
+	.order-invoice.problem { @extend .w3-border-red; }
+	.order-invoice.paid { @extend .w3-border-orange; }
+	.order-invoice.sent { @extend .w3-border-green; }
+	.order-invoice.open { @extend .w3-border-light-blue; }
+	#order-processing {
+		.bookings.problem { @extend .w3-border-red; }
+		.bookings.paid { @extend .w3-border-orange; }
+		.bookings.sent { @extend .w3-border-green; }
+		.bookings.open { @extend .w3-border-light-blue; }
 	}
 }
-#order {
-	.remove {
-		@extend .w3-text-grey;
-		@extend .w3-hover-text-brown;
+#orders{
+	td:first-child { @extend .w3-leftbar; }
+	tr.order.problem td:first-child { @extend .w3-border-red; }
+	tr.order.paid td:first-child { @extend .w3-border-orange; }
+	tr.order.sent td:first-child { @extend .w3-border-green; }
+	tr.order.open td:first-child { @extend .w3-border-light-blue; }
+}
+#order-processing {
+	.booking-product{
+		width: 25%;
 	}
-  .status {
-    @extend .w3-tag;
-    @extend .w3-margin;
-  }
+	.price {
+		width: 14%;
+	}
+}
+
+#order, #order-processing {
 	.to-check-out {
 		@extend .w3-right;
 	}
-	thead {
-			@extend .w3-large;
-		.weight {
-			@extend .w3-medium;
-			@extend .w3-text-grey;
-			@extend .w3-padding-bottom;
-		}
-	}
-  .booking-product small {
-			@extend .w3-text-grey;
-  }
 	table {
 		@extend .w3-padding-left;
 	}
 	.bookings {
+		.remove {
+			@extend .w3-text-grey;
+			@extend .w3-hover-text-brown;
+		}
 		td.name {
 			@extend .w3-border-top;
 			@extend .w3-padding-0;
 			@extend .w3-padding-bottom;
+			padding-top: 7px;
+			padding-bottom: 4px;
 		}
-		.fa-close {
-		}
+		.booking-product small {
+				@extend .w3-text-grey;
+	  }
 		td {
 			padding-top: 0;
 			padding-bottom: 0;
 		}
-		.name {
-			padding-top: 7px;
-			padding-bottom: 4px;
+		.minus {
+			text-align: right;
+		}
+		.price {
+			text-align: right;
+			padding-right: 2%;
+		}
+		.correction .booking-form {
+			.submit {
+				@extend .w3-left;
+			}
 		}
 	}
   .booking-form {
-		@extend .w3-show-inline-block;
+		// @extend .w3-show-inline-block;
 		.submit {
 			@extend .w3-center;
 			.button {
@@ -77,5 +91,64 @@
 				@extend .w3-hover-border-brown;
 			}
 		}
+	}
+	.correction .booking-form .submit .button {
+		@extend .w3-border-indigo;
+		@extend .w3-hover-border-pink;
+	}
+
+	.order-totals, .invoice-cyphers {
+			@extend .w3-padding-left;
+			@extend .w3-large;
+		.weight {
+			@extend .w3-medium;
+			@extend .w3-text-grey;
+			@extend .w3-padding-bottom;
+		}
+	}
+	// Factuur.
+	.invoices {
+		.invoice-cyphers {
+			@extend .w3-light-grey;
+			.weight {
+				// @extend .w3-text-light-grey;
+			}
+		}
+		// @extend .w3-dark-grey;
+		td.invoice-status {
+			@extend .w3-padding-xlarge;
+			span.status {
+				@extend .w3-margin-0;
+			}
+			span.closed { @extend .w3-wide; }
+			@extend .w3-panel;
+			@extend .w3-dark-grey;
+			@extend .w3-text-light-grey;
+			@extend .w3-padding-left;
+			@extend .w3-topbar;
+			@extend .w3-border-indigo;
+		}
+		.paid-back {
+			@extend .w3-text-red;
+		}
+		.addresses {
+			@extend .w3-right;
+		}
+		span.address {
+			@extend .w3-text-white;
+		}
+		.button {
+			width: 100%;
+			@extend .w3-btn;
+			@extend .w3-text-light-grey;
+		}
+		.download-button .button {
+			@extend .w3-dark-grey;
+			@extend .w3-hover-text-white;
+			@extend .w3-hover-indigo; }
+		.sent-out-button .button {
+			@extend .w3-dark-grey;
+			@extend .w3-hover-text-white;
+			@extend .w3-hover-green; }
 	}
 }
