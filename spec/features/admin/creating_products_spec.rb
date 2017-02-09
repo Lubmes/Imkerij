@@ -7,7 +7,7 @@ RSpec.feature 'Admin kan nieuwe producten toevoegen' do
   before do
     login_as(admin)
     visit shop_path
-    click_link 'NIEUW PRODUCT'
+    click_link 'nieuw product'
   end
 
   scenario 'met valide details' do
@@ -32,6 +32,6 @@ RSpec.feature 'Admin kan nieuwe producten toevoegen' do
     expect(page).to have_content 'Product is niet toegevoegd'
     expect(page).to have_content 'moet opgegeven zijn'
     expect(page).to have_content 'moet opgegeven zijn'
-    # expect(page).to have_content 'Product is toegevoegd' # iets met de prijs
+    # expect(page).to have_content '...' # iets met de prijs
   end
 end

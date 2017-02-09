@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin kan nieuwe categorieën toevoegen' do
+feature 'Admin kan nieuwe categorieën toevoegen' do
   let(:admin) { FactoryGirl.create(:user, :admin) }
 
   before do

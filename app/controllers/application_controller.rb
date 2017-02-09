@@ -6,10 +6,13 @@ class ApplicationController < ActionController::Base
   before_filter :store_current_location, :unless => :devise_controller?
 
 
-  # als een gebruiker is ingelogd: current_user; anders: guest_user
+  # als een gebruiker is ingelogd: current_user;
+  # als gebruiker niet is ingelogd: guest_user.
   def current_or_guest_user
     if current_user
+      # als je komt vanuit een guest sessie..
       if session[:guest_user_id] && session[:guest_user_id] != current_user.id
+        # ...zet guest data over naar current_user.
         logging_in
         # herlaad guest_user om caching problemen te voorkomen voor destroy
         guest_user(with_retry = false).reload.try(:destroy)
@@ -33,9 +36,9 @@ class ApplicationController < ActionController::Base
   end
 
 
-  # als gebruiker niet is ingelogd: maak order aan op de guest.
-  # als de gebruiker wel herkend wordt: vind onverwerkte order;
+  # als de gebruiker wel is ingelogd: vind onverwerkte ('open') order;
   # anders: maak een nieuwe aan.
+  # als gebruiker niet is ingelogd: maak nieuwe order aan op de guest.
   def current_order
     if user_signed_in?
       current_order = Order.where(customer_id: current_user.id, status: :open).first_or_initialize(status: :open)
@@ -53,10 +56,7 @@ class ApplicationController < ActionController::Base
   # Devise
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up,
-      keys: [ :first_name, :last_name,
-              :address_street_name, :address_street_number, :address_zip_code, :address_city, :address_country,
-              :admin
-            ])
+      keys: [ :first_name, :last_name, :admin ])
   end
 
   private

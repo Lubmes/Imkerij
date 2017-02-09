@@ -7,15 +7,15 @@
 			<div class='table-actions'>
 				<% if policy(user).show? && current_page?(action: 'index') %>
 					<li>
-						<%= link_to [user] do %>
-							<i class='fa fa-user'></i>
+						<%= link_to [user], title: "inzien" do %>
+							<i class='icon-user'></i>
 						<% end %>
 					</li>
 				<% end %>
 				<% if policy(user).edit? %>
 					<li>
-						<%= link_to [:edit, user] do %>
-							<i class='fa fa-pencil'></i>
+						<%= link_to [:edit, user], title: "bijwerken" do %>
+							<i class='icon-edit'></i>
 						<% end %>
 					</li>
 				<% end %>

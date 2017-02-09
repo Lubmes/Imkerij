@@ -18,7 +18,8 @@ RSpec.feature 'Admin kan nieuwe agendapunten toevoegen' do
     expect(page).to have_content 'Agendapunt is toegevoegd.'
   	expect(page).to have_content 'Vlindernacht'
   	expect(page).to have_content 'Verhalen van een vlinderexpert.'
-  	expect(page).to have_content I18n.l(14.days.from_now.beginning_of_day + 20.5.hours, format: :long)
+  	expect(page).to have_content I18n.l(14.days.from_now.beginning_of_day + 20.5.hours, format: :event_date)
+    expect(page).to have_content I18n.l(14.days.from_now.beginning_of_day + 20.5.hours, format: :event_time)
   end
 
   scenario 'met invalide details' do

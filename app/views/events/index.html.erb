@@ -1,7 +1,4 @@
-<% content_for :navigation do %>
-	<%= render 'layouts/flash_messages' %>
-	<%= render 'layouts/nav_prim_act_events' %>
-<% end %>
+<%= content_for :primary_actions do render 'layouts/primary_actions/primary_actions_events' end %>
 
 <div id='events'>
 	<% @events.each do |event| %>
@@ -22,15 +19,16 @@
 							</li>
 							<% if policy(event).admin_action? %>
 								<li>
-									<%= link_to [:edit, event] do %>
-										<i class='fa fa-pencil'></i>
+									<%= link_to [:edit, event], title: "bijwerken" do %>
+										<i class='icon-edit'></i>
 									<% end %>
 								</li>
 								<li>
 									<%= link_to [event],
 												method: :delete,
-												data: { confirm: 'Weet je zeker dat je dit agendapunt wil verwijderen?' } do %>
-										<i class='fa fa-trash-o'></i>
+												data: { confirm: 'Weet je zeker dat je dit agendapunt wil verwijderen?' },
+												title: "verwijderen" do %>
+										<i class='icon-trash'></i>
 									<% end %>
 								</li>
 							<% end %>

@@ -1,7 +1,5 @@
-<% content_for :navigation do %>
-	<%= render 'layouts/nav_sec_admin' %>
-	<%= render 'layouts/nav_prim_act_users' %>
-<% end %>
+<%= content_for :secondary_navigation do render 'layouts/secondary_navigations/navigation_admin' end %>
+<%= content_for :primary_actions do render 'layouts/primary_actions/primary_actions_users' end %>
 
 <div id='users'>
 	<% @users.each do |user| %>

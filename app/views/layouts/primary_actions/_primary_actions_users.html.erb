@@ -2,10 +2,10 @@
 	<% content_for :navigation_top_margin do %>
 		<br><br><br>
 	<% end %>
-	
+
 	<ul id='primary-actions' class='add-new-record'>
 		<li>
-			<%= link_to [:new, :user], class: 'add-user' do %>
+			<%= link_to [:new, :user], class: 'add-user', title: "nieuwe gebruiker" do %>
 				<i class='fa fa-plus'></i> GEBRUIKER
 			<% end %>
 		</li>

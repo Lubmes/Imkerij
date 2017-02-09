@@ -10,7 +10,7 @@ RSpec.feature 'Admin kan categorieën bijwerken' do
   end
 
   scenario 'met valide details' do
-    page.find('.category', :text => 'Kaarsen').click_link 'BIJWERKEN'
+    page.find('.category', :text => 'Kaarsen').click_link 'bijwerken'
     fill_in 'Naam', with: 'Bijenkaarsen'
     click_button 'Categorie bijwerken'
 

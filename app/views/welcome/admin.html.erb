@@ -1,7 +1,5 @@
 <% if policy(:order).admin_action? %>
-	<% content_for :navigation do %>
-		<%= render 'layouts/nav_sec_admin' %>
-	<% end %>
+	<%= content_for :secondary_navigation do render 'layouts/secondary_navigations/navigation_admin' end %>
 <% end %>
 
 <div id='admin-info'>

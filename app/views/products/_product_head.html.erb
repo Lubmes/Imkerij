@@ -1,15 +1,15 @@
-<ul class='record-actions <%= 'unavailable' unless product.available %>'>
+<ul class='product-bar record-actions <%= 'unavailable' unless product.available %>'>
   <% if policy(product).edit? %>
   <li>
     <div class='up-down-action <%= "single-move" if product.first? || product.last? %>'>
       <% unless product.first? %>
         <%= link_to [:move_higher, product] do %>
-          <i class='fa fa-chevron-up'></i>
+          <i class='icon-move-up'></i>
         <% end %>
       <% end %>
       <% unless product.last? %>
         <%= link_to [:move_lower, product] do %>
-          <i class='fa fa-chevron-down'></i>
+          <i class='icon-move-down'></i>
         <% end %>
       <% end %>
     </div>
@@ -22,8 +22,8 @@
   </li>
   <% if policy(product).edit? %>
     <li>
-      <%= link_to [:edit, product.category, product] do %>
-        <i class='fa fa-pencil'></i>
+      <%= link_to [:edit, product.category, product], title: "bijwerken" do %>
+        <i class='icon-edit'></i>
       <% end %>
     </li>
   <% end %>
@@ -32,7 +32,8 @@
       <%= link_to [product.category, product],
            method: :delete,
            data: { confirm: 'Weet je zeker dat je dit product wil verwijderen?' },
-           class: 'delete' do %>
+           class: 'delete',
+           title: "verwijderen" do %>
         <i class='fa fa-trash-o'></i>
       <% end %>
     </li>

@@ -9,7 +9,7 @@ RSpec.feature 'Admin kan gebruikers bijwerken' do
     login_as(admin)
     visit '/admin'
     click_link 'gebruikers'
-    page.find('.user', :text => 'John').click_link 'BIJWERKEN'
+    page.find('.user', :text => 'John').click_link 'bijwerken'
   end
 
   scenario 'met valide details' do

@@ -1,8 +1,5 @@
-<% content_for :navigation do %>
-	<%= render 'layouts/nav_sec_store' %>
-	<%= render 'layouts/flash_messages' %>
-	<%= render 'layouts/nav_prim_act_store' %>
-<% end %>
+<%= content_for :secondary_navigation do render 'layouts/secondary_navigations/navigation_shop' end %>
+<%= content_for :primary_actions do render 'layouts/primary_actions/primary_actions_shop' end %>
 
 <div id='store-front'>
 	<div id='categories' class='shopping-col'>
