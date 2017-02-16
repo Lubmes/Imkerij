@@ -1,4 +1,4 @@
-class PicturePolicy < ApplicationPolicy
+class CorrectionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope
@@ -9,7 +9,11 @@ class PicturePolicy < ApplicationPolicy
     user.try(:admin)
   end
 
+  def update?
+    create?
+  end
+
   def destroy?
-    user.try(:admin)
+    create?
   end
 end

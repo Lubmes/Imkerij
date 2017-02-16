@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :store_current_location, :unless => :devise_controller?
 
 
-  # als een gebruiker is ingelogd: current_user;
-  # als gebruiker niet is ingelogd: guest_user.
+  # als een gebruiker is ingelogd: return current_user;
+  # als gebruiker niet is ingelogd: return guest_user.
   def current_or_guest_user
     if current_user
       # als je komt vanuit een guest sessie..
@@ -41,9 +41,15 @@ class ApplicationController < ActionController::Base
   # als gebruiker niet is ingelogd: maak nieuwe order aan op de guest.
   def current_order
     if user_signed_in?
-      current_order = Order.where(customer_id: current_user.id, status: :open).first_or_initialize(status: :open)
+      # if Order.where(customer_id: current_user.id, status: :confirmed)
+        # current_order = Order.where(customer_id: current_user.id, status: :confirmed).first
+      # else
+        current_order = Order.where(customer_id: current_user.id, status: :open).first_or_create(status: :open)
+        # current_order.save
+      # end
     else
-      current_order = Order.where(customer_id: guest_user.id).first_or_initialize(status: :open)
+      current_order = Order.where(customer_id: guest_user.id).first_or_create(status: :open)
+      # current_order.save
     end
   end
 

@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe CategoryPolicy do
+describe CategoryPolicy do
   context 'toegang' do
     subject { CategoryPolicy.new(user, category) }
-  
-    let(:user) { FactoryGirl.create :user }
-    let(:category) { FactoryGirl.create :category }
+    let(:category)  { FactoryGirl.create :category }
 
     context 'voor anonieme gebruikers' do
       let(:user) { nil }

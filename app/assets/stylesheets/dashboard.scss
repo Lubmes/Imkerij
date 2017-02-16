@@ -1,4 +1,5 @@
 #admin-info {
+	padding-top: 30px;
 	@extend .w3-margin;
 	@extend .w3-row;
 	table {
@@ -21,6 +22,7 @@
 	}
 }
 #users {
+	padding-top: 100px;
 	@extend .w3-row;
 	width: 100%;
 	.user {
@@ -33,6 +35,10 @@
 #orders {
 	@extend .w3-margin-top;
 	@extend .w3-margin-bottom;
+	th .status-tag {
+		@extend .w3-large;
+	}
+
 	table {
 		@extend .w3-table;
 	}
@@ -41,6 +47,9 @@
 		@extend .w3-border-top;
 		@extend .w3-border-bottom;
 		@extend .w3-border-light-grey;
+		span.status-tag {
+			@extend .w3-medium;
+		}
 	}
 	a {
 		text-decoration: none;

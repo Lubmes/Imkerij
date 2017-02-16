@@ -6,6 +6,19 @@ class ApplicationPolicy
     @record = record
   end
 
+  # Policy standaarden
+  def admins_only
+    user.try(:admin)
+  end
+  def admins_only_excluding_themselves
+    admins_only && user != record
+  end
+  # Additional
+  def admin_action?
+    admins_only
+  end
+
+  # Rails CRUD
   def index?
     false
   end
@@ -32,10 +45,6 @@ class ApplicationPolicy
 
   def destroy?
     false
-  end
-
-  def admin_action?
-    user.try(:admin)
   end
 
   def scope

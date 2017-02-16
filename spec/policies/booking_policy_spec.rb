@@ -1,28 +1,29 @@
 require 'rails_helper'
 
-RSpec.describe BookingPolicy do
+describe BookingPolicy do
+  context 'toegang' do
+    subject { BookingPolicy.new(user, booking) }
+    let(:booking) { FactoryGirl.create :booking }
 
-  let(:user) { User.new }
+    context 'voor anonieme gebruikers' do
+      let(:user) { nil }
 
-  subject { described_class }
+      it { should forbid_edit_and_update_actions }
+      it { should forbid_action :destroy }
+    end
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context "voor willekeurige gebruikers" do
+      let(:user) { FactoryGirl.create :user }
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      it { should permit_edit_and_update_actions }
+      it { should permit_action :destroy }
+    end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context 'voor administrators' do
+      let(:user) { FactoryGirl.create :user, :admin }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+      it { should permit_edit_and_update_actions }
+      it { should permit_action :destroy }
+    end
   end
 end

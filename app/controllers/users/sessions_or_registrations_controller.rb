@@ -1,3 +1,5 @@
+# verwijder?
+
 class Users::SessionsOrRegistrationsController < ApplicationController
   def new
   end

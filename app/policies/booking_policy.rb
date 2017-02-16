@@ -10,6 +10,10 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    user == record.order.customer
+  end
+
+  def destroy?
+    user == record.order.customer
   end
 end

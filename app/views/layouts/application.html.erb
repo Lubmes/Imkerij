@@ -12,15 +12,12 @@
 
     <div id='navigation'>
       <%= render 'layouts/nav_main' %>
+      <%= render 'layouts/flash_messages' %>
       <%= yield :secondary_navigation if content_for? :secondary_navigation %>
       <%= yield :primary_actions if content_for? :primary_actions %>
-      <%= render 'layouts/flash_messages' %>
     </div>
 
     <br><br>
-    <% if content_for? :navigation_top_margin %>
-      <%= yield :navigation_top_margin %>
-    <% end %>
 
     <div id='app-content'>
       <%= yield %>

@@ -41,6 +41,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.try(:admin) && user != record
+    # user.try(:admin) && user != record
+    false
   end
 end

@@ -3,14 +3,13 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.new(delivery_params)
     authorize @delivery
 
-    # @order = Order.find(params[:id])
+    @order = @delivery.sender.orders.open.last
+    @order.package_delivery = @delivery
+    @order.save
     if @delivery.save
       flash[:notice] = 'Adres is toegevoegd.'
-      # redirect_to [:check_out, @order] # wijzig na js.
-      # render 'orders/check_out'
     else
       flash.now[:alert] = 'Adres is niet toegevoegd.'
-      # render 'orders/check_out'
     end
   end
 
@@ -42,6 +41,6 @@ class DeliveriesController < ApplicationController
 
   def delivery_params
     params.require(:delivery).permit(:address_street_name, :address_street_number,
-      :address_zip_code, :address_city, :address_country, :sender_id)
+      :address_zip_code, :address_city, :address_country, :sender_id )
   end
 end

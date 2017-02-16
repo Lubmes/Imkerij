@@ -1,10 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe EventPolicy do
+describe EventPolicy do
   context 'toegang' do
     subject { EventPolicy.new(user, event) }
-  
-    let(:user) { FactoryGirl.create :user }
     let(:event) { FactoryGirl.create :event }
 
     context 'voor anonieme gebruikers' do

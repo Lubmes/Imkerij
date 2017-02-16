@@ -45,7 +45,8 @@ Rails.application.routes.draw do
     member do
       get 'empty'
       get 'check_out'
-      get 'to_bank'
+      get 'confirm'
+      get 'pay'
       get 'success'
     end
     resources 'invoices', only: [:show] do

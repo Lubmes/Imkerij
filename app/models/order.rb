@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   # Money: total
   monetize :total_price_cents
   # Statuses
-  enum status: { open: 0, paid: 1, stored: 2, sent: 3, problem: 4 }
+  enum status: { open: 0, confirmed: 1, paid: 2, stored: 3, sent: 4, problem: 5 }
   # Associations
   belongs_to :package_delivery, class_name: 'Delivery', optional: true
   belongs_to :customer, class_name: 'User', optional: true
@@ -10,6 +10,15 @@ class Order < ApplicationRecord
   has_many :invoices
   # Nested attributes
   accepts_nested_attributes_for :customer # Waarom? => invoice!
+
+  # Om naar de mollie API te sturen.
+  def total_price_in_euros
+    sprintf("%03d", total_price_cents).insert(-3, ".")
+  end
+
+  def bookable?
+    self.status == 'open' || self.status == 'confirmed'
+  end
 
   def sum_all_bookings
     bookings = self.bookings

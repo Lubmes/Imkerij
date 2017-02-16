@@ -1,7 +1,8 @@
 <div class='user'>
 	<ul class='record-actions'>
 		<li><h4><%= user.email %></h4></li>
-		<% unless controller.action_name == 'to_bank' ||
+		<% unless controller.action_name == 'confirm' ||
+							controller.action_name == 'pay' ||
 							controller.action_name == 'success' %>
 
 			<div class='table-actions'>

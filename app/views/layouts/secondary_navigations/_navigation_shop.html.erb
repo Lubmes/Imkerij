@@ -1,8 +1,8 @@
 <% content_for :navigation_top_margin do %>
-	<br>
+	<!-- niets -->
 <% end %>
 
-<ul id='sec-nav'>
+<ul id='sec-nav' class='shop'>
 	<% @categories.each do |category| %>
 		<li><%= link_to category.name.downcase, "#cat-#{category.id}" %></li>
 	<% end %>

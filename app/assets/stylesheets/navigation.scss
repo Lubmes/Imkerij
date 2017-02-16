@@ -9,25 +9,42 @@
 #main-nav {
 	background: rgba(255, 255, 255, 0.85);
 	@extend .w3-bottombar;
-	// @extend .w3-margin-0;
+	@extend .w3-border-dark-grey;
+	@extend .w3-card-4;
+	a {
+		@extend .w3-hover-grey;
+	}
+	a.active {
+		@extend .w3-dark-grey;
+	}
 	.profile {
 		@extend .w3-right;
 	}
-	a.active {
-		@extend .w3-teal;
-	}
 }
-#sec-nav {
-	// @extend .w3-margin-0;
-	@extend .w3-card-4;
+#sec-nav.admin a {
 	@extend .w3-dark-grey;
+	@extend .w3-hover-teal;
+}
+#sec-nav.admin a.active { @extend .w3-teal; }
+#sec-nav.shop a {
+	@extend .w3-lime;
+	@extend .w3-hover-khaki;
+}
+// #sec-nav.shop a.active { @extend .w3-teal; }
+
+#sec-nav {
+	@extend .w3-transparent;
+	@extend .w3-wide;
 	a {
+		@extend .w3-margin;
+		margin-bottom: 1px;
+		@extend .w3-round-xlarge;
 		@extend .w3-wide;
-		@extend .w3-hover-teal;
+		// @extend .w3-hover-brown;
 	}
 	a.active {
-		@extend .w3-teal;
-		@extend .w3-hover-teal;
+		// @extend .w3-teal;
+		// @extend .w3-hover-teal;
 	}
 }
 #primary-actions {

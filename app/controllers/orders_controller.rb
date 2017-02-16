@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :empty, :check_out, :to_bank, :success]
-  before_action :set_user, only: [:check_out, :to_bank, :success]
+  before_action :set_order, only: [:show, :empty, :check_out, :confirm, :pay, :success]
+  before_action :set_user, only: [:check_out, :confirm, :success]
+
+  require 'Mollie/API/Client'
 
   def show
   end
@@ -29,12 +31,15 @@ class OrdersController < ApplicationController
   def check_out
     # gebruiker selecteerd een adres uit zijn bestand.
     @delivery = @user.deliveries.first unless @user.nil?
+    if @delivery
+      @order.package_delivery = @delivery
+      @order.save
+    end
   end
 
-  def to_bank
+  def confirm
     # verzendadres moet aan order gekoppeld zijn! order = pakket.
-    @delivery = @user.deliveries.first unless @user.nil?
-    @order.package_delivery = @delivery
+    @order.confirmed!
     if @order.package_delivery.nil?
       flash.now[:alert] = 'U moet een verzendadres opgeven.'
       render 'check_out'
@@ -46,13 +51,35 @@ class OrdersController < ApplicationController
     @order.save
   end
 
+  def pay
+    mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
+
+    begin
+      payment = mollie.payments.create({
+          :method      => "ideal",
+          :amount      => @order.total_price_in_euros,
+          :description => "#{@order.customer.first_name} #{@order.customer.last_name} order: #{@order.id}",
+          :redirectUrl => "http://localhost:3000/orders/#{@order.id}/success",
+          :metadata    => {
+              :order_id => @order.id
+          }
+      })
+
+    #   # Send the customer off to complete the payment.
+
+      redirect_to payment.getPaymentUrl
+    rescue Mollie::API::Exception => e
+      $response.body << "API call failed: " << (CGI.escapeHTML e.message)
+    end
+
+  end
+
   def success
     if @user == nil
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
     end
-    @order.status = 'paid'
-    @order.save
+    @order.paid!
     @invoice = @order.invoices.create(paid: @order.total_price,
                                       total_mail_weight: @order.total_mail_weight,
                                       invoice_delivery: @order.package_delivery)

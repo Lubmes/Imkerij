@@ -7,7 +7,7 @@
 
 <!-- Bedrag x Aantal = Totaal -->
 <tr id='booking-ajax-<%#= booking.id %>'>
-	<% unless controller.action_name == 'to_bank' ||
+	<% unless controller.action_name == 'confirm' ||
 		 				booking.order.status =='paid' %>
 		<!-- Col 1. Verwijderen. -->
 		<td class='remove'>
@@ -26,7 +26,7 @@
 	</td>
 
 	<!-- Booking update form -->
-	<% unless controller.action_name == 'to_bank' ||
+	<% unless controller.action_name == 'confirm' ||
 						booking.order.status != 'open' %>
 		<%= form_for booking, remote: true do |f| %>
 				<!-- Col 3. Multiplication symbol. -->
@@ -67,7 +67,7 @@
 	<!-- Col 9. Toggle correction input row. -->
 	<td>
 		<% unless controller.action_name == 'check_out' ||
-					controller.action_name == 'to_bank' ||
+					controller.action_name == 'confirm' ||
 					controller.action_name == 'success' ||
 					@order.status == 'open' %>
 			<span onclick="myFunctionForId<%= @order.id %><%= booking.id %>()" class='fa fa-cogs'></span>
@@ -78,7 +78,7 @@
 <!-- Corrections made -->
 <div id='booking-corrections-ajax-<%= booking.id %>'>
 	<% unless controller.action_name == 'check_out' ||
-						controller.action_name == 'to_bank' ||
+						controller.action_name == 'confirm' ||
 						controller.action_name == 'success' ||
 						@order.status == 'open'%>
 		<% if booking.corrections.any? %>

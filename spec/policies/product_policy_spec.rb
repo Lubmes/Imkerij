@@ -3,11 +3,9 @@ require 'rails_helper'
 RSpec.describe ProductPolicy do
   context 'toegang' do
     subject { ProductPolicy.new(user, product) }
-  
-    let(:user) { FactoryGirl.create :user }
-    let(:category) { FactoryGirl.create :category }
-    let(:product) { FactoryGirl.create :product,
-                                        category: category }
+    let(:category)  { FactoryGirl.create :category }
+    let(:product)   { FactoryGirl.create :product,
+                        category: category }
 
     context 'voor anonieme gebruikers' do
       let(:user) { nil }

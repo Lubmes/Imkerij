@@ -1,20 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe UserPolicy do
+describe UserPolicy do
   context 'toegang' do
     subject { UserPolicy.new(user, other_user) }
-
-    let(:user) { FactoryGirl.create :user }
-    let(:other_user) { FactoryGirl.create :user }
+    let(:user)        { FactoryGirl.create :user }
+    let(:other_user)  { FactoryGirl.create :user }
 
     let(:resolved_scope) do
       UserPolicy::Scope.new(user, User.all).resolve
     end
-  
+
     context 'voor anonieme gebruikers:' do
       let(:user) { nil }
-      it 'sluit de andere gebruikers buiten zijn scope' do 
-        expect(resolved_scope).not_to include(other_user) 
+      it 'sluit de andere gebruikers buiten zijn scope' do
+        expect(resolved_scope).not_to include(other_user)
       end
 
       it { should forbid_action :index }
@@ -25,7 +24,7 @@ RSpec.describe UserPolicy do
 
     context "voor willekeurige gebruikers:" do
       context 'op andere gebruikers' do
-        it 'sluit de andere gebruikers buiten zijn scope' do  
+        it 'sluit de andere gebruikers buiten zijn scope' do
          expect(resolved_scope).not_to include(other_user)
         end
 
@@ -37,7 +36,7 @@ RSpec.describe UserPolicy do
       context 'op zichzelf' do
         let(:other_user) { user }
 
-        it { should permit_action :update }
+        it { should permit_edit_and_update_actions }
         it { should forbid_action :destroy }
       end
     end
@@ -45,15 +44,16 @@ RSpec.describe UserPolicy do
     context 'voor administrators:' do
       let(:user) { FactoryGirl.create :user, :admin }
 
-     context 'op andere gebruikers' do
-        it 'sluit de andere gebruikers buiten zijn scope' do 
+      it { should permit_action :index }
+
+      context 'op andere gebruikers' do
+        it 'sluit de andere gebruikers buiten zijn scope' do
           expect(resolved_scope).to include(other_user)
         end
 
-        it { should permit_action :index }
         it { should permit_new_and_create_actions }
         it { should permit_edit_and_update_actions }
-        it { should permit_action :destroy } 
+        it { should forbid_action :destroy }
       end
       context 'op zichzelf' do
         let(:other_user) { user }

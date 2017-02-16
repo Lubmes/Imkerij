@@ -3,6 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #store-front .category {
+	padding-top: 110px;
+	margin-top: -110px;
 	@extend .w3-row;
 	.prod-col {
 		@extend .w3-padding-left;

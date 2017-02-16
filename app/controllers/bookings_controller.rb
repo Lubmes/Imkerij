@@ -1,7 +1,9 @@
 class BookingsController < ApplicationController
+  # Om AJAX op de boekingen te laten werken.
+  skip_before_filter :verify_authenticity_token, :only => [:create]
   before_action :set_order, only: [:create, :update, :destroy]
   before_action :set_booking, only: [:update, :destroy]
-  # Geen after_action update_order voor js.
+  # (Geen after_action update_order. Werkt niet met AJAX.)
 
   def create
     product = Product.find(params[:booking][:product_id])

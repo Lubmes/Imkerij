@@ -1,7 +1,9 @@
 <div class='delivery'>
   <ul class='record-actions'>
     <li><h4 class='address'><%= card_title %></h4></li>
-    <% unless controller.action_name == 'to_bank' || controller.action_name == 'success' %>
+    <% unless controller.action_name == 'confirm' ||
+        controller.action_name == 'pay' ||
+        controller.action_name == 'success' %>
       <div class='table-actions'>
         <li>
           <%= link_to [:edit, delivery.sender, delivery], remote: true do %>

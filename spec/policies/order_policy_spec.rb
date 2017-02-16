@@ -1,28 +1,80 @@
 require 'rails_helper'
 
-RSpec.describe OrderPolicy do
+describe OrderPolicy do
+  context 'toegang' do
+    subject { OrderPolicy.new(user, order) }
+    let(:user) { FactoryGirl.create :user }
+    let(:order) { FactoryGirl.create :order, customer: user, status: 'open' }
+    let(:delivery) { FactoryGirl.create :delivery }
 
-  let(:user) { User.new }
+    context 'voor anonieme (gast) gebruikers' do
+      let(:user) { nil }
 
-  subject { described_class }
+      it { should permit_action :empty }
+      it { should permit_action :check_out }
+      it { should forbid_action :confirm }
+      it { should forbid_action :pay }
+      it { should forbid_action :success }
+    end
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context "voor willekeurige gebruikers" do
+      let(:user) { FactoryGirl.create :user }
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      it { should permit_action :empty }
+      it { should permit_action :check_out }
+      context 'na toevoeging adres' do
+        let(:order) { FactoryGirl.create :order, customer: user, status: 'open', package_delivery: delivery }
+        it { should permit_action :confirm }
+      end
+      context 'na confirmatie' do
+        let(:order) { FactoryGirl.create :order, customer: user, status: 'confirmed', package_delivery: delivery }
+        it { should permit_action :pay }
+      end
+      context 'na betaling' do
+        let(:order) { FactoryGirl.create :order, customer: user, status: 'paid', package_delivery: delivery }
+        it { should permit_action :success }
+      end
+    end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context 'voor administrators' do
+      let(:user) { FactoryGirl.create :user, :admin }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      context 'op andere gebruikers' do
+        let(:other_user) { FactoryGirl.create :user }
+        let(:order) { FactoryGirl.create :order, customer: other_user, status: 'open' }
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+        it { should forbid_action :empty }
+        it { should permit_action :check_out }
+        context 'na toevoeging adres' do
+          let(:order) { FactoryGirl.create :order, customer: user, status: 'open', package_delivery: delivery }
+          it { should permit_action :confirm }
+        end
+        context 'na confirmatie' do
+          let(:order) { FactoryGirl.create :order, customer: other_user, status: 'confirmed', package_delivery: delivery }
+          it { should permit_action :pay }
+        end
+        context 'na betaling' do
+          let(:order) { FactoryGirl.create :order, customer: other_user, status: 'paid', package_delivery: delivery }
+          it { should permit_action :success }
+        end
+      end
+      context 'op zichzelf' do
+        it { should permit_action :empty }
+        it { should permit_action :check_out }
+        context 'na toevoeging adres' do
+          let(:order) { FactoryGirl.create :order, customer: user, status: 'open', package_delivery: delivery }
+          it { should permit_action :confirm }
+        end
+        context 'na confirmatie' do
+          let(:order) { FactoryGirl.create :order, customer: user, status: 'confirmed', package_delivery: delivery }
+          it { should permit_action :pay }
+        end
+        context 'na betaling' do
+          let(:order) { FactoryGirl.create :order, customer: user, status: 'paid', package_delivery: delivery }
+          it { should permit_action :success }
+        end
+      end
+
+    end
   end
 end

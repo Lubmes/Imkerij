@@ -1,28 +1,29 @@
 require 'rails_helper'
 
-RSpec.describe DeliveryPolicy do
+describe DeliveryPolicy do
+  context 'toegang' do
+    subject { DeliveryPolicy.new(user, delivery) }
+    let(:delivery) { FactoryGirl.create :delivery }
 
-  let(:user) { User.new }
+    context 'voor anonieme gebruikers' do
+      let(:user) { nil }
 
-  subject { described_class }
+      it { should forbid_edit_and_update_actions }
+      it { should forbid_action :destroy }
+    end
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context "voor willekeurige gebruikers" do
+      let(:user) { FactoryGirl.create :user }
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      it { should permit_edit_and_update_actions }
+      it { should forbid_action :destroy }
+    end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context 'voor administrators' do
+      let(:user) { FactoryGirl.create :user, :admin }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+      it { should permit_edit_and_update_actions }
+      it { should forbid_action :destroy }
+    end
   end
 end
