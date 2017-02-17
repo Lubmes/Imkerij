@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Admin kan producten verwijderen' do
   let!(:category) { FactoryGirl.create(:category, name: 'Honing') }
   let!(:product) { FactoryGirl.create(:product,
-                                      name: 'Honingpot 200ml',
+                                          name: 'Honingpot 200ml',
                                       category: category ) }
   let(:admin) { FactoryGirl.create(:user, :admin) }
 

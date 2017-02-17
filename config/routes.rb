@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+  
   devise_for :users, path: 'u'#, controllers: { registrations: "registrations" }
   resources 'users' do
     resources 'orders'

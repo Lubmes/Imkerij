@@ -47,6 +47,7 @@ GEM
     airbrussh (1.1.2)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (7.1.4)
+    awesome_print (1.7.0)
     bcrypt (3.1.11)
     builder (3.2.3)
     byebug (9.0.6)
@@ -76,6 +77,9 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     chartkick (2.2.2)
+    ckeditor (4.2.2)
+      cocaine
+      orm_adapter (~> 0.5.0)
     climate_control (0.1.0)
     cliver (0.3.2)
     cocaine (0.5.8)
@@ -292,6 +296,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   acts_as_list
+  awesome_print
   byebug
   capistrano-bundler
   capistrano-passenger
@@ -299,6 +304,7 @@ DEPENDENCIES
   capistrano-rvm
   capybara (~> 2.10, >= 2.10.1)
   chartkick (~> 2.1, >= 2.1.1)
+  ckeditor
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.5, >= 1.5.3)
   devise (~> 4.2)

@@ -20,6 +20,9 @@ gem 'acts_as_list'
 gem 'mollie-api-ruby', '~> 2.1'
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
+gem 'ckeditor'
+# debugging
+gem 'awesome_print'
 # Grafieken
 gem 'chartkick', '~> 2.1', '>= 2.1.1'
 gem 'groupdate'

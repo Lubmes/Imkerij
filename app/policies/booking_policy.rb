@@ -5,6 +5,10 @@ class BookingPolicy < ApplicationPolicy
     end
   end
 
+  def edit?
+    update?
+  end
+
   def create?
     record.product.available == true
   end
@@ -14,6 +18,6 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user == record.order.customer
+    user == record.order.customer && user != nil
   end
 end

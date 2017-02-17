@@ -6,6 +6,7 @@ describe DeliveryPolicy do
     let(:delivery) { FactoryGirl.create :delivery }
 
     context 'voor anonieme gebruikers' do
+      let(:order) { FactoryGirl.create( :order, package_delivery: delivery) }
       let(:user) { nil }
 
       it { should forbid_edit_and_update_actions }
@@ -14,6 +15,7 @@ describe DeliveryPolicy do
 
     context "voor willekeurige gebruikers" do
       let(:user) { FactoryGirl.create :user }
+      let(:order) { FactoryGirl.create( :order, package_delivery: delivery, customer: user) }
 
       it { should permit_edit_and_update_actions }
       it { should forbid_action :destroy }
@@ -21,6 +23,7 @@ describe DeliveryPolicy do
 
     context 'voor administrators' do
       let(:user) { FactoryGirl.create :user, :admin }
+      let(:order) { FactoryGirl.create( :order, package_delivery: delivery, customer: user) }
 
       it { should permit_edit_and_update_actions }
       it { should forbid_action :destroy }

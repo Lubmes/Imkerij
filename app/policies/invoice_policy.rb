@@ -12,4 +12,12 @@ class InvoicePolicy < ApplicationPolicy
   def update?
     user.try(:admin)
   end
+
+  def pdf?
+    user
+  end
+
+  def print?
+    admins_only
+  end
 end

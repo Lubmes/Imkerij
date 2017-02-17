@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require ckeditor/init
 //= require jt_address
 //= require flatpickr
 //= require flatpickr/l10n/nl
@@ -20,6 +21,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
 
 
 // This function is call when Google Maps is loaded

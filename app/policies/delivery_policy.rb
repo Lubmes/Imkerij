@@ -6,10 +6,18 @@ class DeliveryPolicy < ApplicationPolicy
   end
 
   def create?
-    user.try(:admin) || user == record.sender
+    user.try(:admin) || user
+  end
+
+  def edit?
+    create?
+  end
+
+  def update?
+    create?
   end
 
   def destroy?
-    create?
+    false
   end
 end

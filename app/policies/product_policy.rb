@@ -14,4 +14,6 @@ class ProductPolicy < CategoryPolicy
       end
     end
   end
+
+  # Erft over van category policy
 end

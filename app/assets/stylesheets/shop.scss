@@ -39,8 +39,13 @@
 			.gallery-picture {
 				@extend .w3-padding-top;
 				@extend .w3-padding-bottom;
-		    @extend .w3-padding-left;
-				img { @extend .w3-round-xlarge;}
+		    // @extend .w3-padding-left;
+				padding-left: 15%;
+				img {
+					@extend .w3-round-xlarge;
+					width: 75%;
+					margin-top: 15%;
+					}
 			}
 		}
 	}
@@ -49,6 +54,7 @@
 		right: 0;
     .bookings {
       @extend .w3-leftbar;
+			width: 95%;
     }
   }
 }

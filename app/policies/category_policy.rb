@@ -13,6 +13,10 @@ class CategoryPolicy < ApplicationPolicy
     user.try(:admin)
   end
 
+  def edit?
+    create?
+  end
+
   def update?
     create?
   end
@@ -23,5 +27,5 @@ class CategoryPolicy < ApplicationPolicy
 
   def admin_action?
    create?
-  end 
+  end
 end

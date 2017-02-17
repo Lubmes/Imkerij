@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
   end
 
   def update
-    authorize @booking
+    # authorize @booking
     @booking.product_quantity = params[:booking][:product_quantity]
     @booking.save
     update_order
