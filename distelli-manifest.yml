@@ -1,4 +1,4 @@
-lmschukking/imk:
+lmschukkinh/imk:
   PkgInclude:
     - '*'
   PreInstall:
