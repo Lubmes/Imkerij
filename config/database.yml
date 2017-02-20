@@ -83,3 +83,4 @@ production:
   database: ImkerijWebshop_production
   username: ImkerijWebshop
   password: <%= ENV['IMKERIJWEBSHOP_DATABASE_PASSWORD'] %>
+  host: db

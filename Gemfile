@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.1"
+ruby "2.4.0"
 
 gem 'rails', '~> 5.0.0'
 gem 'pg', '~> 0.18'
@@ -17,7 +17,7 @@ gem 'paperclip', '~> 5.1'
 gem 'active_link_to'
 gem 'font-awesome-rails'
 gem 'acts_as_list'
-gem 'mollie-api-ruby', '~> 2.1'
+# gem 'mollie-api-ruby', '~> 2.1'
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
 gem 'ckeditor'
