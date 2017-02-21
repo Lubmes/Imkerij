@@ -2,8 +2,6 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :empty, :check_out, :confirm, :pay, :success]
   before_action :set_user, only: [:check_out, :confirm, :success]
 
-  require 'Mollie/API/Client'
-
   def show
   end
 
@@ -52,26 +50,7 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
-
-    begin
-      payment = mollie.payments.create({
-          :method      => "ideal",
-          :amount      => @order.total_price_in_euros,
-          :description => "#{@order.customer.first_name} #{@order.customer.last_name} order: #{@order.id}",
-          :redirectUrl => "http://localhost:3000/orders/#{@order.id}/success",
-          :metadata    => {
-              :order_id => @order.id
-          }
-      })
-
-    #   # Send the customer off to complete the payment.
-
-      redirect_to payment.getPaymentUrl
-    rescue Mollie::API::Exception => e
-      $response.body << "API call failed: " << (CGI.escapeHTML e.message)
-    end
-
+    
   end
 
   def success
