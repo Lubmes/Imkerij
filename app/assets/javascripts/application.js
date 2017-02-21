@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require ckeditor/init
 //= require jt_address
 //= require flatpickr
 //= require flatpickr/l10n/nl
