@@ -20,7 +20,7 @@ gem 'acts_as_list'
 # gem 'mollie-api-ruby', '~> 2.1'
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
-gem 'ckeditor'
+# gem 'ckeditor'
 # debugging
 gem 'awesome_print'
 # Grafieken
@@ -30,11 +30,6 @@ gem 'groupdate'
 gem 'pdfkit'
 gem 'render_anywhere'
 gem 'wkhtmltopdf-binary'
-# Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
-gem 'capistrano-rvm', group: :development
-gem 'capistrano-bundler', group: :development
-gem 'capistrano-passenger', group: :development
 
 group :development, :test do
   gem 'byebug', platform: :mri

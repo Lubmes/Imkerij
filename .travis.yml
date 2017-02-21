@@ -2,12 +2,5 @@ language: ruby
 rvm: 2.4.0
 script: bundle exec rspec
 before_install:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-deploy:
-  provider: heroku
-  api_key:
-    secure: h03+7LpgBYX2SYhIFFPkNLulneZl7z7HjAZEUfM5EFUIxY15QQApyjsekafcNukT0zDm0uwyNAQGNi0gYtpefq0/jEJCVg181z++kEWR7yYZUjj9y2D1U+T98+J28RO4Jhrkf+OwxwT/fOVRp1wirNjnLk/RjBmi2dKOuaXTp0898RtCuaxMgJwCXioKJperY/YqfehDTB1qJ+Q21qGTPhrK8Mwdbqb7CfAhN77hBwq0DOIEJO56VrHU/d98xVI1NF6wvCJe+Ain0wV5PtDv3FHmbH4UmNZPF+J0jF9CknqhoMRADiPpCzBkqRr99N0Ax4V4QdWCNRZYlz+8QvImml1DvrwdJJeI7+Yh572znGwWGTxYq5+KcSh+Fn9qiLOSEH3xaJoeVuLynKjTdjYlVOVAwvkB4mkGlGXG1EO4DxPtEYYE+KE/RioO7O/4iAGF9nhQH927uQE4bimard+ng1Nuqnk0Fq4pa1yJ6i93HNsCPov+tTxyIfa/AEdsMF43BIlatATLWhwB57Pcys9LlQqb+HmDlM9vJs6nSNi5xhhjKU+cbrqK8ch3lsu65IgwSJABHydlNx8TX2uYR+IGjnSHaR0xV6UCw+DVbE7DYeXy4yDn4zswKWurLTTUUzNSQEytSNg39W8BYRpKYxsuC0Yqe13uhmK0exwphW1F9dk=
-  app: y
-  on:
-    repo: Lubmes/Imkerij
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
