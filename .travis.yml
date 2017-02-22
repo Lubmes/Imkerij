@@ -1,15 +1,19 @@
 language: ruby
 rvm:
 - 2.4.0
-- 2.3.0
-- 2.2.4
-bundler_args: --jobs=2
+bundler_args: "--jobs=2"
 script:
-script:
-  - bundle exec rake db:setup
-  - bundle exec rake spec
+- bundle exec rake db:setup
+- bundle exec rake spec
 cache: bundler
 services:
-  - postgresql
+- postgresql
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
+deploy:
+  provider: heroku
+  api_key:
+    secure: yuQ90XdjxnfNkQv1nYUW7GUXRgJf/kYhrD8VBxl+6H4LSXMRxwSss1TGR51WqKY7xB/HsgckVC5CTJ7Z/Ot0paPwgkK+1yE6Vflyg0Evk1vkXoBp0TjQdld6IWgjh7B/4GjpH2rKmsuRQNHo6YCIf++hN9JeyTo7I5DG8vTCus7CUFIf88i+NtWC9GQXVhKjrEMnmWJJSO9CH3EBD+gjfd+k/iMgA6FeVpf8/snfdR57/V/mrI5KtOS4l8woNC1Ameiiy057YoAakQxPR3Mb3re153oOBD/QSuDKW/Ebciq+6SKmgfoCGCNLD/hd5be3B95pU8CFUdSsQ6sASCfz7TZ9jM9paeP9iQdHplxo7QCAxxlT2szwn3WJmp7bi8/yQmfcoyxs2bh/eQoio/yZmRBSJjgY/rwXcA5wu1vt0wtYl0weGj64FLQDZnnBR5mQnQ2yPibhiyTaIv1JY1ScXkZm2y99RY8/VoLZqcJBpso4mR7lBCqMAr2FRfo3uScLQIfk17fLP2Cq4XeIbvxKPplUC8/mjLI6eREIbcq0MjruhQeecjviDDe8gOtu1tcu2fbth3AIjNWeu3JFXkryBae4+KMo+YELqf42/f6uogx1tSjedklbJbKXAk8jxP73xEIciHx+vGukoN+6+ZKRuIY+94nkoV39xNlMCjMILdc=
+  app: imkerij
+  on:
+    repo: Lubmes/Imkerij
