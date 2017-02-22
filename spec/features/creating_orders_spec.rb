@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User kan zijn mandje vullen', js: true, pending: true do
+RSpec.feature 'User kan zijn mandje vullen', js: true do
   let!(:category) { FactoryGirl.create(:category, name: 'Honing') }
   let!(:cheap_product) { FactoryGirl.create(:product, name: 'Propolis lollie',
                                                       price: '0,80',
@@ -10,21 +10,24 @@ RSpec.feature 'User kan zijn mandje vullen', js: true, pending: true do
                                                           category: category) }
 
   before do
-    visit categories_path
+    visit shop_path
   end
 
-  scenario 'met verschillende producten' do
-    page.find('.product', :text => 'Propolis lollie').click_button('VOEG TOE AAN MANDJE')
-    page.find('.product', :text => 'Honingpot 400ml').click_button('VOEG TOE AAN MANDJE')
+  xscenario 'met verschillende producten' do
+    # page.find('.product', :text => 'Honingpot 200ml').click_link 'bijwerken'
+
+    page.find('.product', :text => 'Propolis lollie').click_button('VOEG TOE')
+    page.find('.product', :text => 'Honingpot 400ml').click_button('VOEG TOE')
 
     within('#order') do
+
       expect(page).to have_content 'Propolis lollie'
       expect(page).to have_content 'Honingpot 400ml'
       expect(page).to have_content 0.80 + 3.95
     end
   end
 
-  scenario 'met meerde producten van 1 soort' do
+  xscenario 'met meerde producten van 1 soort' do
     product_from_shop = page.find('.product', :text => 'Propolis lollie')
     product_from_shop.fill_in 'Aantal', with: 5
     product_from_shop.click_button('VOEG TOE AAN MANDJE')

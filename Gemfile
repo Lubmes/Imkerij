@@ -32,6 +32,9 @@ gem 'wkhtmltopdf-binary'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'database_cleaner'
+  gem 'poltergeist'
+  gem 'jasmine'
 end
 
 group :development do
@@ -46,8 +49,6 @@ group :test do
   gem 'capybara', '~> 2.10', '>= 2.10.1'
   gem 'factory_girl_rails', '~> 4.7'
   # gem 'selenium-webdriver', '~> 2.53.4'
-  gem 'poltergeist'
-  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
   gem "email_spec", "~> 1.6.0"
 end
 
