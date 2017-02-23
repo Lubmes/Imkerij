@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin kan nieuwe agendapunten toevoegen' do
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+feature 'Admin kan nieuwe agendapunten toevoegen' do
+  let(:admin) { create(:user, :admin) }
 
 	before do
     login_as(admin)

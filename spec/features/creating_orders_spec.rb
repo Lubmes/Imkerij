@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.feature 'User kan zijn mandje vullen', js: true do
-  let!(:category) { FactoryGirl.create(:category, name: 'Honing') }
-  let!(:cheap_product) { FactoryGirl.create(:product, name: 'Propolis lollie',
-                                                      price: '0,80',
-                                                      category: category) }
-  let!(:expensive_product) { FactoryGirl.create(:product, name: 'Honingpot 400ml',
-                                                          price: '3,95',
-                                                          category: category) }
+feature 'User kan zijn mandje vullen', js: true do
+  let!(:category)           { create(:category, name: 'Honing') }
+  let!(:cheap_product)      { create(:product, name: 'Propolis lollie',
+                                              price: '0,80',
+                                           category: category) }
+  let!(:expensive_product)  { create(:product, name: 'Honingpot 400ml',
+                                              price: '3,95',
+                                           category: category) }
 
   before do
     visit shop_path

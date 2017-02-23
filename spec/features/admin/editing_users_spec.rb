@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature 'Admin kan gebruikers bijwerken' do
-  let!(:user) { FactoryGirl.create(:user, first_name: 'John',
-                                          last_name: 'D.' )}
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+  let!(:user) { create(:user, first_name: 'John',
+                               last_name: 'D.' )}
+  let(:admin) { create(:user, :admin) }
 
   before do
     login_as(admin)

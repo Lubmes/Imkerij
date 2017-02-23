@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin kan agenda bijwerken' do
-  let!(:event) { FactoryGirl.create(:event, name: 'Vlindernacht',
-                                            description: 'Verhalen van een vlinderexpert.',
-                                            date: 14.days.from_now) }
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+feature 'Admin kan agenda bijwerken' do
+  let!(:event) { create(:event, name: 'Vlindernacht',
+                         description: 'Verhalen van een vlinderexpert.',
+                                date: 14.days.from_now) }
+  let(:admin)  { create(:user, :admin) }
 
   before do
     login_as(admin)

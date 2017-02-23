@@ -1,11 +1,12 @@
 require 'rails_helper'
+require 'factory_girl_rails'
 
 feature 'Gebruikers zien alleen links die van toepassing zijn:' do
-  let!(:event) { FactoryGirl.create(:event)}
-  let!(:category) { FactoryGirl.create(:category)}
-  let!(:product) { FactoryGirl.create(:product, category: category )}
-  let(:random_user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+  let!(:event)      { create(:event)}
+  let!(:category)   { create(:category)}
+  let!(:product)    { create(:product, category: category )}
+  let(:random_user) { create(:user) }
+  let(:admin)       { create(:user, :admin) }
 
   context 'ANONIEME GEBRUIKERS' do
 

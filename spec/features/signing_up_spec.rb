@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.feature 'User kan zich aanmelden' do
+feature 'User kan zich aanmelden' do
 
   xscenario 'bij het voor de eerste keer afrekenen', :pending do
-    let!(:basket) { FactoryGirl.create(:basket) } # met producten ! nog toevoegen !
+    let!(:basket) { create(:basket) } # met producten ! nog toevoegen !
 
     visit basket_path(basket)
     click_link 'Afrekenen'

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin kan nieuwe producten toevoegen' do
-  let!(:category) { FactoryGirl.create(:category, name: 'Snoep') }
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+feature 'Admin kan nieuwe producten toevoegen' do
+  let!(:category) { create(:category, name: 'Snoep') }
+  let(:admin)     { create(:user, :admin) }
 
   before do
     login_as(admin)

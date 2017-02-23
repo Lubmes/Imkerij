@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Admin kan nieuwe categorieën toevoegen' do
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+  let(:admin) { create(:user, :admin) }
 
   before do
     login_as(admin)

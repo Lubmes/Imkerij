@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin kan producten bijwerken' do
-  let!(:category) { FactoryGirl.create(:category, name: 'Honing' )}
-  let!(:product) { FactoryGirl.create(:product, name: 'Honingpot 200ml',
+feature 'Admin kan producten bijwerken' do
+  let!(:category) { create(:category, name: 'Honing' )}
+  let!(:product)  { create(:product, name: 'Honingpot 200ml',
                                                 description: 'Honing uit Veere.',
                                                 category: category )}
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+  let(:admin)     { create(:user, :admin) }
 
   before do
     login_as(admin)

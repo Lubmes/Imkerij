@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature 'User kan uitloggen' do
-  let!(:user) { FactoryGirl.create(:user) }
+feature 'User kan uitloggen' do
+  let!(:user) { create(:user) }
 
   before do
     login_as user

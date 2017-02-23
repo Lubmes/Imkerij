@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.feature 'User kan inloggen' do
-  let(:user) { FactoryGirl.create(:user) }
+feature 'User kan inloggen' do
+  let(:user) { create(:user) }
 
   xscenario 'bij het afrekenen' do
-    let!(:basket) { FactoryGirl.create(:basket) } # met producten ! nog toevoegen !
+    let!(:basket) { create(:basket) } # met producten ! nog toevoegen !
 
     visit basket_path(basket)
     click_link 'Afrekenen'
@@ -26,7 +26,7 @@ RSpec.feature 'User kan inloggen' do
 
     expect(page).to have_content "U bent succesvol ingelogd."
     expect(page).to have_content "#{user.first_name}"
-    expect(page).to have_current_path shop_path 
+    expect(page).to have_current_path shop_path
   end
 
   # Nog vorm te geven:
