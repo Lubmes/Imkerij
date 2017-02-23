@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.2'
 gem 'pundit', '~> 1.1'
 gem 'money-rails', '~> 1.7'
+gem 'mollie-api-ruby'
 gem 'paperclip', '~> 5.1'
 gem 'active_link_to'
 gem 'font-awesome-rails'
@@ -48,7 +49,6 @@ group :test do
   gem 'pundit-matchers', '~> 1.1'
   gem 'capybara', '~> 2.10', '>= 2.10.1'
   gem 'factory_girl_rails', '~> 4.7'
-  # gem 'selenium-webdriver', '~> 2.53.4'
   gem "email_spec", "~> 1.6.0"
 end
 
