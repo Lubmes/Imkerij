@@ -2,8 +2,6 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :empty, :check_out, :confirm, :pay, :success]
   before_action :set_user, only: [:check_out, :confirm, :success]
 
-  # require 'Mollie/API/Client'
-
   def show
   end
 

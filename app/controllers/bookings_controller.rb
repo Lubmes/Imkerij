@@ -33,6 +33,7 @@ class BookingsController < ApplicationController
     @booking.product_quantity = params[:booking][:product_quantity]
     @booking.save
     update_order
+
     respond_to do |format|
       format.html { redirect_to shop_url }
       format.js
@@ -43,6 +44,7 @@ class BookingsController < ApplicationController
     @booking.destroy
     @bookings = @order.bookings
     update_order
+    
     respond_to do |format|
       format.html { redirect_to shop_url }
       format.js
