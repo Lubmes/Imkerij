@@ -1,13 +1,16 @@
 language: ruby
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 rvm:
-- 2.4.0
+  - 2.4.0
 bundler_args: "--jobs=2"
 script:
-- bundle exec rake db:setup
-- bundle exec rake spec
+  - bundle exec rake db:setup
+  - bundle exec rake spec
 cache: bundler
 services:
-- postgresql
+  - postgresql
 addons:
   postgresql: '9.4'
 deploy:
