@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users, path: 'u'#, controllers: { registrations: "registrations" }
   resources 'users' do
     resources 'orders'
     resources 'deliveries'
   end
 
+  # pages
   root 'welcome#home'
+  get 'facilities', to: 'welcome#facilities'
+  get 'expo', to: 'welcome#expo'
+  get 'route', to: 'welcome#route'
+  get 'extras', to: 'welcome#extras'
+
   get 'admin', to: 'welcome#admin'
   resources 'events' do
     resources 'pictures'

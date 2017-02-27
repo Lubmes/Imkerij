@@ -1,5 +1,13 @@
 <ul id='main-nav'>
-  <li><%= active_link_to 'home', root_path, active: :exclusive %></li>
+  <!-- pages -->
+  <li><%= active_link_to 'de imkerij', root_path, active: :exclusive %></li>
+  <li><%= active_link_to 'imkerij winkel en terras', facilities_path, active: :exclusive %></li>
+  <li><%= active_link_to 'expo', expo_path, active: :exclusive %></li>
+  <li><%= active_link_to 'route', route_path, active: :exclusive %></li>
+  <li><%= active_link_to 'zie ook', extras_path, active: :exclusive %></li>
+
+
+
   <li><%= active_link_to 'agenda', events_path %></li>
   <li><%= active_link_to 'winkel', shop_path %></li>
   <% if policy(:application).admin_action? %>
