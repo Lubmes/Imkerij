@@ -9,10 +9,11 @@ require 'rspec/rails'
 # Pundit
 require 'pundit/rspec'
 require 'pundit/matchers'
+require "money-rails/test_helpers"
 # Poltergeist
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
-# Capybara.default_driver = :poltergeist # laat een groot deel van de test suite falen. 
+# require 'capybara/poltergeist'
+Capybara.javascript_driver = :webkit
+# Capybara.default_driver = :poltergeist # laat een groot deel van de test suite falen.
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

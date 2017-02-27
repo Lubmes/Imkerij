@@ -37,7 +37,7 @@
 				<td colspan='2' class='booking-form'>
 					<div class='submit'>
 						<%= f.hidden_field :product_id, value: booking.product.id unless booking.product.nil? %>
-						<%= f.number_field :product_quantity, value: booking.product_quantity, min: 1, max: 999 %>
+						<%= f.number_field :product_quantity, value: booking.product_quantity, min: 1, max: 999, title: 'aantal' %>
 						<%= f.submit class: 'button' %>
 					</div>
 				</td>
