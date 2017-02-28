@@ -40,10 +40,11 @@
 				// @extend .w3-padding-top;
 				@extend .w3-padding-bottom;
 		    // @extend .w3-padding-left;
-				padding-left: 22%;
+				padding-left: 24%;
 				img {
-					@extend .w3-round-xlarge;
-					width: 85%;
+					@extend .w3-sepia;
+					@extend .w3-round-xxlarge;
+					width: 86%;
 					margin-top: 18%;
 					}
 			}
@@ -54,6 +55,7 @@
 		right: 0;
     .bookings {
       @extend .w3-leftbar;
+			@extend .w3-border-dark-grey;
 			width: 95%;
     }
   }

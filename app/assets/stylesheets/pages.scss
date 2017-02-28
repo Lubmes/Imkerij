@@ -2,15 +2,23 @@
   @extend .w3-col;
   @extend .l5;
   margin-left: 16.7%;
-}
-.introduction {
-  @extend .w3-medium;
-  @extend .w3-wide;
-}
-.map {
-  width: 200%;
-  height: 18em;
-}
-.story {
 
+  #introduction {
+    font-weight: lighter;
+    @extend .w3-wide;
+  }
+
+  .mySlides {
+    display:none;
+  }
+  .w3-left, .w3-right, .w3-badge {cursor:pointer}
+  .w3-badge {height:13px;width:13px;padding:0}
+
+  #map {
+    width: 200%;
+    height: 18em;
+  }
+  #story {
+
+  }
 }
