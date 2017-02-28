@@ -30,3 +30,17 @@
 img {
 	width: 100%;
 }
+
+/* Background */
+#mask {
+    position: fixed;
+    left:0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    width: 13%;
+    height: 100%;
+    background-image: image-url("hexagon-pattern.svg");
+    background-size: 21%;
+    z-index: -1;
+}
