@@ -38,6 +38,7 @@
 		padding: 6px;
 		@extend .w3-brown;
 		@extend .w3-hover-khaki;
+		@extend .w3-hover-text-orange;
 		@extend .w3-round-xlarge;
 		@extend .w3-margin;
 		@extend .w3-small;
@@ -74,7 +75,8 @@
 			@extend .w3-padding;
 			@extend .w3-margin;
 			@extend .w3-text-black;
-			@extend .w3-hover-border-brown;
+			@extend .w3-hover-khaki;
+			@extend .w3-hover-text-teal;
 		}
 	}
 }
