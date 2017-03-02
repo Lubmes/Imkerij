@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jt_address
 //= require flatpickr
 //= require flatpickr/l10n/nl
 //= require Chart.bundle
@@ -20,18 +19,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-
-
-// This function is call when Google Maps is loaded
-// window.googleMapInitialize = function(){
-//
-//     // Simple usage
-//     $('.jt-address-autocomplete').jt_address();
-//
-//     // Advanced usage with google options
-//     $('.jt-address-autocomplete').jt_address({
-//         type: ['restaurant'],
-//         componentRestrictions: { country: 'nl' }
-//     });
-// };
