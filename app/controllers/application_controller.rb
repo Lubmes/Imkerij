@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
   # Devise
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_filter :store_current_location, :unless => :devise_controller?
+  before_action :store_current_location, :unless => :devise_controller?
 
 
   # als een gebruiker is ingelogd: return current_user;
