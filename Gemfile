@@ -20,6 +20,7 @@ gem 'font-awesome-rails'
 gem 'acts_as_list'
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
+gem 'rails_12factor', group: :production
 # debugging
 gem 'awesome_print'
 # Grafieken
