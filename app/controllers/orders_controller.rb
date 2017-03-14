@@ -71,10 +71,10 @@ class OrdersController < ApplicationController
     rescue Mollie::API::Exception => e
       $response.body << "API call failed: " << (CGI.escapeHTML e.message)
     end
-
   end
 
   def success
+    session[:order_id] = nil
     if @user == nil
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
