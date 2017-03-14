@@ -22,7 +22,9 @@
 </header>
 
 	<div id='order' class='co-order-col'>
-		<%= render @order %>
+		<div id='order-ajax-<%= @order.id %>'>
+			<%= render @order %>
+		</div>
 	</div>
 
 	<div id="user-info">
@@ -44,10 +46,10 @@
 					</div>
 				<% end %>
 			<% else %>
-				<div class='user'>
+				<div class='user registration'>
 					<%= render 'devise/registrations/form', with_header: true %>
 				</div>
-				<div class='user'>
+				<div class='user log-in'>
 					<%= render 'devise/sessions/form', with_header: true %>
 				</div>
 			<% end %>

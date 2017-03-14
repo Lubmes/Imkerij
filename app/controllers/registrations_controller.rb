@@ -1,17 +1,20 @@
 class RegistrationsController < Devise::RegistrationsController
+  include ShoppingOrder
 
   def create
     super
-    current_or_guest_user
+    add_shopping_order_to_current_user
   end
 
   protected
 
   def after_sign_up_path_for(resource)
-    unless controller.controller_action == 'check_out'
-      shop_path
+    @order = Order.find(session[:order_id])
+
+    if Rails.application.routes.recognize_path(request.referrer)[:action] == 'check_out'
+      [:check_out, @order]
     else
-      check_out_order_path
+      shop_path
     end
   end
 end

@@ -59,18 +59,19 @@
 	}
 }
 #flash-messages {
-	@extend .w3-center;
 	@extend .w3-margin-bottom;
 	.notice, .alert {
-		@extend .w3-border-bottom;
+		@extend .w3-panel;
 		@extend .w3-margin-0;
+		@extend .w3-center;
+		width: 20%;
 	}
 	.notice {
-		@extend .w3-border-green;
+		@extend .w3-pale-green;
 		@extend .w3-text-light-green;
 	}
 	.alert {
-		@extend .w3-border-red;
+		@extend .w3-pale-red;
 		@extend .w3-text-pink;
 	}
 }

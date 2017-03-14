@@ -1,7 +1,7 @@
 class DeliveriesController < ApplicationController
   def create
     @delivery = Delivery.new(delivery_params)
-    authorize @delivery
+    # authorize @delivery
 
     @order = @delivery.sender.orders.open.last
     @order.package_delivery = @delivery

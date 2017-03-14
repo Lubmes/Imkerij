@@ -52,9 +52,11 @@
 	<% end %>
 <% end %>
 
+<!-- Voor onderhoud check out procedé. -->
 <%if false %>
 <p>current_user.id: <%= current_user.nil? ? "nil" : current_user.id  %></p>
-<p>order.customer.id <%= order.customer.id %></p>
+<p>order.customer.id: <%= order.customer.nil? ? "nil" : order.customer.id %></p>
+<p id='last-name'>order.customer.last_name: <%= order.customer.nil? ? "nil" : order.customer.last_name %></p>
 <p>order.id: <%= order.id %></p>
 <p>order.status: <%= order.status %></p>
 <p>order.package_delivery: <%= order.package_delivery.nil? ? "nil" : order.package_delivery.address_zip_code %></p>

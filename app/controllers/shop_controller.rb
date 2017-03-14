@@ -1,10 +1,10 @@
 class ShopController < ApplicationController
+  include ShoppingOrder
+
   def index
-    # skip_authorization # relevant?
+    set_shopping_order
+    @order.open! if @order.confirmed?
     @categories = Category.all.order(position: :asc)
-    # Voor het inzien van wat al geselecteerd is.
-    @order = current_order
-    # Voor het aanslaan van een nieuwe booking.
-    @booking = current_order.bookings.build
+    @booking = @order.bookings.build
   end
 end

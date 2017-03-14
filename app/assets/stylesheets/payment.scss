@@ -1,6 +1,7 @@
 .co-order-col {
 	@extend .w3-col;
 	@extend .l5;
+	margin-left: 14%;
 }
 .co-user-col {
 	@extend .w3-col;
@@ -38,6 +39,7 @@ header {
 	@extend .w3-topbar;
 }
 #payment {
+	@extend .w3-container;
 	header {
 		@extend .w3-text-grey;
 		h3.add-address {
@@ -49,6 +51,8 @@ header {
 	#order {
 		.bookings {
 			@extend .w3-leftbar;
+			@extend .w3-border-dark-grey;
+			width: 95%;
 		}
 	}
 	#user {

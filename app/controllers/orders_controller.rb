@@ -1,19 +1,20 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :empty, :check_out, :confirm, :pay, :success]
+  include ShoppingOrder
+  before_action :set_shopping_order, only: [:show, :empty, :check_out, :confirm, :pay]
+  before_action :set_order, only: [:success]
   before_action :set_user, only: [:check_out, :confirm, :success]
+
+  require 'mollie/api/client'
 
   def show
   end
 
   def index
-    @orders = Order.all.order(created_at: :desc)
-    @guest_orders = @orders.joins(:customer).where(users: {first_name: 'guest'})
-
-    @all_orders = @orders.joins(:customer).where.not(users: {first_name: 'guest'})
-    @open_orders = @all_orders.open
-    @problem_orders = @all_orders.problem
-    @paid_orders = @all_orders.paid
-    @sent_orders = @all_orders.sent
+    all_orders = Order.all.order(created_at: :desc)
+    @open_orders = all_orders.open
+    @problem_orders = all_orders.problem
+    @paid_orders = all_orders.paid
+    @sent_orders = all_orders.sent
   end
 
   def empty
@@ -27,6 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def check_out
+    @order.open! if @order.confirmed?
     # gebruiker selecteerd een adres uit zijn bestand.
     @delivery = @user.deliveries.first unless @user.nil?
     if @delivery
@@ -36,8 +38,6 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    # verzendadres moet aan order gekoppeld zijn! order = pakket.
-    @order.confirmed!
     if @order.package_delivery.nil?
       flash.now[:alert] = 'U moet een verzendadres opgeven.'
       render 'check_out'
@@ -46,7 +46,9 @@ class OrdersController < ApplicationController
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
     end
+    @order.confirmed!
     @order.save
+    # Vanuit @order worden alle gegevens in de view opgebouwd.
   end
 
   def pay

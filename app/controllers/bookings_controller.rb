@@ -1,7 +1,9 @@
 class BookingsController < ApplicationController
+  include ShoppingOrder
   # Om AJAX op de boekingen te laten werken.
   skip_before_action :verify_authenticity_token, :only => [:create]
-  before_action :set_order, only: [:create, :update, :destroy]
+  # before_action :set_order, only: [:create, :update, :destroy]
+  before_action :set_shopping_order, only: [:create, :update, :destroy]
   before_action :set_booking, only: [:update, :destroy]
   # (Geen after_action update_order. Werkt niet met AJAX.)
 
@@ -44,7 +46,7 @@ class BookingsController < ApplicationController
     @booking.destroy
     @bookings = @order.bookings
     update_order
-    
+
     respond_to do |format|
       format.html { redirect_to shop_url }
       format.js
@@ -57,9 +59,10 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:product_quantity, :product_id)
   end
 
-  def set_order
-    @order = current_order
-  end
+  # def set_shopping_order
+  #   set_shopping_order
+  #   # @order = current_order
+  # end
 
   def set_booking
     @booking = Booking.find(params[:id])

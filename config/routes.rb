@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, path: 'u'#, controllers: { registrations: "registrations" }
+  devise_for :users, path: 'u', controllers: { registrations: "registrations", sessions: "sessions" }
   resources 'users' do
     resources 'orders'
     resources 'deliveries'
