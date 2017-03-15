@@ -38,7 +38,11 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    if @order.package_delivery.nil?
+    # Vanuit @order worden alle gegevens in de view opgebouwd.
+    @customer = @order.customer
+    @delivery = @order.package_delivery
+
+    if @delivery.nil?
       flash.now[:alert] = 'U moet een verzendadres opgeven.'
       render 'check_out'
     end
@@ -48,7 +52,6 @@ class OrdersController < ApplicationController
     end
     @order.confirmed!
     @order.save
-    # Vanuit @order worden alle gegevens in de view opgebouwd.
   end
 
   def pay

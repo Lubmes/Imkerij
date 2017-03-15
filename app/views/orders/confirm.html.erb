@@ -16,8 +16,8 @@
 	</div>
 	<div class="user-info">
 		<div class="co-user-col">
-			<%= render @order.customer %>
-			<%= render @order.package_delivery, card_title: "Verzendadres" %>
+			<%= render @customer %>
+			<%= render @delivery, card_title: "Verzendadres" %>
 		</div>
 	</div>
 </div>
