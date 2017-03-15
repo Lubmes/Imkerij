@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   include ShoppingOrder
   before_action :set_shopping_order, only: [:show, :empty, :check_out, :confirm, :pay]
-  # before_action :set_order, only: [:success]
+  before_action :set_order, only: [:success]
   before_action :set_user, only: [:check_out, :confirm, :success]
 
   require 'mollie/api/client'
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
           :method      => "ideal",
           :amount      => @order.total_price_in_euros,
           :description => "#{@order.customer.first_name} #{@order.customer.last_name} order: #{@order.id}",
-          :redirectUrl => "http://localhost:3000/orders/#{@order.id}/success",
+          :redirectUrl => "#{root_url}orders/#{@order.id}/success",
           :metadata    => {
               :order_id => @order.id
           }
@@ -82,7 +82,6 @@ class OrdersController < ApplicationController
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
     end
-    @order = @user.orders.last
     @customer = @order.customer
     @delivery = @order.package_delivery
     @order.paid!
@@ -97,9 +96,9 @@ class OrdersController < ApplicationController
 
   private
 
-  # def set_order
-    # @order = Order.find(params[:id])
-  # end
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
   def set_user
     @user = current_user
