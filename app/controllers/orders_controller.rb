@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   include ShoppingOrder
   before_action :set_shopping_order, only: [:show, :empty, :check_out, :confirm, :pay]
-  before_action :set_order, only: [:success]
+  # before_action :set_order, only: [:success]
   before_action :set_user, only: [:check_out, :confirm, :success]
 
   require 'mollie/api/client'
@@ -82,17 +82,24 @@ class OrdersController < ApplicationController
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
     end
+    @order = @user.orders.last
+    @customer = @order.customer
+    @delivery = @order.package_delivery
     @order.paid!
     @invoice = @order.invoices.create(paid: @order.total_price,
                                       total_mail_weight: @order.total_mail_weight,
                                       invoice_delivery: @order.package_delivery)
+
+    internal_print_mail = InvoiceMailer.internal_print_email(@invoice)
+    # internal_print_mail.attachment(order_invoice_download_path(@order, @invoice, format: "pdf"))
+    internal_print_mail.deliver_now
   end
 
   private
 
-  def set_order
-    @order = Order.find(params[:id])
-  end
+  # def set_order
+    # @order = Order.find(params[:id])
+  # end
 
   def set_user
     @user = current_user
