@@ -89,9 +89,9 @@ class OrdersController < ApplicationController
                                       total_mail_weight: @order.total_mail_weight,
                                       invoice_delivery: @order.package_delivery)
 
-    internal_print_mail = InvoiceMailer.internal_print_email(@invoice)
+    # internal_print_mail = InvoiceMailer.internal_print_email(@invoice)
     # internal_print_mail.attachment(order_invoice_download_path(@order, @invoice, format: "pdf"))
-    internal_print_mail.deliver_now
+    # internal_print_mail.deliver_now
   end
 
   private
