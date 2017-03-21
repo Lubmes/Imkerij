@@ -7,7 +7,7 @@ feature 'User kan uitloggen' do
     login_as user
   end
 
-  scenario "met succes" do
+  xscenario "met succes" do
     visit "/"
     click_link "log uit"
     expect(page).to have_content "U bent succesvol uitgelogd."

@@ -2,24 +2,27 @@ require 'rails_helper'
 
 feature 'User kan zijn bestelling afrekenen', js: true do
   let!(:category)           { create(:category, name: 'Honing') }
-  let!(:product)  { create(:product, name: 'Honingpot 400ml',
+  let!(:product)  { create(:product, name: 'Honingpot 275ml',
                                               price: '3,95',
                                            category: category) }
 
   before do
     visit shop_path
-    page.find('.product', :text => 'Honingpot 400ml').click_button('VOEG TOE')
+    page.find('.product', :text => 'Honingpot 275ml').click_button('VOEG TOE')
     click_link 'AFREKENEN'
   end
 
   scenario 'en het aantal aanpassen van een besteld product' do
     within('#order') do
-      product_in_check_out = page.find('.bookings', :text => 'Honingpot 400ml')
-      product_in_check_out.fill_in with: 5
+      product_in_check_out = page.find('.bookings', :text => 'Honingpot 275ml')
+      product_in_check_out.fill_in with: 4
       product_in_check_out.click_button('PAS AAN')
+    end
 
-      expect(product_in_check_out).to have_content '5'
-      expect(page).to have_content '€ 19,75'
+    within('#order') do
+      product_in_check_out = page.find('.bookings', :text => 'Honingpot 275ml')
+      expect(product_in_check_out).to have_content '4'
+      expect(page).to have_content '€ 15,80'
     end
   end
 
