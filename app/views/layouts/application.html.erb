@@ -13,8 +13,8 @@
     <div id='navigation'>
       <%= render 'layouts/nav_main' %>
       <%= yield :secondary_navigation if content_for? :secondary_navigation %>
-      <%= render 'layouts/flash_messages' %>
       <%= yield :primary_actions if content_for? :primary_actions %>
+      <%= render 'layouts/flash_messages' %>
     </div>
 
     <br><br>

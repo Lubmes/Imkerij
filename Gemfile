@@ -51,7 +51,7 @@ group :test do
   gem "shoulda-matchers"
   gem 'pundit-matchers', '~> 1.1'
   gem 'factory_girl_rails', '~> 4.7'
-  gem "email_spec", "~> 1.6.0"
+  gem "email_spec"
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

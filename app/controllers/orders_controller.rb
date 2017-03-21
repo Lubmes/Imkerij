@@ -67,9 +67,8 @@ class OrdersController < ApplicationController
               :order_id => @order.id
           }
       })
-
-    #   # Send the customer off to complete the payment.
-
+      # Send the customer off to complete the payment.
+      # Then...
       redirect_to payment.payment_url
     rescue Mollie::API::Exception => e
       $response.body << "API call failed: " << (CGI.escapeHTML e.message)
@@ -89,9 +88,9 @@ class OrdersController < ApplicationController
                                       total_mail_weight: @order.total_mail_weight,
                                       invoice_delivery: @order.package_delivery)
 
-    # internal_print_mail = InvoiceMailer.internal_print_email(@invoice)
+    internal_print_mail = InvoiceMailer.internal_print_email(@invoice)
     # internal_print_mail.attachment(order_invoice_download_path(@order, @invoice, format: "pdf"))
-    # internal_print_mail.deliver_now
+    internal_print_mail.deliver
   end
 
   private

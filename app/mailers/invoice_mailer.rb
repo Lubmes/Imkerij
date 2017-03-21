@@ -1,12 +1,11 @@
 class InvoiceMailer < ApplicationMailer
-  default from: 'l.m.schukking@gmail.com'
+  default from: "lmschukking@icloud.com"
 
   def internal_print_email(invoice)
-    printer_email = 'lmschukking@icloud.com'
+    printer_email = 'l.m.schukking@gmail.com'
     @invoice = invoice
-    @url  = 'http://example.com/login'
-    mail(to: printer_email,
-         body: '',
+    mail(     to: printer_email,
+            body: '',
          subject: "invoice id: #{@invoice.id}")
   end
 end

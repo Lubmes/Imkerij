@@ -59,12 +59,19 @@
 	}
 }
 #flash-messages {
-	@extend .w3-margin-bottom;
+	margin-top: 10%;
+	@extend .w3-container;
 	.notice, .alert {
-		@extend .w3-panel;
-		@extend .w3-margin-0;
 		@extend .w3-center;
-		width: 20%;
+		// @extend .w3-padding-xlarge;
+		@extend .w3-panel;
+		margin-left: 41%;
+		width: 18%;
+		padding: 20px 40px 20px 20px;
+		span {
+			@extend .w3-right;
+			margin-right: -24px;
+		}
 	}
 	.notice {
 		@extend .w3-pale-green;

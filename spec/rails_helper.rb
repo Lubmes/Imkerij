@@ -10,6 +10,8 @@ require 'rspec/rails'
 require 'pundit/rspec'
 require 'pundit/matchers'
 require "money-rails/test_helpers"
+require "email_spec"
+require "email_spec/rspec"
 # Poltergeist
 # require 'capybara/poltergeist'
 Capybara.javascript_driver = :webkit
