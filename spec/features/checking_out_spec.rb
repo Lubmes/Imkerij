@@ -13,6 +13,8 @@ feature 'User kan zijn bestelling afrekenen', js: true do
   end
 
   scenario 'en het aantal aanpassen van een besteld product' do
+    wait_for_ajax
+
     within('#order') do
       product_in_check_out = page.find('.bookings', :text => 'Honingpot 275ml')
       product_in_check_out.fill_in with: 4
@@ -20,7 +22,7 @@ feature 'User kan zijn bestelling afrekenen', js: true do
     end
 
     wait_for_ajax
-    
+
     within('#order') do
       product_in_check_out = page.find('.bookings', :text => 'Honingpot 275ml')
       expect(product_in_check_out).to have_content '4'
