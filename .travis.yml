@@ -20,3 +20,4 @@ deploy:
   app: imkerij
   on:
     repo: Lubmes/Imkerij
+  skip_cleanup: true
