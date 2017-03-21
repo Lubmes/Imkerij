@@ -12,7 +12,7 @@ feature 'User kan zijn bestelling afrekenen', js: true do
     click_link 'AFREKENEN'
   end
 
-  scenario 'en het aantal aanpassen van een besteld product' do
+  xscenario 'en het aantal aanpassen van een besteld product' do
     wait_for_ajax
 
     within('#order') do
