@@ -19,6 +19,8 @@ feature 'User kan zijn bestelling afrekenen', js: true do
       product_in_check_out.click_button('PAS AAN')
     end
 
+    wait_for_ajax
+    
     within('#order') do
       product_in_check_out = page.find('.bookings', :text => 'Honingpot 275ml')
       expect(product_in_check_out).to have_content '4'
