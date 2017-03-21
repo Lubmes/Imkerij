@@ -12,7 +12,7 @@ feature 'User kan zijn bestelling afrekenen', js: true do
     click_link 'AFREKENEN'
   end
 
-  xscenario 'en het aantal aanpassen van een besteld product' do
+  scenario 'en het aantal aanpassen van een besteld product' do
     within('#order') do
       product_in_check_out = page.find('.bookings', :text => 'Honingpot 400ml')
       product_in_check_out.fill_in with: 5

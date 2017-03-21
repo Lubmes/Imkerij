@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'pages/edit'
+
+  get 'pages/update'
+
   devise_for :users, path: 'u', controllers: { registrations: "registrations", sessions: "sessions" }
   resources 'users' do
     resources 'orders'
@@ -7,11 +11,11 @@ Rails.application.routes.draw do
   end
 
   # pages
-  root 'welcome#home'
-  get 'facilities', to: 'welcome#facilities'
-  get 'expo', to: 'welcome#expo'
-  get 'route', to: 'welcome#route'
-  get 'extras', to: 'welcome#extras'
+  root 'pages#home'
+  get 'facilities', to: 'pages#facilities', as: 'facilities'
+  get 'expo', to: 'pages#expo', as: 'expo'
+  get 'route', to: 'pages#route', as: 'route'
+  get 'extras', to: 'pages#extras', as: 'extras'
 
   get 'admin', to: 'welcome#admin'
   resources 'events' do

@@ -18,6 +18,7 @@ gem 'paperclip', '~> 5.1'
 gem 'active_link_to'
 gem 'font-awesome-rails'
 gem 'acts_as_list'
+gem 'redcarpet'
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
 gem 'rails_12factor', group: :production

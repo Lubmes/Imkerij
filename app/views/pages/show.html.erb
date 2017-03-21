@@ -1,0 +1,65 @@
+<div id='page'>
+  <h3 id='title'><%= @page.title %></h3>
+
+  <div id='introduction'>
+      <%= markdown(@page.introduction) %>
+  </div>
+
+  <% if @page.route? %>
+    <iframe id='map' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19860.67229741268!2d3.5397278389814817!3d51.52084691754129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c496f38e4b624f%3A0x356397db2eea7b91!2sPoppendamseweg+3%2C+4364+SL+Grijpskerke%2C+Nederland!5e0!3m2!1snl!2snl!4v1488286643853" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <% end %>
+
+  <% if @page.pictures.any? %>
+    <% if @page.pictures.size > 1 %>
+      <div class="w3-content w3-display-container">
+        <% @page.pictures.each do |picture| %>
+          <%= image_tag picture.image.url, class: 'mySlides' %>
+        <% end %>
+          <div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+            <div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+            <div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+          <% @page.pictures.size.times do |i| %>
+            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(<%= i+1 %>)"></span>
+          <% end %>
+          </div>
+      </div>
+    <% else %>
+      <%= image_tag @page.pictures.first.image.url %>
+    <% end %>
+  <% end %>
+
+  <div id='story'>
+    <%= markdown(@page.story) %>
+  </div>
+</div>
+
+<% if @page.pictures.any? && @page.pictures.size > 1 %>
+  <script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+      showDivs(slideIndex += n);
+    }
+
+    function currentDiv(n) {
+      showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      if (n > x.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = x.length}
+      for (i = 0; i < x.length; i++) {
+         x[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+         dots[i].className = dots[i].className.replace(" w3-white", "");
+      }
+      x[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " w3-white";
+    }
+  </script>
+<% end %>
