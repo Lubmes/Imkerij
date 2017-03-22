@@ -64,15 +64,6 @@
 		<%= currency_symbol %>
 		<%= booking.total_price %>
 	</td>
-	<!-- Col 9. Toggle correction input row. -->
-	<td>
-		<% unless controller.action_name == 'check_out' ||
-					controller.action_name == 'confirm' ||
-					controller.action_name == 'success' ||
-					@order.status == 'open' %>
-			<span onclick="myFunctionForId<%= @order.id %><%= booking.id %>()" class='fa fa-cogs'></span>
-		<% end %>
-	</td>
 </tr>
 
 <!-- Corrections made -->
@@ -85,21 +76,9 @@
 			<% booking.corrections.each do |correction| %>
 				<%= render correction %>
 			<% end %>
-	<% end %>
+		<% end %>
 </div>
 
 <%= render 'corrections/input_row', booking: booking %>
-
-<!-- Script for toggling the correction row. -->
-<script>
-	function myFunctionForId<%= @order.id %><%= booking.id %>() {
-	    var x = document.getElementById("correction-form-ajax-<%= @order.id %><%= booking.id %>");
-	    if (x.className.indexOf("w3-hide") == -1) {
-	        x.className += " w3-hide";
-	    } else {
-	        x.className = x.className.replace(" w3-hide", "");
-	    }
-	}
-</script>
 
 <% end %>

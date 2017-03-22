@@ -20,8 +20,23 @@
 	@extend .l5;
 	@extend .w3-right;
 }
+//
+// #sec-nav.shop li a {
+// 	position: relative;
+// 	z-index: 5;
+// }
+
 
 #store-front {
+	// z-index to prevent the navigation from making links unclickable.
+	//
+	// .record-actions, #order {
+	// 	position: relative;
+	// 	z-index: 1;
+	// }
+
+
+
 	img {
 		@extend .w3-round-jumbo;
 	}

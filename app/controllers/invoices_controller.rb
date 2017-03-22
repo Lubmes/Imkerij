@@ -1,5 +1,7 @@
 class InvoicesController < ApplicationController
 
+  require 'mollie/api/client'
+
   def show
     @invoice = Invoice.find(params[:id])
     @order = @invoice.order
@@ -19,6 +21,17 @@ class InvoicesController < ApplicationController
 
     @order.save
     @invoice.save
+  end
+
+  def refund
+    mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
+    @invoice = Invoice.find(params[:id])
+
+    order_id = @invoice.order.id
+    payment  = mollie.payments.get metadata.order_id
+
+
+    redirect_to @invoice.order.customer
   end
 
 end

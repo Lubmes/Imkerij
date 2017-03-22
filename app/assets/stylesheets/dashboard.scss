@@ -44,23 +44,26 @@
 	}
 	tr.order {
 		@extend .w3-hover-light-grey;
+		@extend .w3-hover-opacity;
 		@extend .w3-border-top;
 		@extend .w3-border-bottom;
 		@extend .w3-border-light-grey;
 		span.status-tag {
 			@extend .w3-medium;
 		}
+		td a {
+			padding-left: 10px;
+			display:block;
+	    height:100%;
+	    width:100%;
+		}
+		td {
+			padding-left: 0;
+			padding-right: 0;
+		}
 	}
 	a {
 		text-decoration: none;
 		@extend .w3-text-cyan;
-		.fa {
-			@extend .w3-text-brown;
-		}
-	}
-	a:hover {
-		span {
-			@extend .w3-text-khaki;
-		}
 	}
 }

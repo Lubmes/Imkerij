@@ -40,6 +40,9 @@ h1 {
 		width: 100%;
 	}
 	#order-processing {
+		.order {
+			@extend .w3-card;
+		}
 		.fa-cogs {
 			@extend .w3-opacity;
 			@extend .w3-hover-opacity-off;
@@ -57,20 +60,16 @@ h1 {
 			margin-bottom: 0;
 			padding-bottom: 1%;
 		}
-		.order-invoice {
-			.invoice-data {
-				// @extend .w3-border-light-grey;
-				// @extend .w3-topbar;
-			}
-		}
 	}
 	#processed {
 		.order-invoice {
+			@extend .w3-card;
+			// padding-top: 8px;
 			@extend .w3-margin-bottom;
 		}
 	}
 	.order-invoice {
-		@extend .w3-container;
+		// @extend .w3-container;
 		@extend .w3-leftbar;
 		.invoice-data {
 			@extend .w3-row;
@@ -81,9 +80,10 @@ h1 {
 			// margin-top: 0;
 			.main-data {
 				@extend .w3-col;
-				@extend .l7;
+				@extend .l6;
 				@extend .w3-padding-medium;
 				@extend .w3-padding-left;
+				@extend .w3-margin-left;
 				@extend .w3-margin-0;
 				.date {
 					@extend .w3-slim;

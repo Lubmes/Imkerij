@@ -1,7 +1,4 @@
 <% if policy(:event).admin_action? %>
-	<% content_for :navigation_top_margin do %>
-		<br><br><br>
-	<% end %>
 
 	<ul id='primary-actions' class='add-new-record'>
 		<li><%= link_to [:new, :event], title: "nieuw agendapunt" do %>
@@ -9,4 +6,5 @@
 				<% end %>
 		</li>
 	</ul>
+
 <% end %>

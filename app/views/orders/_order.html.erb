@@ -48,7 +48,7 @@
 
 <% unless in_payment_process? %>
 	<% if order.invoices.any? %>
-		<%= render 'orders/order_invoices', order: order %>
+		<%= render 'invoices/order_invoices', order: order %>
 	<% end %>
 <% end %>
 

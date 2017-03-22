@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     resources 'invoices', only: [:show] do
       member do
         get 'sent_out'
+        get 'refund'
       end
       resource 'download', only: [:show]
     end

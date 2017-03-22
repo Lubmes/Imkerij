@@ -53,7 +53,10 @@
 	}
 }
 #primary-actions {
+	margin-top: -5%;
 	li a {
+		position: absolute;
+		top: 110px;
 		@extend .w3-small;
 		@extend .w3-margin;
 	}
@@ -63,7 +66,6 @@
 	@extend .w3-container;
 	.notice, .alert {
 		@extend .w3-center;
-		// @extend .w3-padding-xlarge;
 		@extend .w3-panel;
 		margin-left: 41%;
 		width: 18%;

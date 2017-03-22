@@ -46,8 +46,14 @@
 
 
   <div class='invoice-actions'>
-    <%= link_to "AFDRUKKEN","#",
-          class: 'print' %>
+
+    <% if order.invoices.first.paid_back < 0 %>
+      <%= link_to "RESTITUEREN", [:refund, order, order.invoices.first], class: 'print' %>
+    <% else %>
+      <%= link_to "AFDRUKKEN","#", class: 'print' %>
+    <% end %>
+
+
     <%= link_to "PDF",
           order_invoice_download_path(order, order.invoices.first, format: "pdf"),
           target: "_blank",

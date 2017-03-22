@@ -1,7 +1,4 @@
 <% if policy(:user).create? %>
-	<% content_for :navigation_top_margin do %>
-		<br><br><br>
-	<% end %>
 
 	<ul id='primary-actions' class='add-new-record'>
 		<li>
@@ -10,4 +7,5 @@
 			<% end %>
 		</li>
 	</ul>
+
 <% end %>

@@ -1,11 +1,23 @@
 <tr class='order <%= order.status %>'>
+
   <td><%= link_to [order.customer] do %>
-      <span>
+    <span>
         <%= "#{order.customer.first_name} #{order.customer.last_name}" %>
-      </span
-    <% end %>
-  </td>
-  <td><%= I18n.l(order.updated_at, format: :long) %></td>
-  <td><%= currency_symbol + " " + order.total_price %></td>
-  <td><span class='status-tag <%= order.status %>'><%= I18n.t "order_status.#{order.status}" %></span></td>
+    </span>
+  <% end %></td>
+
+  <td><%= link_to [order.customer] do %>
+    <%= I18n.l(order.updated_at, format: :long) %>
+  <% end %></td>
+
+  <td><%= link_to [order.customer] do %>
+    <%= currency_symbol + " " + order.total_price %>
+  <% end %></td>
+
+  <td><%= link_to [order.customer] do %>
+    <span class='status-tag <%= order.status %>'>
+      <%= I18n.t "order_status.#{order.status}" %>
+    </span>
+  <% end %></td>
+
 </tr>

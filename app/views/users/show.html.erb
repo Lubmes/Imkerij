@@ -23,7 +23,7 @@
 		<div id='order-processing'>
 			<% if @user.orders.where(status: :paid).any? %>
 				<% @user.orders.where(status: :paid).each do |order| %>
-					<div id='order-ajax-<%= order.id %>'>
+					<div id='order-ajax-<%= order.id %>' class='order'>
 						<%= render order %>
 					</div>
 				<% end %>

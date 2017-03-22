@@ -1,7 +1,4 @@
 <% if policy(:category).admin_action? %>
-	<% content_for :navigation_top_margin do %>
-		<br>
-	<% end %>
 
 	<ul id='primary-actions' class='add-new-record'>
 		<li><%= link_to [:new, :category], class: 'add-category', title: "nieuwe categorie" do %>
@@ -9,4 +6,5 @@
 				<% end %>
 		</li>
 	</ul>
+
 <% end %>
