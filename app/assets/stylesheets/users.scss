@@ -9,6 +9,7 @@ h1 {
 	@extend .w3-white;
 	@extend .w3-card;
 	@extend .w3-container;
+	@extend .w3-padding-bottom;
 	table {
 		td, th {
 			padding-top: 0;
@@ -20,6 +21,52 @@ h1 {
 	}
 	@extend .w3-margin-bottom;
 }
+#user-edit {
+	h1 { @extend .w3-text-dark-grey;}
+	.user {
+		margin-left: 17%;
+		width: 66%;
+		@extend .w3-padding-xxlarge;
+		table {
+			th {
+				width: 24%;
+				text-align: right;
+			}
+			input {
+				width: 100%;
+			}
+		}
+		.button {
+			@extend .w3-btn;
+			@extend .w3-white;
+			@extend .w3-border;
+			@extend .w3-border-green;
+		}
+	}
+}
+
+// #form.user-col {
+// 	// @extend .w3-row;
+// 	@extend .w3-container;
+// 	@extend .w3-center;
+// 	.user {
+// 		@extend .w3-padding;
+// 		margin-left: 20%;
+// 		width: 60%;
+// 		th {
+// 			width: 23%;
+// 			text-align: right;
+// 		}
+// 		input{
+// 			width: 100%;
+// 			margin-right: 3%;
+// 		}
+//
+// 		// @extend .w3-col;
+// 		// @extend .l5;
+// 	}
+// }
+
 #profile {
 	padding-top: 26px;
 	@extend .w3-row-padding;
@@ -31,6 +78,10 @@ h1 {
 		}
 	}
 	.orders-col {
+		header h4 {
+			@extend .w3-xxlarge;
+			@extend .w3-text-dark-grey;
+		}
 		@extend .w3-col;
 		@extend .l7;
 	}

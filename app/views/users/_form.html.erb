@@ -1,63 +1,65 @@
 <%= form_for user do |f| %>
 <div id='form' class='user-col'>
 
-	<table>
-    <div id='password'>
-      <tr>
-        <th><%= f.label :password %></th>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br/>
-        <td><%= f.text_field :password %></td>
-      </tr>
-    </div>
+	<div class='user'>
+		<table>
+	    <div id='password'>
+	      <tr>
+	        <th><%= f.label :password %></th>
+	        <% if @minimum_password_length %>
+	        <em>(<%= @minimum_password_length %> characters minimum)</em>
+	        <% end %><br/>
+	        <td><%= f.password_field :password %></td>
+	      </tr>
+	    </div>
 
-		<tr>
-			<th><%= f.label :email %></td>
-			<td><%= f.text_field :email %></td>
-		</tr>
-		<% if user.errors[:email].any? %>
-      <tr id='errors'>
-        <th></th><td><% user.errors[:email].each do |msg| %>
-            <%= "- #{msg}" %><br>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-		<tr>
-			<th><%= f.label :first_name %></td>
-			<td><%= f.text_field :first_name %></td>
-		</tr>
-		<% if user.errors[:first_name].any? %>
-      <tr id='errors'>
-        <th></th><td><% user.errors[:first_name].each do |msg| %>
-            <%= "- #{msg}" %><br>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-		<tr>
-			<th><%= f.label :last_name %></td>
-			<td><%= f.text_field :last_name %></td>
-		</tr>
-		<% if user.errors[:last_name].any? %>
-      <tr id='errors'>
-        <th></th><td><% user.errors[:last_name].each do |msg| %>
-            <%= "- #{msg}" %><br>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if current_user.admin? %>
 			<tr>
-				<th><%= f.label :admin %></td>
-				<td><%= f.check_box :admin %></td>
+				<th><%= f.label :email %></td>
+				<td><%= f.text_field :email %></td>
 			</tr>
-		<% end %>
-	</table>
+			<% if user.errors[:email].any? %>
+	      <tr id='errors'>
+	        <th></th><td><% user.errors[:email].each do |msg| %>
+	            <%= "- #{msg}" %><br>
+	          <% end %>
+	        </td>
+	      </tr>
+	    <% end %>
+			<tr>
+				<th><%= f.label :first_name %></td>
+				<td><%= f.text_field :first_name %></td>
+			</tr>
+			<% if user.errors[:first_name].any? %>
+	      <tr id='errors'>
+	        <th></th><td><% user.errors[:first_name].each do |msg| %>
+	            <%= "- #{msg}" %><br>
+	          <% end %>
+	        </td>
+	      </tr>
+	    <% end %>
+			<tr>
+				<th><%= f.label :last_name %></td>
+				<td><%= f.text_field :last_name %></td>
+			</tr>
+			<% if user.errors[:last_name].any? %>
+	      <tr id='errors'>
+	        <th></th><td><% user.errors[:last_name].each do |msg| %>
+	            <%= "- #{msg}" %><br>
+	          <% end %>
+	        </td>
+	      </tr>
+	    <% end %>
 
-  <%= f.submit "Opslaan" %>
+	    <% if current_user.admin? %>
+				<tr>
+					<th><%= f.label :admin %></td>
+					<td><%= f.check_box :admin %></td>
+				</tr>
+			<% end %>
+		</table>
+
+	  <%= f.submit "Opslaan", class: 'button' %>
+	</div>
 
 </div>
 <% end %>

@@ -27,9 +27,8 @@
 	width: 100%;
 	.user {
 		@extend .w3-col;
-		@extend .l6;
-		width: 49%;
-		margin: 0 0.5%;
+		width: 32%;
+		margin-left: 1%;
 	}
 }
 #orders {

@@ -1,7 +1,7 @@
 <% if policy(:event).admin_action? %>
 
 	<ul id='primary-actions' class='add-new-record'>
-		<li><%= link_to [:new, :event], title: "nieuw agendapunt" do %>
+		<li class='without-sec-nav'><%= link_to [:new, :event], title: "nieuw agendapunt" do %>
 					<i class='icon-add'></i> AGENDAPUNT
 				<% end %>
 		</li>
