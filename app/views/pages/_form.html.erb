@@ -1,0 +1,80 @@
+<%= form_for [page], html: { multipart: true } do |f| %>
+<div id='form'>
+
+  <!-- Pagina -->
+	<table>
+		<tr>
+      <th><%= f.label :pictures %></th>
+      <td><%= file_field_tag 'images[]', type: :file, multiple: true %></td>
+    </tr>
+		<!-- Link -->
+    <tr>
+      <th><%= f.label :link %></td>
+      <td><%= f.text_field :link, size: 10 %></td>
+    </tr>
+    <% if page.errors[:link].any? %>
+      <tr id='errors'>
+        <th></th><td><% page.errors[:link].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+		<% end %>
+    <!-- Titel -->
+		<tr class='name'>
+			<th><%= f.label :title %></td>
+ 			<td><%= f.text_field :title %></td>
+  	</tr>
+    <% if page.errors[:title].any? %>
+      <tr id='errors'>
+        <th></th><td><% page.errors[:title].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <!-- Introductie -->
+  	<tr class='introduction'>
+		  <th><%= f.label :introduction %></td>
+  		<td><%= f.text_area :introduction, rows: 14 %></td>
+  	</tr>
+    <% if page.errors[:introduction].any? %>
+      <tr id='errors'>
+        <th></th><td><% page.errors[:introduction].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<!-- Route i.p.v. carrousel -->
+    <tr>
+      <th><%= f.label :route %></td>
+      <td><%= f.check_box :route %></td>
+    </tr>
+    <% if page.errors[:route].any? %>
+      <tr id='errors'>
+        <th></th><td><% page.errors[:route].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <!-- Verhaal -->
+  	<tr class='story'>
+		  <th><%= f.label :story %></td>
+  		<td><%= f.text_area :story, rows: 28 %></td>
+  	</tr>
+    <% if page.errors[:story].any? %>
+      <tr id='errors'>
+        <th></th><td><% page.errors[:story].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= f.submit class: 'button' %>
+
+</div>
+<% end %>

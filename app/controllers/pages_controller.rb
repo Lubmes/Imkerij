@@ -1,8 +1,22 @@
 class PagesController < ApplicationController
   def edit
+    @page = Page.find(params[:id])
   end
 
   def update
+    @page = Page.find(params[:id])
+    if @page.update(page_params)
+      if params[:images] # voor params
+        params[:images].each do |image|
+          @page.pictures.create(image: image)
+        end
+      end
+      flash[:notice] = "Pagina is bijgewerkt."
+      render 'show'
+    else
+      flash.now[:alert] = "Pagina is niet bijgewerkt."
+      render 'edit'
+    end
   end
 
   def home
@@ -28,5 +42,9 @@ class PagesController < ApplicationController
   def extras
     @page = Page.find(5)
     render 'show'
+  end
+
+  def page_params
+    params.require(:page).permit(:link, :title, :introduction, :route, :story)
   end
 end

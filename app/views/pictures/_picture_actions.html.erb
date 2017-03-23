@@ -1,7 +1,7 @@
 <ul class='record-actions'>
-  <%= form_for [imageable_model, picture], remote: true do |f| %>
+  <%= form_for [imageable_object, picture], remote: true do |f| %>
       <li class="<%= picture.visable ? 'visable' : 'invisable' %>">
-        <%= link_to [:visability_toggle, imageable_model, picture], remote: true do %>
+        <%= link_to [:visability_toggle, imageable_object, picture], remote: true do %>
           <% if picture.visable? %>
             <i class="fa fa-eye"></i>
           <% else %>
@@ -11,7 +11,7 @@
       </li>
   <% end %>
     <li colspan='2'>
-      <%= link_to [imageable_model, picture],
+      <%= link_to [imageable_object, picture],
             method: :delete,
             remote: true  do%>
         <i class="fa fa-trash-o"></i>

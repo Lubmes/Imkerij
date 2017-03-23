@@ -3,9 +3,12 @@ class ProductsController < ApplicationController
                                      :destroy, :move_higher, :move_lower]
   before_action :set_category, only: [:new, :create, :edit, :update]
 
+  include ShoppingOrder
+
   def show
     authorize @product
-    @booking = current_order.bookings.build
+    set_shopping_order
+    @booking = @order.bookings.build
   end
 
   def new

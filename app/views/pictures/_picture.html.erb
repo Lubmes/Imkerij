@@ -4,7 +4,7 @@
 	    <li class="<%= picture.visable ? 'visable' : 'invisable' %>">
 
 				<!-- zichtbaar / onzichtbaar schakelaar -->
-				<%= link_to [:visability_toggle, imageable_model, picture], remote: true do %>
+				<%= link_to [:visability_toggle, imageable_object, picture], remote: true do %>
 					<% if picture.visable? %>
 						<i class="fa fa-eye"></i>
 					<% else %>
@@ -16,7 +16,7 @@
 	  	<li colspan='2'>
 
 				<!-- verwijder -->
-				<%= link_to [imageable_model, picture], method: :delete, remote: true  do %>
+				<%= link_to [imageable_object, picture], method: :delete, remote: true  do %>
 					<i class="fa fa-trash-o"></i>
 				<% end %>
 

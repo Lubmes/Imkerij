@@ -219,10 +219,8 @@ home.pictures.create(position: 5, image: File.new("#{Rails.root}/app/assets/imag
 facilities  = Page.create(   id: 2,
                            link: "Bij ons op het erf",
                           title: "Onze natuurwinkel en ons terras",
-                   introduction: "De honingbij is het kleinste landbouwhuisdier van de mens. Maar zeker een van de belangrijkste. De bij is onmisbaar voor de wereldwijde voedselproduktie. In onze expositieruimte krijgt u een kort en interessant overzicht van wat er allemaal komt kijken bij het houden van bijen. Zo hebben we een mooie collectie imkermaterialen van over de hele wereld en kunt u de bijen natuurlijk ook zien. Achter glas uiteraard.",
+                   introduction: "Het terras van Imkerij Poppendamme is al sinds jaar en dag een populaire pleisterplaats voor fietsers en wandelaars. Midden in onze drachtplantentuin schenken we koffie, thee en diverse andere versnaperingen. Voor wie de drukte aan de Zeeuwse kusten soms een beetje teveel wordt is dit een uitgelezen gelegenheid even helemaal tot rust te komen.",
                           story: %{
-Het terras van Imkerij Poppendamme is al sinds jaar en dag een populaire pleisterplaats voor fietsers en wandelaars. Midden in onze drachtplantentuin schenken we koffie, thee en diverse andere versnaperingen. Voor wie de drukte aan de Zeeuwse kusten soms een beetje teveel wordt is dit een uitgelezen gelegenheid even helemaal tot rust te komen.
-
 Mocht u ons met een grotere groep willen bezoeken dan kan dat uiteraard altijd. Stuurt u ons een emailtje om te informeren naar de mogelijkheden.
 
 Wie op zoek is naar bijzondere bijenprodukten of een leuk en uniek kadootje komt in de imkerijwinkel goed aan zijn trekken. Wij verkopen er uiteraard onze honing, maar daarnaast ook vanalles dat met bijen te maken heeft. Zo hebben we (handgemaakte) bijenwaskaarsen, allerlei honingsnoep, propolis en gelee royale produkten, diverse soorten honingwijn (die u uiteraard ook proeven kunt) en leuke kleinigheidjes voor de kinderen om of een vriend of familielid eens mee te verrassen.
@@ -246,7 +244,7 @@ expo.pictures.create(position: 1, image: File.new("#{Rails.root}/app/assets/imag
 route       = Page.create(   id: 4,
                            link: "Route",
                           title: "Routebeschrijving",
-                   introduction: "Hoe komt u op onze imkerij?",
+                   introduction: "Hoe komt u op de imkerij?",
                           route: true,
                           story: %{
 **Met de fiets** vind je Imkerij Poppendamme centraal gelegen op Walcheren op een knooppunt van een aantal fiets- en wandelroutes. U vindt ons op een steenworp afstand van Grijpskerke in de Poppendamseweg. De imkerij staat aangegeven op de bekende fietsrouteborden van de ANWB.

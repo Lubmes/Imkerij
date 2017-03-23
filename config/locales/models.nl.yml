@@ -19,6 +19,9 @@ nl:
       event:
         one: Agendapunt
         other: Agendapunten
+      picture:
+        one: Foto
+        other: Foto's
     attributes:
       user:
         email: E-mail
@@ -34,6 +37,12 @@ nl:
         address_zip_code: Postcode
         address_city: Woonplaats
         address_country: Land
+      page:
+        link: Link
+        title: Titel
+        introduction: Introductie
+        route: Route (i.p.v. foto's)
+        story: Verhaal
       event:
         name: Naam
         description: Omschrijving

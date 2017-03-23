@@ -22,3 +22,21 @@
 
   }
 }
+#page-edit {
+  table {
+    margin-left: 12%;
+    th {
+      width: 12%;
+      text-align: right;
+    }
+    input, textarea {
+      width: 60%;
+    }
+  }
+  .button {
+    @extend .w3-btn;
+    @extend .w3-blue;
+
+    @extend .w3-margin-bottom;
+  }
+}

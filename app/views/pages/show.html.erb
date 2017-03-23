@@ -1,5 +1,16 @@
 <div id='page'>
-  <h3 id='title'><%= @page.title %></h3>
+  <ul class='record-actions'>
+    <li>
+      <h3 id='title'><%= @page.title %></h3>
+    </li>
+    <% if policy(@page).edit? %>
+      <li>
+        <%= link_to [:edit, @page], title: "bijwerken" do %>
+          <i class='icon-edit'></i>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 
   <div id='introduction'>
       <%= markdown(@page.introduction) %>

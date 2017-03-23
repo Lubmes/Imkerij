@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'expo', to: 'pages#expo', as: 'expo'
   get 'route', to: 'pages#route', as: 'route'
   get 'extras', to: 'pages#extras', as: 'extras'
+  resources 'pages', only: [:edit, :update]
 
   get 'admin', to: 'welcome#admin'
   resources 'events' do
