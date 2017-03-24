@@ -1,10 +1,10 @@
 <ul id='main-nav'>
   <!-- pages -->
-  <li><%= active_link_to 'de imkerij', root_path, active: :exclusive %></li>
-  <li><%= active_link_to 'imkerij winkel en terras', facilities_path, active: :exclusive %></li>
-  <li><%= active_link_to 'expo', expo_path, active: :exclusive %></li>
-  <li><%= active_link_to 'route', route_path, active: :exclusive %></li>
-  <li><%= active_link_to 'zie ook', extras_path, active: :exclusive %></li>
+  <li><%= active_link_to page_link(1), root_path, active: :exclusive %></li>
+  <li><%= active_link_to page_link(2), facilities_path, active: :exclusive %></li>
+  <li><%= active_link_to page_link(3), expo_path, active: :exclusive %></li>
+  <li><%= active_link_to page_link(4), route_path, active: :exclusive %></li>
+  <li><%= active_link_to page_link(5), extras_path, active: :exclusive %></li>
 
 
 

@@ -1,36 +1,24 @@
 module ApplicationHelper
 
+  # waarom deze method?
   def resource_name
     :user
   end
 
+  # waarom deze method?
   def resource
     @resource ||= User.new
   end
 
+  # waarom deze method?
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def markdown(text)
-  options = {
-    filter_html:     true,
-    hard_wrap:       true,
-    link_attributes: { rel: 'nofollow', target: "_blank" },
-    space_after_headers: true,
-    fenced_code_blocks: true
-  }
-
-  extensions = {
-    autolink:           true,
-    superscript:        true,
-    disable_indented_code_blocks: true
-  }
-
-  renderer = Redcarpet::Render::HTML.new(options)
-  markdown = Redcarpet::Markdown.new(renderer, extensions)
-
-  markdown.render(text).html_safe
-end
+  # Helper om in de navigatie-balk custom pagina links weer te geven.
+  def page_link(page_id)
+    page = Page.find(page_id)
+    page.link.downcase
+  end
 
 end
