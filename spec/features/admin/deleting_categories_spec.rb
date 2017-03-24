@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'Admin kan categorieën verwijderen' do
+  create_navigation
   let!(:category) { create(:category, name: 'Kaarsen') }
   let(:admin)     { create(:user, :admin) }
 

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Admin kan gebruikers bijwerken' do
+  create_navigation
   let!(:user) { create(:user, first_name: 'John',
                                last_name: 'D.' )}
   let(:admin) { create(:user, :admin) }

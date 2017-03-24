@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'User kan zijn bestelling aanmaken', js: true do
+  create_navigation
   let!(:category)           { create(:category, name: 'Honing') }
   let!(:cheap_product)      { create(:product, name: 'Propolis lollie',
                                               price: '0,80',

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'Admin kan nieuwe producten toevoegen' do
+  create_navigation
   let!(:category) { create(:category, name: 'Snoep') }
   let(:admin)     { create(:user, :admin) }
 

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'User kan zich aanmelden' do
+  create_navigation
 
   scenario 'in de winkel' do
     visit shop_path

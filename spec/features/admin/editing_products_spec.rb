@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'Admin kan producten bijwerken' do
+  create_navigation
   let!(:category) { create(:category, name: 'Honing' )}
   let!(:product)  { create(:product, name: 'Honingpot 200ml',
                                                 description: 'Honing uit Veere.',

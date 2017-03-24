@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'Admin kan agenda bijwerken' do
+  create_navigation
   let!(:event) { create(:event, name: 'Vlindernacht',
                          description: 'Verhalen van een vlinderexpert.',
                                 date: 14.days.from_now) }

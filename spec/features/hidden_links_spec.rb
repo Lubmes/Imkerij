@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'factory_girl_rails'
 
 feature 'Gebruikers zien alleen links die van toepassing zijn:' do
+  create_navigation
   let!(:event)      { create(:event)}
   let!(:category)   { create(:category)}
   let!(:product)    { create(:product, category: category )}

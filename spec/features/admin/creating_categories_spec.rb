@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'Admin kan nieuwe categorieën toevoegen' do
+  create_navigation
   let(:admin) { create(:user, :admin) }
 
   before do

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'User kan zijn bestelling afrekenen', js: true do
+  create_navigation
   let!(:category)           { create(:category, name: 'Honing') }
   let!(:product)  { create(:product, name: 'Honingpot 275ml',
                                               price: '3,95',
@@ -13,7 +14,7 @@ feature 'User kan zijn bestelling afrekenen', js: true do
   end
 
   xscenario 'en het aantal aanpassen van een besteld product' do
-    wait_for_ajax
+    wait_for_ajax # lijkt niet te werken.
 
     within('#order') do
       product_in_check_out = page.find('.bookings', :text => 'Honingpot 275ml')
