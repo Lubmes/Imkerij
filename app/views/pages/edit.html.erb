@@ -1,5 +1,9 @@
 <div id='page-edit'>
   <h1>Bijwerken pagina</h1>
 
+  <div id='pictures'>
+		<%= render 'pictures/edit_pictures', imageable_object: @page %>
+	</div>
+
   <%= render 'form', page: @page %>
 </div>

@@ -2,7 +2,7 @@
   @extend .w3-col;
   @extend .l5;
   margin-left: 16.7%;
-
+  img { @extend .w3-round-xlarge; }
   #introduction {
     font-weight: lighter;
     @extend .w3-wide;
@@ -23,6 +23,13 @@
   }
 }
 #page-edit {
+  @extend .w3-margin-top;
+	#pictures { @extend .w3-row-padding; }
+	.picture-ajax {
+		@extend .w3-col;
+		@extend .l2;
+		img { @extend .w3-round-xlarge; }
+	}
   table {
     margin-left: 12%;
     th {
