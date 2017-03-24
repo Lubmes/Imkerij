@@ -12,7 +12,7 @@ class PagesController < ApplicationController
         end
       end
       flash[:notice] = "Pagina is bijgewerkt."
-      render 'show'
+      redirect_to @page
     else
       flash.now[:alert] = "Pagina is niet bijgewerkt."
       render 'edit'
