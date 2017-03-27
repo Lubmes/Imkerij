@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320144536) do
+ActiveRecord::Schema.define(version: 20170325111714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170320144536) do
     t.integer  "customer_id"
     t.integer  "total_mail_weight",    default: 0
     t.integer  "package_delivery_id"
+    t.string   "payment_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id", using: :btree
     t.index ["package_delivery_id"], name: "index_orders_on_package_delivery_id", using: :btree
   end

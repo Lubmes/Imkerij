@@ -1,20 +1,51 @@
+// ADMIN: Info
 #admin-info {
 	padding-top: 30px;
 	@extend .w3-margin;
-	@extend .w3-row;
+	@extend .w3-container;
+	@extend .w3-row-padding;
+	#result-totals {
+		@extend .m4;
+		th { font-weight: lighter; }
+		td { font-weight: bold; text-align: right;}
+		.overall { @extend .w3-small; @extend .w3-text-grey; }
+		.previous-month { @extend .w3-medium; @extend .w3-text-grey; }
+		.current-month { @extend .w3-medium; @extend .w3-text-dark-grey; }
+		.today { @extend .w3-large; @extend .w3-text-black; }
+	}
+	#order-type-totals {
+		@extend .m2;
+	}
 	table {
 		@extend .w3-col;
-		@extend .m4;
     @extend .w3-table;
+		@extend .w3-card;
+		@extend .w3-margin;
+		@extend .w3-white;
 		@extend .w3-bordered;
 	}
 }
+// ADMIN: Graphs
 #months {
+	@extend .w3-margin;
+	@extend .w3-container;
 	small {
 		@extend .w3-text-dark-grey;
 	}
 	@extend .w3-margin-bottom;
+	div {
+		@extend .w3-padding-medium;
+		@extend .w3-margin-bottom;
+		@extend .w3-margin-left;
+		@extend .w3-margin-right;
+	}
+	.all-months{
+		@extend .w3-card;
+		@extend .w3-white;
+	}
 	.month {
+		@extend .w3-card;
+		@extend .w3-white;
 		h4 {
 			@extend .w3-margin-top;
 			@extend .w3-margin-bottom;

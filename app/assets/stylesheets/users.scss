@@ -94,6 +94,9 @@ h1 {
 		.order {
 			@extend .w3-card;
 		}
+		.order-totals {
+			@extend .w3-padding-top;
+		}
 		.fa-cogs {
 			@extend .w3-opacity;
 			@extend .w3-hover-opacity-off;

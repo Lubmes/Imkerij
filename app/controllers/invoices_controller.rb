@@ -27,8 +27,7 @@ class InvoicesController < ApplicationController
     mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
     @invoice = Invoice.find(params[:id])
 
-    order_id = @invoice.order.id
-    payment  = mollie.payments.get metadata.order_id
+    payment  = mollie.payments.get @invoice.order.payment_id
 
 
     redirect_to @invoice.order.customer
