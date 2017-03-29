@@ -7,6 +7,11 @@ class Invoice < ApplicationRecord
   has_many :corrections
   belongs_to :invoice_delivery, class_name: 'Delivery', optional: true
 
+  # Om naar de mollie API te sturen.
+  def paid_back_in_euros
+    sprintf("%03d", paid_back_cents).insert(-3, ".")
+  end
+
   def sum_all_corrections
     corrections = self.corrections
     sum_money = 0

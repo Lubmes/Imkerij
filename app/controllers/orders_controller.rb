@@ -10,11 +10,11 @@ class OrdersController < ApplicationController
   end
 
   def index
-    all_orders = Order.all.order(created_at: :desc)
+    all_orders = Order.all.order(updated_at: :asc)
     @open_orders = all_orders.open
     @problem_orders = all_orders.problem
     @paid_orders = all_orders.paid
-    @sent_orders = all_orders.sent
+    @sent_orders = all_orders.sent.order(updated_at: :desc)
   end
 
   def empty
@@ -59,16 +59,18 @@ class OrdersController < ApplicationController
 
     begin
       payment = mollie.payments.create({
-          :method      => "ideal",
-          :amount      => @order.total_price_in_euros,
-          :description => "#{@order.customer.first_name} #{@order.customer.last_name} order: #{@order.id}",
-          :redirectUrl => "#{root_url}orders/#{@order.id}/success",
-          :metadata    => {
-              :order_id => @order.id
-          }
-      })
-      # Send the customer off to complete the payment.
-      # Then...
+                  :method      => "ideal",
+                  :amount      => @order.total_price_in_euros,
+                  :description => "#{@order.customer.first_name} #{@order.customer.last_name} order: #{@order.id}",
+                  :redirectUrl => "#{root_url}orders/#{@order.id}/success",
+                  :metadata    => {
+                      :order_id => @order.id
+                  }
+                })
+      # Store payment id to be able to retrieve payment later.
+      @order.payment_id = payment.id
+      @order.save
+      # Sending the customer off to complete the payment....
       redirect_to payment.payment_url
     rescue Mollie::API::Exception => e
       $response.body << "API call failed: " << (CGI.escapeHTML e.message)
@@ -76,21 +78,28 @@ class OrdersController < ApplicationController
   end
 
   def success
-    session[:order_id] = nil
-    if @user == nil
-      flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
-      render 'check_out'
-    end
-    @customer = @order.customer
-    @delivery = @order.package_delivery
-    @order.paid!
-    @invoice = @order.invoices.create(paid: @order.total_price,
-                                      total_mail_weight: @order.total_mail_weight,
-                                      invoice_delivery: @order.package_delivery)
+    mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
+    payment  = mollie.payments.get @order.payment_id
+    if payment.paid?
+      session[:order_id] = nil
+      if @user == nil
+        flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
+        render 'check_out'
+      end
+      @customer = @order.customer
+      @delivery = @order.package_delivery
+      @order.paid!
+      @invoice = @order.invoices.create(paid: @order.total_price,
+                                        total_mail_weight: @order.total_mail_weight,
+                                        invoice_delivery: @order.package_delivery)
 
-    internal_print_mail = InvoiceMailer.internal_print_email(@invoice)
-    # internal_print_mail.attachment(order_invoice_download_path(@order, @invoice, format: "pdf"))
-    internal_print_mail.deliver
+      internal_print_mail = InvoiceMailer.internal_print_email(@invoice)
+      # internal_print_mail.attachment(order_invoice_download_path(@order, @invoice, format: "pdf"))
+      internal_print_mail.deliver
+    else
+      redirect_to [:confirm, @order]
+      flash.now[:alert] = 'Uw betaling is niet geslaagd.'
+    end
   end
 
   private

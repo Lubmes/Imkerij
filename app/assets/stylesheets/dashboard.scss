@@ -14,12 +14,13 @@
 		.today { @extend .w3-large; @extend .w3-text-black; }
 	}
 	#order-type-totals {
+		td { text-align: right;}
 		@extend .m2;
 	}
 	table {
 		@extend .w3-col;
     @extend .w3-table;
-		@extend .w3-card;
+		@extend .w3-card-8;
 		@extend .w3-margin;
 		@extend .w3-white;
 		@extend .w3-bordered;
@@ -40,11 +41,11 @@
 		@extend .w3-margin-right;
 	}
 	.all-months{
-		@extend .w3-card;
+		@extend .w3-card-8;
 		@extend .w3-white;
 	}
 	.month {
-		@extend .w3-card;
+		@extend .w3-card-8;
 		@extend .w3-white;
 		h4 {
 			@extend .w3-margin-top;
