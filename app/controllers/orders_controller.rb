@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
   include ShoppingOrder
   before_action :set_shopping_order, only: [:show, :empty, :check_out, :confirm, :pay]
-  before_action :set_order, only: [:success]
+  before_action :set_order, only: [:success, :problem]
   before_action :set_user, only: [:check_out, :confirm, :success]
 
   require 'mollie/api/client'
+  require 'mailgun'
 
   def show
   end
@@ -55,7 +56,7 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
+    mollie = Mollie::API::Client.new Rails.application.secrets.mollie_api_key
 
     begin
       payment = mollie.payments.create({
@@ -73,19 +74,20 @@ class OrdersController < ApplicationController
       # Sending the customer off to complete the payment....
       redirect_to payment.payment_url
     rescue Mollie::API::Exception => e
-      $response.body << "API call failed: " << (CGI.escapeHTML e.message)
+      flash.now[:alert] = 'Er ging iets mis met uw betaling.'
+      redirect_to shop_path
     end
   end
 
   def success
-    mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
+    if @user == nil
+      flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
+      render 'check_out'
+    end
+    mollie = Mollie::API::Client.new Rails.application.secrets.mollie_api_key
     payment  = mollie.payments.get @order.payment_id
     if payment.paid?
       session[:order_id] = nil
-      if @user == nil
-        flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
-        render 'check_out'
-      end
       @customer = @order.customer
       @delivery = @order.package_delivery
       @order.paid!
@@ -93,13 +95,31 @@ class OrdersController < ApplicationController
                                         total_mail_weight: @order.total_mail_weight,
                                         invoice_delivery: @order.package_delivery)
 
-      internal_print_mail = InvoiceMailer.internal_print_email(@invoice)
-      # internal_print_mail.attachment(order_invoice_download_path(@order, @invoice, format: "pdf"))
-      internal_print_mail.deliver
+      # Mail factuur naar interne printer.
+      mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
+      message_params_to_printer =  {
+                          from:       'postmaster@mg.rexcopa.nl',
+                          to:         'lmschukking@icloud.com',
+                          subject:    "Printer: Invoice id: #{@invoice.id}",
+                          text:       "Here should be a pdf of an invoice with amount paid: #{@invoice.paid}"
+                        }
+      message_params_to_customer =  {
+                          from:    'postmaster@mg.rexcopa.nl',
+                          to:      'lmschukking@icloud.com',
+                          subject: "Customer: Invoice id: #{@invoice.id}",
+                          text:    order_received_confirmation(@invoice)
+                        }
+      mg_client.send_message 'mg.rexcopa.nl', message_params_to_printer
+      mg_client.send_message 'mg.rexcopa.nl', message_params_to_customer
     else
       redirect_to [:confirm, @order]
       flash.now[:alert] = 'Uw betaling is niet geslaagd.'
     end
+  end
+
+  def problem
+    @order.problem!
+    @order.invoices.first.toggle! :closed
   end
 
   private
@@ -110,5 +130,13 @@ class OrdersController < ApplicationController
 
   def set_user
     @user = current_user
+  end
+
+  def order_received_confirmation(invoice)
+    <<~EOF
+      Uw bestelling is ontvangen. Deze wordt zo spoedig mogelijk naar u opgestuurd.
+
+      Here should be a pdf of an invoice with amount paid: #{invoice.paid}
+    EOF
   end
 end

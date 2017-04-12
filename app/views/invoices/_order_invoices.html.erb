@@ -2,15 +2,15 @@
   <div class='invoice-data'>
     <div class='main-data'>
 
-        <i class='date'><%= l(order.invoices.first.updated_at, format: :long) %> </i><br>
+        <i class='date'><%= l(order.active_invoice.updated_at, format: :long) %> </i><br>
 
-        <strong class='price paid'><%= currency_symbol %> <%= order.invoices.first.paid %></strong>
+        <strong class='price paid'><%= currency_symbol %> <%= order.active_invoice.paid %></strong>
         <strong class='price paid-back'>
-          <% if order.invoices.first.paid_back == 0 %>
-          <% elsif order.invoices.first.paid_back < 0 %>
-            &minus; <%= currency_symbol %> <%= order.invoices.first.paid_back.abs %>
+          <% if order.active_invoice.paid_back == 0 %>
+          <% elsif order.active_invoice.paid_back < 0 %>
+            &minus; <%= currency_symbol %> <%= order.active_invoice.paid_back.abs %>
           <% else %>
-             &plus; <%= currency_symbol %> <%= order.invoices.first.paid_back.abs %>
+             &plus; <%= currency_symbol %> <%= order.active_invoice.paid_back.abs %>
           <% end %>
         </strong><br>
 
@@ -22,7 +22,7 @@
 
     <% unless order.package_delivery.nil? %>
       <div class='addresses'>
-        <% if order.package_delivery == order.invoices.first.invoice_delivery %>
+        <% if order.package_delivery == order.active_invoice.invoice_delivery %>
           Verzendadres:
           <span class='address'>
             <%= order.package_delivery.address_zip_code %>,
@@ -36,8 +36,8 @@
           </span>
           Factuur:
           <span class='address'>
-            <%= order.invoices.first.invoice_delivery.address_zip_code %>,
-            <%= order.invoices.first.invoice_delivery.address_street_number %>
+            <%= order.active_invoice.invoice_delivery.address_zip_code %>,
+            <%= order.active_invoice.invoice_delivery.address_street_number %>
           </span>
         <% end %>
       </div>
@@ -47,23 +47,31 @@
 
   <div class='invoice-actions'>
 
-    <% if order.invoices.first.paid_back < 0 %>
-      <%= link_to "RESTITUEREN", [:refund, order, order.invoices.first], class: 'print' %>
+    <% if order.active_invoice.paid_back < 0 && !order.active_invoice.closed %>
+      <%= link_to "RESTITUEREN", [:refund, order, order.active_invoice], class: 'print' %>
     <% else %>
-      <%= link_to "AFDRUKKEN","#", class: 'print' %>
+      <%= link_to "AFDRUKKEN",[:print, order, order.active_invoice], class: 'print' %>
     <% end %>
 
 
     <%= link_to "PDF",
-          order_invoice_download_path(order, order.invoices.first, format: "pdf"),
+          [order, order.active_invoice],
           target: "_blank",
+          format: :pdf,
           class: "pdf" %>
-    <%= link_to "PROBLEEM","#",
-          class: 'problem' %>
-    <%= link_to "VERZONDEN", [:sent_out, order, order.invoices.first],
+    <%= link_to "PROBLEEM", [:problem, order],
+          class: "problem #{'inactive' if order.problem? || order.active_invoice.closed && order.active_invoice.paid_back < 0 }" %>
+    <%= link_to "VERZONDEN", [:sent_out, order, order.active_invoice],
           remote: true,
-          class: 'mail' %>
+          class: "mail #{'inactive' if !order.active_invoice.closed && order.problem? || order.sent? }" %>
   </div>
 
   </div>
 </div>
+
+<!-- Zou actie moeten verhinderen. -->
+<script>
+  $('.inactive').click(function(e){
+    e.preventDefault();
+  });
+</script>

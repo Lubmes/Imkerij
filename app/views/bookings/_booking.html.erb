@@ -71,7 +71,7 @@
 	<% unless controller.action_name == 'check_out' ||
 						controller.action_name == 'confirm' ||
 						controller.action_name == 'success' ||
-						@order.status == 'open'%>
+						booking.order.status == 'open' %>
 		<% if booking.corrections.any? %>
 			<% booking.corrections.each do |correction| %>
 				<%= render correction %>

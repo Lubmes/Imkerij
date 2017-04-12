@@ -9,7 +9,7 @@ class Invoice < ApplicationRecord
 
   # Om naar de mollie API te sturen.
   def paid_back_in_euros
-    sprintf("%03d", paid_back_cents).insert(-3, ".")
+    sprintf("%03d", paid_back_cents.abs).insert(-3, ".")
   end
 
   def sum_all_corrections

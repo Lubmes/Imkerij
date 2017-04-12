@@ -180,6 +180,7 @@ h1 {
 			.pdf { @extend .w3-hover-black; }
 			.problem { @extend .w3-hover-red; }
 			.mail { @extend .w3-hover-green; }
+			.inactive { @extend .w3-disabled;}
 		}
 	}
 }

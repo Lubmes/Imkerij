@@ -1,7 +1,6 @@
 class InvoicesController < ApplicationController
-  before_action :connect_to_mollie, only: [:refund]
-
   require 'mollie/api/client'
+  require 'mailgun'
 
   def show
     @invoice = Invoice.find(params[:id])
@@ -11,6 +10,9 @@ class InvoicesController < ApplicationController
       @invoice.invoice_delivery = @invoice.order.package_delivery
       @invoice.save
     end
+    render :pdf       => "file_name",
+           :template  => 'invoices/invoice.pdf.erb',
+           :layout    => 'invoice_pdf.html'
   end
 
   def sent_out
@@ -25,28 +27,80 @@ class InvoicesController < ApplicationController
   end
 
   def refund
-    mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
     @invoice = Invoice.find(params[:id])
-    payment  = mollie.payments.get @invoice.order.payment_id
+    @order = @invoice.order
 
-    begin
-      refund =  mollie.payments_refunds.with(payment.id).create({
-                  :amount       => 2.00,
-                  :description  => "#{@invoice.order.customer.first_name} #{@invoice.order.customer.last_name} restitutie"
-                })
+    unless @invoice.closed?
+      mollie = Mollie::API::Client.new Rails.application.secrets.mollie_api_key
+      payment_id = @order.payment_id
 
-      # aanpassen
-      # $response.body << "The payment #{payment.id} is now refunded.<br>"
-    rescue Mollie::API::Exception => e
-      # $response.body << "API call failed: " << (CGI.escapeHTML e.message)
+      begin
+        payment  = mollie.payments.get payment_id
+        # Api call.
+        mollie.payments_refunds.with(payment).create(
+          amount: @invoice.paid_back_in_euros,
+          description: "Restitutiebedrag van uw aankoop bij Imkerij Poppendamme").payment.amount_refunded.to_f
+        # Success...
+        flash[:notice] = 'Uw restitutiebedrag is verzonden naar de klant. Vergeet niet de nieuwe factuur (mee) te verzenden.'
+        @invoice.closed = true
+        @invoice.save
+        @order.status = 'paid'
+        @order.save
+      rescue Mollie::API::Exception => e
+        flash.now[:alert] = 'De restitutie lijkt niet te zijn uitgevoerd. Ga naar https://www.mollie.com/dashboard voor directe controle.' + e.message
+      end
     end
 
     redirect_to @invoice.order.customer
   end
 
+  def print
+    @invoice = Invoice.find(params[:id])
+    @order = @invoice.order
+    @customer = @order.customer
+    pdf = WickedPdf.new.pdf_from_string(render_to_string(:pdf       => 'file_name.pdf',
+                           :template  => 'invoices/invoice.pdf.erb',
+                           :layout    => 'invoice_pdf.html'))
+
+    # save_path = Rails.root.join('pdfs','file_name.pdf')
+    # File.open(save_path, 'wb') do |file|
+    #   file << pdf
+    # end
+
+    mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
+    mb_object = Mailgun::MessageBuilder.new
+
+    mb_object.add_attachment pdf, 'file_name.pdf'
+    mg_client.send_message 'mg.rexcopa.nl', mb_object
+  end
+
   private
 
-  def connect_to_mollie
-    mollie = Mollie::API::Client.new 'test_EygcTKUUPHnS85C4c5x2GAQ74rnyWr'
-  end
+  # def pdf_attachment_method(invoice_id)
+  #   @invoice = Invoice.find(invoice_id)
+  #   @order = @invoice.order
+  #   @customer = @order.customer
+  #   doc = WickedPdf.new.pdf_from_string(
+  #     render_to_string(pdf: 'invoice', template: 'invoices/invoice.pdf.erb', layout: 'invoice_pdf')
+  #   )
+  #   # mail(to: invoice.owner.email, subject: 'Your invoice PDF is attached', invoice: todo)
+  #   mg_client = Mailgun::Client.new 'key-e762523fb38e1f94ad6336e03f5792c6'
+  #   mb_object = Mailgun::MessageBuilder.new
+  #
+  #   mb_object.add_attachment doc#, "invoice_#{@invoice.id}.pdf"
+  #   mg_client.send_message 'mg.rexcopa.nl', mb_object
+  # end
+
+  # def invoice_pdf
+  #   invoice = Invoice.find(params[:id])
+  #   InvoicePdf.new(invoice)
+  # end
+  #
+  # def send_invoice_pdf
+  #   send_file invoice_pdf.to_pdf,
+  #     filename: invoice_pdf.filename,
+  #     type: "application/pdf",
+  #     disposition: "inline"
+  # end
+
 end

@@ -21,8 +21,8 @@
 		</header>
 
 		<div id='order-processing'>
-			<% if @user.orders.where(status: :paid).any? %>
-				<% @user.orders.where(status: :paid).order(created_at: :asc).each do |order| %>
+			<% if @user.orders.where(status: [:paid, :problem]).any? %>
+				<% @user.orders.where(status: [:paid, :problem]).order(created_at: :asc).each do |order| %>
 					<div id='order-ajax-<%= order.id %>' class='order'>
 						<%= render order %>
 					</div>

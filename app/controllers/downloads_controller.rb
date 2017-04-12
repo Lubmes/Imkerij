@@ -3,11 +3,6 @@ class DownloadsController < ApplicationController
   def show
     respond_to do |format|
       format.pdf { send_invoice_pdf }
-
-      # Mocht je dit handig vinden (want sneller): 
-      # if Rails.env.development?
-      #   format.html { render_sample_html }
-      # end
     end
   end
 
@@ -25,8 +20,4 @@ class DownloadsController < ApplicationController
       disposition: "inline"
   end
 
-  # Nodig wanneer je pdf als html sample wil renderen.
-  # def render_sample_html
-  #   render template: "invoices/pdf", layout: "invoice_pdf", locals: { invoice: invoice }
-  # end
 end

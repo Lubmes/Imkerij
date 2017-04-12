@@ -20,6 +20,10 @@ class Order < ApplicationRecord
     self.status == 'open' || self.status == 'confirmed'
   end
 
+  def active_invoice
+    self.invoices.first
+  end
+
   def sum_all_bookings
     bookings = self.bookings
     sum_money = 0

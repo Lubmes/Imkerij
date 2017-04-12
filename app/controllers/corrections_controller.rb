@@ -15,6 +15,7 @@ class CorrectionsController < ApplicationController
       correction = @invoice.corrections.create(correction_params)
     end
     correction.save
+    @order.problem!
     update_invoice
     @corrections = @booking.corrections
   end

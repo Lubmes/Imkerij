@@ -66,11 +66,13 @@ Rails.application.routes.draw do
       get 'confirm'
       get 'pay'
       get 'success'
+      get 'problem'
     end
     resources 'invoices', only: [:show] do
       member do
         get 'sent_out'
         get 'refund'
+        get 'print'
       end
       resource 'download', only: [:show]
     end

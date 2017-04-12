@@ -21,6 +21,9 @@ gem 'acts_as_list'
 gem 'redcarpet'
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
+gem 'mailgun-ruby', '~> 1.1', '>= 1.1.5'
+gem 'faraday', '~> 0.9.2'
+gem 'rest-client', '~> 2.0', '>= 2.0.1'
 gem 'rails_12factor', group: :production
 # debugging
 gem 'awesome_print'
@@ -28,9 +31,12 @@ gem 'awesome_print'
 gem 'chartkick', '~> 2.1', '>= 2.1.1'
 gem 'groupdate'
 # pdf's
-gem 'pdfkit'
-gem 'render_anywhere'
+# gem 'pdfkit'
+# gem 'render_anywhere'
+# 1 & 2 !
 gem 'wkhtmltopdf-binary'
+# pdf's 2
+gem 'wicked_pdf'
 
 group :development, :test do
   gem 'byebug', platform: :mri
