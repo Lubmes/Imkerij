@@ -31,11 +31,7 @@ gem 'awesome_print'
 gem 'chartkick', '~> 2.1', '>= 2.1.1'
 gem 'groupdate'
 # pdf's
-# gem 'pdfkit'
-# gem 'render_anywhere'
-# 1 & 2 !
 gem 'wkhtmltopdf-binary'
-# pdf's 2
 gem 'wicked_pdf'
 
 group :development, :test do

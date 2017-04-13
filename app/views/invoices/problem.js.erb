@@ -1,0 +1,2 @@
+$('#invoice-ajax-<%= @order.active_invoice.id %>').fadeOut();
+$('#order-processing').html("<%= j render 'orders/order_processing', user: @order.customer %>")

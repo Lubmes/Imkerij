@@ -119,7 +119,7 @@ class OrdersController < ApplicationController
 
   def problem
     @order.problem!
-    @order.invoices.first.toggle! :closed
+    @order.active_invoice.toggle! :closed
   end
 
   private

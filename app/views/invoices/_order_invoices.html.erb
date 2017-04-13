@@ -1,4 +1,4 @@
-<div class='order-invoice <%= order.status %>'>
+<div id='invoice-ajax-<%= order.active_invoice.id %>' class='order-invoice <%= order.status %>'>
   <div class='invoice-data'>
     <div class='main-data'>
 
@@ -60,6 +60,7 @@
           format: :pdf,
           class: "pdf" %>
     <%= link_to "PROBLEEM", [:problem, order],
+          remote: true,
           class: "problem #{'inactive' if order.problem? || order.active_invoice.closed && order.active_invoice.paid_back < 0 }" %>
     <%= link_to "VERZONDEN", [:sent_out, order, order.active_invoice],
           remote: true,
