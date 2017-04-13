@@ -1,58 +1,65 @@
 // ADMIN: Info
 #admin-info {
 	padding-top: 30px;
-	@extend .w3-margin;
-	@extend .w3-container;
-	@extend .w3-row-padding;
-	#result-totals {
-		@extend .m4;
-		th { font-weight: lighter; }
-		td { font-weight: bold; text-align: right;}
-		.overall { @extend .w3-small; @extend .w3-text-grey; }
-		.previous-month { @extend .w3-medium; @extend .w3-text-grey; }
-		.current-month { @extend .w3-medium; @extend .w3-text-dark-grey; }
-		.today { @extend .w3-large; @extend .w3-text-black; }
-	}
-	#order-type-totals {
-		td { text-align: right;}
-		@extend .m2;
-	}
-	table {
-		@extend .w3-col;
-    @extend .w3-table;
-		@extend .w3-card-8;
-		@extend .w3-margin;
-		@extend .w3-white;
-		@extend .w3-bordered;
-	}
-}
-// ADMIN: Graphs
-#months {
-	@extend .w3-margin;
-	@extend .w3-container;
-	small {
-		@extend .w3-text-dark-grey;
-	}
-	@extend .w3-margin-bottom;
-	div {
-		@extend .w3-padding-medium;
+	.graphs {
 		@extend .w3-margin-bottom;
-		@extend .w3-margin-left;
-		@extend .w3-margin-right;
-	}
-	.all-months{
-		@extend .w3-card-8;
-		@extend .w3-white;
-	}
-	.month {
 		@extend .w3-card-8;
 		@extend .w3-white;
 		h4 {
+			@extend .w3-padding-medium;
+		}
+		small {
+			@extend .w3-text-dark-grey;
+		}
+		div {
+			@extend .w3-padding-medium;
+		}
+	}
+	@extend .w3-row-padding;
+	#central-reports {
+		@extend .w3-col;
+		@extend .m6;
+		@extend .w3-row-padding;
+		#result-totals {
+			@extend .w3-col;
+			@extend .m6;
 			@extend .w3-margin-top;
 			@extend .w3-margin-bottom;
+			th { font-weight: lighter; }
+			td { font-weight: bold; text-align: right; vertical-align: middle; }
+			.overall { @extend .w3-small; @extend .w3-text-grey; @extend .w3-margin-top; }
+			.previous-month { @extend .w3-medium; @extend .w3-text-grey; }
+			.current-month { @extend .w3-medium; @extend .w3-text-dark-grey; }
+			.today { @extend .w3-xlarge; @extend .w3-text-black; }
+		}
+		#order-type-totals {
+			td { text-align: right;}
+			@extend .w3-col;
+			@extend .m2;
+			@extend .w3-margin;
+		}
+		table {
+			@extend .w3-col;
+	    @extend .w3-table;
+			@extend .w3-card-8;
+			@extend .w3-white;
+			@extend .w3-bordered;
+		}
+		#overall-development {
+			@extend .graphs;
+			@extend .w3-col;
+			@extend .m12;
+		}
+	}
+	#months {
+		@extend .w3-col;
+		@extend .m6;
+		.month {
+			@extend .graphs;
 		}
 	}
 }
+
 #users {
 	padding-top: 100px;
 	@extend .w3-row;

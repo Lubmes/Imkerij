@@ -3,68 +3,67 @@
 <% end %>
 
 <div id='admin-info'>
-	<table id='result-totals'>
-		<tbody>
-			<tr>
-				<th>Totaalbedrag over alle orders</th>
-				<td class="overall"><%= currency_symbol %> <%= Order.sum_of_all_orders %></td>
-			</tr>
-			<tr>
-				<th>Totaalbedrag vorige maand</th>
-				<td class="previous-month"><%= currency_symbol %> <%= Order.sum_of_previous_months_orders %></td>
-			</tr>
-			<tr>
-				<th>Totaalbedrag deze maand</th>
-				<td class="current-month"><%= currency_symbol %> <%= Order.sum_of_current_months_orders %></td>
-			</tr>
+	<div id='central-reports'>
+		<table id='result-totals'>
+			<tbody>
+				<tr>
+					<th>Totaalbedrag<br><i> over alle orders</i></th>
+					<td class="overall"><%= currency_symbol %> <%= Order.sum_of_all_orders %></td>
+				</tr>
+				<tr>
+					<th>Totaalbedrag<br><i> vorige maand</i></th>
+					<td class="previous-month"><%= currency_symbol %> <%= Order.sum_of_previous_months_orders %></td>
+				</tr>
+				<tr>
+					<th>Totaalbedrag<br><i> deze maand</i></th>
+					<td class="current-month"><%= currency_symbol %> <%= Order.sum_of_current_months_orders %></td>
+				</tr>
 
-			<tr>
-				<th>Totaalbedrag vandaag </th>
-				<td class="today"><%= currency_symbol %> <%= Order.sum_of_todays_orders %></td>
-			</tr>
-		</tbody>
-	</table>
-	<table id='order-type-totals'>
-		<tbody>
-			<tr>
-				<td><span class='status-tag problem'>probleem</span></td>
-				<td><%= Order.where(status: :problem).count %></td>
-			</tr>
-			<tr>
-				<td><span class='status-tag paid'>betaald</span></td>
-				<td><%= Order.where(status: :paid).count %></td>
-			</tr>
-			<tr>
-				<td><span class='status-tag sent'>verzonden</span></td>
-				<td><%= Order.where(status: :sent).count %></td>
-			</tr>
-			<tr>
-				<td><span class='status-tag open'>open</span></td>
-				<td><%= Order.where(status: :open).count %></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+				<tr>
+					<th>Totaalbedrag<br><i> vandaag</i></th>
+					<td class="today"><%= currency_symbol %> <%= Order.sum_of_todays_orders %></td>
+				</tr>
+			</tbody>
+		</table>
+		<table id='order-type-totals'>
+			<tbody>
+				<tr>
+					<td><span class='status-tag problem'>probleem</span></td>
+					<td><%= Order.where(status: :problem).count %></td>
+				</tr>
+				<tr>
+					<td><span class='status-tag paid'>betaald</span></td>
+					<td><%= Order.where(status: :paid).count %></td>
+				</tr>
+				<tr>
+					<td><span class='status-tag sent'>verzonden</span></td>
+					<td><%= Order.where(status: :sent).count %></td>
+				</tr>
+				<tr>
+					<td><span class='status-tag open'>open</span></td>
+					<td><%= Order.where(status: :open).count %></td>
+				</tr>
+			</tbody>
+		</table>
 
-<div id='months'>
-	<div class="all-months">
-		<h4>Totaaloverzicht <small><%= currency_symbol %> / dag</small></h4>
-		<%= area_chart (Order.group_by_day(:updated_at).sum(:total_price_cents)).transform_values { |v|
-						(v.fdiv(100)).round(2) },
-					colors: ['#4c997f'],
-					label: "€ dagtotaal" %>
-	</div>
-
-	<% Order.group_by_month(:updated_at).count.size.times do |i| %>
-
-		<div class='month'>
-			<h4><%= I18n.l(Date.today - i.month, format: "%B").capitalize %> <small><%= currency_symbol %> / dag</small></h4>
-			<%= column_chart Order.group_by_day_of_month(:updated_at, range: Date.today.beginning_of_month-i.month..Date.today.end_of_month-i.month).sum(:total_price_cents).transform_values { |v|
+		<div id="overall-development">
+			<h4>Totaaloverzicht <small><%= currency_symbol %> / dag</small></h4>
+			<%= line_chart (Order.group_by_day(:updated_at).sum(:total_price_cents)).transform_values { |v|
 							(v.fdiv(100)).round(2) },
-						colors: ['#65cca9'],
-						label: "€ dagtotaal" %>
+						colors: ['#4c997f'],
+						label: "€ dagtotaal",
+						height: "250px" %>
 		</div>
-
-	<% end %>
-
+	</div>
+	<div id='months'>
+		<% Order.group_by_month(:updated_at).count.size.times do |i| %>
+			<div class='month'>
+				<h4><%= I18n.l(Date.today - i.month, format: "%B").capitalize %> <small><%= currency_symbol %> / dag</small></h4>
+				<%= column_chart Order.group_by_day_of_month(:updated_at, range: Date.today.beginning_of_month-i.month..Date.today.end_of_month-i.month).sum(:total_price_cents).transform_values { |v|
+								(v.fdiv(100)).round(2) },
+							colors: ['#65cca9'],
+							label: "€ dagtotaal" %>
+			</div>
+		<% end %>
+	</div>
 </div>
