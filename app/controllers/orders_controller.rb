@@ -91,26 +91,28 @@ class OrdersController < ApplicationController
       @customer = @order.customer
       @delivery = @order.package_delivery
       @order.paid!
-      @invoice = @order.invoices.create(paid: @order.total_price,
-                                        total_mail_weight: @order.total_mail_weight,
-                                        invoice_delivery: @order.package_delivery)
+      if @order.invoices.empty?
+        @invoice = @order.invoices.create(paid: @order.total_price,
+                                          total_mail_weight: @order.total_mail_weight,
+                                          invoice_delivery: @order.package_delivery)
 
-      # Mail factuur naar interne printer.
-      mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
-      message_params_to_printer =  {
-                          from:       'postmaster@mg.rexcopa.nl',
-                          to:         'lmschukking@icloud.com',
-                          subject:    "Printer: Invoice id: #{@invoice.id}",
-                          text:       "Here should be a pdf of an invoice with amount paid: #{@invoice.paid}"
-                        }
-      message_params_to_customer =  {
-                          from:    'postmaster@mg.rexcopa.nl',
-                          to:      'lmschukking@icloud.com',
-                          subject: "Customer: Invoice id: #{@invoice.id}",
-                          text:    order_received_confirmation(@invoice)
-                        }
-      mg_client.send_message 'mg.rexcopa.nl', message_params_to_printer
-      mg_client.send_message 'mg.rexcopa.nl', message_params_to_customer
+        # Mail factuur naar interne printer.
+        mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
+        message_params_to_printer =  {
+                            from:       'postmaster@mg.rexcopa.nl',
+                            to:         'lmschukking@icloud.com',
+                            subject:    "Printer: Invoice id: #{@invoice.id}",
+                            text:       "Here should be a pdf of an invoice with amount paid: #{@invoice.paid}"
+                          }
+        message_params_to_customer =  {
+                            from:    'postmaster@mg.rexcopa.nl',
+                            to:      'lmschukking@icloud.com',
+                            subject: "Customer: Invoice id: #{@invoice.id}",
+                            text:    order_received_confirmation(@invoice)
+                          }
+        mg_client.send_message 'mg.rexcopa.nl', message_params_to_printer
+        mg_client.send_message 'mg.rexcopa.nl', message_params_to_customer
+      end
     else
       redirect_to [:confirm, @order]
       flash.now[:alert] = 'Uw betaling is niet geslaagd.'

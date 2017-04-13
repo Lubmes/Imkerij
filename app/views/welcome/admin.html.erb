@@ -29,11 +29,11 @@
 			<tbody>
 				<tr>
 					<td><span class='status-tag problem'>probleem</span></td>
-					<td><%= Order.where(status: :problem).count %></td>
+					<td><b><%= Order.where(status: :problem).count %></b></td>
 				</tr>
 				<tr>
 					<td><span class='status-tag paid'>betaald</span></td>
-					<td><%= Order.where(status: :paid).count %></td>
+					<td><b><%= Order.where(status: :paid).count %></b></td>
 				</tr>
 				<tr>
 					<td><span class='status-tag sent'>verzonden</span></td>
