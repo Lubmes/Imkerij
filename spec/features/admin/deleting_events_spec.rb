@@ -2,9 +2,11 @@ require 'rails_helper'
 
 feature 'Admin kan agendapunten verwijderen' do
   create_navigation
+  let(:picture) { FactoryGirl.create :picture }
   let!(:event) { create(:event, name: 'Vlindernacht',
-                                            description: 'Verhalen van een vlinderexpert.',
-                                            date: 14.days.from_now) }
+                                description: 'Verhalen van een vlinderexpert.',
+                                date: 14.days.from_now,
+                                pictures: [picture] )}
   let(:admin)  { create(:user, :admin) }
 
   before do

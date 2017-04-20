@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
 
   require 'mollie/api/client'
   require 'mailgun'
+  require 'easypost'
 
   def show
   end
@@ -94,25 +95,52 @@ class OrdersController < ApplicationController
       if @order.invoices.empty?
         @invoice = @order.invoices.create(paid: @order.total_price,
                                           total_mail_weight: @order.total_mail_weight,
-                                          invoice_delivery: @order.package_delivery)
+                                          invoice_delivery: @delivery)
 
         # Mail factuur naar interne printer.
         mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
         message_params_to_printer =  {
-                            from:       'postmaster@mg.rexcopa.nl',
-                            to:         'lmschukking@icloud.com',
-                            subject:    "Printer: Invoice id: #{@invoice.id}",
-                            text:       "Here should be a pdf of an invoice with amount paid: #{@invoice.paid}"
-                          }
+          :from     => 'postmaster@mg.rexcopa.nl',
+          :to       => 'lmschukking@icloud.com',
+          :subject  => "Printer: Invoice id: #{@invoice.id}",
+          :text     => "Here should be a pdf of an invoice with amount paid: #{@invoice.paid}"
+        }
         message_params_to_customer =  {
-                            from:    'postmaster@mg.rexcopa.nl',
-                            to:      'lmschukking@icloud.com',
-                            subject: "Customer: Invoice id: #{@invoice.id}",
-                            text:    order_received_confirmation(@invoice)
-                          }
+          :from     => 'postmaster@mg.rexcopa.nl',
+          :to       => 'lmschukking@icloud.com',
+          :subject  => "Customer: Invoice id: #{@invoice.id}",
+          :text     => order_received_confirmation(@invoice)
+        }
         mg_client.send_message 'mg.rexcopa.nl', message_params_to_printer
         mg_client.send_message 'mg.rexcopa.nl', message_params_to_customer
       end
+      # Easypost pakketverstuur dienst.
+      EasyPost.api_key = Rails.application.secrets.easypost_api_key
+      to_address = EasyPost::Address.create(
+        :name     => "#{@user.first_name} #{@user.last_name}",
+        :street1  => "#{@delivery.address_street_name} #{@delivery.address_street_number}",
+        :city     => @delivery.address_city,
+        :zip      => @delivery.address_zip_code,
+        :country  => @delivery.address_country
+      )
+      from_address = EasyPost::Address.create(
+        :company  => 'Imkerij Poppendamme',
+        :street1  => 'Poppendamseweg 3',
+        :city     => 'Grijpskerke',
+        :zip      => '4364SL',
+      )
+      # pakket (ounces en inches)
+      parcel = EasyPost::Parcel.create(
+        :width  => 15.2,
+        :length => 18,
+        :height => 9.5,
+        :weight => @invoice.total_mail_weight
+      )
+      @shipment = EasyPost::Shipment.create(
+        :to_address   => to_address,
+        :from_address => from_address,
+        :parcel       => parcel
+      )
     else
       redirect_to [:confirm, @order]
       flash.now[:alert] = 'Uw betaling is niet geslaagd.'

@@ -35,8 +35,6 @@ header {
 }
 #payment.to-bank {
 	@extend .w3-margin-top;
-	@extend .w3-border-dark-grey;
-	@extend .w3-topbar;
 }
 #payment {
 	@extend .w3-container;
@@ -46,6 +44,9 @@ header {
 			@extend .w3-large;
 			@extend .w3-text-orange;
 		}
+		@extend .w3-border-dark-grey;
+		@extend .w3-bottombar;
+		margin-left: 14%;
 	}
 	@extend .w3-row;
 	#order {

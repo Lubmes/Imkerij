@@ -14,11 +14,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     authorize @event
+    if params[:image]
+      @event.pictures.new(image: params[:image])
+    end
 
     if @event.save
-      if params[:image]
-        @event.pictures.create(image: params[:image])
-      end
       flash[:notice] = 'Agendapunt is toegevoegd.'
       redirect_to events_path
     else
@@ -33,10 +33,12 @@ class EventsController < ApplicationController
 
   def update
     authorize @event
+    if params[:image]
+      @event.pictures.delete_all
+      @event.pictures.new(image: params[:image])
+    end
+
     if @event.update(event_params)
-      if params[:image]
-        @event.pictures.create(image: params[:image])
-      end
       flash[:notice] = 'Agendapunt is bijgewerkt.'
       redirect_to events_path
     else

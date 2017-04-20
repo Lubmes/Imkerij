@@ -3,7 +3,8 @@ require 'factory_girl_rails'
 
 feature 'Gebruikers zien alleen links die van toepassing zijn:' do
   create_navigation
-  let!(:event)      { create(:event)}
+  let(:picture)     { create :picture }
+  let!(:event)      { create(:event, pictures: [picture])}
   let!(:category)   { create(:category)}
   let!(:product)    { create(:product, category: category )}
   let(:random_user) { create(:user) }

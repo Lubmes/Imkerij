@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Admin kan nieuwe agendapunten toevoegen' do
   create_navigation
   let(:admin) { create(:user, :admin) }
+  let(:picture) { FactoryGirl.create :picture }
 
 	before do
     login_as(admin)
@@ -11,7 +12,9 @@ feature 'Admin kan nieuwe agendapunten toevoegen' do
   end
 
   scenario 'met valide details' do
+
   	fill_in 'Naam', with: 'Vlindernacht'
+    attach_file('image', File.absolute_path('./spec/test_files/huis.jpg'))
   	fill_in 'Omschrijving', with: 'Verhalen van een vlinderexpert.'
     find('#datetimejs-input').set 14.days.from_now.beginning_of_day + 20.5.hours
   	click_button 'Agendapunt toevoegen'

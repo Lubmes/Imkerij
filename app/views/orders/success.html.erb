@@ -23,4 +23,18 @@
 			<%= render @delivery, card_title: "Verzendadres" %>
 		</div>
 	</div>
+
 </div>
+
+<% if true %>
+<div>
+	<ul>
+		<% @shipment.rates.each do |rate| %>
+			<li><%= rate.carrier %></li>
+			<li><%= rate.service %></li>
+			<li><%= rate.rate %></li>
+			<li><%= rate.id %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>

@@ -1,6 +1,8 @@
 class InvoicesController < ApplicationController
+
   require 'mollie/api/client'
   require 'mailgun'
+  require 'combine_pdf'
 
   def show
     @invoice = Invoice.find(params[:id])
@@ -58,19 +60,20 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @order = @invoice.order
     @customer = @order.customer
-    pdf = WickedPdf.new.pdf_from_string(render_to_string(:pdf       => 'file_name.pdf',
-                           :template  => 'invoices/invoice.pdf.erb',
-                           :layout    => 'invoice_pdf.html'))
 
-    # save_path = Rails.root.join('pdfs','file_name.pdf')
-    # File.open(save_path, 'wb') do |file|
-    #   file << pdf
-    # end
+    pdf_data = WickedPdf.new.pdf_from_string(
+      render_to_string(
+        :pdf          => 'file_name',
+        :template     => 'invoices/invoice.pdf.erb',
+        :layout       => 'invoice_pdf.html'
+    ))
+    pdf = CombinePDF.parse(pdf_data)
+
 
     mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
     mb_object = Mailgun::MessageBuilder.new
 
-    mb_object.add_attachment pdf, 'file_name.pdf'
+    mb_object.add_attachment send_data pdf.to_pdf, :disposition => 'inline', :type => "application/pdf"
     mg_client.send_message 'mg.rexcopa.nl', mb_object
   end
 

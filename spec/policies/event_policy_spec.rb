@@ -3,7 +3,8 @@ require 'rails_helper'
 describe EventPolicy do
   context 'toegang' do
     subject { EventPolicy.new(user, event) }
-    let(:event) { FactoryGirl.create :event }
+    let(:picture) { FactoryGirl.create :picture }
+    let(:event) { FactoryGirl.create :event, pictures: [picture] }
 
     context 'voor anonieme gebruikers' do
       let(:user) { nil }
