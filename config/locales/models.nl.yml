@@ -56,6 +56,8 @@ nl:
         price: Prijs
         sales_tax:  BTW
         mail_weight: Verzendgewicht
+        content_weight: Inhoud (gr)
+        content_volume: Inhoud (ml)
         available: Beschikbaar?
         category: Categorie
         pictures: Foto's

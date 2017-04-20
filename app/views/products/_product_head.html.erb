@@ -18,6 +18,8 @@
   <li>
     <h5>
       <%= product.name %>
+      <small><%= product.content_weight %>gr</small>
+      <small><%= product.content_volume %>ml</small>
     </h5>
   </li>
   <% if policy(product).edit? %>

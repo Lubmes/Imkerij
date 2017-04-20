@@ -21,6 +21,32 @@
         </td>
       </tr>
     <% end %>
+		<!-- Inhoud gewicht -->
+		<tr class='content-weight'>
+			<th><%= f.label :content_weight %></td>
+ 			<td><%= f.text_field :content_weight %></td>
+  	</tr>
+    <% if product.errors[:content_weight].any? %>
+      <tr id='errors'>
+        <th></th><td><% product.errors[:content_weight].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+		<!-- Inhoud volume -->
+		<tr class='content-volume'>
+			<th><%= f.label :content_volume %></td>
+ 			<td><%= f.text_field :content_volume %></td>
+  	</tr>
+    <% if product.errors[:content_volume].any? %>
+      <tr id='errors'>
+        <th></th><td><% product.errors[:content_volume].each do |msg| %>
+            <%= "- #{msg}" %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
     <!-- Omschrijving -->
   	<tr class='description'>
 		  <th><%= f.label :description %></td>

@@ -17,5 +17,5 @@
 .byebug_history
 
 # Extra
-public/images/*
-config/secrets.yml
+/public/images/*
+/config/secrets.yml

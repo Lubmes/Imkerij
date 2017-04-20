@@ -1,7 +1,9 @@
 class ProductPolicy < CategoryPolicy
   def permitted_attributes
     if user.admin?
-      [:name, :description, :price, :sales_tax, :mail_weight, :available, :category_id]
+      [ :name, :description, :price, :sales_tax,
+        :mail_weight, :content_weight, :content_volume,
+        :available, :category_id ]
     end
   end
 
