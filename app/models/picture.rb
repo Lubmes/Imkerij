@@ -6,11 +6,11 @@ class Picture < ApplicationRecord
     # :path           => ":rails_root/public/images/:id/:filename",
     # :url            => "/images/:id/:filename"
     :storage  => :s3,
-    :bucket   => Figaro.env.s3_bucket,
+    :bucket   => ENV["s3_bucket"],
     :s3_credentials => {
-      :access_key_id      => Figaro.env.s3_access_key_id,
-      :secret_access_key  => Figaro.env.s3_secret_access_key,
-      :s3_region          => Figaro.env.s3_region
+      :access_key_id      => ENV["s3_access_key_id"],
+      :secret_access_key  => ENV["s3_secret_access_key"],
+      :s3_region          => ENV["s3_region"]
     }
 
   do_not_validate_attachment_file_type :image
