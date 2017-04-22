@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    mollie = Mollie::API::Client.new Rails.application.secrets.mollie_api_key
+    mollie = Mollie::API::Client.new Figaro.env.mollie_api_key
 
     begin
       payment = mollie.payments.create({
@@ -85,7 +85,7 @@ class OrdersController < ApplicationController
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
     end
-    mollie = Mollie::API::Client.new Rails.application.secrets.mollie_api_key
+    mollie = Mollie::API::Client.new Figaro.env.mollie_api_key
     payment  = mollie.payments.get @order.payment_id
     if payment.paid?
       session[:order_id] = nil
@@ -98,7 +98,7 @@ class OrdersController < ApplicationController
                                           invoice_delivery: @delivery)
 
         # Mail factuur naar interne printer.
-        mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
+        mg_client = Mailgun::Client.new Figaro.env.mailgun_api_key
         message_params_to_printer =  {
           :from     => 'postmaster@mg.rexcopa.nl',
           :to       => 'lmschukking@icloud.com',
@@ -115,7 +115,7 @@ class OrdersController < ApplicationController
         mg_client.send_message 'mg.rexcopa.nl', message_params_to_customer
       end
       # Easypost pakketverstuur dienst.
-      EasyPost.api_key = Rails.application.secrets.easypost_api_key
+      EasyPost.api_key = Figaro.env.easypost_api_key
       to_address = EasyPost::Address.create(
         :name     => "#{@user.first_name} #{@user.last_name}",
         :street1  => "#{@delivery.address_street_name} #{@delivery.address_street_number}",

@@ -10,11 +10,11 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'rails_12factor', group: :production
 gem 'devise', '~> 4.2'
 gem 'pundit', '~> 1.1'
 gem 'money-rails', '~> 1.7'
 gem 'mollie-api-ruby'
+gem 'aws-sdk'
 gem 'paperclip', '~> 5.1'
 gem 'active_link_to'
 gem 'font-awesome-rails'
@@ -26,9 +26,12 @@ gem 'mailgun-ruby', '~> 1.1', '>= 1.1.5'
 gem 'faraday', '~> 0.9.2'
 gem 'rest-client', '~> 2.0', '>= 2.0.1'
 gem 'easypost', '~> 2.7'
+# heroku
+gem 'rails_12factor', group: :production
+gem "figaro"
 # debugging
 gem 'awesome_print'
-# Grafieken
+# grafieken
 gem 'chartkick', '~> 2.1', '>= 2.1.1'
 gem 'groupdate'
 # pdf's

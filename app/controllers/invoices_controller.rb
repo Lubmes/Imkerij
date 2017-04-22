@@ -33,7 +33,7 @@ class InvoicesController < ApplicationController
     @order = @invoice.order
 
     unless @invoice.closed?
-      mollie = Mollie::API::Client.new Rails.application.secrets.mollie_api_key
+      mollie = Mollie::API::Client.new Figaro.env.mollie_api_key
       payment_id = @order.payment_id
 
       begin
@@ -70,7 +70,7 @@ class InvoicesController < ApplicationController
     pdf = CombinePDF.parse(pdf_data)
 
 
-    mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
+    mg_client = Mailgun::Client.new Figaro.env.mailgun_api_key
     mb_object = Mailgun::MessageBuilder.new
 
     mb_object.add_attachment send_data pdf.to_pdf, :disposition => 'inline', :type => "application/pdf"
