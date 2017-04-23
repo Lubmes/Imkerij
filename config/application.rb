@@ -13,6 +13,6 @@ module ImkerijWebshop
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :nl
 
-    Aws.config.update({region: 'eu-west-1'})
+    # Aws.config.update({region: 'eu-west-1'})
   end
 end
