@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Admin kan nieuwe agendapunten toevoegen' do
   create_navigation
   let(:admin) { create(:user, :admin) }
-  let(:picture) { FactoryGirl.create :picture }
+  let(:picture) { FactoryGirl.build_stubbed :picture }
 
 	before do
     login_as(admin)
