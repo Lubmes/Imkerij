@@ -7,7 +7,7 @@ class Picture < ApplicationRecord
     # :url            => "/images/:id/:filename"
     :storage    => :s3,
     :bucket     => 'ENV["AWS_BUCKET"]',
-    :s3_region  => 'eu-west-1'
+    :s3_region  => 'eu-west-1',
     :s3_credentials => {
       :access_key_id      => ENV["AWS_ACCESS_KEY"],
       :secret_access_key  => ENV["AWS_SECRET_KEY"]
