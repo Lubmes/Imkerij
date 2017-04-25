@@ -8,10 +8,10 @@ class Picture < ApplicationRecord
     :storage    => :s3,
     :bucket     => 'ENV["AWS_BUCKET"]',
     :s3_region  => 'eu-west-1'
-    # :s3_credentials => {
-    #   :access_key_id      => ENV["s3_access_key_id"],
-    #   :secret_access_key  => ENV["s3_secret_access_key"]
-    # }
+    :s3_credentials => {
+      :access_key_id      => ENV["s3_access_key_id"],
+      :secret_access_key  => ENV["s3_secret_access_key"]
+    }
 
   do_not_validate_attachment_file_type :image
 
