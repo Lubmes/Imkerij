@@ -19,7 +19,7 @@ gem 'paperclip', '~> 5.1'
 gem 'active_link_to'
 gem 'font-awesome-rails'
 gem 'acts_as_list'
-gem 'redcarpet'
+gem 'redcarpet' # Markdown interpretatie in views.
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
 gem 'mailgun-ruby', '~> 1.1', '>= 1.1.5'

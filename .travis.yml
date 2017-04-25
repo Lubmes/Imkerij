@@ -21,3 +21,5 @@ deploy:
   on:
     repo: Lubmes/Imkerij
   skip_cleanup: true
+env:
+  - AWS_BUCKET='imkerij-poppendamme-test'
