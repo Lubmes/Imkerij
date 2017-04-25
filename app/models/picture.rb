@@ -4,7 +4,7 @@ class Picture < ApplicationRecord
 
   has_attached_file :image,
     :storage    => :s3,
-    :bucket     => Figaro.env.s3_bucket
+    :bucket     => Figaro.env.s3_bucket,
     :s3_region  => 'eu-west-1'
 
   do_not_validate_attachment_file_type :image
