@@ -147,7 +147,7 @@ p26.pictures.create(position: 2, image: File.new("#{Rails.root}/app/assets/image
 p27 = Product.create(name: 'Propoliscapsules', description: descr, price: '3,60', sales_tax: '21,0', mail_weight: 200, category: c5, position: 5 )
 p27.pictures.create(position: 1, image: File.new("#{Rails.root}/app/assets/images/sellables/propoliscapsules\ voor\ groen.jpg"))
 p27.pictures.create(position: 2, image: File.new("#{Rails.root}/app/assets/images/sellables/propoliscapsules\ voor\ steen.jpg"))
-p27.pictures.create(position: 3, image: File.new("#{Rails.root}/app/assets/images/sellables/propoliscapsules\ achter\ groen\ 2.jpg"))
+p27.pictures.create(position: 3, image: File.new("#{Rails.root}/app/assets/images/sellables/propoliscapsules\ achter\ groen.jpg"))
 p27.pictures.create(position: 4, image: File.new("#{Rails.root}/app/assets/images/sellables/propoliscapsules\ achter\ steen.jpg"))
 p28 = Product.create(name: 'Propolisinctuur', description: descr, price: '3,89', sales_tax: '21,0', mail_weight: 150, category: c5, position: 6 )
 p28.pictures.create(position: 1, image: File.new("#{Rails.root}/app/assets/images/sellables/propolisinctuur.jpg"))
