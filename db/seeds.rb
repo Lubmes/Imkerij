@@ -176,8 +176,8 @@ p36 = Product.create(name: 'Uiercreme met koninginnebrij', description: descr, p
 p36.pictures.create(position: 1, image: File.new("#{Rails.root}/app/assets/images/sellables/uiercreme\ 350ml.jpg"))
 # zeep
 p37 = Product.create(name: 'Miel zeep met blok', description: descr, price: '4,80', sales_tax: '21,0', mail_weight: 400, category: c4, position: 5 )
-p37.pictures.create(position: 1, image: File.new("#{Rails.root}/app/assets/images/sellables/zeep\ miel\ blok\ 1.jpg"))
-p37.pictures.create(position: 2, image: File.new("#{Rails.root}/app/assets/images/sellables/zeep\ miel\ blok\ 2.jpg"))
+p37.pictures.create(position: 1, image: File.new("#{Rails.root}/app/assets/images/sellables/zeep\ miel\ blok\ donker\ 1.jpg"))
+p37.pictures.create(position: 2, image: File.new("#{Rails.root}/app/assets/images/sellables/zeep\ miel\ blok\ donker\ 2.jpg"))
 p37.pictures.create(position: 3, image: File.new("#{Rails.root}/app/assets/images/sellables/zeep\ miel\ blok\ licht.jpg"))
 p37.pictures.create(position: 4, image: File.new("#{Rails.root}/app/assets/images/sellables/selectie\ zeep\ plus\ blok.jpg"))
 p38 = Product.create(name: 'Miel zeep', description: descr, price: '3,80', sales_tax: '21,0', mail_weight: 360, category: c4, position: 6 )
