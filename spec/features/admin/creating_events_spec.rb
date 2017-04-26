@@ -11,7 +11,7 @@ feature 'Admin kan nieuwe agendapunten toevoegen' do
     click_link 'nieuw agendapunt'
   end
 
-  xscenario 'met valide details' do
+  scenario 'met valide details' do
 
   	fill_in 'Naam', with: 'Vlindernacht'
     attach_file('image', File.absolute_path('./spec/test_files/huis.jpg'))
