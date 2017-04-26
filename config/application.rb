@@ -23,7 +23,7 @@ module ImkerijWebshop
     #       :secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY']
     #     }
     #   }
+    # config.secret_key_base = Figaro.env.secret_key_base
     Figaro.require_keys("aws_access_key_id", "aws_secret_access_key")
-    config.secret_key_base = Figaro.env.secret_key_base
   end
 end
