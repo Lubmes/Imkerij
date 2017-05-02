@@ -61,19 +61,22 @@ class InvoicesController < ApplicationController
     @order = @invoice.order
     @customer = @order.customer
 
-    pdf_data = WickedPdf.new.pdf_from_string(
-      render_to_string(
-        :pdf          => 'file_name',
+    pdf = WickedPdf.new.pdf_from_string(
+      ActionController::Base.new().render_to_string(
+        :pdf          => 'invoice',
         :template     => 'invoices/invoice.pdf.erb',
-        :layout       => 'invoice_pdf.html'
+        :layout       => 'invoice_pdf.html',
+        :locals       => {
+          :@invoice  => @invoice,
+          :@order    => @order,
+          :@customer => @customer
+        }
     ))
-    pdf = CombinePDF.parse(pdf_data)
 
-
-    mg_client = Mailgun::Client.new ENV["mailgun_api_key"]
+    mg_client = Mailgun::Client.new Figaro.env.mailgun_api_key
     mb_object = Mailgun::MessageBuilder.new
 
-    mb_object.add_attachment send_data pdf.to_pdf, :disposition => 'inline', :type => "application/pdf"
+    mb_object.add_attachment send_data pdf
     mg_client.send_message 'mg.rexcopa.nl', mb_object
   end
 
