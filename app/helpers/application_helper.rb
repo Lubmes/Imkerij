@@ -20,5 +20,4 @@ module ApplicationHelper
     page = Page.find(page_id)
     page.link.downcase
   end
-
 end

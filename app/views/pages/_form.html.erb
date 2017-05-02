@@ -72,7 +72,44 @@
         </td>
       </tr>
     <% end %>
-  </table>
+
+		<% if !page.route? %>
+			<tr>
+				<td colspan="2" class="widget"><h2>Openingstijden Widget</h2></td>
+			</tr>
+
+			<!-- Openingstijden widget -->
+			<%= f.fields_for :opening_times_widget do |iw_f| %>
+				<!-- Titel -->
+				<tr class='name'>
+					<th><%= iw_f.label :title %></td>
+		 			<td><%= iw_f.text_field :title %></td>
+		  	</tr>
+		    <% if page.errors[:title].any? %>
+		      <tr id='errors'>
+		        <th></th><td><% page.errors[:title].each do |msg| %>
+		            <%= "- #{msg}" %><br>
+		          <% end %>
+		        </td>
+		      </tr>
+		    <% end %>
+				<!-- Verhaal -->
+		  	<tr class='story'>
+				  <th><%= iw_f.label :information %></td>
+		  		<td><%= iw_f.text_area :information, rows: 15 %></td>
+		  	</tr>
+		    <% if page.errors[:information].any? %>
+		      <tr id='errors'>
+		        <th></th><td><% page.errors[:information].each do |msg| %>
+		            <%= "- #{msg}" %><br>
+		          <% end %>
+		        </td>
+		      </tr>
+		    <% end %>
+			<% end %>
+		<% end %>
+
+	</table>
 
   <%= f.submit class: 'button' %>
 

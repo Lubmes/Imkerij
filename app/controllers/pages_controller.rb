@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def edit
     @page = Page.find(params[:id])
+    # @page.build_opening_times_widget
   end
 
   def update
@@ -45,6 +46,6 @@ class PagesController < ApplicationController
   end
 
   def page_params
-    params.require(:page).permit(:link, :title, :introduction, :route, :story)
+    params.require(:page).permit(:link, :title, :introduction, :route, :story, opening_times_widget_attributes: [:id, :title, :information])
   end
 end

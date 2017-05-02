@@ -10,7 +10,8 @@
 #   User.create!(email: 'admin@shop.com', password: 'password', first_name: 'Imkerij Poppendamme', last_name: 'Meester', admin: true)
 # end
 #
-# if false
+# !!!!
+if false
 descr = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 Picture.delete_all
@@ -277,3 +278,45 @@ Heeft u een bijenzwerm in de tuin? De afdeling walcheren van de NBV heeft een sc
 
 Logeren in het huis van de imker? Dat kan!
                             })
+end
+
+pages = Page.all
+pages.each do |page|
+  page.opening_times_widget = nil
+  page.save!
+end
+InformationWidget.delete_all
+iw = InformationWidget.create(
+  :id           => 1,
+  :title        => "Openingstijden",
+  :information  =>
+    %{
+#### van 10.00 tot 17.00
+
+## Juli en Augustus
+
+Elke dag
+
+## April t/m Oktober
+
+Dinsdag t/m Zondag
+
+## November t/m Maart
+
+Zaterdag
+
+## Ook open
+
+* Goede vrijdag
+* Tweede paasdag
+* Hemelvaartsdag
+* Tweede pinksterdag
+
+### Toegang is gratis!
+    }
+)
+pages = Page.all
+pages.each do |page|
+  page.opening_times_widget = iw
+  page.save!
+end

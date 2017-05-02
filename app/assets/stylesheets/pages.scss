@@ -22,6 +22,25 @@
 
   }
 }
+#opening-times {
+  @extend .w3-col;
+  @extend .m3;
+  @extend .w3-right;
+  @extend .w3-margin-top;
+  @extend .w3-margin-right;
+  @extend .w3-padding-xxlarge;
+  @extend .w3-card-8;
+  @extend .w3-container;
+  h1 { @extend .w3-text-dark-grey; @extend .w3-center; @extend .w3-xlarge;}
+  h2 { @extend .w3-text-teal; @extend .w3-large;
+    margin-bottom: 5px;
+  }
+  h3 { @extend .w3-text-green; @extend .w3-center; @extend .w3-xlarge;}
+  h4 { @extend .w3-text-grey; @extend .w3-center; @extend .w3-large;}
+  p, ul {
+    margin-top: 0;
+  }
+}
 #page-edit {
   @extend .w3-margin-top;
 	#pictures { @extend .w3-row-padding; }
@@ -38,6 +57,9 @@
     }
     input, textarea {
       width: 60%;
+    }
+    .widget h2 {
+      padding-left: 30%;
     }
   }
   .button {

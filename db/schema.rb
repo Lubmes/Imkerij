@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420101550) do
+ActiveRecord::Schema.define(version: 20170502135506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,11 @@ ActiveRecord::Schema.define(version: 20170420101550) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "information_widgets", force: :cascade do |t|
+    t.string "title"
+    t.text   "information"
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.boolean  "closed",              default: false
     t.integer  "total_mail_weight",   default: 0
@@ -110,8 +115,10 @@ ActiveRecord::Schema.define(version: 20170420101550) do
     t.text     "introduction"
     t.boolean  "route"
     t.text     "story"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "opening_times_widget_id"
+    t.index ["opening_times_widget_id"], name: "index_pages_on_opening_times_widget_id", using: :btree
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -173,5 +180,6 @@ ActiveRecord::Schema.define(version: 20170420101550) do
   add_foreign_key "invoices", "orders"
   add_foreign_key "orders", "deliveries", column: "package_delivery_id"
   add_foreign_key "orders", "users", column: "customer_id"
+  add_foreign_key "pages", "information_widgets", column: "opening_times_widget_id"
   add_foreign_key "products", "categories"
 end

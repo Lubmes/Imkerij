@@ -13,7 +13,7 @@
   </ul>
 
   <div id='introduction'>
-      <%= markdown(@page.introduction) %>
+    <%= markdown(@page.introduction) %>
   </div>
 
   <% if @page.route? %>
@@ -43,6 +43,13 @@
     <%= markdown(@page.story) %>
   </div>
 </div>
+
+<% if !@page.route? && !@page.opening_times_widget.nil? %>
+  <div id='opening-times'>
+    <h1><%= @page.opening_times_widget.title %></h1>
+    <%= markdown(@page.opening_times_widget.information) %>
+  </div>
+<% end %>
 
 <% if @page.pictures.any? && @page.pictures.size > 1 %>
   <script>
