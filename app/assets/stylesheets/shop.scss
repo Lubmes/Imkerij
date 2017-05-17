@@ -23,10 +23,10 @@
 
 #store-front {
 	img {
-		@extend .w3-round-jumbo;
+		@extend .w3-round-xxlarge;
 	}
-  @extend .w3-margin-top;
-	@extend .w3-padding-top;
+  // @extend .w3-margin-top;
+	padding-top: 8px;
 	@extend .w3-row;
   header {
   	@extend .w3-row;
@@ -37,7 +37,7 @@
 	.cat-col {
 		.gallery {
 			.gallery-picture {
-				@extend .w3-padding-bottom;
+				padding-bottom: 4px;
 				padding-left: 24%;
 				img {
 					@extend .w3-opacity-min;
@@ -53,7 +53,7 @@
 		right: 0;
     .bookings {
       @extend .w3-leftbar;
-			@extend .w3-border-dark-grey;
+			@extend .w3-border-grey;
 			width: 95%;
     }
   }

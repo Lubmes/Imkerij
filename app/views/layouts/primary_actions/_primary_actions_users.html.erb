@@ -1,11 +1,9 @@
 <% if policy(:user).create? %>
 
-	<ul id='primary-actions' class='add-new-record'>
-		<li>
+	<nav id='primary-actions' class='add-new-record'>
 			<%= link_to [:new, :user], class: 'add-user', title: "nieuwe gebruiker" do %>
 				<i class='fa fa-plus'></i> GEBRUIKER
 			<% end %>
-		</li>
-	</ul>
+	</nav>
 
 <% end %>

@@ -9,30 +9,28 @@
 				<% end %>
 			</div>
 			<div class='event-col'>
-					  <ul class=record-actions>
-							<li>
+					  <nav class=record-bar>
+							<div class='title'>
 							  <h3>
 									<div class='time'><%= I18n.l(event.date, format: :event_time) %></div>
 									<small><%= I18n.l(event.date, format: :event_date) %></small>
 									<%= event.name %>
 								</h3>
-							</li>
-							<% if policy(event).admin_action? %>
-								<li>
-									<%= link_to [:edit, event], title: "bijwerken" do %>
-										<i class='icon-edit'></i>
-									<% end %>
-								</li>
-								<li>
-									<%= link_to [event],
-												method: :delete,
-												data: { confirm: 'Weet je zeker dat je dit agendapunt wil verwijderen?' },
-												title: "verwijderen" do %>
-										<i class='icon-trash'></i>
-									<% end %>
-								</li>
-							<% end %>
-						</ul>
+							</div>
+							<div class='actions'>
+								<% if policy(event).admin_action? %>
+										<%= link_to [:edit, event], title: "bijwerken" do %>
+											<i class='icon-edit'></i>
+										<% end %>
+										<%= link_to [event],
+													method: :delete,
+													data: { confirm: 'Weet je zeker dat je dit agendapunt wil verwijderen?' },
+													title: "verwijderen" do %>
+											<i class='icon-trash'></i>
+										<% end %>
+								<% end %>
+							</div>
+						</nav>
 
 					  <p>
 						  <%= event.description %>

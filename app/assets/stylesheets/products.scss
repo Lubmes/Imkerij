@@ -10,7 +10,7 @@
 		@extend .w3-text-grey;
 	}
 	@extend .w3-row;
-	@extend .w3-border-lime;
+	@extend .w3-border-yellow;
 	@extend .w3-leftbar;
 	ul {
 		@extend .w3-text-dark-grey;
@@ -39,14 +39,14 @@
 		@extend .w3-brown;
 		@extend .w3-text-yellow;
 		@extend .w3-hover-brown;
-		@extend .w3-hover-text-lime;
+		@extend .w3-hover-text-yellow;
 		@extend .w3-round-xlarge;
 		@extend .w3-margin;
 		@extend .w3-small;
 	}
 }
 #record-zoom.product {
-	img { @extend .w3-round-jumbo; }
+	img { @extend .w3-round-xxlarge; }
 	.row-gallery {
 		@extend .w3-row-padding;
 		.gallery-picture {
@@ -71,20 +71,20 @@
 			@extend .w3-btn;
 			@extend .w3-transparent;
 			@extend .w3-border;
-			@extend .w3-border-khaki;
+			@extend .w3-border-yellow;
 			@extend .w3-round-xlarge;
 			@extend .w3-padding;
 			@extend .w3-margin;
 			@extend .w3-text-black;
 			@extend .w3-hover-khaki;
-			@extend .w3-hover-text-teal;
+			@extend .w3-hover-text-green;
 		}
 	}
 }
 
 #shop-edit.product {
-	.picture-ajax img { @extend .w3-round-jumbo; }
-	#form { @extend .w3-border-lime; }
+	.picture-ajax img { @extend .w3-round-xxlarge; }
+	#form { @extend .w3-border-green; }
 	.button {
 		@extend .w3-lime;
 		width: 35%;

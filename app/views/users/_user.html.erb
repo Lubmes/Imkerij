@@ -1,29 +1,27 @@
 <div class='user'>
-	<ul class='record-actions'>
-		<li><h4><%= user.email %></h4></li>
+	<nav class='record-bar'>
+		<div class='title'>
+			<h4><%= user.email %></h4>
+		</div>
+
 		<% unless controller.action_name == 'confirm' ||
 							controller.action_name == 'pay' ||
 							controller.action_name == 'success' %>
-
-			<div class='table-actions'>
+			<div class='actions'>
 				<% if policy(user).show? && current_page?(action: 'index') %>
-					<li>
-						<%= link_to [user], title: "inzien" do %>
-							<i class='icon-user'></i>
-						<% end %>
-					</li>
+					<%= link_to [user], title: "inzien" do %>
+						<i class='icon-user'></i>
+					<% end %>
 				<% end %>
 				<% if policy(user).edit? %>
-					<li>
-						<%= link_to [:edit, user], title: "bijwerken" do %>
-							<i class='icon-edit'></i>
-						<% end %>
-					</li>
+					<%= link_to [:edit, user], title: "bijwerken" do %>
+						<i class='icon-edit'></i>
+					<% end %>
 				<% end %>
 			</div>
 
 		<% end %>
-	</ul>
+	</nav>
 
 	<table>
 		<tr>

@@ -14,7 +14,7 @@
 						<% policy_scope(category.products).each do |product| %>
 							<div class='product'>
 								<div class='info'>
-									<%= render 'products/product_head', product: product %>
+									<%= render 'products/product_bar', product: product %>
 									<% if product.pictures.where(visable: true).any? %>
 										<%= render 'pictures/cover_picture',
 													picture: product.pictures.where(visable: true).first %>

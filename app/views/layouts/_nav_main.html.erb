@@ -1,30 +1,32 @@
-<ul id='main-nav'>
+<nav id='main-nav'>
   <!-- pages -->
-  <li><%= active_link_to page_link(1), root_path, active: :exclusive %></li>
-  <li><%= active_link_to page_link(2), facilities_path, active: :exclusive %></li>
-  <li><%= active_link_to page_link(3), expo_path, active: :exclusive %></li>
-  <li><%= active_link_to page_link(4), route_path, active: :exclusive %></li>
-  <li><%= active_link_to page_link(5), extras_path, active: :exclusive %></li>
+  <%= active_link_to page_link(1), root_path, active: :exclusive %>
+  <%= active_link_to page_link(2), facilities_path, active: :exclusive %>
+  <%= active_link_to page_link(3), expo_path, active: :exclusive %>
+  <%= active_link_to page_link(4), route_path, active: :exclusive %>
+  <%= active_link_to page_link(5), extras_path, active: :exclusive %>
 
 
-
-  <li><%= active_link_to 'agenda', events_path %></li>
-  <li><%= active_link_to 'winkel', shop_path %></li>
+  <%= active_link_to 'agenda', events_path %>
+  <%= active_link_to 'winkel', shop_path %>
   <% if policy(:application).admin_action? %>
-    <li><%= active_link_to 'admin', admin_path,
-                            active: [['welcome', 'users', 'orders'],['index', 'admin']] %></li>
+    <%= active_link_to 'admin',
+          admin_path,
+          active: [['welcome', 'users', 'orders'],['index', 'admin']] %>
   <% end %>
   <div class='profile'>
     <% if user_signed_in? %>
-      <li>
-        <%= active_link_to "<i class='fa fa-user-o'></i> #{current_user.first_name} #{'(Admin)' if current_user.admin?}".html_safe,
-              [current_user] %>
-      </li>
-      <li><%= link_to 'log uit', destroy_user_session_path, method: :delete %></li>
+      <%= active_link_to(
+            "<i class='fa fa-user-o'></i>
+            #{current_user.first_name}
+            #{'(Admin)' if current_user.admin?}".html_safe,
+            [current_user] ) %>
+
+      <%= link_to 'log uit', destroy_user_session_path, method: :delete %>
     <% end %>
     <% unless user_signed_in? %>
-      <li><%= active_link_to 'inloggen', new_user_session_path %></li>
-      <li><%= active_link_to 'nieuwe account', new_user_registration_path %></li>
+      <%= active_link_to 'inloggen', new_user_session_path %>
+      <%= active_link_to 'nieuwe account', new_user_registration_path %>
     <% end %>
   </div>
-</ul>
+</nav>

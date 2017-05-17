@@ -1,18 +1,18 @@
 // ADMIN: Info
 #admin-info {
-	padding-top: 30px;
+	// padding-top: 30px;
 	.graphs {
 		@extend .w3-margin-bottom;
-		@extend .w3-card-8;
+		@extend .w3-card-2;
 		@extend .w3-white;
 		h4 {
-			@extend .w3-padding-medium;
+			@extend .w3-padding;
 		}
 		small {
 			@extend .w3-text-dark-grey;
 		}
 		div {
-			@extend .w3-padding-medium;
+			@extend .w3-padding;
 		}
 	}
 	@extend .w3-row-padding;
@@ -21,6 +21,7 @@
 		@extend .m6;
 		@extend .w3-row-padding;
 		#result-totals {
+			@extend .w3-card-4;
 			@extend .w3-col;
 			@extend .m6;
 			@extend .w3-margin-top;
@@ -33,6 +34,7 @@
 			.today { @extend .w3-xlarge; @extend .w3-text-black; }
 		}
 		#order-type-totals {
+			@extend .w3-card-4;
 			td { text-align: right;}
 			@extend .w3-col;
 			@extend .m2;
@@ -41,11 +43,12 @@
 		table {
 			@extend .w3-col;
 	    @extend .w3-table;
-			@extend .w3-card-8;
+			@extend .w3-card-4;
 			@extend .w3-white;
 			@extend .w3-bordered;
 		}
 		#overall-development {
+			@extend .w3-card-4;
 			@extend .graphs;
 			@extend .w3-col;
 			@extend .m12;
@@ -61,7 +64,7 @@
 }
 
 #users {
-	padding-top: 100px;
+	padding-top: 90px;
 	@extend .w3-row;
 	width: 100%;
 	.user {
@@ -71,7 +74,7 @@
 	}
 }
 #orders {
-	@extend .w3-margin-top;
+	// @extend .w3-margin-top;
 	@extend .w3-margin-bottom;
 	th .status-tag {
 		@extend .w3-large;
@@ -81,27 +84,24 @@
 		@extend .w3-table;
 	}
 	tr.order {
-		@extend .w3-hover-light-grey;
-		@extend .w3-hover-opacity;
+		@extend .w3-hover-grey;
 		@extend .w3-border-top;
 		@extend .w3-border-bottom;
-		@extend .w3-border-light-grey;
+		@extend .w3-border-grey;
 		span.status-tag {
 			@extend .w3-medium;
 		}
 		td a {
+			text-decoration: none;
 			padding-left: 10px;
 			display:block;
 	    height:100%;
 	    width:100%;
+			@extend .w3-text-black;
 		}
 		td {
 			padding-left: 0;
 			padding-right: 0;
 		}
-	}
-	a {
-		text-decoration: none;
-		@extend .w3-text-cyan;
 	}
 }

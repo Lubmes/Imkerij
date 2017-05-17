@@ -6,10 +6,10 @@ h1 {
 	@extend .w3-center;
 }
 .user {
+	padding-bottom: 12px;
 	@extend .w3-white;
 	@extend .w3-card;
 	@extend .w3-container;
-	@extend .w3-padding-bottom;
 	table {
 		td, th {
 			padding-top: 0;
@@ -26,7 +26,7 @@ h1 {
 	.user {
 		margin-left: 17%;
 		width: 66%;
-		@extend .w3-padding-xxlarge;
+		@extend .w3-padding-48;
 		table {
 			th {
 				width: 24%;
@@ -68,7 +68,7 @@ h1 {
 // }
 
 #profile {
-	padding-top: 26px;
+	// padding-top: 26px;
 	@extend .w3-row-padding;
 	.user-col {
 		@extend .w3-col;
@@ -92,16 +92,16 @@ h1 {
 	}
 	#order-processing {
 		.order {
-			@extend .w3-card;
+			@extend .w3-card-2;
 		}
 		.order-totals {
-			@extend .w3-padding-top;
+			padding-top: 8px;
 		}
 		.fa-cogs {
 			@extend .w3-opacity;
 			@extend .w3-hover-opacity-off;
 			@extend .w3-text-grey;
-			@extend .w3-hover-text-indigo;
+			@extend .w3-hover-text-blue;
 		}
 		.correction {
 			@extend .w3-text-red;
@@ -118,29 +118,22 @@ h1 {
 	#processed {
 		.order-invoice {
 			@extend .w3-card;
-			// padding-top: 8px;
 			@extend .w3-margin-bottom;
 		}
 	}
 	.order-invoice {
-		// @extend .w3-container;
 		@extend .w3-leftbar;
 		.invoice-data {
 			@extend .w3-row;
-			// @extend .w3-panel;
-			// @extend .w3-padding-left;
-			@extend .w3-dark-grey;
+			@extend .w3-light-grey;
 			@extend .w3-text-dark-grey;
-			// margin-top: 0;
 			.main-data {
 				@extend .w3-col;
 				@extend .l6;
-				@extend .w3-padding-medium;
-				@extend .w3-padding-left;
-				@extend .w3-margin-left;
-				@extend .w3-margin-0;
+				@extend .w3-padding;
+				margin: 0;
 				.date {
-					@extend .w3-slim;
+					letter-spacing: 1px;
 				}
 				.price {
 					@extend .w3-large;
@@ -156,25 +149,25 @@ h1 {
 				@extend .w3-col;
 				@extend .l5;
 				@extend .w3-right;
-				@extend .w3-padding-medium;
+				@extend .w3-padding;
 				text-align: right;
 				.address {
 					@extend .w3-medium;
 					@extend .w3-text-black;
 				}
 			}
-		@extend .w3-margin-0;
+		margin: 0;
 	}
 		.invoice-actions {
-			@extend .w3-btn-bar;
+			@extend .w3-bar;
 			@extend .w3-light-grey;
 			a {
 				width: 25%;
-				@extend .w3-btn;
+				@extend .w3-bar-item;
+				@extend .w3-button;
 				@extend .w3-show-inline-block;
 				@extend .w3-text-teal;
-				@extend .w3-padding-left;
-				@extend .w3-padding-right;
+				@extend .w3-padding;
 			}
 			.print { @extend .w3-hover-indigo; }
 			.pdf { @extend .w3-hover-black; }
@@ -186,13 +179,13 @@ h1 {
 }
 // nog nodig?
 #admin-actions {
-	@extend .w3-navbar;
+	@extend .w3-bar;
 	@extend .w3-border-bottom;
 	li a {
 		@extend .w3-margin-bottom;
 		@extend .w3-margin-right;
 		@extend .w3-hover-light-grey;
-		@extend .w3-hover-text-teal;
+		@extend .w3-hover-text-green;
 	}
 }
 // log-in
@@ -208,7 +201,7 @@ h1 {
 	table {
 		@extend .w3-table;
 		@extend .w3-border;
-		@extend .w3-border-teal;
+		@extend .w3-border-green;
 		@extend .w3-bottombar;
 		@extend .w3-padding;
 	}

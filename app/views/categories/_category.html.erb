@@ -1,69 +1,55 @@
 <!-- Categorie: Naam met daaromheen categorie-acties. Geen foto-gallerie. -->
 <header class='category-bar'>
-  <ul class='record-actions'>
-
-    <!-- Op en neer -->
-    <% if policy(category).edit? %>
-      <li>
-
+  <nav class='record-bar'>
+      <!-- Op en neer -->
+      <% if policy(category).edit? %>
         <div class='up-down-action <%= "single-move" if category.first? || category.last? %>'>
           <% unless category.first? %>
-            <%= link_to [:move_higher, category] do %>
-              <i class='icon-move-up'></i>
-            <% end %>
+            <div class='up'
+              <%= link_to [:move_higher, category] do %>
+                <i class='icon-move-up'></i>
+              <% end %>
+            </div>
           <% end %>
           <% unless category.last? %>
-            <%= link_to [:move_lower, category] do %>
-              <i class='icon-move-down'></i>
-            <% end %>
+            <div class='down'>
+              <%= link_to [:move_lower, category] do %>
+                <i class='icon-move-down'></i>
+              <% end %>
+            </div>
           <% end %>
         </div>
+      <% end %>
 
-      </li>
-    <% end %>
-
-    <li>
-
+    <div class='title'>
       <!-- Naam -->
       <h3><%= category.name %></h3>
+    </div>
 
-    </li>
-
-    <!-- Wijzig -->
-    <% if policy(category).edit? %>
-      <li>
+      <!-- Wijzig -->
+      <% if policy(category).edit? %>
         <%= link_to [:edit, category], title: "bijwerken" do %>
           <i class='icon-edit'></i>
         <% end %>
-      </li>
-    <% end %>
-
-    <!-- Verwijderen -->
-    <% if policy(category).destroy? %>
-      <li>
-
+      <% end %>
+      <!-- Verwijderen -->
+      <% if policy(category).destroy? %>
         <%= link_to [category], method: :delete,
             data: { confirm: 'Weet je zeker dat je deze categorie en de daarbij behorende producten wil verwijderen?' },
             title: "verwijderen" do %>
           <i class='icon-trash'></i>
         <% end %>
+      <% end %>
 
-      </li>
-    <% end %>
-
-  </ul>
+  </nav>
 
   <!-- Nieuw product -->
   <% if policy(:product).new? %>
-    <ul class='add-new-record'>
-      <li>
-
-        <%= link_to [:new, category, :product], title: "nieuw product" do %>
-          <i class='icon-add'></i> PRODUCT
-        <% end %>
-
-      </li>
-    </ul>
+    <nav class='add-new-record'>
+      <%= link_to [:new, category, :product], title: "nieuw product" do %>
+        <i class='icon-add'></i> PRODUCT
+      <% end %>
+    </nav>
   <% end %>
 
 </header>

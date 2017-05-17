@@ -3,43 +3,60 @@
 	// @extend .w3-hover-light-grey;
 }
 
-.record-actions {
-	@extend .w3-navbar;
+.record-bar {
+	@extend .w3-bar;
 	@extend .w3-xlarge;
-	li {
-		.single-move, a, h5 {
-			@extend .w3-padding-top;
-			@extend .w3-padding-bottom;
-		}
+	.title { @extend .w3-left; }
+	.single-move, a, h5 {
+		@extend .w3-padding;
 	}
 	a {
+		@extend .w3-bar-item;
+		@extend .w3-button;
 		@extend .w3-hover-none;
-		@extend .w3-hover-text-khaki;
+		@extend .w3-hover-text-yellow;
 	}
 	.up-down-action {
+		@extend .w3-padding;
+		margin-top: 6px;
+
+		height: 50px;
 		@extend .w3-small;
+		@extend .w3-left;
+		@extend .w3-display-container;
+		.up {
+			@extend .w3-display-topmiddle;
+		}
+		.down {
+			@extend .w3-display-bottommiddle;
+		}
 	}
-	.table-actions {
+	.actions {
 		@extend .w3-right;
 	}
 }
 
 .add-new-record {
 	@extend .w3-small;
-	@extend .w3-navbar;
-	li a {
+	@extend .w3-bar;
+	a {
+		@extend .w3-bar-item;
+		@extend .w3-button;
 		@extend .w3-light-grey;
 		@extend .w3-small;
 		@extend .w3-margin-top;
 		@extend .w3-margin-bottom;
 		@extend .w3-hover-dark-grey;
-		@extend .w3-hover-text-lime;
+		@extend .w3-hover-text-yellow;
 	}
 	.add-category {
-		@extend .w3-hover-text-white;
+		padding-top: -8px;
+		// @extend .w3-hover-text-white;
+		z-index: 2;
+		// @extend .w3-hover-dark-grey;
 	}
 	.add-user {
-		@extend .w3-hover-text-khaki;
+		// @extend .w3-hover-text-yellow;
 	}
 }
 
@@ -59,7 +76,7 @@
 	label {
 	}
 	input {
-		@extend .w3-border-pink;
+		@extend .w3-border-red;
 	}
 }
 #errors {

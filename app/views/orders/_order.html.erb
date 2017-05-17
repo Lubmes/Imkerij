@@ -1,25 +1,21 @@
 <% if order.bookable? %>
 	<% if @order.bookings.any? %>
-		<ul class='record-actions'>
+		<nav class='record-bar'>
 			<% if policy(@order).empty? %>
 				<% unless controller.action_name == 'confirm' %>
-				<li>
 					<%= link_to [:empty, order] do %>
 						<i class='fa fa-trash-o'></i>
 					<% end %>
-				</li>
 				<% end %>
 			<% end %>
 			<% if policy(@order).check_out? %>
 				<% unless controller.action_name == 'check_out' || controller.action_name == 'confirm' %>
-					<li class='to-check-out'>
-						<%= link_to [:check_out, order] do %>
-							<small>AFREKENEN</small> <i class='fa fa-arrow-right'></i>
-						<% end %>
-					</li>
+					<%= link_to [:check_out, order], class: 'to-check-out' do %>
+						<small>AFREKENEN</small> <i class='fa fa-arrow-right'></i>
+					<% end %>
 				<% end %>
 			<% end %>
-		</ul>
+		</nav>
 	<% end %>
 <% end %>
 
@@ -31,6 +27,7 @@
 				<strong><%= currency_symbol %> <%= order.total_price %></strong>
 				<br>
 				<span class='weight'>
+					<i class="icon-package" aria-hidden="true"></i>
 					<i><%= order.total_mail_weight %> gr</i>
 				</span>
 			</td>

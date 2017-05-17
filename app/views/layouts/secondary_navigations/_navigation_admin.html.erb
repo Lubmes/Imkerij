@@ -2,8 +2,8 @@
 	<br><br>
 <% end %>
 
-<ul id='sec-nav' class='admin'>
-	<li><%= active_link_to 'infographics', admin_path %></li>
-	<li><%= active_link_to 'gebruikers', users_path %></li>
-	<li><%= active_link_to 'orders', orders_path %></li>
-</ul>
+<nav id='sec-nav' class='admin'>
+	<%= active_link_to 'infographics', admin_path %>
+	<%= active_link_to 'gebruikers', users_path %>
+	<%= active_link_to 'orders', orders_path %>
+</nav>

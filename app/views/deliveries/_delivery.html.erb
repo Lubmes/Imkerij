@@ -1,18 +1,18 @@
 <div class='delivery'>
-  <ul class='record-actions'>
-    <li><h4 class='address'><%= card_title %></h4></li>
+  <nav class='record-bar'>
+    <div class='title'>
+      <h4 class='address'><%= card_title %></h4>
+    </div>
     <% unless controller.action_name == 'confirm' ||
         controller.action_name == 'pay' ||
         controller.action_name == 'success' %>
-      <div class='table-actions'>
-        <li>
+      <div class='actions'>
           <%= link_to [:edit, delivery.sender, delivery], remote: true do %>
             <i class='fa fa-pencil'></i>
           <% end %>
-        </li>
       </div>
     <% end %>
-  </ul>
+  </nav>
 
   <p>
     <%= delivery.address_street_name %>

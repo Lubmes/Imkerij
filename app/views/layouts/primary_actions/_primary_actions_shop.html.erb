@@ -1,10 +1,9 @@
 <% if policy(:category).admin_action? %>
 
-	<ul id='primary-actions' class='add-new-record'>
-		<li><%= link_to [:new, :category], class: 'add-category', title: "nieuwe categorie" do %>
-					<i class='icon-add'></i> CATEGORIE
-				<% end %>
-		</li>
-	</ul>
+	<nav id='primary-actions' class='add-new-record'>
+		<%= link_to [:new, :category], class: 'add-category', title: "nieuwe categorie" do %>
+			<i class='icon-add'></i> CATEGORIE
+		<% end %>
+	</nav>
 
 <% end %>

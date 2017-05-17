@@ -1,16 +1,16 @@
 <div id='page'>
-  <ul class='record-actions'>
-    <li>
+  <nav class='record-bar'>
+    <div class='actions'>
+      <% if policy(@page).edit? %>
+          <%= link_to [:edit, @page], title: "bijwerken" do %>
+            <i class='icon-edit'></i>
+          <% end %>
+      <% end %>
+    </div>
+    <div class='title'>
       <h3 id='title'><%= @page.title %></h3>
-    </li>
-    <% if policy(@page).edit? %>
-      <li>
-        <%= link_to [:edit, @page], title: "bijwerken" do %>
-          <i class='icon-edit'></i>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+    </div>
+  </nav>
 
   <div id='introduction'>
     <%= markdown(@page.introduction) %>

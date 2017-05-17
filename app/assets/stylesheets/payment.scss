@@ -23,7 +23,7 @@ header {
 		text-decoration: none;
 		@extend .w3-border;
 		@extend .w3-border-white;
-		@extend .w3-hover-border-cyan;
+		@extend .w3-hover-border-blue;
 		@extend .w3-round-xlarge;
 		@extend .w3-padding;
 	}
@@ -44,7 +44,7 @@ header {
 			@extend .w3-large;
 			@extend .w3-text-orange;
 		}
-		@extend .w3-border-dark-grey;
+		@extend .w3-border-grey;
 		@extend .w3-bottombar;
 		margin-left: 14%;
 	}
@@ -52,7 +52,7 @@ header {
 	#order {
 		.bookings {
 			@extend .w3-leftbar;
-			@extend .w3-border-dark-grey;
+			@extend .w3-border-grey;
 			width: 95%;
 		}
 	}

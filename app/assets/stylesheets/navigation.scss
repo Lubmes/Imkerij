@@ -1,18 +1,20 @@
 #navigation {
-	@extend .w3-top;
+	// @extend .w3-top;
 }
 
 #main-nav, #sec-nav, #primary-actions, #flash-messages {
-	@extend .w3-navbar;
+	@extend .w3-bar;
 }
 
 #main-nav {
 	background: rgba(255, 255, 255, 0.85);
 	@extend .w3-bottombar;
-	@extend .w3-border-dark-grey;
+	@extend .w3-border-grey;
 	@extend .w3-card-4;
 	a {
-		@extend .w3-hover-grey;
+		@extend .w3-bar-item;
+		@extend .w3-button;
+		@extend .w3-hover-amber;
 	}
 	a.active {
 		@extend .w3-dark-grey;
@@ -31,7 +33,7 @@
 	@extend .w3-dark-grey;
 	@extend .w3-text-lime;
 	@extend .w3-hover-brown;
-	@extend .w3-hover-text-lime;
+	@extend .w3-hover-text-yellow;
 }
 #sec-nav {
 	@extend .w3-transparent;
@@ -41,17 +43,21 @@
 		margin-bottom: 1px;
 		@extend .w3-round-xlarge;
 		@extend .w3-wide;
+		@extend .w3-bar-item;
+		@extend .w3-button;
 	}
 }
 #primary-actions {
-	margin-top: -5%;
-	li a {
+	margin-top: -3%;
+	a {
+		@extend .w3-bar-item;
+		@extend .w3-button;
 		position: absolute;
 		top: 105px;
 		@extend .w3-small;
 		@extend .w3-margin;
 	}
-	li.without-sec-nav a {
+	a.without-sec-nav {
 		top: 50px;
 	}
 }

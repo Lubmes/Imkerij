@@ -2,24 +2,24 @@
   @extend .w3-white;
   @extend .w3-card;
   @extend .w3-container;
-  @extend .w3-padding-bottom;
+  padding-bottom: 4px;
   table {
     @extend .w3-margin-top;
     th {
       text-align: left;
-      @extend .w3-padding-right;
+      padding-right: 4px;
     }
     // werkt niet om de een of andere rede
     .field td input { width: 90%; }
   }
-  p { @extend .w3-margin-0; }
+  p { margin: 0; }
   .button-center {
-    @extend .w3-padding-medium;
+    @extend .w3-padding;
     @extend .w3-center;
     .button {
       @extend .w3-btn;
       @extend .w3-border;
-      @extend .w3-border-orange;
+      @extend .w3-border-red;
       @extend .w3-transparent;
       @extend .w3-text-black;
     }

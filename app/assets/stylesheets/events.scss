@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #events {
-	@extend .w3-margin-top;
+	padding-top: 90px;
+	// @extend .w3-margin-top;
 	.event {
 		@extend .w3-row-padding;
 		.image-col {
@@ -12,7 +13,7 @@
 			.cover-picture {
 				img {
 					@extend .w3-margin-top;
-					@extend .w3-round-jumbo;
+					@extend .w3-round-xxlarge;
 				}
 			}
 		}

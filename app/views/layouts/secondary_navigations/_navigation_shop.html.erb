@@ -2,8 +2,8 @@
 	<!-- niets -->
 <% end %>
 
-<ul id='sec-nav' class='shop'>
+<nav id='sec-nav' class='shop'>
 	<% @categories.each do |category| %>
-		<li><%= link_to category.name.downcase, "#cat-#{category.id}" %></li>
+		<%= link_to category.name.downcase, "#cat-#{category.id}" %>
 	<% end %>
-</ul>
+</nav>

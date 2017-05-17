@@ -1,10 +1,11 @@
 <% if policy(:event).admin_action? %>
 
-	<ul id='primary-actions' class='add-new-record'>
-		<li class='without-sec-nav'><%= link_to [:new, :event], title: "nieuw agendapunt" do %>
-					<i class='icon-add'></i> AGENDAPUNT
-				<% end %>
-		</li>
-	</ul>
+	<nav id='primary-actions' class='add-new-record'>
+		<%= link_to [:new, :event],
+					title: "nieuw agendapunt",
+					class: 'without-sec-nav' do %>
+			<i class='icon-add'></i> AGENDAPUNT
+		<% end %>
+	</nav>
 
 <% end %>
