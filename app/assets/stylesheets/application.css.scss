@@ -29,6 +29,10 @@
 img {
 	width: 100%;
 }
+.offset {
+	@extend .w3-col;
+	@extend .m2;
+}
 
 /* Background */
 #mask {

@@ -1,3 +1,7 @@
+<!-- cel 1 -->
+<div class='offset'>&nbsp;</div>
+
+<!-- cel 2 -->
 <div id='page'>
   <nav class='record-bar'>
     <div class='actions'>
@@ -7,9 +11,7 @@
           <% end %>
       <% end %>
     </div>
-    <div class='title'>
-      <h3 id='title'><%= @page.title %></h3>
-    </div>
+    <h3 id='title'><%= @page.title %></h3>
   </nav>
 
   <div id='introduction'>
@@ -44,6 +46,7 @@
   </div>
 </div>
 
+<!-- cel 3 -->
 <% if !@page.route? && !@page.opening_times_widget.nil? %>
   <div id='opening-times'>
     <h1><%= @page.opening_times_widget.title %></h1>
@@ -51,6 +54,7 @@
   </div>
 <% end %>
 
+<!-- Javascript afbeeldingen -->
 <% if @page.pictures.any? && @page.pictures.size > 1 %>
   <script>
     var slideIndex = 1;

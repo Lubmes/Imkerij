@@ -13,10 +13,7 @@ $logo-font: 'Baloo';
 
 #navigation {
 	@extend .w3-row;
-	.offset {
-		@extend .w3-col;
-		@extend .m2;
-	}
+
 }
 
 #identity, #main, #sec-nav, #primary-actions, #flash-messages { @extend .w3-bar; }

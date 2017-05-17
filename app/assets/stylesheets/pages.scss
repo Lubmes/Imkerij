@@ -1,11 +1,19 @@
 #page {
   @extend .w3-col;
   @extend .l5;
-  margin-left: 16.7%;
-  img { @extend .w3-round-xlarge; }
+  img { @extend .w3-round-xxlarge; }
+
+  h3#title  {
+    @extend .w3-xlarge;
+  }
+
   #introduction {
     font-weight: lighter;
     @extend .w3-wide;
+    padding-bottom: 6px;
+  }
+  #introduction p:first-child {
+    margin-top: 0;
   }
 
   .mySlides {
@@ -19,9 +27,10 @@
     height: 18em;
   }
   #story {
-
+    @extend .w3-padding;
   }
 }
+
 #opening-times {
   @extend .w3-col;
   @extend .m3;
@@ -41,6 +50,7 @@
     margin-top: 0;
   }
 }
+
 #page-edit {
   @extend .w3-margin-top;
 	#pictures { @extend .w3-row-padding; }
