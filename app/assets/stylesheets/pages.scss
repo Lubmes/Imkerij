@@ -38,9 +38,16 @@
   @extend .w3-margin-top;
   @extend .w3-margin-right;
   @extend .w3-padding-large;
-  @extend .w3-card-4;
+  @extend .w3-card-2;
+  border-color: $brown-red!important;
+  @extend .w3-border;
+  @extend .w3-round-xxlarge;
+  // border: 5px $brown-red!important solid;
   @extend .w3-container;
-  h1 { @extend .w3-text-dark-grey; @extend .w3-center; @extend .w3-xlarge;}
+  h1 {
+    letter-spacing: 2px;
+    @extend .w3-text-dark-grey; @extend .w3-center; @extend .w3-xlarge;
+  }
   h2 { @extend .w3-text-teal; @extend .w3-large;
     margin-bottom: 5px;
   }
