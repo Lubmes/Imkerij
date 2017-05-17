@@ -5,6 +5,12 @@ $bee-yellow: #DDA900;
 $teal: #1a916f;
 $logo-font: 'Baloo';
 
+.w3-text-yellow, .w3-hover-text-yellow:hover {
+	color: $bee-yellow!important;
+}
+.w3-border-yellow {
+	border-color: $bee-yellow!important;
+}
 .w3-text-brown {
 	color: $brown-red!important;
 }
@@ -20,7 +26,6 @@ $logo-font: 'Baloo';
 
 #navigation {
 	@extend .w3-row;
-
 }
 
 #identity, #main, #sec-nav, #primary-actions, #flash-messages { @extend .w3-bar; }
@@ -78,7 +83,7 @@ $logo-font: 'Baloo';
 #sec-nav.shop a {
 	@extend .w3-medium;
 	@extend .w3-dark-grey;
-	@extend .w3-text-lime;
+	@extend .w3-text-yellow;
 	@extend .w3-hover-brown;
 	@extend .w3-hover-text-yellow;
 }
