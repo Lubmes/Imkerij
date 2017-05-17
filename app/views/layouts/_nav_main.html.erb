@@ -1,19 +1,11 @@
-<nav id='main-nav'>
-  <!-- pages -->
-  <%= active_link_to page_link(1), root_path, active: :exclusive %>
-  <%= active_link_to page_link(2), facilities_path, active: :exclusive %>
-  <%= active_link_to page_link(3), expo_path, active: :exclusive %>
-  <%= active_link_to page_link(4), route_path, active: :exclusive %>
-  <%= active_link_to page_link(5), extras_path, active: :exclusive %>
+<div class="offset">&nbsp;</div>
 
+<nav id='identity'>
+  <div class='logo'>
+    <%= image_tag 'imkerij_logo' %>
+    <h1>imkerij poppendamme</h1>
+  </div>
 
-  <%= active_link_to 'agenda', events_path %>
-  <%= active_link_to 'winkel', shop_path %>
-  <% if policy(:application).admin_action? %>
-    <%= active_link_to 'admin',
-          admin_path,
-          active: [['welcome', 'users', 'orders'],['index', 'admin']] %>
-  <% end %>
   <div class='profile'>
     <% if user_signed_in? %>
       <%= active_link_to(
@@ -29,4 +21,25 @@
       <%= active_link_to 'nieuwe account', new_user_registration_path %>
     <% end %>
   </div>
+</nav>
+
+<div class="offset">&nbsp;</div>
+
+<nav id='main'>
+  <!-- pages -->
+  <%= active_link_to page_link(1), root_path, active: :exclusive %>
+  <%= active_link_to page_link(2), facilities_path, active: :exclusive %>
+  <%= active_link_to page_link(3), expo_path, active: :exclusive %>
+  <%= active_link_to page_link(4), route_path, active: :exclusive %>
+  <%= active_link_to page_link(5), extras_path, active: :exclusive %>
+  <!-- events -->
+  <%= active_link_to 'agenda', events_path %>
+  <!-- shop -->
+  <%= active_link_to 'winkel', shop_path %>
+  <!-- admin area -->
+  <% if policy(:application).admin_action? %>
+    <%= active_link_to 'admin',
+          admin_path,
+          active: [['welcome', 'users', 'orders'],['index', 'admin']] %>
+  <% end %>
 </nav>

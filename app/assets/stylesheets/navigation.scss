@@ -1,28 +1,71 @@
+$brown-red: #911A3C;
+$bright-red: #EB0541;
+$dark-green: #0D4837;
+$bee-yellow: #DDA900;
+$logo-font: 'Baloo';
+
+.w3-text-brown {
+	color: $brown-red!important;
+}
+.w3-brown, .w3-hover-brown {
+	background-color: $brown-red!important;
+}
+
 #navigation {
-	// @extend .w3-top;
-}
-
-#main-nav, #sec-nav, #primary-actions, #flash-messages {
-	@extend .w3-bar;
-}
-
-#main-nav {
-	background: rgba(255, 255, 255, 0.85);
-	@extend .w3-bottombar;
-	@extend .w3-border-grey;
-	@extend .w3-card-4;
-	a {
-		@extend .w3-bar-item;
-		@extend .w3-button;
-		@extend .w3-hover-amber;
+	@extend .w3-row;
+	.offset {
+		@extend .w3-col;
+		@extend .m2;
 	}
-	a.active {
-		@extend .w3-dark-grey;
+}
+
+#identity, #main, #sec-nav, #primary-actions, #flash-messages { @extend .w3-bar; }
+#identity, #main {
+	@extend  .w3-col;
+	@extend .m10;
+}
+
+#identity {
+	.logo {
+		@extend .w3-bar-item;
+		@extend .w3-left;
+		h1 {
+			font-family: $logo-font, serif;
+			display: inline-block;
+			margin-bottom: 4px;
+			@extend .w3-xlarge;
+		}
+		img {
+			height: 35px;
+			width: 32px;
+			padding-top: 4px;
+		}
 	}
 	.profile {
 		@extend .w3-right;
 	}
 }
+
+#main, #identity {
+	@extend .w3-transparent;
+	a {
+		@extend .w3-bar-item;
+		@extend .w3-button;
+		@extend .w3-text-brown;
+	}
+	a:hover {
+		color: $dark-green!important;
+		border-color: $dark-green!important;
+		@extend .w3-bottombar;
+		@extend .w3-transparent;
+	}
+	a.active {
+		color: $bright-red!important;
+		border-color: $bright-red!important;
+		@extend .w3-bottombar;
+	}
+}
+
 #sec-nav.admin a {
 	@extend .w3-dark-grey;
 	@extend .w3-hover-teal;
