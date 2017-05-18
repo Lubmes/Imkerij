@@ -1,7 +1,7 @@
 #page {
   padding-top: 8px;
   @extend .w3-col;
-  @extend .l6;
+  @extend .l5;
   img {
     @extend .w3-round-xxlarge;
     margin-top: 5px;
@@ -12,6 +12,7 @@
 
   h3#title  {
     @extend .w3-xlarge;
+    color: $dark-green;
   }
 
   #introduction {
