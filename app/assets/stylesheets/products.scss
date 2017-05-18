@@ -36,8 +36,9 @@
 	.description a {
 		text-decoration: none;
 		padding: 6px;
-		@extend .w3-brown;
-		@extend .w3-text-yellow;
+		// @extend .w3-yellow;
+		background-color: $bee-yellow!important;
+		color: $dark-green!important;
 		@extend .w3-hover-brown;
 		@extend .w3-hover-text-yellow;
 		@extend .w3-round-xlarge;
@@ -69,15 +70,11 @@
 		@extend .w3-center;
 		.button {
 			@extend .w3-btn;
-			@extend .w3-transparent;
-			@extend .w3-border;
-			@extend .w3-border-yellow;
+			background-color: $brown-red;
+			@extend .w3-text-yellow;
 			@extend .w3-round-xlarge;
 			@extend .w3-padding;
 			@extend .w3-margin;
-			@extend .w3-text-black;
-			@extend .w3-hover-khaki;
-			@extend .w3-hover-text-green;
 		}
 	}
 }
