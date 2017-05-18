@@ -1,5 +1,7 @@
 <%= content_for :primary_actions do render 'layouts/primary_actions/primary_actions_events' end %>
 
+<div class='offset'>&nbsp;</div>
+
 <div id='events'>
 	<% @events.each do |event| %>
 		<div class='event'>
@@ -11,9 +13,9 @@
 			<div class='event-col'>
 					  <nav class=record-bar>
 							<div class='title'>
-							  <h3>
-									<div class='time'><%= I18n.l(event.date, format: :event_time) %></div>
-									<small><%= I18n.l(event.date, format: :event_date) %></small>
+								<div class='time'><%= I18n.l(event.date, format: :event_time) %></div>
+								<small><%= I18n.l(event.date, format: :event_date) %></small>
+								<h3>
 									<%= event.name %>
 								</h3>
 							</div>

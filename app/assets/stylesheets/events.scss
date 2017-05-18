@@ -3,34 +3,32 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #events {
-	padding-top: 90px;
-	// @extend .w3-margin-top;
+	@extend .w3-col;
+	@extend .l10;
+	@extend .w3-padding-24;
 	.event {
+		padding-bottom: 4px;
 		@extend .w3-row-padding;
 		.image-col {
 			@extend .w3-col;
 			@extend .l4;
-			.cover-picture {
-				img {
-					@extend .w3-margin-top;
-					@extend .w3-round-xxlarge;
-				}
+			.cover-picture img {
+				@extend .w3-round-xxlarge;
 			}
 		}
 		.event-col {
 			@extend .w3-col;
 			@extend .l8;
+			.time {
+				@extend .w3-tag;
+				@extend .w3-text-yellow;
+				@extend .w3-show-inline-block;
+				small {
+					@extend .w3-text-grey;
+				}
+			}
 		}
-
 		@extend .w3-margin-bottom;
-		.time {
-			@extend .w3-tag;
-			@extend .w3-text-yellow;
-			@extend .w3-show-inline-block;
-		}
-		small {
-			@extend .w3-text-grey;
-		}
 	}
 }
 #form.event {
