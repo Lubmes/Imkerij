@@ -5,6 +5,8 @@
 #events {
 	@extend .w3-col;
 	@extend .l10;
+	@extend .m10;
+	@extend .s10;
 	@extend .w3-padding-24;
 	.event {
 		padding-bottom: 4px;
@@ -12,15 +14,20 @@
 		@extend .w3-row-padding;
 		.image-col {
 			@extend .w3-col;
-			@extend .l4;
+			@extend .l5;
+			@extend .m10;
+			@extend .s10;
 			.cover-picture img {
 				@extend .w3-round-xxlarge;
 			}
 		}
 		.event-col {
 			@extend .w3-col;
-			@extend .l8;
+			@extend .l5;
+			@extend .m10;
+			@extend .s10;
 			.title {
+				@extend .w3-margin-top;
 				h3 {
 					@extend .w3-border-yellow;
 					@extend .w3-bottombar;

@@ -2,9 +2,12 @@
   padding-top: 8px;
   @extend .w3-col;
   @extend .l5;
+  @extend .m5;
+  @extend .s10;
   img {
     @extend .w3-round-xxlarge;
     margin-top: 5px;
+    @extend .w3-padding;
   }
 
   a { color: $teal; }
@@ -45,19 +48,19 @@
 }
 
 #opening-times {
+  word-wrap: break-word;
   @extend .w3-col;
+  @extend .l3;
   @extend .m3;
+  @extend .s10;
   @extend .w3-right;
-  // @extend .w3-margin-top;
-  margin-top: 60px;
-  @extend .w3-margin-right;
+  @extend .w3-margin;
+  margin-top: 60px!important;
   @extend .w3-padding-large;
 
   @extend .w3-card-4;
-  border-color: $brown-red!important;
-  // @extend .w3-border;
   @extend .w3-round-xxlarge;
-  border: 5px $brown-red!important solid;
+  // border: 5px $brown-red!important solid;
   @extend .w3-container;
   h1 {
     letter-spacing: 2px;

@@ -32,7 +32,9 @@ img {
 }
 .offset {
 	@extend .w3-col;
+	@extend .l2;
 	@extend .m2;
+	@extend .s2;
 }
 
 /* Background */

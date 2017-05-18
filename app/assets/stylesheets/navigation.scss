@@ -5,7 +5,9 @@
 #identity, #main, #sec-nav, #primary-actions, #flash-messages { @extend .w3-bar; }
 #identity, #main {
 	@extend  .w3-col;
+	@extend .l10;
 	@extend .m10;
+	@extend .s10;
 }
 
 #identity {

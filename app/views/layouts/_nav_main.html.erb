@@ -1,11 +1,6 @@
 <div class="offset">&nbsp;</div>
 
 <nav id='identity'>
-  <div class='logo'>
-    <%= image_tag 'https://s3-eu-west-1.amazonaws.com/imkerij-poppendamme-prod/imkerij_logo.png' %>
-    <h1>imkerij poppendamme</h1>
-  </div>
-
   <div class='profile'>
     <% if user_signed_in? %>
       <%= active_link_to(
@@ -20,6 +15,11 @@
       <%= active_link_to 'inloggen', new_user_session_path %>
       <%= active_link_to 'nieuwe account', new_user_registration_path %>
     <% end %>
+  </div>
+
+  <div class='logo'>
+    <%= image_tag 'https://s3-eu-west-1.amazonaws.com/imkerij-poppendamme-prod/imkerij_logo.png' %>
+    <h1>imkerij poppendamme</h1>
   </div>
 </nav>
 
