@@ -6,10 +6,12 @@
 .shopping-col {
 	@extend .w3-col;
 	@extend .l5;
+	@extend .m5;
 }
 .order-col {
 	@extend .w3-col;
 	@extend .l5;
+	@extend .m5;
 	@extend .w3-right;
 }
 
@@ -25,21 +27,6 @@
   	@extend .w3-text-dark-grey;
     @extend .w3-large;
   }
-	// Categorie Gallery
-	.cat-col {
-		.gallery {
-			.gallery-picture {
-				padding-bottom: 4px;
-				padding-left: 24%;
-				img {
-					@extend .w3-opacity-min;
-					@extend .w3-round-xxlarge;
-					width: 86%;
-					margin-top: 18%;
-					}
-			}
-		}
-	}
 	#order {
 		position: fixed;
 		right: 0;
