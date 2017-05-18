@@ -5,15 +5,7 @@
 // Shop Column Spread Out
 .shopping-col {
 	@extend .w3-col;
-	@extend .l7;
-  .cat-col {
-  	@extend .w3-col;
-  	@extend .l3;
-  }
-  .prod-col {
-  	@extend .w3-col;
-  	@extend .l9;
-  }
+	@extend .l5;
 }
 .order-col {
 	@extend .w3-col;

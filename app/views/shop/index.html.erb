@@ -2,16 +2,18 @@
 <%= content_for :primary_actions do render 'layouts/primary_actions/primary_actions_shop' end %>
 
 <div id='store-front'>
+	<div class='offset'>&nbsp;</div>
+
 	<div id='categories' class='shopping-col'>
 		<% @categories.each do |category| %>
 			<div id='cat-<%= category.id %>'>
-				<div class='category'>
-					<div class='cat-col'>
-						<%= render 'categories/category_gallery', category: category %>
-					</div>
-					<div id='products' class='prod-col'>
-						<%= render category %>
+					<div id='products'>
+						<div class='category'>
+							<%= render category %>
+							<%= render 'categories/category_gallery', category: category %>
+						</div>
 						<% policy_scope(category.products).each do |product| %>
+
 							<div class='product'>
 								<div class='info'>
 									<%= render 'products/product_bar', product: product %>
@@ -31,9 +33,9 @@
 									</div>
 								<% end %>
 							</div>
+
 						<% end %>
 					</div>
-				</div>
 			</div>
 		<% end %>
 	</div>

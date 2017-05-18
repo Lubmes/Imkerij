@@ -3,9 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #store-front .category {
+	h3 {
+		@extend .w3-text-yellow;
+		letter-spacing: 3px;
+	}
 	@extend .w3-row;
-	.prod-col {
-		padding-left: 4px;
+	.gallery {
+		@extend .w3-row-padding;
+		.cat-picture {
+			@extend .w3-col;
+			@extend .l3;
+			@extend .w3-padding;
+		}
 	}
 }
 #shop-edit.category {
