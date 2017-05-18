@@ -1,27 +1,25 @@
 <div id='picture_<%= picture.id %>'>
 
-  <ul class='record-actions'>
-	    <li class="<%= picture.visable ? 'visable' : 'invisable' %>">
+  <nav class='record-bar'>
 
-				<!-- zichtbaar / onzichtbaar schakelaar -->
-				<%= link_to [:visability_toggle, imageable_object, picture], remote: true do %>
-					<% if picture.visable? %>
-						<i class="fa fa-eye"></i>
-					<% else %>
-						<i class="fa fa-eye-slash"></i>
-					<% end %>
-				<% end %>
+  	<!-- zichtbaar / onzichtbaar schakelaar -->
+  	<%= link_to [:visability_toggle, imageable_object, picture],
+          class: "#{picture.visable ? 'visable' : 'invisable'}",
+          remote: true do %>
+  		<% if picture.visable? %>
+  			<i class="fa fa-eye"></i>
+  		<% else %>
+  			<i class="fa fa-eye-slash"></i>
+  		<% end %>
+  	<% end %>
 
-			</li>
-	  	<li colspan='2'>
 
-				<!-- verwijder -->
-				<%= link_to [imageable_object, picture], method: :delete, remote: true  do %>
-					<i class="fa fa-trash-o"></i>
-				<% end %>
-
-			</li>
-	</ul>
+  	<!-- verwijder -->
+  	<%= link_to [imageable_object, picture], method: :delete, remote: true  do %>
+  		<i class="fa fa-trash-o"></i>
+  	<% end %>
+	
+	</nav>
 
 	<div class='image'><%= image_tag picture.image.url %></div>
 
