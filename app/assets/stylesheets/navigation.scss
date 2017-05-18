@@ -1,29 +1,3 @@
-$brown-red: #911A3C;
-$bright-red: #EB0541;
-$dark-green: #0D4837;
-$bee-yellow: #DDA900;
-$teal: #1a916f;
-$logo-font: 'Baloo';
-
-.w3-text-yellow, .w3-hover-text-yellow:hover {
-	color: $bee-yellow!important;
-}
-.w3-border-yellow {
-	border-color: $bee-yellow!important;
-}
-.w3-text-brown {
-	color: $brown-red!important;
-}
-.w3-text-green {
-	color: $dark-green!important;
-}
-.w3-text-teal {
-	color: $teal!important;
-}
-.w3-brown, .w3-hover-brown {
-	background-color: $brown-red!important;
-}
-
 #navigation {
 	@extend .w3-row;
 }

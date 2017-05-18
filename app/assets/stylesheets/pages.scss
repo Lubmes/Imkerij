@@ -1,7 +1,14 @@
 #page {
+  padding-top: 8px;
   @extend .w3-col;
-  @extend .l5;
-  img { @extend .w3-round-xxlarge; }
+  @extend .l6;
+  img {
+    @extend .w3-round-xxlarge;
+    margin-top: 5px;
+  }
+
+  a { color: $teal; }
+  a:hover { color: $light-blue; }
 
   h3#title  {
     @extend .w3-xlarge;
@@ -11,9 +18,12 @@
     font-weight: lighter;
     @extend .w3-wide;
     padding-bottom: 6px;
-  }
-  #introduction p:first-child {
-    margin-top: 0;
+    p:first-child {
+      margin-top: 0;
+    }
+    p {
+      margin-bottom: 2px;
+    }
   }
 
   .mySlides {
@@ -21,6 +31,8 @@
   }
   .w3-left, .w3-right, .w3-badge {cursor:pointer}
   .w3-badge {height:13px;width:13px;padding:0}
+  .w3-left { padding-left: 5px;}
+  .w3-right { padding-right: 5px;}
 
   #map {
     width: 200%;
@@ -35,24 +47,27 @@
   @extend .w3-col;
   @extend .m3;
   @extend .w3-right;
-  @extend .w3-margin-top;
+  // @extend .w3-margin-top;
+  margin-top: 60px;
   @extend .w3-margin-right;
   @extend .w3-padding-large;
+
   @extend .w3-card-4;
   border-color: $brown-red!important;
-  @extend .w3-border;
+  // @extend .w3-border;
   @extend .w3-round-xxlarge;
-  // border: 5px $brown-red!important solid;
+  border: 5px $brown-red!important solid;
   @extend .w3-container;
   h1 {
     letter-spacing: 2px;
     @extend .w3-text-dark-grey; @extend .w3-center; @extend .w3-xlarge;
   }
-  h2 { @extend .w3-text-teal; @extend .w3-large;
+  h2 { @extend .w3-text-teal; @extend .w3-medium;
     margin-bottom: 5px;
+    font-weight: bolder;
   }
-  h3 { @extend .w3-text-green; @extend .w3-center; @extend .w3-xlarge;}
-  h4 { @extend .w3-text-grey; @extend .w3-center; @extend .w3-large;}
+  h3 { @extend .w3-text-green; @extend .w3-center; @extend .w3-large; font-weight: bolder;}
+  h4 { @extend .w3-text-grey; @extend .w3-center; @extend .w3-medium;}
   p, ul {
     margin-top: 0;
   }
