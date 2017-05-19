@@ -10,7 +10,7 @@
 		@extend .w3-text-grey;
 	}
 	@extend .w3-row;
-	@extend .w3-border-yellow;
+	@extend .w3-border-green;
 	@extend .w3-leftbar;
 	ul {
 		@extend .w3-text-dark-grey;
@@ -36,14 +36,17 @@
 	.description a {
 		text-decoration: none;
 		padding: 6px;
-		// @extend .w3-yellow;
-		background-color: $bee-yellow!important;
-		color: $dark-green!important;
-		@extend .w3-hover-brown;
+		background-color: $dark-green!important;
+		color: $bee-yellow!important;
+		// @extend .w3-hover-brown;
+		@extend .w3-btn;
 		@extend .w3-hover-text-yellow;
 		@extend .w3-round-xlarge;
 		@extend .w3-margin;
 		@extend .w3-small;
+	}
+	.description a:hover {
+		// background-color: $bright-red!important;
 	}
 }
 #record-zoom.product {

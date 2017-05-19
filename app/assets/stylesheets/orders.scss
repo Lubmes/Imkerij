@@ -83,12 +83,11 @@
 			@extend .w3-center;
 			.button {
 				@extend .w3-small;
-				@extend .w3-border;
-				@extend .w3-white;
-				@extend .w3-border-yellow;
+				@extend .w3-btn;
+				background-color: $brown-red;
+				@extend .w3-text-yellow;
 				@extend .w3-round-xlarge;
-				@extend .w3-hover-khaki;
-				@extend .w3-hover-text-green;			}
+			}
 		}
 	}
 	.correction .booking-form .submit .button {
