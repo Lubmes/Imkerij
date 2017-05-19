@@ -58,10 +58,11 @@
 #sec-nav.admin a.active { @extend .w3-teal; }
 #sec-nav.shop a {
 	@extend .w3-medium;
-	@extend .w3-brown;
+	@extend .w3-green;
 	@extend .w3-text-yellow;
-	@extend .w3-hover-green;
-	@extend .w3-hover-text-yellow;
+}
+#sec-nav.shop a:hover {
+	box-shadow:0 8px 12px 0 rgba(0,0,0,0.2),0 6px 12px 0 rgba(0,0,0,0.19)
 }
 #sec-nav {
 	@extend .w3-transparent;

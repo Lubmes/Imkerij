@@ -7,11 +7,12 @@
 	@extend .w3-col;
 	@extend .l5;
 	@extend .m5;
+	@extend .s10;
 }
 .order-col {
 	@extend .w3-col;
 	@extend .l5;
-	@extend .m5;
+	@extend .s10;
 	@extend .w3-right;
 }
 
@@ -35,6 +36,7 @@
 			@extend .w3-border-grey;
 			width: 95%;
     }
+		@extend .w3-white;
   }
 }
 

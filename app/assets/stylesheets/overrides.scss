@@ -16,7 +16,11 @@ $logo-font: 'Baloo';
 .w3-text-brown { color: $brown-red!important; }
 
 .w3-green, .w3-hover-green:hover { background-color: $dark-green!important; }
-.w3-text-green { color: $dark-green!important; }
+.w3-text-green, .w3-hover-text-green:hover { color: $dark-green!important; }
 .w3-border-green { border-color: $dark-green!important; }
 
 .w3-text-teal { color: $teal!important; }
+
+.w3-red { background-color: $bright-red!important; }
+.w3-text-red, .w3-hover-text-red:hover { color: $bright-red!important; }
+.w3-border-red { border-color: $bright-red!important; }

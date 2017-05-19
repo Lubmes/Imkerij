@@ -40,8 +40,12 @@
 }
 
 #order, #order-processing {
+	.fa-trash-o {
+		@extend .w3-hover-text-red;
+	}
 	.to-check-out {
 		@extend .w3-right;
+		@extend .w3-hover-text-green;
 	}
 	table {
 		padding-left: 8px;
