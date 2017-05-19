@@ -3,6 +3,8 @@
 
 <div id='users'>
 	<% @users.each do |user| %>
-		<%= render user %>
+		<div class='user-grid-placeholder'>
+			<%= render user %>
+		</div>
 	<% end %>
 </div>

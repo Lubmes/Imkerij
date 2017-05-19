@@ -1,6 +1,5 @@
 // ADMIN: Info
 #admin-info {
-	// padding-top: 30px;
 	.graphs {
 		@extend .w3-margin-bottom;
 		@extend .w3-card-2;
@@ -18,12 +17,32 @@
 	@extend .w3-row-padding;
 	#central-reports {
 		@extend .w3-col;
-		@extend .m6;
+		@extend .l6;
+		@extend .m12;
 		@extend .w3-row-padding;
+		#order-type-totals {
+			@extend .w3-card-4;
+			td { text-align: right;}
+			@extend .w3-col;
+			@extend .l2;
+			@extend .m2;
+			@extend .w3-left;
+			@extend .w3-margin-top;
+			@extend .w3-margin-bottom;
+		}
+		table {
+			@extend .w3-col;
+	    @extend .w3-table;
+			@extend .w3-card-4;
+			@extend .w3-white;
+			@extend .w3-bordered;
+		}
 		#result-totals {
 			@extend .w3-card-4;
 			@extend .w3-col;
+			@extend .l6;
 			@extend .m6;
+			@extend .w3-right;
 			@extend .w3-margin-top;
 			@extend .w3-margin-bottom;
 			th { font-weight: lighter; }
@@ -33,48 +52,46 @@
 			.current-month { @extend .w3-medium; @extend .w3-text-dark-grey; }
 			.today { @extend .w3-xlarge; @extend .w3-text-black; }
 		}
-		#order-type-totals {
-			@extend .w3-card-4;
-			td { text-align: right;}
-			@extend .w3-col;
-			@extend .m2;
-			@extend .w3-margin;
-		}
-		table {
-			@extend .w3-col;
-	    @extend .w3-table;
-			@extend .w3-card-4;
-			@extend .w3-white;
-			@extend .w3-bordered;
-		}
+
 		#overall-development {
 			@extend .w3-card-4;
 			@extend .graphs;
 			@extend .w3-col;
 			@extend .m12;
+			@extend .w3-margin-top;
+			@extend .w3-margin-bottom;
 		}
 	}
 	#months {
 		@extend .w3-col;
-		@extend .m6;
+		@extend .l6;
+		@extend .m12;
+		@extend .s12;
 		.month {
 			@extend .graphs;
+			@extend .w3-margin-top;
+			@extend .w3-margin-bottom;
 		}
 	}
 }
 
 #users {
-	padding-top: 90px;
-	@extend .w3-row;
-	width: 100%;
-	.user {
+	@extend .w3-row-padding;
+	.user-grid-placeholder {
 		@extend .w3-col;
-		width: 32%;
-		margin-left: 1%;
+		@extend .l4;
+		@extend .m6;
+		@extend .s12;
+	}
+	.user {
+		nav {
+			padding-top: 8px;
+			padding-bottom: 4px;
+		}
+		height: 220px;
 	}
 }
 #orders {
-	// @extend .w3-margin-top;
 	@extend .w3-margin-bottom;
 	th .status-tag {
 		@extend .w3-large;
@@ -84,6 +101,7 @@
 		@extend .w3-table;
 	}
 	tr.order {
+		@extend .w3-white;
 		@extend .w3-hover-grey;
 		@extend .w3-border-top;
 		@extend .w3-border-bottom;
@@ -100,6 +118,7 @@
 			@extend .w3-text-black;
 		}
 		td {
+			vertical-align: middle;
 			padding-left: 0;
 			padding-right: 0;
 		}

@@ -2,9 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.status-tag { @extend .w3-tag; }
+.status-tag { @extend .w3-tag;}
 .status-tag.open, .status-tag.problem, .status-tag.paid, .status-tag.sent {
-	@extend .w3-text-black;
+	@extend .w3-text-white;
+	@extend .w3-padding-small;
+	font-weight: bold;
 }
 .status-tag.problem { @extend .w3-yellow; }
 .status-tag.paid { @extend .w3-red; }

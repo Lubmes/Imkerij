@@ -1,8 +1,5 @@
 <div class='user'>
 	<nav class='record-bar'>
-		<div class='title'>
-			<h4><%= user.email %></h4>
-		</div>
 
 		<% unless controller.action_name == 'confirm' ||
 							controller.action_name == 'pay' ||
@@ -19,8 +16,12 @@
 					<% end %>
 				<% end %>
 			</div>
-
 		<% end %>
+
+		<div class='title'>
+			<h4><%= user.email %></h4>
+		</div>
+
 	</nav>
 
 	<table>

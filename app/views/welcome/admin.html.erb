@@ -4,6 +4,27 @@
 
 <div id='admin-info'>
 	<div id='central-reports'>
+		<table id='order-type-totals'>
+			<tbody>
+				<tr>
+					<td><span class='status-tag problem'>probleem</span></td>
+					<td><b><%= Order.where(status: :problem).count %></b></td>
+				</tr>
+				<tr>
+					<td><span class='status-tag paid'>betaald</span></td>
+					<td><b><%= Order.where(status: :paid).count %></b></td>
+				</tr>
+				<tr>
+					<td><span class='status-tag sent'>verzonden</span></td>
+					<td><%= Order.where(status: :sent).count %></td>
+				</tr>
+				<tr>
+					<td><span class='status-tag open'>open</span></td>
+					<td><%= Order.where(status: :open).count %></td>
+				</tr>
+			</tbody>
+		</table>
+
 		<table id='result-totals'>
 			<tbody>
 				<tr>
@@ -22,26 +43,6 @@
 				<tr>
 					<th>Totaalbedrag<br><i> vandaag</i></th>
 					<td class="today"><%= currency_symbol %> <%= Order.sum_of_todays_orders %></td>
-				</tr>
-			</tbody>
-		</table>
-		<table id='order-type-totals'>
-			<tbody>
-				<tr>
-					<td><span class='status-tag problem'>probleem</span></td>
-					<td><b><%= Order.where(status: :problem).count %></b></td>
-				</tr>
-				<tr>
-					<td><span class='status-tag paid'>betaald</span></td>
-					<td><b><%= Order.where(status: :paid).count %></b></td>
-				</tr>
-				<tr>
-					<td><span class='status-tag sent'>verzonden</span></td>
-					<td><%= Order.where(status: :sent).count %></td>
-				</tr>
-				<tr>
-					<td><span class='status-tag open'>open</span></td>
-					<td><%= Order.where(status: :open).count %></td>
 				</tr>
 			</tbody>
 		</table>
