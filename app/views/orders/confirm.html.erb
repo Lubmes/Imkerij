@@ -1,23 +1,27 @@
-<div id='controls'>
-	<h2>VERZENDING</h2>
-	<!-- tijdelijke link. -->
-	<!-- eigenlijk naar bank gaan met succes url bijgevoegd. -->
-	<%= link_to 'Betalen', [:pay, @order] %>
-</div>
+<div class='offset'>&nbsp;</div>
 
 <div id='payment' class='to-bank'>
-<header>
-	<h3 class='co-order-col'>Uw bestelling</h3>
-	<h3 class='co-user-col'>Uw verzendgegevens</h3>
-</header>
+
+	<div id='controls'>
+		<h2>VERZENDING</h2>
+		<%= link_to 'Betalen', [:pay, @order] %>
+	</div>
 
 	<div id='order' class='co-order-col'>
-		<%= render @order %>
+		<header>
+			<h3>Uw bestelling</h3>
+		</header>
+			<%= render @order %>
 	</div>
+
 	<div class="user-info">
 		<div class="co-user-col">
+			<header>
+				<h3>Uw verzendgegevens</h3>
+			</header>
 			<%= render @customer %>
 			<%= render @delivery, card_title: "Verzendadres" %>
 		</div>
 	</div>
+
 </div>

@@ -1,3 +1,7 @@
+<div class='offset'>&nbsp;</div>
+
+<div id='payment' class='success'>
+
 <div id='controls'>
 	<h2>SUCCES!</h2>
 	<%= link_to shop_path, class: 'success' do %>
@@ -8,25 +12,29 @@
 				format: :pdf %>
 </div>
 
-<div id='payment' class='to-bank'>
-<header>
-	<h3 class='co-order-col'>Uw bestelling</h3>
-	<h3 class='co-user-col'>Uw verzendgegevens</h3>
-</header>
+
+
 
 	<div id='order' class='co-order-col'>
+		<header>
+			<h3>Uw bestelling</h3>
+		</header>
 		<%= render @order %>
 	</div>
 	<div class="user-info">
 		<div class="co-user-col">
+			<header>
+				<h3>Uw verzendgegevens</h3>
+			</header>
 			<%= render @customer %>
 			<%= render @delivery, card_title: "Verzendadres" %>
 		</div>
 	</div>
 
+
 </div>
 
-<% if true %>
+<% if false %>
 <div>
 	<ul>
 		<% @shipment.rates.each do |rate| %>

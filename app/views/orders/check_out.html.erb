@@ -2,57 +2,65 @@
 	<%= render 'layouts/flash_messages' %>
 <% end %>
 
-<div id='controls'>
-	<h2>AFREKENEN</h2>
-	<% if policy(@order).confirm? %>
-		<%= link_to 'Bevestig', [:confirm, @order] %>
-	<% end %>
-</div>
+<div class='offset'>&nbsp;</div>
 
-<div id='payment' class='to-bank'>
-<header>
-	<h3 class='co-order-col'>Controleer uw bestelling!</h3>
-	<h3 class='co-user-col'>
-		<% if user_signed_in? %>
-			Controleer uw verzendgegevens!
-		<% else %>
-			Uw gegevens zijn nodig voor verzending
+<div id='payment'>
+
+	<div id='controls'>
+		<h2>AFREKENEN</h2>
+		<% if policy(@order).confirm? %>
+			<%= link_to 'Bevestig', [:confirm, @order] %>
 		<% end %>
-	</h3>
-</header>
+	</div>
 
 	<div id='order' class='co-order-col'>
+		<header>
+			<h3>Controleer uw bestelling!</h3>
+		</header>
+
 		<div id='order-ajax-<%= @order.id %>'>
 			<%= render @order %>
 		</div>
 	</div>
 
-	<div id="user-info">
-		<div class="co-user-col">
-			<% if user_signed_in? %>
-				<%= render @user %>
-				<% unless @delivery.nil? %>
-					<div class='delivery-ajax'>
-						<%= render @delivery,
-									card_title: "Uw geselecteerde verzendadres" %>
-					</div>
+	<div class="co-user-col">
+		<header>
+			<h3>
+				<% if user_signed_in? %>
+					Controleer uw verzendgegevens!
 				<% else %>
-					<header>
-						<h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
-					</header>
-					<div class='delivery-ajax'>
-						<%= render 'deliveries/form',
-									delivery: @user.deliveries.build %>
-					</div>
+					Uw gegevens zijn nodig voor verzending
 				<% end %>
-			<% else %>
-				<div class='user registration'>
-					<%= render 'devise/registrations/form', with_header: true %>
+			</h3>
+		</header>
+
+		<div id="user-info">
+
+		<% if user_signed_in? %>
+			<%= render @user %>
+			<% if @delivery %>
+				<div class='delivery-ajax'>
+					<%= render @delivery,
+								card_title: "Uw geselecteerde verzendadres" %>
 				</div>
-				<div class='user log-in'>
-					<%= render 'devise/sessions/form', with_header: true %>
+			<% else %>
+				<header>
+					<h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
+				</header>
+				<div class='delivery-ajax'>
+					<%= render 'deliveries/form',
+								delivery: @user.deliveries.build %>
 				</div>
 			<% end %>
+		<% else %>
+			<div class='user registration'>
+				<%= render 'devise/registrations/form', with_header: true %>
+			</div>
+			<div class='user log-in'>
+				<%= render 'devise/sessions/form', with_header: true %>
+			</div>
+		<% end %>
+
 		</div>
 	</div>
 
