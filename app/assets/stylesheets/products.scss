@@ -81,12 +81,12 @@
 		}
 	}
 }
-
-#shop-edit.product {
-	.picture-ajax img { @extend .w3-round-xxlarge; }
-	#form { @extend .w3-border-green; }
-	.button {
-		@extend .w3-lime;
-		width: 35%;
-	}
-}
+//
+// #shop-edit.product {
+// 	.picture-ajax img { @extend .w3-round-xxlarge; }
+// 	#form { @extend .w3-border-green; }
+// 	.button {
+// 		@extend .w3-lime;
+// 		width: 35%;
+// 	}
+// }

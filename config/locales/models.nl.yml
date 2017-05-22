@@ -50,6 +50,7 @@ nl:
         picture: Afbeelding
       category:
         name: Naam
+        pictures: Foto's
       product:
         name: Naam
         description: Omschrijving

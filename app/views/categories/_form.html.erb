@@ -1,9 +1,15 @@
 <%= form_for category, html: { multipart: true } do |f| %>
+
   <div id=form>
   	<!-- Categorie -->
   	<table>
+      <!-- Afbeeldingen -->
+      <tr>
+        <th><%= f.label :pictures %></th>
+        <td><%= file_field_tag 'images[]', type: :file, multiple: true %></td>
+      </tr>
   		<!-- Naam -->
-  		<tr>
+  		<tr class='name'>
   			<th><%= f.label :name %></th>
    			<td><%= f.text_field :name %>
         </td>
@@ -16,11 +22,8 @@
           </td>
         </tr>
       <% end %>
-      <tr>
-        <th><%= f.label :pictures %></th>
-        <td><%= file_field_tag 'images[]', type: :file, multiple: true %></td>
-      </tr>
     </table>
     <%= f.submit class: 'button' %>
   </div>
+
 <% end %>

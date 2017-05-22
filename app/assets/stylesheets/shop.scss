@@ -40,24 +40,37 @@
   }
 }
 
+#shop-edit.category .name {
+	@extend .w3-border-green;
+	@extend .w3-bottombar;
+	@extend .w3-margin-bottom;
+	padding-bottom: 10px;
+}
 #shop-edit {
+	@extend .w3-col;
+	@extend .l10;
+	@extend .m10;
+	@extend .s10;
 	@extend .w3-margin-top;
+	padding-right: 50px;
+	padding-top: 10px;
 	#pictures { @extend .w3-row-padding; }
 	.picture-ajax {
 		@extend .w3-col;
 		@extend .l2;
+		@extend .m2;
+		@extend .s2;
 		img { @extend .w3-round-xlarge; }
 	}
 	#form {
-		@extend .w3-border-top;
-		@extend .w3-margin-left;
-		padding-top: 2%;
+		padding-top: 8px;
 		th {
 			text-align: right;
 			width: 18%;
+			@extend .w3-text-green;
 		}
 		.name td input, .description td textarea { width: 60%; }
 		.description td textarea { rows: 7; }
-		.button { @extend .w3-btn; }
+		.button { @extend .w3-btn; @extend .w3-lime; }
 	}
 }

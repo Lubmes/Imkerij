@@ -1,73 +1,78 @@
-<%= form_for [event], html: { multipart: true } do |f| %>
-<div id='form' class='event'>
+<div class='offset'>&nbsp;</div>
 
-	<div class='image-col'>
-		<% if event.pictures.any? %>
-			<%= render 'pictures/cover_picture', picture: event.pictures.first %>
-		<% end %>
-	</div>
-	<div class='event-col'>
-  <!-- Event -->
-	<table>
-		<!-- Afbeelding -->
-		<tr>
-			<th><%= f.label :picture %></th>
-			<td><%= file_field_tag 'image', type: :file, multiple: false %></td>
-    </tr>
-		<% if event.errors[:pictures].any? %>
-      <tr id='errors'>
-        <th></th><td><% event.errors[:pictures].each do |msg| %>
-            <%= "- #{msg}" %><br>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-		<!-- Tijdstip -->
-    <tr>
-      <th><%= f.label :date %></td>
-      <td><%= f.text_field :date, id: 'datetimejs-input' %></td>
-    </tr>
-    <% if event.errors[:date].any? %>
-      <tr id='errors'>
-        <th></th><td><% event.errors[:date].each do |msg| %>
-            <%= "- #{msg}" %><br>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-    <!-- Naam -->
-		<tr class='name'>
-			<th><%= f.label :name %></td>
- 			<td><%= f.text_field :name, size: 30 %>
-      </td>
-  	</tr>
-    <% if event.errors[:name].any? %>
-      <tr id='errors'>
-        <th></th><td><% event.errors[:name].each do |msg| %>
-            <%= "- #{msg}" %><br>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-    <!-- Omschrijving -->
-  	<tr class='description'>
-		  <th><%= f.label :description %></td>
-  		<td><%= f.text_area :description, rows: 10 %></td>
-  	</tr>
-    <% if event.errors[:description].any? %>
-      <tr id='errors'>
-        <th></th><td><% event.errors[:description].each do |msg| %>
-            <%= "- #{msg}" %><br>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+<div id='events'>
+	<%= form_for [event], html: { multipart: true } do |f| %>
+	<div id='form' class='event'>
 
-  <%= f.submit class: 'button' %>
+		<div class='image-col'>
+			<% if event.pictures.any? %>
+				<%= render 'pictures/cover_picture', picture: event.pictures.first %>
+			<% end %>
+		</div>
+		<div class='event-col'>
+	  <!-- Event -->
+		<table>
+			<!-- Afbeelding -->
+			<tr>
+				<th><%= f.label :picture %></th>
+				<td><%= file_field_tag 'image', type: :file, multiple: false %></td>
+	    </tr>
+			<% if event.errors[:pictures].any? %>
+	      <tr id='errors'>
+	        <th></th><td><% event.errors[:pictures].each do |msg| %>
+	            <%= "- #{msg}" %><br>
+	          <% end %>
+	        </td>
+	      </tr>
+	    <% end %>
+			<!-- Tijdstip -->
+	    <tr>
+	      <th><%= f.label :date %></td>
+	      <td><%= f.text_field :date, id: 'datetimejs-input' %></td>
+	    </tr>
+	    <% if event.errors[:date].any? %>
+	      <tr id='errors'>
+	        <th></th><td><% event.errors[:date].each do |msg| %>
+	            <%= "- #{msg}" %><br>
+	          <% end %>
+	        </td>
+	      </tr>
+	    <% end %>
+	    <!-- Naam -->
+			<tr class='name'>
+				<th><%= f.label :name %></td>
+	 			<td><%= f.text_field :name, size: 30 %>
+	      </td>
+	  	</tr>
+	    <% if event.errors[:name].any? %>
+	      <tr id='errors'>
+	        <th></th><td><% event.errors[:name].each do |msg| %>
+	            <%= "- #{msg}" %><br>
+	          <% end %>
+	        </td>
+	      </tr>
+	    <% end %>
+	    <!-- Omschrijving -->
+	  	<tr class='description'>
+			  <th><%= f.label :description %></td>
+	  		<td><%= f.text_area :description, rows: 10 %></td>
+	  	</tr>
+	    <% if event.errors[:description].any? %>
+	      <tr id='errors'>
+	        <th></th><td><% event.errors[:description].each do |msg| %>
+	            <%= "- #{msg}" %><br>
+	          <% end %>
+	        </td>
+	      </tr>
+	    <% end %>
+	  </table>
+
+	  <%= f.submit class: 'button' %>
+		</div>
 	</div>
+	<% end %>
+	
 </div>
-<% end %>
 
 <script type="text/javascript">
   $(document).ready(function(){

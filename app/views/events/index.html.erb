@@ -3,6 +3,8 @@
 <div class='offset'>&nbsp;</div>
 
 <div id='events'>
+	<h3 class='title'>Onze activiteiten</h3>
+
 	<% @events.each do |event| %>
 		<div class='event'>
 			<div class='image-col'>
@@ -11,32 +13,33 @@
 				<% end %>
 			</div>
 			<div class='event-col'>
-					  <nav class=record-bar>
-							<div class='title'>
-								<div class='time'><%= I18n.l(event.date, format: :event_time) %></div>
-								<small><%= I18n.l(event.date, format: :event_date) %></small>
-								<h3>
-									<%= event.name %>
-								</h3>
-							</div>
-							<div class='actions'>
-								<% if policy(event).admin_action? %>
-										<%= link_to [:edit, event], title: "bijwerken" do %>
-											<i class='icon-edit'></i>
-										<% end %>
-										<%= link_to [event],
-													method: :delete,
-													data: { confirm: 'Weet je zeker dat je dit agendapunt wil verwijderen?' },
-													title: "verwijderen" do %>
-											<i class='icon-trash'></i>
-										<% end %>
-								<% end %>
-							</div>
-						</nav>
+				
+			  <nav class=record-bar>
+					<div class='title'>
+						<div class='time'><%= I18n.l(event.date, format: :event_time) %></div>
+						<small><%= I18n.l(event.date, format: :event_date) %></small>
+						<h3>
+							<%= event.name %>
+						</h3>
+					</div>
+					<div class='actions'>
+						<% if policy(event).admin_action? %>
+							<%= link_to [:edit, event], title: "bijwerken" do %>
+								<i class='icon-edit'></i>
+							<% end %>
+							<%= link_to [event],
+										method: :delete,
+										data: { confirm: 'Weet je zeker dat je dit agendapunt wil verwijderen?' },
+										title: "verwijderen" do %>
+								<i class='icon-trash'></i>
+							<% end %>
+						<% end %>
+					</div>
+				</nav>
 
-					  <p>
-						  <%= event.description %>
-						</p>
+			  <p>
+				  <%= event.description %>
+				</p>
 			</div>
 		</div>
 	<% end %>

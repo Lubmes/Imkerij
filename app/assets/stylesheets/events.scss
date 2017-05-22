@@ -7,9 +7,10 @@
 	@extend .l10;
 	@extend .m10;
 	@extend .s10;
-	@extend .w3-padding-24;
+	h3.title {
+		color: $dark-green;
+	}
 	.event {
-		padding-bottom: 4px;
 		@extend .w3-padding-24;
 		@extend .w3-row-padding;
 		.image-col {
@@ -46,6 +47,7 @@
 	}
 }
 #form.event {
+	@extend .w3-margin-bottom;
 	th {
 		text-align: right;
 		@extend .w3-text-brown;

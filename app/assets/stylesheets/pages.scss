@@ -78,11 +78,14 @@
 }
 
 #page-edit {
+  h1, h2 { @extend .w3-text-teal;}
   @extend .w3-margin-top;
 	#pictures { @extend .w3-row-padding; }
 	.picture-ajax {
 		@extend .w3-col;
 		@extend .l2;
+    @extend .m2;
+    @extend .s2;
 		img { @extend .w3-round-xlarge; }
 	}
   table {
@@ -90,6 +93,7 @@
     th {
       width: 12%;
       text-align: right;
+      @extend .w3-text-brown;
     }
     input, textarea {
       width: 60%;
