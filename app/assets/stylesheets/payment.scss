@@ -39,14 +39,18 @@
 			@extend .w3-hover-border-white;
 			@extend .w3-hover-text-yellow;
 		}
+		.confirm {
+			display: none;
+		}
 	}
 	h3 {
+		@extend .w3-margin-top;
 		@extend .w3-text-grey;
 		@extend .w3-large;
-		.add-address {
-			@extend .w3-large;
-			@extend .w3-text-orange;
-		}
+	}
+	h3.add-address {
+		@extend .w3-large;
+		@extend .w3-text-orange;
 	}
 	#order {
 		.bookings {
@@ -60,27 +64,3 @@
 		}
 	}
 }
-
-header {
-	@extend .w3-margin-top;
-	.co-order-col, .co-user-col {
-		@extend .w3-text-grey;
-		@extend .w3-large;
-	}
-}
-// // #controls {
-//
-// 	a {
-// 		text-decoration: none;
-// 		@extend .w3-border;
-// 		@extend .w3-border-white;
-// 		@extend .w3-hover-border-blue;
-// 		@extend .w3-round-xlarge;
-// 		@extend .w3-padding;
-// 	}
-// 	a.success {
-// 		@extend .w3-text-green;
-// 		@extend .w3-hover-border-white;
-// 		@extend .w3-hover-text-yellow;
-// 	}
-// // }

@@ -7,7 +7,8 @@ class DeliveriesController < ApplicationController
     @order.package_delivery = @delivery
     @order.save
     if @delivery.save
-      flash[:notice] = 'Adres is toegevoegd.'
+      # flash[:notice] = 'Adres is toegevoegd.'
+      # ^ is storend in betaalproces.
     else
       flash.now[:alert] = 'Adres is niet toegevoegd.'
     end
