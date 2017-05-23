@@ -17,7 +17,6 @@
 		<header>
 			<h3>Controleer uw bestelling!</h3>
 		</header>
-
 		<div id='order-ajax-<%= @order.id %>'>
 			<%= render @order %>
 		</div>
@@ -36,30 +35,30 @@
 
 		<div id="user-info">
 
-		<% if user_signed_in? %>
-			<%= render @user %>
-			<% if @delivery %>
-				<div class='delivery-ajax'>
-					<%= render @delivery,
-								card_title: "Uw geselecteerde verzendadres" %>
-				</div>
+			<% if user_signed_in? %>
+				<%= render @user %>
+				<% if @delivery %>
+					<div class='delivery-ajax'>
+						<%= render @delivery,
+									card_title: "Uw geselecteerde verzendadres" %>
+					</div>
+				<% else %>
+					<header>
+						<h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
+					</header>
+					<div class='delivery-ajax'>
+						<%= render 'deliveries/form',
+									delivery: @user.deliveries.build %>
+					</div>
+				<% end %>
 			<% else %>
-				<header>
-					<h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
-				</header>
-				<div class='delivery-ajax'>
-					<%= render 'deliveries/form',
-								delivery: @user.deliveries.build %>
+				<div class='user registration'>
+					<%= render 'devise/registrations/form', with_header: true %>
+				</div>
+				<div class='user log-in'>
+					<%= render 'devise/sessions/form', with_header: true %>
 				</div>
 			<% end %>
-		<% else %>
-			<div class='user registration'>
-				<%= render 'devise/registrations/form', with_header: true %>
-			</div>
-			<div class='user log-in'>
-				<%= render 'devise/sessions/form', with_header: true %>
-			</div>
-		<% end %>
 
 		</div>
 	</div>

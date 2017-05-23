@@ -97,8 +97,8 @@
 		}
 	}
 	.correction .booking-form .submit .button {
-		@extend .w3-border-yellow;
-		@extend .w3-hover-border-red;
+		@extend .w3-yellow;
+		@extend .w3-text-green;
 	}
 
 	.order-totals, .invoice-cyphers {

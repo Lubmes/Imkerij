@@ -1,4 +1,5 @@
 #payment {
+	padding-right: 10px;
 	@extend .w3-col;
 	@extend .l10;
 	@extend .m10;
@@ -16,8 +17,8 @@
 		@extend .m12;
 		@extend .s12;
 	}
-
 	#controls {
+		@extend .w3-center;
 		h2 {
 			@extend .w3-text-teal;
 			@extend .w3-xlarge;
@@ -25,19 +26,34 @@
 		padding-bottom: 15px;
 		@extend .w3-border-grey;
 		@extend .w3-bottombar;
+		a {
+			text-decoration: none;
+			@extend .w3-border;
+			@extend .w3-border-white;
+			@extend .w3-hover-border-blue;
+			@extend .w3-round-xlarge;
+			@extend .w3-padding;
+		}
+		a.success {
+			@extend .w3-text-green;
+			@extend .w3-hover-border-white;
+			@extend .w3-hover-text-yellow;
+		}
 	}
 	h3 {
+		@extend .w3-text-grey;
 		@extend .w3-large;
-		// margin-bottom: 5px;
 		.add-address {
 			@extend .w3-large;
 			@extend .w3-text-orange;
 		}
 	}
-
 	#order {
+		.bookings {
+			@extend .w3-leftbar;
+			@extend .w3-border-grey;
+		}
 	}
-
 	#user-info {
 		div {
 			@extend .w3-margin-top;
@@ -47,54 +63,24 @@
 
 header {
 	@extend .w3-margin-top;
-	// height: 65px;
-	// padding-top: 0px;
-	// padding-bottom: 10px;
 	.co-order-col, .co-user-col {
 		@extend .w3-text-grey;
 		@extend .w3-large;
 	}
 }
-#controls {
-	@extend .w3-center;
-	h2 {
-		@extend .w3-large;
-	}
-	a {
-		text-decoration: none;
-		@extend .w3-border;
-		@extend .w3-border-white;
-		@extend .w3-hover-border-blue;
-		@extend .w3-round-xlarge;
-		@extend .w3-padding;
-	}
-	a.success {
-		@extend .w3-text-green;
-		@extend .w3-hover-border-white;
-		@extend .w3-hover-text-yellow;
-	}
-}
-
-
-
-#payment.to-bank {
-	@extend .w3-row;
-}
-#payment {
-	@extend .w3-container;
-	header {
-		@extend .w3-text-grey;
-		h3.add-address {
-			@extend .w3-large;
-			@extend .w3-text-orange;
-		}
-
-	}
-	@extend .w3-row;
-	#order {
-		.bookings {
-			@extend .w3-leftbar;
-			@extend .w3-border-grey;
-		}
-	}
-}
+// // #controls {
+//
+// 	a {
+// 		text-decoration: none;
+// 		@extend .w3-border;
+// 		@extend .w3-border-white;
+// 		@extend .w3-hover-border-blue;
+// 		@extend .w3-round-xlarge;
+// 		@extend .w3-padding;
+// 	}
+// 	a.success {
+// 		@extend .w3-text-green;
+// 		@extend .w3-hover-border-white;
+// 		@extend .w3-hover-text-yellow;
+// 	}
+// // }

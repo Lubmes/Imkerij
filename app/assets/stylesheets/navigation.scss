@@ -37,6 +37,8 @@
 		@extend .w3-bar-item;
 		@extend .w3-button;
 		@extend .w3-text-brown;
+		@extend .w3-bottombar;
+		border-color: transparent!important;
 	}
 	a:hover {
 		color: $dark-green!important;
