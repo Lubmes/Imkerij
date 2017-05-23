@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   # Associations
   belongs_to :package_delivery, class_name: 'Delivery', optional: true
   belongs_to :customer, class_name: 'User', optional: true
-  has_many :bookings, dependent: :destroy
+  has_many :selections, dependent: :destroy
   has_many :invoices
   # Nested attributes
   accepts_nested_attributes_for :customer # Waarom? => invoice!
@@ -24,13 +24,13 @@ class Order < ApplicationRecord
     self.invoices.first
   end
 
-  def sum_all_bookings
-    bookings = self.bookings
+  def sum_all_selections
+    selections = self.selections
     sum_money = 0
     sum_mass = 0
-    bookings.each do |booking|
-      sum_money += booking.product_quantity * booking.product_price_cents
-      sum_mass += booking.product_quantity * booking.product_mail_weight
+    selections.each do |selection|
+      sum_money += selection.product_quantity * selection.product_price_cents
+      sum_mass += selection.product_quantity * selection.product_mail_weight
     end
     self.total_price_cents = sum_money
     self.total_mail_weight = sum_mass

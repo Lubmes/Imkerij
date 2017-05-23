@@ -5,10 +5,10 @@ class CorrectionsController < ApplicationController
   # Geen after_action update_order voor js. ? invoice ook ?
 
   def create
-    @booking = Booking.find(params[:booking_id])
-    @order = @booking.order
+    @selection = Selection.find(params[:selection_id])
+    @order = @selection.order
     @invoice = @order.invoices.first_or_create
-    correction = @booking.corrections.first # where invoice is current invoice
+    correction = @selection.corrections.first # where invoice is current invoice
     if correction
       correction.quantity = params[:correction][:quantity]
     else
@@ -17,11 +17,11 @@ class CorrectionsController < ApplicationController
     correction.save
     @order.problem!
     update_invoice
-    @corrections = @booking.corrections
+    @corrections = @selection.corrections
   end
 
   def destroy
-    @order = @correction.booking.order
+    @order = @correction.selection.order
     @invoice = @order.invoices.first_or_create
     @correction.destroy
     update_invoice
@@ -30,7 +30,7 @@ class CorrectionsController < ApplicationController
   private
 
   def correction_params
-    params.require(:correction).permit(:quantity, :booking_id)
+    params.require(:correction).permit(:quantity, :selection_id)
   end
 
   def set_correction

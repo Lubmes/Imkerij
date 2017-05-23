@@ -17,8 +17,8 @@ class Invoice < ApplicationRecord
     sum_money = 0
     sum_mass = 0
     corrections.each do |correction|
-      sum_money += correction.quantity * correction.booking.product_price_cents
-      sum_mass += correction.quantity * correction.booking.product_mail_weight
+      sum_money += correction.quantity * correction.selection.product_price_cents
+      sum_mass += correction.quantity * correction.selection.product_mail_weight
     end
 
     self.total_mail_weight = original_mail_weight_order + sum_mass

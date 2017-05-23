@@ -25,11 +25,11 @@
 										<%= render product %>
 									</div>
 								</div>
-								<% if policy(product.bookings.build).create? %>
-									<div class='add-booking'>
-										<%= render 'bookings/form_in_product',
+								<% if policy(product.selections.build).create? %>
+									<div class='add-selection'>
+										<%= render 'selections/form_in_product',
 													product: product,
-													booking: product.bookings.build %>
+													selection: product.selections.build %>
 									</div>
 								<% end %>
 							</div>

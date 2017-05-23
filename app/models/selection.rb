@@ -1,4 +1,4 @@
-class Booking < ApplicationRecord
+class Selection < ApplicationRecord
   # Money: product_price
   monetize :product_price_cents
   # Associaties
@@ -12,7 +12,7 @@ class Booking < ApplicationRecord
   validates_uniqueness_of :order_id, scope: :product_id
   # Actions
   after_commit do
-    order.sum_all_bookings
+    order.sum_all_selections
   end
 
   def total_price

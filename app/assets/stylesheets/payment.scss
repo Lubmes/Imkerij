@@ -39,7 +39,7 @@
 			@extend .w3-hover-border-white;
 			@extend .w3-hover-text-yellow;
 		}
-		.confirm {
+		.confirm-hidden {
 			display: none;
 		}
 	}
@@ -53,7 +53,7 @@
 		@extend .w3-text-orange;
 	}
 	#order {
-		.bookings {
+		.selections {
 			@extend .w3-leftbar;
 			@extend .w3-border-grey;
 		}

@@ -5,6 +5,6 @@ class ShopController < ApplicationController
     set_shopping_order
     @order.open! if @order.confirmed?
     @categories = Category.all.order(position: :asc)
-    @booking = @order.bookings.build
+    @selection = @order.selections.build
   end
 end

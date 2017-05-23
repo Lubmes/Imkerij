@@ -10,7 +10,7 @@
 		<h2>AFREKENEN</h2>
 		<% #if policy(@order).confirm? %>
 		<!-- ^ I.v.m. jquery hide/show -->
-			<%= link_to 'Bevestig', [:confirm, @order], class: 'confirm' %>
+			<%= link_to 'Bevestig', [:confirm, @order], class: "#{'confirm-hidden' unless @delivery}" %>
 		<% #end %>
 	</div>
 

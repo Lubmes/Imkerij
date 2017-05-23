@@ -1,4 +1,4 @@
-class BookingPolicy < ApplicationPolicy
+class SelectionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope

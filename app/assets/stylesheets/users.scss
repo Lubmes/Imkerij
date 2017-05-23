@@ -63,7 +63,7 @@ h1 {
 		@extend .w3-col;
 		@extend .l7;
 	}
-	.bookings {
+	.selections {
 		@extend .w3-border-grey;
 		@extend .w3-leftbar;
 		width: 100%;
@@ -88,7 +88,7 @@ h1 {
 				@extend .w3-text-red;
 			}
 		}
-		table.bookings {
+		table.selections {
 			margin-bottom: 0;
 			padding-bottom: 1%;
 		}

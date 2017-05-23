@@ -20,8 +20,8 @@ class OrdersController < ApplicationController
   end
 
   def empty
-    @order.bookings.delete_all
-    @order.sum_all_bookings
+    @order.selections.delete_all
+    @order.sum_all_selections
     @order.save
     respond_to do |format|
       format.html { redirect_to shop_path }

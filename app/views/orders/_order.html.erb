@@ -1,5 +1,5 @@
 <% if order.bookable? %>
-	<% if @order.bookings.any? %>
+	<% if @order.selections.any? %>
 		<nav class='record-bar'>
 			<% if policy(@order).empty? %>
 				<% unless controller.action_name == 'confirm' %>
@@ -19,7 +19,7 @@
 	<% end %>
 <% end %>
 
-<table class='bookings <%= order.status%>'>
+<table class='selections <%= order.status%>'>
 
 	<thead>
 		<tr>
@@ -35,9 +35,9 @@
 	</thead>
 
 	<tbody>
-		<% order.bookings.order(created_at: :desc).each do |booking| %>
-			<div class='booking'>
-				<%= render booking %>
+		<% order.selections.order(created_at: :desc).each do |selection| %>
+			<div class='selection'>
+				<%= render selection %>
 			</div>
 		<% end %>
 	</tbody>

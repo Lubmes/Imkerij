@@ -38,25 +38,25 @@
     <h4>Uw boekingen</h4>
   </thead>
   <!-- <hr> -->
-  <% @invoice.order.bookings.each do |booking| %>
+  <% @invoice.order.selections.each do |selection| %>
     <tr>
-      <td><%= booking.product_name %></td>
-      <td><%= currency_symbol %> <%= booking.product_price %></td>
-      <td><small>incl. <%= number_with_precision(booking.product_sales_tax,
+      <td><%= selection.product_name %></td>
+      <td><%= currency_symbol %> <%= selection.product_price %></td>
+      <td><small>incl. <%= number_with_precision(selection.product_sales_tax,
                             strip_insignificant_zeros: true) %> %</small></td>
       <td>&times;</td>
       <td></td>
-      <td class='quantity'><%= booking.product_quantity %></td>
+      <td class='quantity'><%= selection.product_quantity %></td>
       <td>&equals;</td>
       <td></td>
       <td><%= currency_symbol %></td>
-      <td class='sum'><%= booking.total_price %></td>
+      <td class='sum'><%= selection.total_price %></td>
     </tr>
-    <% booking.corrections.each do |correction| %>
+    <% selection.corrections.each do |correction| %>
       <tr>
         <td>&rdsh; Correctie</td>
-        <td><%= currency_symbol %> <%= booking.product_price %></td>
-        <td><small>incl. <%= number_with_precision(booking.product_sales_tax,
+        <td><%= currency_symbol %> <%= selection.product_price %></td>
+        <td><small>incl. <%= number_with_precision(selection.product_sales_tax,
                               strip_insignificant_zeros: true) %> %</small></td>
         <td>&times;</td>
         <td><%= "&minus;".html_safe if correction.quantity < 0 %></td>

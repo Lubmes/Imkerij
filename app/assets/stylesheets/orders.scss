@@ -19,10 +19,10 @@
 	.order-invoice.sent { @extend .w3-border-green; }
 	.order-invoice.open { @extend .w3-border-grey; }
 	#order-processing {
-		.bookings.problem { @extend .w3-border-yellow; }
-		.bookings.paid { @extend .w3-border-red; }
-		.bookings.sent { @extend .w3-border-green; }
-		.bookings.open { @extend .w3-border-grey; }
+		.selections.problem { @extend .w3-border-yellow; }
+		.selections.paid { @extend .w3-border-red; }
+		.selections.sent { @extend .w3-border-green; }
+		.selections.open { @extend .w3-border-grey; }
 	}
 }
 #orders{
@@ -33,7 +33,7 @@
 	tr.order.open td:first-child { @extend .w3-border-grey; }
 }
 #order-processing {
-	.booking-product{
+	.selection-product{
 		width: 25%;
 	}
 	.price {
@@ -52,7 +52,7 @@
 	table {
 		padding-left: 8px;
 	}
-	.bookings {
+	.selections {
 		.remove {
 			@extend .w3-text-grey;
 			@extend .w3-hover-text-red;
@@ -63,7 +63,7 @@
 			padding-top: 7px;
 			padding-bottom: 4px;
 		}
-		.booking-product small {
+		.selection-product small {
 				@extend .w3-text-grey;
 	  }
 		td {
@@ -77,13 +77,13 @@
 			text-align: right;
 			padding-right: 2%;
 		}
-		.correction .booking-form {
+		.correction .selection-form {
 			.submit {
 				@extend .w3-left;
 			}
 		}
 	}
-  .booking-form {
+  .selection-form {
 		@extend .w3-left;
 		.submit {
 			@extend .w3-center;
@@ -96,7 +96,7 @@
 			}
 		}
 	}
-	.correction .booking-form .submit .button {
+	.correction .selection-form .submit .button {
 		@extend .w3-yellow;
 		@extend .w3-text-green;
 	}

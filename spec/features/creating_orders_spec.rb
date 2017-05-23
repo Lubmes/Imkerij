@@ -31,7 +31,7 @@ feature 'User kan zijn bestelling aanmaken', js: true do
     product_from_shop.click_button('VOEG TOE')
 
     within('#order') do
-      product_in_basket = page.find('.bookings', :text => 'Propolis lollie')
+      product_in_basket = page.find('.selections', :text => 'Propolis lollie')
       expect(product_in_basket).to have_content '5'
       expect(page).to have_content '€ 4,00'
     end

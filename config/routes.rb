@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources 'bookings' do
+  resources 'selections' do
     resources 'corrections'
   end
 

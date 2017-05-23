@@ -10,25 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502135506) do
+ActiveRecord::Schema.define(version: 20170523190521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "bookings", force: :cascade do |t|
-    t.integer  "order_id"
-    t.integer  "product_id"
-    t.string   "product_name"
-    t.integer  "product_quantity"
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
-    t.integer  "product_price_cents",                            default: 0,     null: false
-    t.string   "product_price_currency",                         default: "EUR", null: false
-    t.integer  "product_mail_weight"
-    t.decimal  "product_sales_tax",      precision: 3, scale: 1
-    t.index ["order_id"], name: "index_bookings_on_order_id", using: :btree
-    t.index ["product_id"], name: "index_bookings_on_product_id", using: :btree
-  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -39,10 +24,10 @@ ActiveRecord::Schema.define(version: 20170502135506) do
 
   create_table "corrections", force: :cascade do |t|
     t.integer "quantity"
-    t.integer "booking_id"
+    t.integer "selection_id"
     t.integer "invoice_id"
-    t.index ["booking_id"], name: "index_corrections_on_booking_id", using: :btree
     t.index ["invoice_id"], name: "index_corrections_on_invoice_id", using: :btree
+    t.index ["selection_id"], name: "index_corrections_on_selection_id", using: :btree
   end
 
   create_table "deliveries", force: :cascade do |t|
@@ -153,6 +138,21 @@ ActiveRecord::Schema.define(version: 20170502135506) do
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
   end
 
+  create_table "selections", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.string   "product_name"
+    t.integer  "product_quantity"
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.integer  "product_price_cents",                            default: 0,     null: false
+    t.string   "product_price_currency",                         default: "EUR", null: false
+    t.integer  "product_mail_weight"
+    t.decimal  "product_sales_tax",      precision: 3, scale: 1
+    t.index ["order_id"], name: "index_selections_on_order_id", using: :btree
+    t.index ["product_id"], name: "index_selections_on_product_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -173,8 +173,8 @@ ActiveRecord::Schema.define(version: 20170502135506) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "corrections", "bookings"
   add_foreign_key "corrections", "invoices"
+  add_foreign_key "corrections", "selections"
   add_foreign_key "deliveries", "users", column: "sender_id"
   add_foreign_key "invoices", "deliveries", column: "invoice_delivery_id"
   add_foreign_key "invoices", "orders"

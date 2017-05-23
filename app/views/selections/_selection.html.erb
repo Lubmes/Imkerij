@@ -1,0 +1,84 @@
+<!-- Boekings product naam. -->
+<tr>
+	<td class='name' colspan='9'>
+		<small><%= selection.product_name %></small>
+	</td>
+<tr>
+
+<!-- Bedrag x Aantal = Totaal -->
+<tr id='selection-ajax-<%#= selection.id %>'>
+	<% unless controller.action_name == 'confirm' ||
+		 				selection.order.status =='paid' %>
+		<!-- Col 1. Verwijderen. -->
+		<td class='remove'>
+	    <%= link_to [selection], method: :delete, remote: true do %>
+	      <i class='fa fa-close'></i>
+	    <% end %>
+		</td>
+	<% else %>
+		<!-- Col 1. Verwijderen (leeg). -->
+		<td style='width: 3%;'></td>
+	<% end %>
+	<!-- Col 2. selection pricing information. -->
+	<td class='selection-product'>
+		<strong><%= currency_symbol %> <%= selection.product_price %> </strong>
+		<small>incl. <%= number_with_precision(selection.product_sales_tax, strip_insignificant_zeros: true) %> %</small>
+	</td>
+
+	<!-- selection update form -->
+	<% unless controller.action_name == 'confirm' ||
+						selection.order.status != 'open' %>
+		<%= form_for selection, remote: true do |f| %>
+				<!-- Col 3. Multiplication symbol. -->
+				<td>
+					&#183;
+				</td>
+				<!-- Col 4, 5. selection form -->
+				<td colspan='2' class='selection-form'>
+					<div class='submit'>
+						<%= f.hidden_field :product_id, value: selection.product.id unless selection.product.nil? %>
+						<%= f.number_field :product_quantity, value: selection.product_quantity, min: 1, max: 999, title: 'aantal' %>
+						<%= f.submit class: 'button' %>
+					</div>
+				</td>
+		<% end %>
+	<% else %>
+		<!-- Col 3. Multiplication sign. -->
+		<td>
+			&times;
+		</td>
+		<!-- Col 4. Minus sign. -->
+		<td></td>
+		<!-- Col 5. selection quantity. -->
+		<td>
+			<%= selection.product_quantity %>
+		</td>
+	<% end %>
+
+	<!-- Col 6. Equal is sign. -->
+	<td>&equals;</td>
+	<!-- Col 7. Minus sign -->
+	<!-- <td class='minus'><td> -->
+	<!-- Col 8. Price after multiplication. -->
+	<td colspan='2' class='price'>
+		<%= currency_symbol %>
+		<%= selection.total_price %>
+	</td>
+</tr>
+
+<!-- Corrections made -->
+<div id='selection-corrections-ajax-<%= selection.id %>'>
+	<% unless controller.action_name == 'check_out' ||
+						controller.action_name == 'confirm' ||
+						controller.action_name == 'success' ||
+						selection.order.status == 'open' %>
+		<% if selection.corrections.any? %>
+			<% selection.corrections.each do |correction| %>
+				<%= render correction %>
+			<% end %>
+		<% end %>
+</div>
+
+<%= render 'corrections/input_row', selection: selection %>
+
+<% end %>

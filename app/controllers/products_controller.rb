@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   def show
     authorize @product
     set_shopping_order
-    @booking = @order.bookings.build
+    @selection = @order.selections.build
   end
 
   def new

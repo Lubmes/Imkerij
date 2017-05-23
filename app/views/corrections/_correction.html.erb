@@ -1,14 +1,14 @@
 <tr id='correction-ajax-<%= correction.id %>' class='correction'>
 	<!-- Col 1. -->
 	<td class='remove'>
-    <%= link_to [correction.booking, correction], method: :delete, remote: true do %>
+    <%= link_to [correction.selection, correction], method: :delete, remote: true do %>
       <i class='fa fa-close'></i>
     <% end %>
 	</td>
 	<!-- Col 2. -->
-	<td class='booking-product'>
-		<strong><%= currency_symbol %> <%= correction.booking.product_price %> </strong>
-		<small>incl. <%= number_with_precision(correction.booking.product_sales_tax,
+	<td class='selection-product'>
+		<strong><%= currency_symbol %> <%= correction.selection.product_price %> </strong>
+		<small>incl. <%= number_with_precision(correction.selection.product_sales_tax,
                       strip_insignificant_zeros: true) %> %</small>
 	</td>
 	<!-- Col 3. -->

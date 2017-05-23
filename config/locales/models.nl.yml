@@ -64,7 +64,7 @@ nl:
         pictures: Foto's
       picture:
         visable: Zichtbaar
-      booking:
+      selection:
         product_quantity: Aantal
         product_price: Product prijs
         product_sales_tax: BTW
@@ -109,7 +109,7 @@ nl:
 
   helpers:
     submit:
-      booking:
+      selection:
         create: "VOEG TOE"
         update: "PAS AAN"
       correction:

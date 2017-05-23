@@ -1,4 +1,4 @@
-<div class='booking'>
+<div class='selection'>
   <div class='info'>
     <%= currency_symbol %> <%= product.price %>
       <small class='price'>incl. <%= number_with_precision(product.sales_tax, strip_insignificant_zeros: true) %> %</small>
@@ -8,6 +8,6 @@
     <% end %>
   </div>
   <div class='submit'>
-    <%= render 'bookings/form', product: product, booking: @booking %>
+    <%= render 'selections/form', product: product, selection: @selection %>
   </div>
 </div>

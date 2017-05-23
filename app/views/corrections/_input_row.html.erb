@@ -1,23 +1,23 @@
 <!-- Correction input row -->
-<tr id="correction-form-ajax-<%= @order.id %><%= booking.id %>" class='correction'>
+<tr id="correction-form-ajax-<%= @order.id %><%= selection.id %>" class='correction'>
 	<!-- Col 1. Verwijderen -->
 	<td class='remove'></td>
-	<!-- Col 2. Booking pricing information -->
-	<td class='booking-product'>
-		<strong><%= currency_symbol %> <%= booking.product_price %> </strong>
-		<small>incl. <%= number_with_precision(booking.product_sales_tax, strip_insignificant_zeros: true) %> %</small>
+	<!-- Col 2. selection pricing information -->
+	<td class='selection-product'>
+		<strong><%= currency_symbol %> <%= selection.product_price %> </strong>
+		<small>incl. <%= number_with_precision(selection.product_sales_tax, strip_insignificant_zeros: true) %> %</small>
 	</td>
 	<!-- Correction form -->
-	<%= form_for [booking, booking.corrections.build], remote: true do |f| %>
+	<%= form_for [selection, selection.corrections.build], remote: true do |f| %>
 			<!-- Col 3. Multiplication symbol. -->
 			<td>
 				&#183;
 			</td>
-			<!-- Col 4, 5, 6, 7, 8, 9. Booking quantity. -->
-			<td colspan='8' class='booking-form'>
+			<!-- Col 4, 5, 6, 7, 8, 9. selection quantity. -->
+			<td colspan='8' class='selection-form'>
 				<div class='submit'>
-					<%= f.hidden_field :booking_id, value: booking.id %>
-					<%= f.number_field :quantity, value: -1, min: -1 * booking.product_quantity, max: -1 %>
+					<%= f.hidden_field :selection_id, value: selection.id %>
+					<%= f.number_field :quantity, value: -1, min: -1 * selection.product_quantity, max: -1 %>
 					<%= f.submit class: 'button' %>
 				</div>
 			</td>

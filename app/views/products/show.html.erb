@@ -8,7 +8,7 @@
 			<%= render 'pictures/row_gallery',
 				pictures: @product.pictures.where(visable: true) %>
 			<%= render @product, category: @product.category %>
-			<%= render 'bookings/form_in_product', product: @product, booking: @booking %>
+			<%= render 'selections/form_in_product', product: @product, selection: @selection %>
 		</div>
 	</div>
 
