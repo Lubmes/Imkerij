@@ -1,11 +1,23 @@
 #invoice-pdf {
   @extend .w3-tiny;
   h1 { @extend .w3-large; }
-  h2 { @extend .w3-medium; }
   h3 { @extend .w3-small; }
   h4 {
     @extend .w3-small;
     @extend .w3-text-grey;
+  }
+  .logo {
+    img {
+      height: 35px;
+      width: 32px;
+      padding-top: 4px;
+    }
+    h2 {
+      font-family: $logo-font, serif;
+      display: inline-block;
+			margin-bottom: 4px;
+			@extend .w3-xlarge;
+    }
   }
   .status-tag { @extend .w3-tiny; }
   .invoice-no {
