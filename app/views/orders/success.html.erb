@@ -7,7 +7,7 @@
 		<%= link_to shop_path, class: 'success' do %>
 	    <i class='fa fa-arrow-left'></i> terug naar winkel
 	  <% end %>
-		<%= link_to "Download PDF", [@order, @order.active_invoice],
+		<%= link_to "Download PDF", [@order, @order.first_invoice],
 					target: "_blank",
 					format: :pdf %>
 	</div>

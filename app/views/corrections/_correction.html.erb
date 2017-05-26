@@ -1,10 +1,14 @@
 <tr id='correction-ajax-<%= correction.id %>' class='correction'>
 	<!-- Col 1. -->
-	<td class='remove'>
-    <%= link_to [correction.selection, correction], method: :delete, remote: true do %>
-      <i class='fa fa-close'></i>
-    <% end %>
-	</td>
+	<% if correction.invoice.sequence_number == correction.invoice.order.invoices.size %>
+		<td class='remove'>
+	    <%= link_to [correction.selection, correction], method: :delete, remote: true do %>
+	      <i class='fa fa-close'></i>
+	    <% end %>
+		</td>
+	<% else %>
+		<td></td>
+	<% end %>
 	<!-- Col 2. -->
 	<td class='selection-product'>
 		<strong><%= currency_symbol %> <%= correction.selection.product_price %> </strong>

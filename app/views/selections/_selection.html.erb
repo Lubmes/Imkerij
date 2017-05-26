@@ -8,7 +8,7 @@
 <!-- Bedrag x Aantal = Totaal -->
 <tr id='selection-ajax-<%#= selection.id %>'>
 	<% unless controller.action_name == 'confirm' ||
-		 				selection.order.status =='paid' %>
+						selection.order.payment_id.present? %>
 		<!-- Col 1. Verwijderen. -->
 		<td class='remove'>
 	    <%= link_to [selection], method: :delete, remote: true do %>

@@ -20,7 +20,20 @@ class Order < ApplicationRecord
     self.status == 'open' || self.status == 'confirmed'
   end
 
+  # Defineert de invoice v.d. order die bewerkt kan worden.
   def active_invoice
+    if self.invoices.last.closed?
+      invoice = self.invoices.first.dup
+      invoice.closed = false
+      invoice.save!
+      invoice
+    else
+      self.invoices.last
+    end
+  end
+
+  # Na succes betaling.
+  def first_invoice
     self.invoices.first
   end
 
@@ -58,5 +71,12 @@ class Order < ApplicationRecord
     @orders = Order.where(updated_at: Time.now.beginning_of_day..Time.now)
     sum = @orders.sum(:total_price_cents)
     Money.new(sum)
+  end
+
+  # Om order nummer in factuur nummer te verwerken.
+  def sequence_number
+    customer = self.customer
+    orders = customer.orders.order(created_at: :asc)
+    orders.find_index(self) + 1
   end
 end

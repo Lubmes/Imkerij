@@ -43,7 +43,7 @@ class InvoicesController < ApplicationController
           amount: @invoice.paid_back_in_euros,
           description: "Restitutiebedrag van uw aankoop bij Imkerij Poppendamme").payment.amount_refunded.to_f
         # Success...
-        flash[:notice] = 'Uw restitutiebedrag is verzonden naar de klant. Vergeet niet de nieuwe factuur (mee) te verzenden.'
+        flash[:notice] = 'Het restitutiebedrag is verzonden naar de klant. Vergeet niet de nieuwe factuur (mee) te verzenden.'
         @invoice.closed = true
         @invoice.save
         @order.status = 'paid'

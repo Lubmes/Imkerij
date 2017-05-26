@@ -7,8 +7,8 @@ class CorrectionsController < ApplicationController
   def create
     @selection = Selection.find(params[:selection_id])
     @order = @selection.order
-    @invoice = @order.invoices.first_or_create
-    correction = @selection.corrections.first # where invoice is current invoice
+    @invoice = @order.active_invoice
+    correction = @selection.corrections.where(invoice_id: @invoice.id).first # where invoice is current invoice
     if correction
       correction.quantity = params[:correction][:quantity]
     else
@@ -22,9 +22,13 @@ class CorrectionsController < ApplicationController
 
   def destroy
     @order = @correction.selection.order
-    @invoice = @order.invoices.first_or_create
+    @invoice = @order.active_invoice
     @correction.destroy
-    update_invoice
+    if @invoice.corrections.any?
+      update_invoice
+    else
+      @invoice.destroy
+    end
   end
 
   private

@@ -4,7 +4,9 @@
   </header>
   <% if user.orders.where(status: :sent).any? %>
     <% user.orders.where(status: :sent).each do |order| %>
-      <%= render 'invoices/order_invoices', order: order %>
+      <% order.invoices.order(created_at: :asc).each do |invoice| %>
+        <%= render 'invoices/order_invoice', invoice: invoice %>
+      <% end %>
     <% end %>
   <% else %>
     <p>Geen</p>

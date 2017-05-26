@@ -97,6 +97,7 @@ class OrdersController < ApplicationController
                                           total_mail_weight: @order.total_mail_weight,
                                           invoice_delivery: @delivery)
 
+        @invoice.update_attributes(closed: true)
         # Mail factuur naar interne printer.
         mg_client = Mailgun::Client.new ENV["mailgun_api_key"]
         message_params_to_printer =  {

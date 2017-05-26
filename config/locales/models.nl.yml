@@ -6,6 +6,9 @@ nl:
     paid: betaald
     open: open
     sent: verzonden
+  invoice:
+    closed: Gesloten
+    not_closed: In bewerking
 
   activerecord:
     models:
@@ -75,6 +78,8 @@ nl:
         status: Orderstatus
         total_price: Totaalbedrag
         total_mail_weight: Totaal verzendgewicht
+      invoice:
+        closed: Gesloten
 
     errors:
       models:

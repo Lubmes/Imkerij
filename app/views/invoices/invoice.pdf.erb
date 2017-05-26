@@ -2,10 +2,14 @@
 <h1>F A C T U U R</h1>
 
 <div class='invoice-no'>
-  <%= "#{@customer.email.upcase}-BEST#{@customer.orders.count}-FACT#{@order.invoices.count}-#{I18n.l @invoice.updated_at, format: :invoice}" %>
+  <%= "<#{@customer.email.upcase}>" %><br>
+  <%= @invoice.invoice_identification_number %>
   <br>
   <small>Laatst bewerkt: <%= I18n.l @invoice.updated_at, format: :long %><br>
-    Status: <span class='status-tag'><%= I18n.t "order_status.#{@order.status}" %></span>
+    Status:
+    <span class='status-tag'>
+      <%= @invoice.closed ? (I18n.t 'invoice.closed') : (I18n.t 'invoice.not_closed') %>
+    </span>
   </small>
 </div>
 
@@ -27,6 +31,7 @@
     <%= @invoice.order.package_delivery.address_zip_code %><br>
     <%= @invoice.order.package_delivery.address_city %><br>
   </div>
+  <% if false %>
   <div class='invoice'>
     <h4>Factuur-verzendadres</h4>
     <%= @invoice.invoice_delivery.address_street_name %>
@@ -34,6 +39,7 @@
     <%= @invoice.invoice_delivery.address_zip_code %><br>
     <%= @invoice.invoice_delivery.address_city %><br>
   </div>
+  <% end %>
 </div>
 
 <hr>
@@ -56,20 +62,25 @@
       <td><%= currency_symbol %></td>
       <td class='sum'><%= selection.total_price %></td>
     </tr>
-    <% selection.corrections.each do |correction| %>
-      <tr>
-        <td>&rdsh; Correctie</td>
-        <td><%= currency_symbol %> <%= selection.product_price %></td>
-        <td><small>incl. <%= number_with_precision(selection.product_sales_tax,
-                              strip_insignificant_zeros: true) %> %</small></td>
-        <td>&times;</td>
-        <td><%= "&minus;".html_safe if correction.quantity < 0 %></td>
-        <td class='quantity'><%= correction.quantity.abs %></td>
-        <td>&equals;</td>
-        <td><%= "&minus;".html_safe if correction.total_amount < 0 %></td>
-        <td><%= currency_symbol %></td>
-        <td class='sum'><%= correction.total_amount.abs %></td>
-      </tr>
+    <% selection.corrections.joins(:invoice).order('invoices.created_at').each do |correction| %>
+      <% if correction.invoice.sequence_number <= @invoice.sequence_number %>
+        <tr>
+          <td>&rdsh; Correctie
+              <%= "&#8727;".html_safe if correction.invoice.sequence_number == @invoice.sequence_number &&
+                  correction.invoice.sequence_number != 2 %>
+          </td>
+          <td><%= currency_symbol %> <%= selection.product_price %></td>
+          <td><small>incl. <%= number_with_precision(selection.product_sales_tax,
+                                strip_insignificant_zeros: true) %> %</small></td>
+          <td>&times;</td>
+          <td><%= "&minus;".html_safe if correction.quantity < 0 %></td>
+          <td class='quantity'><%= correction.quantity.abs %></td>
+          <td>&equals;</td>
+          <td><%= "&minus;".html_safe if correction.total_amount < 0 %></td>
+          <td><%= currency_symbol %></td>
+          <td class='sum'><%= correction.total_amount.abs %></td>
+        </tr>
+      <% end %>
     <% end %>
   <% end %>
   <tfoot>
@@ -80,9 +91,18 @@
       <td><%= currency_symbol %></td>
       <td colspan='2' class='sum'><%= @invoice.paid %></td>
     </tr>
+    <% if @invoice.already_paid_back != 0 %>
+    <tr>
+      <th colspan='6'>Bedrag al door ons gerestitueerd</th>
+      <td></td>
+      <td><%= "&minus;".html_safe if @invoice.already_paid_back < 0 %></td>
+      <td><%= currency_symbol %></td>
+      <td colspan='2' class='sum'><%= @invoice.already_paid_back.abs %></td>
+    </tr>
+    <% end %>
     <% if @invoice.paid_back != 0 %>
     <tr>
-      <th colspan='6'>Bedrag door ons gerestitueerd</th>
+      <th colspan='6'>Bedrag bij deze door ons gerestitueerd</th>
       <td></td>
       <td><%= "&minus;".html_safe if @invoice.paid_back < 0 %></td>
       <td><%= currency_symbol %></td>
@@ -106,7 +126,7 @@
     Onze excuses voor het niet volledig kunnen leveren van uw bestelling.<br>
     Er is een restitutiebedrag overeenkomstig ons in gebreke zijn teruggestort op uw rekening.
   </p>
-  <p>Wij hopen u hiermee voldoende te zijn tegemoet gekomen.</p>
+  <p>Wij hopen u hiermee voldoende tegemoet te zijn gekomen.</p>
 <% end %>
 
 </div>
