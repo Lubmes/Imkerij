@@ -94,14 +94,19 @@ h1 {
 		}
 	}
 	#processed {
+		.order-invoices {
+			@extend .w3-margin-bottom;
+		}
 		.order-invoice {
 			@extend .w3-card;
-			@extend .w3-margin-bottom;
+			// @extend .w3-margin-bottom;
 		}
 	}
 	.order-invoice {
 		@extend .w3-leftbar;
 		.invoice-data {
+			@extend .w3-border-bottom;
+			border-color: #AAAAAA;
 			@extend .w3-row;
 			@extend .w3-light-grey;
 			@extend .w3-text-dark-grey;

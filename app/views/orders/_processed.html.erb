@@ -4,9 +4,11 @@
   </header>
   <% if user.orders.where(status: :sent).any? %>
     <% user.orders.where(status: :sent).each do |order| %>
-      <% order.invoices.order(created_at: :asc).each do |invoice| %>
-        <%= render 'invoices/order_invoice', invoice: invoice %>
-      <% end %>
+      <div class='order-invoices'>
+        <% order.invoices.order(created_at: :asc).each do |invoice| %>
+          <%= render 'invoices/order_invoice', invoice: invoice %>
+        <% end %>
+      </div>
     <% end %>
   <% else %>
     <p>Geen</p>

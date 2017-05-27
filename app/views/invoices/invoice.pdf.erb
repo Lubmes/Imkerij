@@ -66,8 +66,12 @@
       <% if correction.invoice.sequence_number <= @invoice.sequence_number %>
         <tr>
           <td>&rdsh; Correctie
-              <%= "&#8727;".html_safe if correction.invoice.sequence_number == @invoice.sequence_number &&
+              <% if correction.invoice.sequence_number == @invoice.sequence_number &&
                   correction.invoice.sequence_number != 2 %>
+                &#8727;
+              <% else %>
+                <small class='sequence-indicator'>FACT<%= correction.invoice.sequence_number %></small>
+              <% end %>
           </td>
           <td><%= currency_symbol %> <%= selection.product_price %></td>
           <td><small>incl. <%= number_with_precision(selection.product_sales_tax,

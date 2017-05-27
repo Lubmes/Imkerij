@@ -33,6 +33,8 @@
     margin-left: 33%;
   }
   table{
+    small { @extend .w3-text-grey; }
+    small.sequence-indicator { font-size: 6px; }
     .sum { text-align: right; }
     .paid .sum { border-top: black 1px solid;}
     .total .sum { border-top: black 1px solid;}

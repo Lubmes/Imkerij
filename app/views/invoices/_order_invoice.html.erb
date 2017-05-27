@@ -53,30 +53,31 @@
     <% end %>
 
 
+  <% if invoice.sequence_number == invoice.order.invoices.size %>
+    <div class='invoice-actions'>
 
-  <div class='invoice-actions'>
-
-    <% if invoice.paid_back < 0 && !invoice.closed %>
-      <%= link_to "RESTITUEREN", [:refund, invoice.order, invoice], class: 'print' %>
-    <% else %>
-      <%= link_to "AFDRUKKEN",[:print, invoice.order, invoice], class: 'print' %>
-    <% end %>
+      <% if invoice.paid_back < 0 && !invoice.closed %>
+        <%= link_to "RESTITUEREN", [:refund, invoice.order, invoice], class: 'print' %>
+      <% else %>
+        <%= link_to "AFDRUKKEN",[:print, invoice.order, invoice], class: 'print' %>
+      <% end %>
 
 
-    <%= link_to "PDF",
-          [invoice.order, invoice],
-          target: "_blank",
-          format: :pdf,
-          class: "pdf" %>
-    <%= link_to "PROBLEEM", [:problem, invoice.order],
-          remote: true,
-          class: "problem #{'inactive' if invoice.order.problem? ||
-                                          invoice.sequence_number < invoice.order.invoices.size }" %>
-    <%= link_to "VERZONDEN", [:sent_out, invoice.order, invoice],
-          remote: true,
-          class: "mail #{'inactive' if invoice.order.sent? ||
-                                       invoice.sequence_number < invoice.order.invoices.size}" %>
-  </div>
+      <%= link_to "PDF",
+            [invoice.order, invoice],
+            target: "_blank",
+            format: :pdf,
+            class: "pdf" %>
+      <%= link_to "PROBLEEM", [:problem, invoice.order],
+            remote: true,
+            class: "problem #{'inactive' if invoice.order.problem? ||
+                                            invoice.sequence_number < invoice.order.invoices.size }" %>
+      <%= link_to "VERZONDEN", [:sent_out, invoice.order, invoice],
+            remote: true,
+            class: "mail #{'inactive' if invoice.order.sent? ||
+                                         invoice.sequence_number < invoice.order.invoices.size}" %>
+    </div>
+  <% end %>
 
   </div>
 </div>
