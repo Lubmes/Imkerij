@@ -74,10 +74,10 @@
       </tr>
 		<% end %>
 		<!-- BTW -->
-    <tr>
-      <th><%= f.label :sales_tax %></td>
-      <td><%= f.text_field :sales_tax, size: 10 %></td>
-    </tr>
+		<tr>
+			<th><%= f.label :sales_tax %></td>
+			<td><%= select(:product, :sales_tax, [['6%', 6],['21%', 21]]) %></td>
+		</tr>
     <% if product.errors[:sales_tax].any? %>
       <tr id='errors'>
         <th></th><td><% product.errors[:sales_tax].each do |msg| %>
