@@ -5,9 +5,7 @@
   <% if user.orders.where(status: :sent).any? %>
     <% user.orders.where(status: :sent).each do |order| %>
       <div class='order-invoices'>
-        <% order.invoices.order(created_at: :asc).each do |invoice| %>
-          <%= render 'invoices/order_invoice', invoice: invoice %>
-        <% end %>
+        <%= render order.invoices.order(created_at: :asc) %>
       </div>
     <% end %>
   <% else %>

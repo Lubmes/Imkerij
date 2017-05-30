@@ -8,7 +8,7 @@ $teal: #1a916f;
 // Fonts
 $logo-font: 'Baloo';
 
-.w3-yellow { background-color: $bee-yellow!important; }
+.w3-yellow, .w3-hover-yellow:hover { background-color: $bee-yellow!important; }
 .w3-text-yellow, .w3-hover-text-yellow:hover { color: $bee-yellow!important; }
 .w3-border-yellow { border-color: $bee-yellow!important; }
 

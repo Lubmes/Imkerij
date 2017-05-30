@@ -68,14 +68,20 @@
             target: "_blank",
             format: :pdf,
             class: "pdf" %>
+      <!-- Niet als probleem te markeren:
+           wanneer al een probleem, wanneer niet laatste factuur,
+           wanneer in te verwerken (paid) (want dirrect corr.) -->
       <%= link_to "PROBLEEM", [:problem, invoice.order],
             remote: true,
             class: "problem #{'inactive' if invoice.order.problem? ||
-                                            invoice.sequence_number < invoice.order.invoices.size }" %>
+                                            invoice.sequence_number < invoice.order.invoices.size ||
+                                            invoice.order.paid?}" %>
+      <!-- Niet als verzonden te markeren:
+          wanneer al in verzonden, wanneer niet laatste factuur,  -->
       <%= link_to "VERZONDEN", [:sent_out, invoice.order, invoice],
             remote: true,
-            class: "mail #{'inactive' if invoice.order.sent? ||
-                                         invoice.sequence_number < invoice.order.invoices.size}" %>
+            class: "mail #{'inactive' if invoice.order.problem? || invoice.order.sent? ||
+                                         invoice.sequence_number < invoice.order.invoices.size }" %>
     </div>
   <% end %>
 

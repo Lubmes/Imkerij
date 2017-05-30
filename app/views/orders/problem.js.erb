@@ -1,0 +1,2 @@
+$('#invoice-ajax-<%= @order.active_invoice.id %>').fadeOut();
+$('#order-processing').append("<%= j render @order %>")

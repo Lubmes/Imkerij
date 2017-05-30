@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
-    @order = @user.orders.last # Moet zijn opgesplitst in paid_-, send_- en stored_orders.
+    # @order = @user.orders.last # Moet zijn opgesplitst in paid_-, send_- en stored_orders.
     @deliveries = @user.deliveries
   end
 

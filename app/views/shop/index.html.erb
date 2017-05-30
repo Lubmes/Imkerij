@@ -10,7 +10,7 @@
 					<div id='products'>
 						<div class='category'>
 							<%= render category %>
-							<%= render 'categories/category_gallery', category: category %>
+							<%= render 'categories/gallery', category: category %>
 						</div>
 						<% policy_scope(category.products).each do |product| %>
 
@@ -27,7 +27,7 @@
 								</div>
 								<% if policy(product.selections.build).create? %>
 									<div class='add-selection'>
-										<%= render 'selections/form_in_product',
+										<%= render 'selections/product_form_wrap',
 													product: product,
 													selection: product.selections.build %>
 									</div>

@@ -74,11 +74,13 @@
 						selection.order.status == 'open' %>
 		<% if selection.corrections.any? %>
 			<% selection.corrections.each do |correction| %>
-				<%= render correction %>
+				<%= render 'corrections/output_row', correction: correction %>
 			<% end %>
 		<% end %>
 </div>
 
-<%= render 'corrections/input_row', selection: selection %>
+<% if selection.order.payment_id %>
+	<%= render 'corrections/input_row', selection: selection %>
+<% end %>
 
 <% end %>

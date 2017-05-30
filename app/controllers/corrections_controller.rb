@@ -28,6 +28,7 @@ class CorrectionsController < ApplicationController
       update_invoice
     else
       @invoice.destroy
+      @order.paid!
     end
   end
 

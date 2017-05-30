@@ -150,7 +150,6 @@ class OrdersController < ApplicationController
 
   def problem
     @order.problem!
-    @order.active_invoice.toggle! :closed
   end
 
   private

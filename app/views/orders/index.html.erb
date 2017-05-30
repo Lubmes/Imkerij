@@ -17,7 +17,7 @@
 		</thead>
 		<tbody>
 			<% @problem_orders.each do |order| %>
-				<%= render 'order_index_row', order: order %>
+				<%= render 'index_row', order: order %>
 			<% end %>
 		</tbody>
 		<% end %>
@@ -36,7 +36,7 @@
 		</thead>
 		<tbody>
 			<% @paid_orders.each do |order| %>
-				<%= render 'order_index_row', order: order %>
+				<%= render 'index_row', order: order %>
 			<% end %>
 		</tbody>
 		<% end %>
@@ -55,7 +55,7 @@
 		</thead>
 		<tbody>
 			<% @sent_orders.each do |order| %>
-				<%= render 'order_index_row', order: order %>
+				<%= render 'index_row', order: order %>
 			<% end %>
 		</tbody>
 		<% end %>
@@ -76,7 +76,7 @@
 		</thead>
 		<tbody>
 			<% @open_orders.each do |order| %>
-				<%= render 'order_index_row', order: order %>
+				<%= render 'index_row', order: order %>
 			<% end %>
 		</tbody>
 		<% end %>
@@ -95,7 +95,7 @@
 			</thead>
 			<tbody>
 				<% @guest_orders.each do |order| %>
-					<%= render 'order_index_row', order: order %>
+					<%= render 'index_row', order: order %>
 				<% end %>
 			</tbody>
 		<% end %>

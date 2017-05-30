@@ -19,13 +19,8 @@ class InvoicesController < ApplicationController
 
   def sent_out
     @invoice = Invoice.find(params[:id])
-    @order = @invoice.order
-
-    @invoice.closed = true
-    @order.status = 'sent'
-
-    @order.save
-    @invoice.save
+    @order = @invoice.order  
+    @order.sent!
   end
 
   def refund

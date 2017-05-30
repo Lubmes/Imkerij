@@ -46,7 +46,7 @@
 <% unless in_payment_process? %>
 	<% if order.invoices.any? %>
 		<% order.invoices.order(created_at: :asc).each do |invoice| %>
-			<%= render 'invoices/order_invoice', invoice: invoice %>
+			<%= render 'invoices/invoice', invoice: invoice %>
 		<% end %>
 	<% end %>
 <% end %>
