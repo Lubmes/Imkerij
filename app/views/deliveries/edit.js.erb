@@ -1,1 +1,1 @@
-$('.delivery-ajax').html("<%= j render 'deliveries/form', delivery: @delivery %>");
+$('.delivery-ajax-<% @delivery.id %>').html("<%= j render 'deliveries/form', delivery: @delivery %>");

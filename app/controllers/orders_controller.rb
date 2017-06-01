@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   include ShoppingOrder
   before_action :set_shopping_order, only: [:show, :empty, :check_out, :confirm, :pay]
-  before_action :set_order, only: [:success, :problem]
-  before_action :set_user, only: [:check_out, :confirm, :success]
+  before_action :set_order, only: [:set_package_delivery, :success, :problem]
+  before_action :set_user, only: [:set_package_delivery, :check_out, :confirm, :success]
 
   require 'mollie/api/client'
   require 'mailgun'
@@ -29,14 +29,22 @@ class OrdersController < ApplicationController
     end
   end
 
+  def set_package_delivery
+    @deliveries = @order.customer.deliveries
+    @delivery = Delivery.find(params[:order][:package_delivery_id])
+    @order.package_delivery = @delivery
+    @order.save!
+  end
+
   def check_out
     @order.open! if @order.confirmed?
-    # gebruiker selecteerd een adres uit zijn bestand.
-    @delivery = @user.deliveries.first unless @user.nil?
-    if @delivery
-      @order.package_delivery = @delivery
-      @order.save
-    end
+    # Gebruiker selecteerd een adres uit zijn bestand.
+    # @delivery = @user.deliveries.first unless @user.nil?
+    @deliveries = @user.deliveries if @user
+    # if @delivery
+    #   @order.package_delivery = @delivery
+    #   @order.save
+    # end
   end
 
   def confirm
@@ -153,6 +161,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def order_params
+    params.require(:order).permit([:package_delivery_id])
+  end
 
   def set_order
     @order = Order.find(params[:id])

@@ -1,43 +1,43 @@
 
-<%= form_for [delivery.sender, delivery], remote: true do |f| %>
-<%= f.hidden_field :sender_id, value: delivery.sender.id %>
+<%= form_for [delivery.sender, delivery], remote: true do |ff| %>
+<%= ff.hidden_field :sender_id, value: delivery.sender.id %>
 
 <div class='delivery'>
 <table>
   <tr>
     <div class="field">
-      <th><%= f.label :address_street_name %></th>
-      <td><%= f.text_field :address_street_name %></td>
+      <th><%= ff.label :address_street_name %></th>
+      <td><%= ff.text_field :address_street_name %></td>
     </div>
   </tr>
   <tr>
     <div class="field">
-      <th><%= f.label :address_street_number %></th>
-      <td><%= f.text_field :address_street_number %></td>
+      <th><%= ff.label :address_street_number %></th>
+      <td><%= ff.text_field :address_street_number %></td>
     </div>
   </tr>
   <tr>
     <div class="field">
-      <th><%= f.label :address_zip_code %></th>
-      <td><%= f.text_field :address_zip_code, cols: 30 %></td>
+      <th><%= ff.label :address_zip_code %></th>
+      <td><%= ff.text_field :address_zip_code, cols: 30 %></td>
     </div>
   </tr>
   <tr>
       <div class="field">
-        <th><%= f.label :address_city %></th>
-        <td><%= f.text_field :address_city %></td>
+        <th><%= ff.label :address_city %></th>
+        <td><%= ff.text_field :address_city %></td>
       </div>
   </tr>
   <tr>
       <div class="field">
-        <th><%= f.label :address_country %></th>
-        <td><%= f.text_field :address_country %></td>
+        <th><%= ff.label :address_country %></th>
+        <td><%= ff.text_field :address_country %></td>
       </div>
   </tr>
 </table>
 
   <div class='button-center'>
-    <%= f.submit "Opslaan", class: 'button' %>
+    <%= ff.submit "Opslaan", class: 'button' %>
   </div>
 
 </div>

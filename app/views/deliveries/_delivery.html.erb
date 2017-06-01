@@ -1,11 +1,16 @@
 <div class='delivery'>
   <nav class='record-bar'>
+    <% if controller.action_name == 'check_out' && form %>
+      <div class='select-button'>
+        <%= form.radio_button :package_delivery_id, delivery.id, :onclick => "this.form.submit();" %>
+      </div>
+    <% end %>
     <div class='title'>
       <h4 class='address'><%= card_title %></h4>
     </div>
-    <% unless controller.action_name == 'confirm' ||
-        controller.action_name == 'pay' ||
-        controller.action_name == 'success' %>
+    <% if (controller.action_name != 'confirm' ||
+        controller.action_name != 'pay') &&
+        policy(delivery).edit? %>
       <div class='actions'>
           <%= link_to [:edit, delivery.sender, delivery], remote: true do %>
             <i class='fa fa-pencil'></i>

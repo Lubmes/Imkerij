@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   resources 'orders', only: [:index] do
     member do
       get 'empty'
+      patch 'set_package_delivery'
       get 'check_out'
       get 'confirm'
       get 'pay'

@@ -10,11 +10,11 @@ class DeliveryPolicy < ApplicationPolicy
   end
 
   def edit?
-    create?
+    create? && record.editable?
   end
 
   def update?
-    create?
+    edit?
   end
 
   def destroy?

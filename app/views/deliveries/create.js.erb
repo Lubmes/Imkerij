@@ -1,2 +1,5 @@
-$('.delivery-ajax').html("<%= j render @delivery, card_title: "Verzendadres" %>")
-$('.confirm-hidden').show();
+// $('.delivery-ajax').html("<%= j render @delivery, card_title: "Verzendadres" %>");
+$('#deliveries-ajax').html(
+  "<%= j render 'deliveries/select_form', deliveries: @deliveries, order: @order %>");
+
+// $('.confirm-hidden').show();

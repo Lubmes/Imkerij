@@ -1,0 +1,11 @@
+<div id='order-processing'>
+  <% if orders.where(status: [:paid, :problem]).any? %>
+    <% orders.where(status: [:paid, :problem]).order(created_at: :asc).each do |order| %>
+      <div id='order-ajax-<%= order.id %>' class='order'>
+        <%= render order %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Geen</p>
+  <% end %>
+</div>

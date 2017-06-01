@@ -3,7 +3,10 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.new(delivery_params)
     # authorize @delivery
 
-    @order = @delivery.sender.orders.open.last
+    @customer = @delivery.sender
+    @order = @customer.orders.open.last
+    @deliveries = @customer.deliveries
+
     @order.package_delivery = @delivery
     @order.save
     if @delivery.save
@@ -21,6 +24,12 @@ class DeliveriesController < ApplicationController
   def update
     @delivery = Delivery.find(params[:id])
     # authorize @delivery
+
+
+    @customer = @delivery.sender
+    @order = @customer.orders.open.last
+    @deliveries = @customer.deliveries
+
     if @delivery.update(delivery_params)
       flash[:notice] = "Adres is bijgewerkt."
     else

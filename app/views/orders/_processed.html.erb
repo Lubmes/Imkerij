@@ -4,7 +4,7 @@
   </header>
   <% if user.orders.where(status: :sent).any? %>
     <% user.orders.where(status: :sent).each do |order| %>
-      <div class='order-invoices'>
+      <div id='order-invoices-ajax-<%= order.id %>' class='order-invoices'>
         <%= render order.invoices.order(created_at: :asc) %>
       </div>
     <% end %>

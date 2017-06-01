@@ -60,8 +60,12 @@
 		}
 	}
 	#user-info {
-		div {
-			@extend .w3-margin-top;
+		.select-button {
+			padding-left: 2px;
+			padding-right: 7px;
+			padding-top: 3px;
+			display: inline-block;
+			@extend .w3-left;
 		}
 	}
 }
