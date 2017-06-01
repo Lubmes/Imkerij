@@ -17,7 +17,7 @@
 			<td colspan='8' class='selection-form'>
 				<div class='submit'>
 					<%= f.hidden_field :selection_id, value: selection.id %>
-					<%= f.number_field :quantity, value: -1, min: -1 * selection.product_quantity, max: -1 %>
+					<%= f.number_field :quantity, value: -1, min: -1 * selection.correctable_quantity, max: -1 %>
 					<%= f.submit class: 'button' %>
 				</div>
 			</td>

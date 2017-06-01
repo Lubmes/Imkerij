@@ -22,4 +22,13 @@ class Selection < ApplicationRecord
   def total_mail_weight
     product_mail_weight * product_quantity
   end
+
+  def correctable_quantity
+    sum = self.corrections.joins(:invoice).where(invoices: { closed: true }).sum(:quantity).abs
+    self.product_quantity - sum
+  end
+
+  def correctable?(quantity = 0)
+    self.correctable_quantity - quantity > 0
+  end
 end

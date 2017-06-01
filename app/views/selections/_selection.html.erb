@@ -79,7 +79,7 @@
 		<% end %>
 </div>
 
-<% if selection.order.payment_id %>
+<% if selection.order.payment_id && selection.correctable? %>
 	<%= render 'corrections/input_row', selection: selection %>
 <% end %>
 

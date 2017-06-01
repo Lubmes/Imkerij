@@ -1,6 +1,6 @@
 <tr id='correction-ajax-<%= correction.id %>' class='correction'>
 	<!-- Col 1. -->
-	<% if correction.invoice.sequence_number == correction.invoice.order.invoices.size %>
+	<% unless correction.invoice.closed? %>
 		<td class='remove'>
 	    <%= link_to [correction.selection, correction], method: :delete, remote: true do %>
 	      <i class='fa fa-close'></i>
