@@ -5,4 +5,17 @@ class Delivery < ApplicationRecord
   has_many :invoices, foreign_key: "invoices_delivery_id"
 
   has_address :address
+
+  def address_short
+    "#{address_zip_code}, #{address_street_number}"
+  end
+
+  # Bewerkbaar als een delivery nog niet is gekoppeld aan een betaalde order.
+  def editable?
+    if self.orders.where.not(payment_id: nil).any?
+      false
+    else
+      true
+    end
+  end
 end
