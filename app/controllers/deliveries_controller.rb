@@ -1,4 +1,7 @@
 class DeliveriesController < ApplicationController
+  include ShoppingOrder
+  before_action :set_shopping_order, only: [:update, :set_package_delivery]
+
   def create
     @delivery = Delivery.new(delivery_params)
     # authorize @delivery
@@ -23,11 +26,9 @@ class DeliveriesController < ApplicationController
 
   def update
     @delivery = Delivery.find(params[:id])
-    # authorize @delivery
-
 
     @customer = @delivery.sender
-    @order = @customer.orders.open.last
+    # @order = @customer.orders.open.last
     @deliveries = @customer.deliveries
 
     if @delivery.update(delivery_params)
@@ -45,6 +46,18 @@ class DeliveriesController < ApplicationController
 
     @order = current_order # verwijder na js
     redirect_to [:check_out, @order]
+  end
+
+  def set_package_delivery
+    @deliveries = @order.customer.deliveries
+    @delivery = Delivery.find(params[:id])
+    @order.package_delivery = @delivery
+    @order.save!
+
+    respond_to do |format|
+      format.html { redirect_to [:check_out, @order] }
+      format.js
+    end
   end
 
   private

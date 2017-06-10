@@ -3,7 +3,7 @@ class ShopController < ApplicationController
 
   def index
     set_shopping_order
-    @order.open! if @order.confirmed?
+    @order.open!
     @categories = Category.all.order(position: :asc)
     @selection = @order.selections.build
   end

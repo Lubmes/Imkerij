@@ -2,7 +2,8 @@ class Order < ApplicationRecord
   # Money: total
   monetize :total_price_cents
   # Statuses
-  enum status: { open: 0, confirmed: 1, paid: 2, stored: 3, sent: 4, problem: 5 }
+  # enum status: { open: 0, confirmed: 1, paid: 2, stored: 3, sent: 4, problem: 5 }
+  enum status: { open: 0, stored: 1, at_check_out: 2, confirmed: 3, paid: 4,  sent: 5, problem: 6 }
   # Associations
   belongs_to :package_delivery, class_name: 'Delivery', optional: true
   belongs_to :customer, class_name: 'User', optional: true

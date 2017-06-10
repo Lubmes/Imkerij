@@ -60,12 +60,31 @@
 		}
 	}
 	#user-info {
-		.select-button {
-			padding-left: 2px;
-			padding-right: 7px;
-			padding-top: 3px;
-			display: inline-block;
-			@extend .w3-left;
+		.delivery {
+			@extend .w3-light-grey;
+			.select-button {
+				padding-left: 0;
+				margin-left: -12px;
+				@extend .w3-left;
+				@extend .w3-circle;
+				@extend .w3-white;
+				@extend .w3-hover-black;
+				@extend .w3-text-teal;
+				@extend .w3-hover-text-teal;
+				@extend .w3-center;
+				width: 40px;
+				height: 40px;
+				display: inline-block;
+
+			}
+		}
+		.delivery.selected {
+			@extend .w3-red;
+			@extend .w3-card-4;
+			.select-button {
+				@extend .w3-black;
+				@extend .w3-text-teal;
+			}
 		}
 	}
 }

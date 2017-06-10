@@ -36,18 +36,21 @@
 			<% if user_signed_in? %>
 				<%= render @user %>
 				<% if @deliveries.any? %>
-						<header>
-							<% if @deliveries.size > 1 %>
-								<h3>Selecteer uw verzendadres</h3>
-							<% else %>
-								<h3>Uw verzendadres</h3>
-							<% end %>
-						</header>
+					<header>
+						<% if @deliveries.size > 1 %>
+							<h3>Selecteer uw verzendadres</h3>
+						<% else %>
+								<!-- <h3>Uw verzendadres</h3> -->
+								<!-- Werkt niet met javascript. -->
+						<% end %>
+					</header>
 				<% end %>
 
 				<div id='deliveries-ajax'>
-					<%= render 'deliveries/select_form', deliveries: @deliveries, order: @order %>
+					<!-- De aanwezige deliveries. -->
+					<%= render 'deliveries/options', deliveries: @deliveries, order: @order %>
 
+					<!-- Als er nog geen nieuw adres is toegevoegd, dan: formulier nieuw adres tonen. -->
 					<% unless @deliveries.map(&:editable?).any? %>
 							<header>
 								<h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>

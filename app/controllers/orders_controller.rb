@@ -29,22 +29,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  def set_package_delivery
-    @deliveries = @order.customer.deliveries
-    @delivery = Delivery.find(params[:order][:package_delivery_id])
-    @order.package_delivery = @delivery
-    @order.save!
-  end
-
   def check_out
-    @order.open! if @order.confirmed?
-    # Gebruiker selecteerd een adres uit zijn bestand.
-    # @delivery = @user.deliveries.first unless @user.nil?
+    @order.at_check_out!
     @deliveries = @user.deliveries if @user
-    # if @delivery
-    #   @order.package_delivery = @delivery
-    #   @order.save
-    # end
   end
 
   def confirm
@@ -53,8 +40,8 @@ class OrdersController < ApplicationController
     @delivery = @order.package_delivery
 
     if @delivery.nil?
-      flash.now[:alert] = 'U moet een verzendadres opgeven.'
-      render 'check_out'
+      flash.keep[:alert] = 'U moet een verzendadres opgeven.'
+      redirect_to [:check_out, @order]
     end
     if @user == nil
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'

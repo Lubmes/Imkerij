@@ -5,14 +5,8 @@
 <div id='profile'>
 	<div class='user-col'>
 		<%= render @user %>
-		<% if @deliveries.any? %>
-			<% @deliveries.each do |delivery| %>
-				<div class='delivery-ajax'>
-					<%= render delivery,
-								card_title: "#{delivery.address_zip_code}, #{delivery.address_street_number}" %>
-				</div>
-			<% end %>
-		<% end %>
+
+		<%= render 'deliveries/options', deliveries: @deliveries, order: @order %>
 	</div>
 
 	<div class='orders-col'>

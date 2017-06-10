@@ -1,19 +1,23 @@
-<div class='delivery'>
+<div class="delivery <%= ('selected' if order.package_delivery == delivery) unless order.nil? %>">
   <nav class='record-bar'>
-    <% if controller.action_name == 'check_out' && form %>
-      <div class='select-button'>
-        <%= form.radio_button :package_delivery_id, delivery.id, :onclick => "this.form.submit();" %>
-      </div>
+    <% unless order.nil? %>
+      <% if order.status == 'at_check_out' %>
+        <%= link_to [:set_package_delivery, delivery.sender, delivery], remote: true do %>
+          <div class='select-button'>
+            <%= '<i class="icon-mail-pre"></i>'.html_safe %>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
     <div class='title'>
       <h4 class='address'><%= card_title %></h4>
     </div>
-    <% if (controller.action_name != 'confirm' ||
-        controller.action_name != 'pay') &&
+    <% if !(controller.action_name == 'confirm' ||
+        controller.action_name == 'pay') &&
         policy(delivery).edit? %>
       <div class='actions'>
           <%= link_to [:edit, delivery.sender, delivery], remote: true do %>
-            <i class='fa fa-pencil'></i>
+            <i class='icon-edit'></i>
           <% end %>
       </div>
     <% end %>

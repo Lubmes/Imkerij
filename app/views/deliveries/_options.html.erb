@@ -1,13 +1,11 @@
 <% if deliveries.any? %>
-  
 
     <% deliveries.each do |delivery| %>
-      <div class='delivery-ajax-<% delivery.id %>'>
+      <div id='delivery-ajax-<%= delivery.id %>'>
         <%= render delivery,
               card_title: "#{delivery.address_zip_code}, #{delivery.address_street_number}",
-              form: deliveries.size > 1 ? f : false %>
+              order: order %>
       </div>
     <% end %>
-
 
 <% end %>

@@ -326,3 +326,4 @@ end # Becommentariseer aan/uit.
 Correction.delete_all
 Invoice.delete_all
 Order.delete_all
+Delivery.delete_all

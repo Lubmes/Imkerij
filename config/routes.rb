@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, path: 'u', controllers: { registrations: "registrations", sessions: "sessions" }
   resources 'users' do
     resources 'orders'
-    resources 'deliveries'
+    resources 'deliveries' do
+      member do
+        get 'set_package_delivery'
+      end
+    end
   end
 
   # pages
@@ -62,7 +66,6 @@ Rails.application.routes.draw do
   resources 'orders', only: [:index] do
     member do
       get 'empty'
-      patch 'set_package_delivery'
       get 'check_out'
       get 'confirm'
       get 'pay'
