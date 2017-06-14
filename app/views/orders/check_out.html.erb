@@ -56,7 +56,8 @@
 								<h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
 							</header>
 							<%= render 'deliveries/form',
-										delivery: @user.deliveries.build %>
+										delivery: @user.deliveries.build,
+										sender: @user %>
 					<% end %>
 				</div>
 

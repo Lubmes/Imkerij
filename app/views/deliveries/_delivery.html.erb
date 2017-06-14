@@ -1,4 +1,4 @@
-<div class="delivery <%= ('selected' if order.package_delivery == delivery) unless order.nil? %>">
+<div class="delivery <%= (order.package_delivery == delivery ? 'selected' : 'not-selected') unless order.nil? %>">
   <nav class='record-bar'>
     <% unless order.nil? %>
       <% if order.status == 'at_check_out' %>

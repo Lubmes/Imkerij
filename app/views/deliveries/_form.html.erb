@@ -1,5 +1,5 @@
 <%= form_for [sender, delivery], remote: true do |f| %>
-<%= f.hidden_field :sender_id, value: delivery.sender.id %>
+<%= f.hidden_field :sender_id, value: sender.id %>
 
 <div class='delivery'>
 <table>

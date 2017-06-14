@@ -1,13 +1,13 @@
 class DeliveriesController < ApplicationController
   include ShoppingOrder
-  before_action :set_shopping_order, only: [:update, :set_package_delivery]
+  before_action :set_shopping_order, only: [:create, :update, :set_package_delivery]
 
   def create
     @delivery = Delivery.new(delivery_params)
     # authorize @delivery
 
     @customer = @delivery.sender
-    @order = @customer.orders.open.last
+    # @order = @customer.orders.open.last
     @deliveries = @customer.deliveries
 
     @order.package_delivery = @delivery
@@ -38,6 +38,7 @@ class DeliveriesController < ApplicationController
     end
   end
 
+  # Geen app actie meer => wellicht verwijderen?..
   def destroy
     @delivery = Delivery.find(params[:id])
     authorize @delivery
