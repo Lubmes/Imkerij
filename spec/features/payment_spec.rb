@@ -13,22 +13,13 @@ feature 'User kan zijn bestelling afrekenen', js: true do
     click_link 'AFREKENEN'
   end
 
-  xscenario 'en het aantal aanpassen van een besteld product' do
-    wait_for_ajax # lijkt niet te werken.
+  scenario 'en het aantal aanpassen van een besteld product' do
+    product_in_check_out = page.find('.selections', :text => 'Honingpot 275ml')
+    product_in_check_out.fill_in with: 4
+    product_in_check_out.click_button('PAS AAN')
 
-    within('#order') do
-      product_in_check_out = page.find('.bookings', :text => 'Honingpot 275ml')
-      product_in_check_out.fill_in with: 4
-      product_in_check_out.click_button('PAS AAN')
-    end
-
-    wait_for_ajax
-
-    within('#order') do
-      product_in_check_out = page.find('.bookings', :text => 'Honingpot 275ml')
-      expect(product_in_check_out).to have_content '4'
-      expect(page).to have_content '€ 15,80'
-    end
+    expect(product_in_check_out).to have_content '4'
+    expect(page).to have_content '€ 15,80'
   end
 
   scenario 'en zijn persoonsgegevens opgeven voor de eerste keer' do
