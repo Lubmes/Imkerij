@@ -96,19 +96,20 @@
 	}
 }
 #flash-messages {
-	margin-top: -5%;
+	// margin-top: -5%;
 	@extend .w3-container;
 	.notice, .alert {
 		@extend .w3-center;
 		@extend .w3-panel;
-		position: absolute;
-		left: 41%;
-		width: 18%;
-		top: 130px;
+		// position: fixed;
+		// left: 0;
+		// bottom: 0;
+		width: 100%;
+		// top: 300px;
 		padding: 13px 13px 13px 13px;
 		span {
 			@extend .w3-right;
-			margin-right: -5px;
+			// margin-right: -5px;
 		}
 	}
 	.notice {

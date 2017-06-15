@@ -8,7 +8,7 @@
 
 	<div id='controls'>
 		<h2>AFREKENEN</h2>
-		<%= link_to 'Bevestig', [:confirm, @order], class: "#{'xconfirm-hidden' unless @delivery}" %>
+		<%= link_to 'Bevestig', [:confirm, @order], class: "#{'confirm-hidden' if @order.package_delivery.nil?}" %>
 	</div>
 
 	<div id='order' class='co-order-col'>
@@ -37,28 +37,13 @@
 				<%= render @user %>
 				<% if @deliveries.any? %>
 					<header>
-						<% if @deliveries.size > 1 %>
-							<h3>Selecteer uw verzendadres</h3>
-						<% else %>
-								<!-- <h3>Uw verzendadres</h3> -->
-								<!-- Werkt niet met javascript. -->
-						<% end %>
+						<h3>Stel uw verzendadres in</h3>
 					</header>
 				<% end %>
 
 				<div id='deliveries-ajax'>
 					<!-- De aanwezige deliveries. -->
-					<%= render 'deliveries/options', deliveries: @deliveries, order: @order %>
-
-					<!-- Als er nog geen nieuw adres is toegevoegd, dan: formulier nieuw adres tonen. -->
-					<% unless @deliveries.map(&:editable?).any? %>
-							<header>
-								<h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
-							</header>
-							<%= render 'deliveries/form',
-										delivery: @user.deliveries.build,
-										sender: @user %>
-					<% end %>
+					<%= render 'deliveries/options', deliveries: @deliveries, order: @order, sender: @user %>
 				</div>
 
 			<% else %>

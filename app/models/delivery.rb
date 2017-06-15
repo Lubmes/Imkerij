@@ -10,9 +10,11 @@ class Delivery < ApplicationRecord
     "#{address_zip_code}, #{address_street_number}"
   end
 
-  # Bewerkbaar als een delivery nog niet is gekoppeld aan een betaalde order.
+  # Bewerkbaar als een delivery nog niet is gekoppeld aan een order door betaling gesluisd.
   def editable?
-    if self.orders.where.not(payment_id: nil).any?
+    if (self.orders.where(status: :paid)
+        .or(self.orders.where(status: :sent))
+        .or(self.orders.where(status: :problem))).any?
       false
     else
       true

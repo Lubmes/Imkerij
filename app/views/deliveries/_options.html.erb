@@ -1,11 +1,23 @@
 <% if deliveries.any? %>
 
-    <% deliveries.each do |delivery| %>
-      <div id='delivery-ajax-<%= delivery.id %>'>
-        <%= render delivery,
-              card_title: "#{delivery.address_zip_code}, #{delivery.address_street_number}",
-              order: order %>
-      </div>
-    <% end %>
+  <% deliveries.each do |delivery| %>
+    <div id='delivery-ajax-<%= delivery.id %>'>
+      <%= render delivery,
+            card_title: "#{delivery.address_zip_code}, #{delivery.address_street_number}",
+            order: order %>
+    </div>
+  <% end %>
+
+<% end %>
+
+<% if order && order.at_check_out? && !deliveries.map(&:editable?).any? %>
+
+  <header>
+    <h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
+  </header>
+
+  <%= render 'deliveries/form',
+        delivery: sender.deliveries.build,
+            sender: sender %>
 
 <% end %>

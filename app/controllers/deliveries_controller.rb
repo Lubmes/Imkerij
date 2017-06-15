@@ -32,7 +32,7 @@ class DeliveriesController < ApplicationController
     @deliveries = @customer.deliveries
 
     if @delivery.update(delivery_params)
-      flash[:notice] = "Adres is bijgewerkt."
+      # flash[:notice] = "Adres is bijgewerkt."
     else
       flash.now[:alert] = "Adres is niet bijgewerkt."
     end
@@ -51,6 +51,7 @@ class DeliveriesController < ApplicationController
 
   def set_package_delivery
     @deliveries = @order.customer.deliveries
+
     @delivery = Delivery.find(params[:id])
     @order.package_delivery = @delivery
     @order.save!

@@ -32,6 +32,10 @@ class OrdersController < ApplicationController
   def check_out
     @order.at_check_out!
     @deliveries = @user.deliveries if @user
+    if @deliveries && @order.package_delivery.nil?
+      @order.package_delivery = @deliveries.last
+    end
+    @order.save!
   end
 
   def confirm
@@ -39,16 +43,16 @@ class OrdersController < ApplicationController
     @customer = @order.customer
     @delivery = @order.package_delivery
 
-    if @delivery.nil?
-      flash.keep[:alert] = 'U moet een verzendadres opgeven.'
-      redirect_to [:check_out, @order]
-    end
     if @user == nil
-      flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
-      render 'check_out'
+      flash.keep[:alert] = 'U moet uzelf eerst inloggen of aanmelden.'
+      redirect_to [:check_out, @order]
+    elsif @delivery.nil?
+      flash.keep[:alert] = 'U moet uw verzendadres doorgeven.'
+      redirect_to [:check_out, @order]
+    else
+      @order.confirmed!
+      @order.save
     end
-    @order.confirmed!
-    @order.save
   end
 
   def pay
