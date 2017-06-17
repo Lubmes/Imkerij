@@ -1,5 +1,5 @@
 #page {
-  padding-top: 8px;
+  padding-top: 2px;
   @extend .w3-col;
   @extend .l5;
   @extend .m5;
@@ -14,12 +14,14 @@
   a:hover { color: $light-blue; }
 
   h3#title  {
-    @extend .w3-xlarge;
-    color: $dark-green;
+    @extend .w3-xxlarge;
+    color: $teal;
+    font-family: $logo-font, serif;
   }
 
   #introduction {
     font-weight: lighter;
+    color: $dark-green;
     @extend .w3-wide;
     padding-bottom: 6px;
     p:first-child {
@@ -35,8 +37,8 @@
   }
   .w3-left, .w3-right, .w3-badge {cursor:pointer}
   .w3-badge {height:13px;width:13px;padding:0}
-  .w3-left { padding-left: 5px;}
-  .w3-right { padding-right: 5px;}
+  .w3-left { padding-left: 30px;}
+  .w3-right { padding-right: 30px;}
 
   #map {
     width: 200%;
@@ -48,6 +50,7 @@
 }
 
 #opening-times {
+  color: $dark-green;
   word-wrap: break-word;
   @extend .w3-col;
   @extend .l3;
@@ -63,8 +66,10 @@
   // border: 5px $brown-red!important solid;
   @extend .w3-container;
   h1 {
+    color: $light-teal;
     letter-spacing: 2px;
-    @extend .w3-text-dark-grey; @extend .w3-center; @extend .w3-xlarge;
+    //@extend .w3-text-dark-grey;
+    @extend .w3-center; @extend .w3-xlarge;
   }
   h2 { @extend .w3-text-teal; @extend .w3-medium;
     margin-bottom: 5px;

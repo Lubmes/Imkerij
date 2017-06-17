@@ -90,9 +90,9 @@
 			.button {
 				@extend .w3-small;
 				@extend .w3-btn;
-				background-color: $brown-red;
-				@extend .w3-text-yellow;
-				@extend .w3-round-xlarge;
+				background-color: $light-teal;
+				@extend .w3-text-brown;
+				@extend .w3-hover-text-red;
 			}
 		}
 	}

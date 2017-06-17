@@ -23,6 +23,8 @@
   <% end %>
 
   <% if @page.pictures.any? %>
+
+    <!-- Slideshow -->
     <% if @page.pictures.size > 1 %>
       <div class="w3-content w3-display-container">
         <% @page.pictures.each do |picture| %>
@@ -36,9 +38,12 @@
           <% end %>
           </div>
       </div>
+
+    <!-- Losse afbeelding -->
     <% else %>
       <%= image_tag @page.pictures.first.image.url %>
     <% end %>
+
   <% end %>
 
   <div id='story'>

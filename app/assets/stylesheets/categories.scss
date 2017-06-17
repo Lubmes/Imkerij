@@ -4,6 +4,9 @@
 
 #store-front .category {
 	h3 {
+		// @extend .w3-xxlarge;
+    // color: $bright-red;
+    font-family: $logo-font, serif;
 		@extend .w3-text-green;
 		@extend .w3-border-green;
 		@extend .w3-bottombar;

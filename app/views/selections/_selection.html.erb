@@ -1,10 +1,11 @@
-<!-- Boekings product naam. -->
+<!-- Product naam aankoop -->
 <tr>
 	<td class='name' colspan='9'>
 		<small><%= selection.product_name %></small>
 	</td>
 <tr>
 
+<!-- Omschrijving aankoop -->
 <!-- Bedrag x Aantal = Totaal -->
 <tr id='selection-ajax-<%#= selection.id %>'>
 	<% unless controller.action_name == 'confirm' ||
@@ -25,10 +26,9 @@
 		<small>incl. <%= number_with_precision(selection.product_sales_tax, strip_insignificant_zeros: true) %> %</small>
 	</td>
 
-	<!-- selection update form -->
-	<% unless controller.action_name == 'confirm' ||
-						selection.order.status != 'at_check_out' ||
-						selection.order.status != 'at_check_out' %>
+	<!-- Aankoop update form -->
+	<% if selection.order.status == 'open' ||
+					selection.order.status == 'at_check_out' %>
 		<%= form_for selection, remote: true do |f| %>
 				<!-- Col 3. Multiplication symbol. -->
 				<td>

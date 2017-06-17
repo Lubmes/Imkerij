@@ -1,5 +1,5 @@
 <div id='record-zoom' class='product'>
-
+	<h3 class='title'><%= @product.name %></h3>
 	<div class='info'>
 		<%= render 'pictures/cover_picture',
 					picture: @product.pictures.where(visable: true).first %>
@@ -8,7 +8,7 @@
 			<%= render 'pictures/row_gallery',
 				pictures: @product.pictures.where(visable: true) %>
 			<%= render @product, category: @product.category %>
-			<%= render 'selections/form_in_product', product: @product, selection: @selection %>
+			<%= render 'selections/product_form_wrap', product: @product, selection: @selection %>
 		</div>
 	</div>
 

@@ -3,12 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #events {
+	padding-top: 2px;
 	@extend .w3-col;
 	@extend .l10;
 	@extend .m10;
 	@extend .s10;
 	h3.title {
-		color: $dark-green;
+		@extend .w3-xxlarge;
+    color: $teal;
+    font-family: $logo-font, serif;
 	}
 	.event {
 		@extend .w3-padding-24;

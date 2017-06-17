@@ -3,6 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .product {
+	.title {
+		color: $dark-green;
+		letter-spacing: 2px;
+		font-size: 12px;
+	}
 	.description {
 		@extend .w3-text-dark-grey;
 	}
@@ -10,8 +15,6 @@
 		@extend .w3-text-grey;
 	}
 	@extend .w3-row;
-	@extend .w3-border-green;
-	@extend .w3-leftbar;
 	ul {
 		@extend .w3-text-dark-grey;
 	}
@@ -32,15 +35,17 @@
 	@extend .w3-margin-bottom;
 }
 #store-front #products .product {
+	@extend .w3-border-green;
+	@extend .w3-leftbar;
 	// "meer"-knop
 	.description a {
 		text-decoration: none;
-		padding: 6px;
+		padding: 8px 12px;
 		background-color: $dark-green!important;
-		color: $bee-yellow!important;
+		color: $light-teal!important;
 		// @extend .w3-hover-brown;
 		@extend .w3-btn;
-		@extend .w3-hover-text-yellow;
+		// @extend .w3-hover-text-yellow;
 		@extend .w3-round-xlarge;
 		@extend .w3-margin;
 		@extend .w3-small;
@@ -50,6 +55,11 @@
 	}
 }
 #record-zoom.product {
+	margin-top: 0;
+	.title {
+		@extend .w3-xlarge;
+		@extend .w3-center;
+	}
 	img { @extend .w3-round-xxlarge; }
 	.row-gallery {
 		@extend .w3-row-padding;
@@ -73,9 +83,12 @@
 		@extend .w3-center;
 		.button {
 			@extend .w3-btn;
-			background-color: $brown-red;
-			@extend .w3-text-yellow;
-			@extend .w3-round-xlarge;
+			background-color: $light-teal;
+			@extend .w3-text-brown;
+			@extend .w3-hover-text-red;
+			// background-color: $brown-red;
+			// @extend .w3-text-yellow;
+			// @extend .w3-round-xlarge;
 			@extend .w3-padding;
 			@extend .w3-margin;
 		}
