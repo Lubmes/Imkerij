@@ -65,13 +65,13 @@
 	font-family: $logo-font, serif;
 	@extend .w3-medium;
 	// @extend .w3-teal;
-	color: $teal!important;
+	color: $dark-green!important;
 	background-color: $lighter-teal!important;
 	// @extend .w3-text-yellow;
 }
 #sec-nav.shop a:hover {
 	box-shadow:0 8px 8px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.19);
-	color: $dark-green!important;
+	color: #000!important;
 }
 #sec-nav {
 	@extend .w3-transparent;
