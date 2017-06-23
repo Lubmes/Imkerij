@@ -1,9 +1,8 @@
-<div id='invoice-pdf'>
 <h1>F A C T U U R</h1>
 
 <div class='invoice-no'>
   <%= "<#{@customer.email.upcase}>" %><br>
-  <%= @invoice.invoice_identification_number %>
+  <%= @invoice.storewide_identification_number %>
   <br>
   <small>Laatst bewerkt: <%= I18n.l @invoice.updated_at, format: :long %><br>
     Status:
@@ -132,5 +131,3 @@
   </p>
   <p>Wij hopen u hiermee voldoende tegemoet te zijn gekomen.</p>
 <% end %>
-
-</div>

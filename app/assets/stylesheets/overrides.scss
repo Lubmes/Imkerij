@@ -7,6 +7,8 @@ $light-blue: #2EBAE8;
 $teal: #1A916F;
 $light-teal: #75BDA8;
 $lighter-teal: #F1F8F6;
+$orange: #ff9800;
+
 // Fonts
 $logo-font: 'Baloo';
 
@@ -26,3 +28,5 @@ $logo-font: 'Baloo';
 .w3-red { background-color: $bright-red!important; }
 .w3-text-red, .w3-hover-text-red:hover { color: $bright-red!important; }
 .w3-border-red { border-color: $bright-red!important; }
+
+.w3-border-orange { border-color: $orange!important; }

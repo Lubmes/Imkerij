@@ -14,6 +14,7 @@ class CorrectionsController < ApplicationController
     else
       correction = @invoice.corrections.create(correction_params)
     end
+    authorize correction
     correction.save
     @order.problem!
     update_invoice
@@ -21,6 +22,7 @@ class CorrectionsController < ApplicationController
   end
 
   def destroy
+    authorize @correction
     @order = @correction.selection.order
     @invoice = @order.active_invoice
     @correction.destroy

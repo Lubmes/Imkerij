@@ -12,14 +12,14 @@ class InvoicesController < ApplicationController
       @invoice.invoice_delivery = @invoice.order.package_delivery
       @invoice.save
     end
-    render :pdf       => "file_name",
-           :template  => 'invoices/invoice.pdf.erb',
+    render :pdf       => @invoice.storewide_identification_number,
+           :template  => 'invoices/browser.pdf.erb',
            :layout    => 'invoice_pdf.html'
   end
 
   def sent_out
     @invoice = Invoice.find(params[:id])
-    @order = @invoice.order  
+    @order = @invoice.order
     @order.sent!
   end
 

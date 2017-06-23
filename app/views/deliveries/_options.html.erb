@@ -13,11 +13,21 @@
 <% if order && order.at_check_out? && !deliveries.map(&:editable?).any? %>
 
   <header>
-    <h3 class='add-address'><i class='fa fa-plus'></i> ADRES</h3>
+    <h3 class='add-address' title='nieuw adres'><i class='fa fa-plus'></i> ADRES</h3>
   </header>
 
-  <%= render 'deliveries/form',
-        delivery: sender.deliveries.build,
-            sender: sender %>
+  <div id='delivery-form' style='display: none;'>
+    <%= render 'deliveries/form',
+          delivery: sender.deliveries.build,
+              sender: sender %>
+  </div>
+
+  <script>
+  $(document).ready(function(){
+      $(".add-address").click(function(){
+          $("#delivery-form").toggle();
+      });
+  });
+  </script>
 
 <% end %>

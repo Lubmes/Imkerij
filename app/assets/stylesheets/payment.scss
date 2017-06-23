@@ -1,5 +1,6 @@
 #payment {
 	padding-right: 10px;
+	padding-bottom: 80px;
 	@extend .w3-col;
 	@extend .l10;
 	@extend .m10;
@@ -51,6 +52,8 @@
 	h3.add-address {
 		@extend .w3-large;
 		@extend .w3-text-orange;
+		@extend .w3-light-grey;
+		@extend .w3-btn;
 	}
 	#order {
 		.selections {

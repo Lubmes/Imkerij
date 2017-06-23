@@ -45,7 +45,7 @@ feature 'User kan bij het afrekenen', js: true do
     scenario 'zijn naam en order terugzien en een vervolg verzendadres-formulier' do
       expect(page).to have_content 'Timmerman'
       expect(page).to have_content '€ 3,95'
-      expect(page).to have_content 'Straat'
+      expect(page).to have_content 'ADRES'
     end
     scenario 'en nog niet de "Bevestig" knop zien' do
       expect(page).not_to have_content 'Bevestig'
@@ -53,6 +53,7 @@ feature 'User kan bij het afrekenen', js: true do
 
     context 'in het vervolg verzendadres-formulier een adres opgeven' do
       before do
+        find('.add-address', :text => 'ADRES').click
         fill_in 'Straat', with: 'Korteweg'
         fill_in 'Huisnummer', with: '12A'
         fill_in 'Postcode', with: '1234AB'

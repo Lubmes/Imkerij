@@ -67,7 +67,7 @@
 	</td>
 </tr>
 
-<!-- Corrections made -->
+<!-- Corrections geschiedenis. -->
 <div id='selection-corrections-ajax-<%= selection.id %>'>
 	<% unless controller.action_name == 'check_out' ||
 						controller.action_name == 'confirm' ||
@@ -80,7 +80,8 @@
 		<% end %>
 </div>
 
-<% if selection.order.payment_id && selection.correctable? %>
+<!-- Correctie input. -->
+<% if selection.order.payment_id && selection.correctable? && policy(:correction).create? %>
 	<%= render 'corrections/input_row', selection: selection %>
 <% end %>
 

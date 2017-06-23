@@ -33,7 +33,7 @@ class Invoice < ApplicationRecord
   end
 
   # Factuur-nummer voor in de factuur en op bankafschriften.
-  def invoice_identification_number
+  def storewide_identification_number
     "KLNT#{self.order.customer.id}" +
     "BEST#{self.order.sequence_number}" +
     "FACT#{self.sequence_number}" +

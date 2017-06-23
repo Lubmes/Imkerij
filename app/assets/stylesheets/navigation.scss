@@ -47,7 +47,7 @@
 		@extend .w3-transparent;
 	}
 	a.active {
-		color: $dark-green!important;
+		color: $brown-red!important;
 		border-color: transparent!important;
 		@extend .w3-bottombar;
 	}
@@ -66,7 +66,7 @@
 	@extend .w3-medium;
 	// @extend .w3-teal;
 	color: $dark-green!important;
-	background-color: $lighter-teal!important;
+	background-color: $light-teal!important;
 	// @extend .w3-text-yellow;
 }
 #sec-nav.shop a:hover {

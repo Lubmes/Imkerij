@@ -28,17 +28,22 @@
 		</div>
 	</div>
 
+	<% if false %>
+		<div class='co-order-col'>
+			<div>
+				naar: <%= @to_address.id %><br>
+				pakket: <%= @parcel.id %><br>
+				PostNL: <br>
+				<h5>Rates</h5>
+				<% @shipment.rates.each do |rate| %>
+					<ul>
+						<h6><%= rate.carrier %></h6>
+						<li><%= rate.service %></li>
+						<li><%= rate.rate %></li>
+						<li><%= rate.id %></li>
+					</ul>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
 </div>
-
-<% if false %>
-<div>
-	<ul>
-		<% @shipment.rates.each do |rate| %>
-			<li><%= rate.carrier %></li>
-			<li><%= rate.service %></li>
-			<li><%= rate.rate %></li>
-			<li><%= rate.id %></li>
-		<% end %>
-	</ul>
-</div>
-<% end %>

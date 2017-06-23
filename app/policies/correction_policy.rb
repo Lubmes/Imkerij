@@ -9,10 +9,6 @@ class CorrectionPolicy < ApplicationPolicy
     user.try(:admin)
   end
 
-  def update?
-    create?
-  end
-
   def destroy?
     create?
   end
