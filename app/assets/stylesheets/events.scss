@@ -10,7 +10,7 @@
 	@extend .s10;
 	h3.title {
 		@extend .w3-xxlarge;
-    color: $teal;
+		@extend .w3-text-teal;
     font-family: $logo-font, serif;
 	}
 	.event {
@@ -31,18 +31,22 @@
 			@extend .m10;
 			@extend .s10;
 			.title {
+				width: 100%;
 				@extend .w3-margin-top;
 				h3 {
 					@extend .w3-border-yellow;
+					@extend .w3-text-teal;
+					font-family: $logo-font, serif;
 					@extend .w3-bottombar;
 				}
 				.time {
 					@extend .w3-tag;
 					@extend .w3-text-yellow;
 					@extend .w3-show-inline-block;
-					small {
-						@extend .w3-text-grey;
-					}
+				}
+				small {
+					@extend .w3-text-grey;
+					letter-spacing: 7px;
 				}
 			}
 		}
