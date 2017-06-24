@@ -13,7 +13,7 @@
 				<% end %>
 			</div>
 			<div class='event-col'>
-				
+
 			  <nav class=record-bar>
 					<div class='title'>
 						<div class='time'><%= I18n.l(event.date, format: :event_time) %></div>
@@ -38,7 +38,7 @@
 				</nav>
 
 			  <p>
-				  <%= event.description %>
+				  <%= markdown(event.description) %>
 				</p>
 			</div>
 		</div>

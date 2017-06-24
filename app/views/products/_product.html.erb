@@ -1,8 +1,8 @@
 <div class='description <%= 'unavailable' unless product.available %>'>
   <% if controller.action_name == 'show' %>
-    <%= product.description %>
+    <%= markdown(product.description) %>
   <% else %>
-    <%= truncate(product.description, length: 200) %>
+    <%= markdown( truncate(product.description, length: 200) ) %>
   <% end %>
   <br><br>
   <%= link_to "meer informatie", [product.category, product] unless
