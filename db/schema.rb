@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523190521) do
+ActiveRecord::Schema.define(version: 20170630165056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "delivery_id"
+    t.string  "street_number"
+    t.string  "street_name"
+    t.string  "zip_code"
+    t.string  "city"
+    t.string  "country"
+    t.index ["delivery_id"], name: "index_addresses_on_delivery_id", using: :btree
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -32,22 +42,10 @@ ActiveRecord::Schema.define(version: 20170523190521) do
 
   create_table "deliveries", force: :cascade do |t|
     t.integer  "kind_of"
-    t.string   "address_formatted_address"
-    t.string   "address_street_number"
-    t.string   "address_street_name"
-    t.string   "address_street"
-    t.string   "address_city"
-    t.string   "address_zip_code"
-    t.string   "address_department"
-    t.string   "address_department_code"
-    t.string   "address_state"
-    t.string   "address_state_code"
-    t.string   "address_country"
-    t.string   "address_country_code"
     t.float    "address_lat"
     t.float    "address_lng"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "sender_id"
     t.index ["sender_id"], name: "index_deliveries_on_sender_id", using: :btree
   end
@@ -173,6 +171,7 @@ ActiveRecord::Schema.define(version: 20170523190521) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "addresses", "deliveries"
   add_foreign_key "corrections", "invoices"
   add_foreign_key "corrections", "selections"
   add_foreign_key "deliveries", "users", column: "sender_id"

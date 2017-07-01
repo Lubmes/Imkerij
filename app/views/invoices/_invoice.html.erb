@@ -34,19 +34,16 @@
         <% if invoice.order.package_delivery == invoice.invoice_delivery %>
           Verzendadres:
           <span class='address'>
-            <%= invoice.order.package_delivery.address_zip_code %>,
-            <%= invoice.order.package_delivery.address_street_number %>
+            <%= invoice.order.package_delivery.address_short %>
           </span>
         <% else %>
           Pakket:
           <span class='address'>
-            <%= invoice.order.package_delivery.address_zip_code %>,
-            <%= invoice.order.package_delivery.address_street_number %>
+            <%= invoice.order.package_delivery.address_short %>
           </span>
           Factuur:
           <span class='address'>
-            <%= invoice.invoice_delivery.address_zip_code %>,
-            <%= invoice.invoice_delivery.address_street_number %>
+            <%= invoice.invoice_delivery.address_short %>
           </span>
         <% end %>
       </div>

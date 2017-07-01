@@ -3,7 +3,7 @@
   <% deliveries.each do |delivery| %>
     <div id='delivery-ajax-<%= delivery.id %>'>
       <%= render delivery,
-            card_title: "#{delivery.address_zip_code}, #{delivery.address_street_number}",
+            card_title: delivery.address_short,
             order: order %>
     </div>
   <% end %>
@@ -19,7 +19,7 @@
   <div id='delivery-form' style='display: none;'>
     <%= render 'deliveries/form',
           delivery: sender.deliveries.build,
-              sender: sender %>
+            sender: sender %>
   </div>
 
   <script>

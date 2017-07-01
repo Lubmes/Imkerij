@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   require 'mollie/api/client'
   require 'mailgun'
   require 'easypost'
+  require 'savon'
 
   def show
   end
@@ -119,129 +120,65 @@ class OrdersController < ApplicationController
       else
         @invoice = @order.active_invoice
       end
-      # Easypost pakketverstuur dienst.
-      EasyPost.api_key = ENV["easypost_api_key"]
-      from_address = EasyPost::Address.create(
-        :company  => 'Imkerij Poppendamme',
-        :street1  => 'Poppendamseweg 3',
-        :city     => 'Grijpskerke',
-        :zip      => '4364SL',
-        :phone    => '0031118123456'
-      )
-      @to_address = EasyPost::Address.create(
-        :name     => "#{@user.first_name} #{@user.last_name}",
-        :street1  => "#{@delivery.address_street_name} #{@delivery.address_street_number}",
-        :city     => @delivery.address_city,
-        :zip      => @delivery.address_zip_code,
-        :country  => @delivery.address_country
-      )
+      # Initiatie verzendproces
+      # soap_header = {
+      #                 "Action" =>  "http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode",
+      #                 "Security" => {
+      #                   "UsernameToken" => {
+      #                     "Username" => 'devc_!R4xc8p9',
+      #                     "Password" => ''
+      #                   }
+      #                 },
+      #                 :attributes! => {
+      #                   "Envelope" => {
+      #                     "xmlns:s" => "http://schemas.xmlsoap.org/soap/envelope/"
+      #                   },
+      #                   "Action" => {
+      #                     "s:mustUnderstand" => "1",
+      #                     "xmlns" => "http://schemas.microsoft.com/ws/2005/05/addressing/none"
+      #                   },
+      #                   "Security" => {
+      #                     "xmlns" => "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+      #                   }
+      #                 }
+      #               }
       #
+      # message = {
+      #               "d6p1:Customer" => {
+      #                 "d6p1:CustomerCode"    => 'DEVC',
+      #                 "d6p1:CustomerNumber"  => 11223344
+      #               },
+      #               "d6p1:Barcode" => {
+      #                 "d6p1:Type" => '3S',
+      #                 "d6p1:Range" => 'DEVC',
+      #                 "d6p1:Serie" => '1000000-2000000'
+      #               },
+      #               :attributes! => {
+      #                 "wsdl:GenerateBarcode" => {
+      #                   "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
+      #                   "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
+      #                   "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"
+      #                 }
+      #               }
+      #           }
       #
-      # # pakket (ounces en inches)
-      @parcel = EasyPost::Parcel.create(
-        :width  => 15.2,
-        :length => 18,
-        :height => 9.5,
-        :weight => @invoice.total_mail_weight
-      )
-      # customs_info = EasyPost::CustomsInfo.create(
-      #   eel_pfc: 'NOEEI 30.37(a)',
-      #   customs_certify: true,
-      #   customs_signer: 'Steve Brule',
-      #   contents_type: 'merchandise',
-      #   contents_explanation: '',
-      #   restriction_type: 'none',
-      #   restriction_comments: '',
-      #   non_delivery_option: 'abandon',
-      #   customs_items: [ {
-      #     description: 'Sweet shirts',
-      #     quantity: 2,
-      #     weight: 11,
-      #     value: 23,
-      #     hs_tariff_number: '654321',
-      #     origin_country: 'US'
-      #   }]
-      # )
-      @shipment = EasyPost::Shipment.create(
-        :to_address   => @to_address,
-        :from_address => from_address,
-        :parcel       => @parcel#,
-        # customs_info: customs_info
-      )
-      # @shipment.buy(
-      #   rate: @shipment.lowest_rate(carriers = ['PostNL'], services = ['PriorityMailInternational'])
-      #   # rate: {id: "#{@shipment.rates.first.id}"}
-      # )
+      # @client = Savon.client(
+      #   :soap_header => soap_header,
+      #   # :namespace_identifier => :none,
+      #   :env_namespace => :s,
+      #   :convert_request_keys_to => :camelcase,
+      #   :raise_errors => false,
+      #   :pretty_print_xml => true,
+      #   :endpoint => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/BarcodeWebService.svc',
+      #   :wsdl => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl')
+      #
+      # @request = @client.build_request(:generate_barcode) do
+      #   message message
+      end
 
-      # @ca = EasyPost::CarrierAccount.retrieve("ca_2289a14cd52a487a88d709d58f4798b5")
-
-      ###
-      # Dummie shipment
-      ###
-
-      # to_address = EasyPost::Address.create(
-      #   :name => 'Dr. Steve Brule',
-      #   :street1 => '179 N Harbor Dr',
-      #   :city => 'Redondo Beach',
-      #   :state => 'CA',
-      #   :zip => '90277',
-      #   :country => 'US',
-      #   :phone => '310-808-5243'
-      # )
-      # from_address = EasyPost::Address.create(
-      #   :company => 'EasyPost',
-      #   :street1 => '118 2nd Street',
-      #   :street2 => '4th Floor',
-      #   :city => 'San Francisco',
-      #   :state => 'CA',
-      #   :zip => '94105',
-      #   :phone => '415-456-7890'
-      # )
-      #
-      # parcel = EasyPost::Parcel.create(
-      #   :width => 15.2,
-      #   :length => 18,
-      #   :height => 9.5,
-      #   :weight => 35.1
-      # )
-      #
-      # customs_item = EasyPost::CustomsItem.create(
-      #   :description => 'EasyPost T-shirts',
-      #   :quantity => 2,
-      #   :value => 23.56,
-      #   :weight => 33,
-      #   :origin_country => 'us',
-      #   :hs_tariff_number => 123456
-      # )
-      # customs_info = EasyPost::CustomsInfo.create(
-      #   :integrated_form_type => 'form_2976',
-      #   :customs_certify => true,
-      #   :customs_signer => 'Dr. Pepper',
-      #   :contents_type => 'gift',
-      #   :contents_explanation => '', # only required when contents_type => 'other'
-      #   :eel_pfc => 'NOEEI 30.37(a)',
-      #   :non_delivery_option => 'abandon',
-      #   :restriction_type => 'none',
-      #   :restriction_comments => '',
-      #   :customs_items => [customs_item]
-      # )
-      #
-      # shipment = EasyPost::Shipment.create(
-      #   :to_address => to_address,
-      #   :from_address => from_address,
-      #   :parcel => parcel,
-      #   :customs_info => customs_info
-      # )
-      #
-      # shipment.buy(
-      #   :rate => shipment.lowest_rate
-      # )
-      #
-      # shipment.insure(amount: 100)
-      #
-      # @to_address = to_address
-      # @parcel = parcel
-      # @shipment = shipment
+      @response = @client.call(:generate_barcode) do
+        message message
+      end
     else
       redirect_to [:confirm, @order]
       flash.now[:alert] = 'Uw betaling is niet geslaagd.'

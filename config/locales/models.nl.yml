@@ -34,12 +34,12 @@ nl:
         last_name: Achternaam
         admin: Adminrechten
         remember_me: Onthoud mij
-      delivery:
-        address_street_name: Straat
-        address_street_number: Huisnummer
-        address_zip_code: Postcode
-        address_city: Woonplaats
-        address_country: Land
+      address:
+        street_name: Straat
+        street_number: Huisnummer
+        zip_code: Postcode
+        city: Woonplaats
+        country: Land
       page:
         link: Link
         title: Titel

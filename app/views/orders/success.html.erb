@@ -31,18 +31,13 @@
 	<% if false %>
 		<div class='co-order-col'>
 			<div>
-				naar: <%= @to_address.id %><br>
-				pakket: <%= @parcel.id %><br>
-				PostNL: <br>
-				<h5>Rates</h5>
-				<% @shipment.rates.each do |rate| %>
-					<ul>
-						<h6><%= rate.carrier %></h6>
-						<li><%= rate.service %></li>
-						<li><%= rate.rate %></li>
-						<li><%= rate.id %></li>
-					</ul>
-				<% end %>
+				naar: <%= ' ' %><br>
+				pakket: <%= ' ' %><br>
+				<strong>PostNL:</strong> <%= @client.operations %><br>
+				<strong>PostNLreq:<br>
+				</strong> <%= @request.body %><br>
+				<strong>PostNLresp:<br>
+				</strong> <%= '@response.body' %><br>
 			</div>
 		</div>
 	<% end %>

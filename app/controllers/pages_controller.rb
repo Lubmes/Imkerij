@@ -45,6 +45,8 @@ class PagesController < ApplicationController
     render 'show'
   end
 
+  private
+
   def page_params
     params.require(:page).permit(:link, :title, :introduction, :route, :story, opening_times_widget_attributes: [:id, :title, :information])
   end

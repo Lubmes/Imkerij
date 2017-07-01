@@ -2,7 +2,6 @@ class InvoicesController < ApplicationController
 
   require 'mollie/api/client'
   require 'mailgun'
-  require 'combine_pdf'
 
   def show
     @invoice = Invoice.find(params[:id])

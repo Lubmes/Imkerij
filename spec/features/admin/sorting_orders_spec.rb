@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Admin kan orders sorteren' do
+xfeature 'Admin kan orders sorteren' do
   create_navigation
   let(:admin)      { create(:user, :admin) }
   let(:customer)   { create( :user ) }

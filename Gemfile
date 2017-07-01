@@ -19,13 +19,13 @@ gem 'paperclip', '~> 5.1'
 gem 'active_link_to'
 gem 'font-awesome-rails'
 gem 'acts_as_list'
-gem 'redcarpet' # Markdown interpretatie in views.
+gem 'redcarpet' # Markdown verwerking naar views.
 gem 'flatpickr_rails', '~> 0.0.2'
-gem 'jt-rails-address', '~> 1.3', '>= 1.3.1'
 gem 'mailgun-ruby', '~> 1.1', '>= 1.1.5'
 gem 'faraday', '~> 0.9.2'
 gem 'rest-client', '~> 2.0', '>= 2.0.1'
-gem 'easypost', '~> 2.7'
+gem 'savon', '~> 2.11', '>= 2.11.1'
+
 # heroku
 gem 'rails_12factor', group: :production
 gem "figaro"
@@ -37,7 +37,6 @@ gem 'groupdate'
 # pdf's
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
-gem 'combine_pdf', '~> 0.2.36'
 
 group :development, :test do
   gem 'byebug', platform: :mri

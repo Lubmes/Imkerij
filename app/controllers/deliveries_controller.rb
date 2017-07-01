@@ -65,7 +65,7 @@ class DeliveriesController < ApplicationController
   private
 
   def delivery_params
-    params.require(:delivery).permit(:address_street_name, :address_street_number,
-      :address_zip_code, :address_city, :address_country, :sender_id )
+    params.require(:delivery).permit(:sender_id, address_attributes: [:street_name, :street_number,
+      :zip_code, :city, :country] )
   end
 end

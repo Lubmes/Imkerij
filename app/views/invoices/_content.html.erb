@@ -25,18 +25,18 @@
 <div class='address'>
   <div class='package'>
     <h4>Pakket-verzendadres</h4>
-    <%= @invoice.order.package_delivery.address_street_name %>
-    <%= @invoice.order.package_delivery.address_street_number %><br>
-    <%= @invoice.order.package_delivery.address_zip_code %><br>
-    <%= @invoice.order.package_delivery.address_city %><br>
+    <%= @invoice.order.package_delivery.address.street_name %>
+    <%= @invoice.order.package_delivery.address.street_number %><br>
+    <%= @invoice.order.package_delivery.address.zip_code %><br>
+    <%= @invoice.order.package_delivery.address.city %><br>
   </div>
   <% if false %>
   <div class='invoice'>
     <h4>Factuur-verzendadres</h4>
-    <%= @invoice.invoice_delivery.address_street_name %>
-    <%= @invoice.invoice_delivery.address_street_number %><br>
-    <%= @invoice.invoice_delivery.address_zip_code %><br>
-    <%= @invoice.invoice_delivery.address_city %><br>
+    <%= @invoice.invoice_delivery.address.street_name %>
+    <%= @invoice.invoice_delivery.address.street_number %><br>
+    <%= @invoice.invoice_delivery.address.zip_code %><br>
+    <%= @invoice.invoice_delivery.address.city %><br>
   </div>
   <% end %>
 </div>

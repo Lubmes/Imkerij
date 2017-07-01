@@ -1,43 +1,49 @@
 <%= form_for [sender, delivery], remote: true do |f| %>
 <%= f.hidden_field :sender_id, value: sender.id %>
 
-<div class='delivery'>
-<table>
-  <tr>
-    <div class="field">
-      <th><%= f.label :address_street_name %></th>
-      <td><%= f.text_field :address_street_name %></td>
-    </div>
-  </tr>
-  <tr>
-    <div class="field">
-      <th><%= f.label :address_street_number %></th>
-      <td><%= f.text_field :address_street_number %></td>
-    </div>
-  </tr>
-  <tr>
-    <div class="field">
-      <th><%= f.label :address_zip_code %></th>
-      <td><%= f.text_field :address_zip_code, cols: 30 %></td>
-    </div>
-  </tr>
-  <tr>
-      <div class="field">
-        <th><%= f.label :address_city %></th>
-        <td><%= f.text_field :address_city %></td>
-      </div>
-  </tr>
-  <tr>
-      <div class="field">
-        <th><%= f.label :address_country %></th>
-        <td><%= f.text_field :address_country %></td>
-      </div>
-  </tr>
-</table>
+  <div class='delivery'>
 
-  <div class='button-center'>
-    <%= f.submit "Opslaan", class: 'button' %>
+    <% delivery.build_address if delivery.address.nil? %>
+    <%= f.fields_for :address do |a_f| %>
+
+        <table>
+          <tr>
+            <div class="field">
+              <th><%= a_f.label :street_name %></th>
+              <td><%= a_f.text_field :street_name %></td>
+            </div>
+          </tr>
+          <tr>
+            <div class="field">
+              <th><%= a_f.label :street_number %></th>
+              <td><%= a_f.text_field :street_number %></td>
+            </div>
+          </tr>
+          <tr>
+            <div class="field">
+              <th><%= a_f.label :zip_code %></th>
+              <td><%= a_f.text_field :zip_code, cols: 30 %></td>
+            </div>
+          </tr>
+          <tr>
+              <div class="field">
+                <th><%= a_f.label :city %></th>
+                <td><%= a_f.text_field :city %></td>
+              </div>
+          </tr>
+          <tr>
+              <div class="field">
+                <th><%= a_f.label :country %></th>
+                <td><%= a_f.text_field :country %></td>
+              </div>
+          </tr>
+        </table>
+
+    <% end %>
+
+    <div class='button-center'>
+      <%= f.submit "Opslaan", class: 'button' %>
+    </div>
   </div>
 
-</div>
 <% end %>

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-feature 'User kan bij het afrekenen', js: true do
+xfeature 'User kan bij het afrekenen', js: true do
   create_navigation
   let!(:category) { create(:category, name: 'Honing') }
-  let!(:product) { create(:product,  name: 'Honingpot 275ml',
-                                    price: '3,95',
-                                 category: category) }
+  let!(:product) { create(:product, name: 'Honingpot 275ml',
+                                   price: '3,95',
+                                category: category) }
 
   before do
     visit shop_path
