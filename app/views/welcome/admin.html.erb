@@ -49,8 +49,7 @@
 
 		<div id="overall-development">
 			<h4>Totaaloverzicht <small><%= currency_symbol %> / dag</small></h4>
-			<%= line_chart (Order.group_by_day(:updated_at).sum(:total_price_cents)).transform_values { |v|
-							(v.fdiv(100)).round(2) },
+			<%= line_chart Order.hashify_received_value_over_all,
 						colors: ['#4c997f'],
 						label: "€ dagtotaal",
 						height: "250px",
@@ -61,8 +60,7 @@
 		<% Order.group_by_month(:updated_at).count.size.times do |i| %>
 			<div class='month'>
 				<h4><%= I18n.l(Date.today - i.month, format: "%B").capitalize %> <small><%= currency_symbol %> / dag</small></h4>
-				<%= column_chart Order.group_by_day_of_month(:updated_at, range: Date.today.beginning_of_month-i.month..Date.today.end_of_month-i.month).sum(:total_price_cents).transform_values { |v|
-								(v.fdiv(100)).round(2) },
+				<%= column_chart Order.hashify_received_value_over_date_range(Date.today.beginning_of_month-i.month, Date.today.end_of_month-i.month),
 							colors: ['#65cca9'],
 							label: "€ dagtotaal" %>
 			</div>

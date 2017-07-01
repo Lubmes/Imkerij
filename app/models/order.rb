@@ -12,6 +12,13 @@ class Order < ApplicationRecord
   # Nested attributes
   accepts_nested_attributes_for :customer # Waarom? => invoice!
 
+  # Om order nummer in factuur nummer te verwerken.
+  def sequence_number
+    customer = self.customer
+    orders = customer.orders.order(created_at: :asc)
+    orders.find_index(self) + 1
+  end
+
   # Om naar de mollie API te sturen.
   def total_price_in_euros
     sprintf("%03d", total_price_cents).insert(-3, ".")
@@ -38,6 +45,16 @@ class Order < ApplicationRecord
     self.invoices.first
   end
 
+  # Voor doorgeven BTW.
+  def last_closed_invoice
+    self.invoices.where(closed: true).last
+  end
+
+  def last_closed_invoice_received_value
+    money = last_closed_invoice.received_value
+    money.cents/100.0
+  end
+
   def sum_all_selections
     selections = self.selections
     sum_money = 0
@@ -50,34 +67,44 @@ class Order < ApplicationRecord
     self.total_mail_weight = sum_mass
   end
 
+  # orders voor de infographics
+  def self.orders_past_payment
+    where.not(status: :open).
+    where.not(status: :at_check_out).
+    where.not(status: :confirmed)
+  end
+
   def self.sum_of_all_orders
-    sum = Order.sum(:total_price_cents)
+    sum = orders_past_payment.sum{ |o| o.last_closed_invoice.received_value }
     Money.new(sum)
   end
 
   def self.sum_of_current_months_orders
-    @orders = Order.where(updated_at: Time.now.beginning_of_month..Time.now)
-    sum = @orders.sum(:total_price_cents)
+    @orders = orders_past_payment.where(updated_at: Time.now.beginning_of_month..Time.now)
+    sum = @orders.sum{ |o| o.last_closed_invoice.received_value }
     Money.new(sum)
   end
 
   def self.sum_of_previous_months_orders
-    @orders = Order.where(
+    @orders = orders_past_payment.where(
       updated_at: (Time.now.beginning_of_month - 1.month)..Time.now.beginning_of_month)
-    sum = @orders.sum(:total_price_cents)
+    sum = @orders.sum{ |o| o.last_closed_invoice.received_value }
     Money.new(sum)
   end
 
   def self.sum_of_todays_orders
-    @orders = Order.where(updated_at: Time.now.beginning_of_day..Time.now)
-    sum = @orders.sum(:total_price_cents)
+    @orders = orders_past_payment.where(updated_at: Time.now.beginning_of_day..Time.now)
+    sum = @orders.sum{ |o| o.last_closed_invoice.received_value }
     Money.new(sum)
   end
 
-  # Om order nummer in factuur nummer te verwerken.
-  def sequence_number
-    customer = self.customer
-    orders = customer.orders.order(created_at: :asc)
-    orders.find_index(self) + 1
+  def self.hashify_received_value_over_date_range(start_time, end_time)
+    Hash[orders_past_payment.
+      group_by_day_of_month(range: start_time..end_time, series: true) { |o| o.updated_at }.map { |k, v| [k, v.sum(&:last_closed_invoice_received_value)] } ]
+  end
+
+  def self.hashify_received_value_over_all
+    Hash[orders_past_payment.
+      group_by_day(series: true) { |o| o.updated_at }.map { |k, v| [k, v.sum(&:last_closed_invoice_received_value)] } ]
   end
 end

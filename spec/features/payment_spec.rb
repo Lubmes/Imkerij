@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xfeature 'User kan bij het afrekenen', js: true do
+feature 'User kan bij het afrekenen', js: true do
   create_navigation
   let!(:category) { create(:category, name: 'Honing') }
   let!(:product) { create(:product, name: 'Honingpot 275ml',

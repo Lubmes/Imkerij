@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xfeature 'Admin kan orders sorteren' do
+feature 'Admin kan gesorteerde orders inzien en vult in:' do
   create_navigation
   let(:admin)      { create(:user, :admin) }
   let(:customer)   { create( :user ) }
@@ -44,7 +44,13 @@ xfeature 'Admin kan orders sorteren' do
     visit orders_path
   end
 
-  scenario 'met een begindatum, een einddatum en op btw-tarief' do
+  scenario 'niets' do
+    within('#paid') do
+      expect(page).to have_content '20,00'
+    end
+  end
+
+  scenario 'een begindatum en een einddatum' do
     # find('#datetimejs-input-start').set 31.days.ago
     # find('#datetimejs-input-end').set 7.days.ago
     # (select from)

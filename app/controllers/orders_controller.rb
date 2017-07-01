@@ -197,6 +197,10 @@ class OrdersController < ApplicationController
     @order.problem!
   end
 
+  def filter
+
+  end
+
   private
 
   def order_params
