@@ -174,11 +174,11 @@ class OrdersController < ApplicationController
       #
       # @request = @client.build_request(:generate_barcode) do
       #   message message
-      end
-
-      @response = @client.call(:generate_barcode) do
-        message message
-      end
+      # end
+      #
+      # @response = @client.call(:generate_barcode) do
+      #   message message
+      # end
     else
       redirect_to [:confirm, @order]
       flash.now[:alert] = 'Uw betaling is niet geslaagd.'
