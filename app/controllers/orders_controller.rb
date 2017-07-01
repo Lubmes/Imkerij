@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
 
   require 'mollie/api/client'
   require 'mailgun'
-  require 'easypost'
   require 'savon'
 
   def show
