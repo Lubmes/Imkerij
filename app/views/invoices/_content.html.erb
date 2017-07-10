@@ -51,7 +51,7 @@
     <tr>
       <td><%= selection.product_name %></td>
       <td><%= currency_symbol %> <%= selection.product_price %></td>
-      <td><small>incl. <%= number_with_precision(selection.product_sales_tax,
+      <td class='percentage'><small>incl. <%= number_with_precision(selection.product_sales_tax,
                             strip_insignificant_zeros: true) %> %</small></td>
       <td>&times;</td>
       <td></td>

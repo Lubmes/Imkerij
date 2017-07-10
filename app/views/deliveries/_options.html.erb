@@ -16,18 +16,18 @@
     <h3 class='add-address' title='nieuw adres'><i class='fa fa-plus'></i> ADRES</h3>
   </header>
 
-  <div id='delivery-form' style='display: none;'>
+  <div id='delivery-form' <%= "style='display: none;'".html_safe if deliveries.any? %> >
     <%= render 'deliveries/form',
           delivery: sender.deliveries.build,
             sender: sender %>
   </div>
 
   <script>
-  $(document).ready(function(){
-      $(".add-address").click(function(){
-          $("#delivery-form").toggle();
-      });
-  });
+    $(document).ready(function(){
+        $(".add-address").click(function(){
+            $("#delivery-form").toggle();
+        });
+    });
   </script>
 
 <% end %>

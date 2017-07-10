@@ -21,24 +21,35 @@
 	#controls {
 		@extend .w3-center;
 		h2 {
-			@extend .w3-text-teal;
+			@extend .w3-text-grey;
 			@extend .w3-xlarge;
+			letter-spacing: 3px;
+		}
+		h2.success {
+			@extend .w3-text-green;
 		}
 		padding-bottom: 15px;
 		@extend .w3-border-grey;
 		@extend .w3-bottombar;
 		a {
 			text-decoration: none;
-			@extend .w3-border;
-			@extend .w3-border-white;
-			@extend .w3-hover-border-blue;
+			// @extend .w3-border;
+			// @extend .w3-border-white;
+			@extend .w3-large;
+			@extend .w3-text-teal;
+			@extend .w3-hover-text-yellow;
 			@extend .w3-round-xlarge;
 			@extend .w3-padding;
 		}
 		a.success {
-			@extend .w3-text-green;
-			@extend .w3-hover-border-white;
+			@extend .w3-text-teal;
 			@extend .w3-hover-text-yellow;
+		}
+		a.download-pdf {
+			@extend .w3-grey;
+			@extend .w3-round-xlarge;
+			@extend .w3-text-indigo;
+			@extend .w3-hover-text-blue;
 		}
 		.confirm-hidden {
 			display: none;

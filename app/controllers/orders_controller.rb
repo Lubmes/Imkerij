@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def index
+    @invoices = Invoice.where('updated_at < ?', Time.now )
     all_orders = Order.all.order(updated_at: :asc)
     @open_orders = all_orders.open
     @problem_orders = all_orders.problem
@@ -124,8 +125,8 @@ class OrdersController < ApplicationController
       #                 "Action" =>  "http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode",
       #                 "Security" => {
       #                   "UsernameToken" => {
-      #                     "Username" => 'devc_!R4xc8p9',
-      #                     "Password" => ''
+      #                     "Username" => ENV['postnl_username'],
+      #                     "Password" => ENV['postnl_password']
       #                   }
       #                 },
       #                 :attributes! => {
@@ -138,27 +139,28 @@ class OrdersController < ApplicationController
       #                   },
       #                   "Security" => {
       #                     "xmlns" => "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-      #                   }
+      #                   },
+      #                   "GenerateBarcode" => {
+      #                     "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
+      #                     "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
+      #                     "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"
+      #                     }
       #                 }
       #               }
       #
       # message = {
-      #               "d6p1:Customer" => {
-      #                 "d6p1:CustomerCode"    => 'DEVC',
-      #                 "d6p1:CustomerNumber"  => 11223344
-      #               },
-      #               "d6p1:Barcode" => {
-      #                 "d6p1:Type" => '3S',
-      #                 "d6p1:Range" => 'DEVC',
-      #                 "d6p1:Serie" => '1000000-2000000'
-      #               },
-      #               :attributes! => {
-      #                 "wsdl:GenerateBarcode" => {
-      #                   "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
-      #                   "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
-      #                   "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"
-      #                 }
-      #               }
+      #             "d6p1:Customer" => {
+      #               "d6p1:CustomerCode"    => 'DEVC',
+      #               "d6p1:CustomerNumber"  => 11223344
+      #             },
+      #             "d6p1:Barcode" => {
+      #               "d6p1:Type" => '3S',
+      #               "d6p1:Range" => 'DEVC',
+      #               "d6p1:Serie" => '1000000-2000000'
+      #             },
+      #             # :attributes! => {
+      #             #
+      #             #   }
       #           }
       #
       # @client = Savon.client(
@@ -174,13 +176,76 @@ class OrdersController < ApplicationController
       # @request = @client.build_request(:generate_barcode) do
       #   message message
       # end
-      #
-      # @response = @client.call(:generate_barcode) do
-      #   message message
-      # end
+
+      # XML direct gemanipuleerd.
+#       @client = Savon.client(
+#         :endpoint => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/BarcodeWebService.svc',
+#         :wsdl => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl')
+#
+#       @request = @client.build_request(:generate_barcode,
+#         xml: %Q{<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+#   <s:Header>
+#     <Action s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode</Action>
+#     <Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+#       <wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+#         <wsse:Username>devc_!R4xc8p9</wsse:Username>
+#         <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">098fd559930983af31ef6630a0bb0c1974156561</wsse:Password>
+#       </wsse:UsernameToken>
+#     </Security>
+#   </s:Header>
+#   <s:Body>
+#     <GenerateBarcode xmlns:d6p1="http://postnl.nl/cif/domain/BarcodeWebService/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://postnl.nl/cif/services/BarcodeWebService/">
+#       <d6p1:Message>
+#         <d6p1:MessageID>5</d6p1:MessageID>
+#         <d6p1:MessageTimeStamp>#{l Time.now, format: :postnl_api}</d6p1:MessageTimeStamp>
+#       </d6p1:Message>
+#       <d6p1:Customer>
+#         <d6p1:CustomerCode>DEVC</d6p1:CustomerCode>
+#         <d6p1:CustomerNumber>11223344</d6p1:CustomerNumber>
+#       </d6p1:Customer>
+#       <d6p1:Barcode>
+#         <d6p1:Type>3S</d6p1:Type>
+#         <d6p1:Range>DEVC</d6p1:Range>
+#         <d6p1:Serie>100000000-200000000</d6p1:Serie>
+#       </d6p1:Barcode>
+#     </GenerateBarcode>
+#   </s:Body>
+# </s:Envelope>})
+
+# @response = @client.call(:generate_barcode,
+#   xml: %Q{<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+# <s:Header>
+# <Action s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode</Action>
+# <Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+# <wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+#   <wsse:Username>devc_!R4xc8p9</wsse:Username>
+#   <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">098fd559930983af31ef6630a0bb0c1974156561</wsse:Password>
+# </wsse:UsernameToken>
+# </Security>
+# </s:Header>
+# <s:Body>
+# <GenerateBarcode xmlns:d6p1="http://postnl.nl/cif/domain/BarcodeWebService/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://postnl.nl/cif/services/BarcodeWebService/">
+# <d6p1:Message>
+#   <d6p1:MessageID>5</d6p1:MessageID>
+#   <d6p1:MessageTimeStamp>#{l Time.now, format: :postnl_api}</d6p1:MessageTimeStamp>
+# </d6p1:Message>
+# <d6p1:Customer>
+#   <d6p1:CustomerCode>DEVC</d6p1:CustomerCode>
+#   <d6p1:CustomerNumber>11223344</d6p1:CustomerNumber>
+# </d6p1:Customer>
+# <d6p1:Barcode>
+#   <d6p1:Type>3S</d6p1:Type>
+#   <d6p1:Range>DEVC</d6p1:Range>
+#   <d6p1:Serie>100000000-200000000</d6p1:Serie>
+# </d6p1:Barcode>
+# </GenerateBarcode>
+# </s:Body>
+# </s:Envelope>})
+
+
     else
-      redirect_to [:confirm, @order]
       flash.now[:alert] = 'Uw betaling is niet geslaagd.'
+      redirect_to [:confirm, @order]
     end
     # InvoiceMailer.paid_notification(@order.invoices.last, @user).deliver_now
     # mg_client = Mailgun::Client.new ENV["mailgun_api_key"]
@@ -204,7 +269,11 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit([:package_delivery_id])
+    params.require(:order).permit([:package_delivery_id, :sales_tax, :year_start, :year_end, :quarter_start, :quarter_end])
+  end
+
+  def sorting_params(params)
+    params.slice(:sales_tax, :year_start, :year_end, :quarter_start, :quarter_end)
   end
 
   def set_order

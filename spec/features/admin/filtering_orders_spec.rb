@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Admin kan gesorteerde orders inzien en vult in:' do
+feature 'Admin kan orders filteren met:' do
   create_navigation
   let(:admin)      { create(:user, :admin) }
   let(:customer)   { create( :user ) }
@@ -32,7 +32,7 @@ feature 'Admin kan gesorteerde orders inzien en vult in:' do
   before do
     order_1.created_at = 30.days.ago
     order_2.created_at = 30.days.ago
-    order_3.created_at = 6.days.ago
+    order_3.created_at = 1.days.ago
 
     [order_1, order_2, order_3].each do |order|
       order.sum_all_selections
@@ -50,15 +50,19 @@ feature 'Admin kan gesorteerde orders inzien en vult in:' do
     end
   end
 
-  scenario 'een begindatum en een einddatum' do
-    # find('#datetimejs-input-start').set 31.days.ago
-    # find('#datetimejs-input-end').set 7.days.ago
-    # (select from)
-    # select_from 'BTW-tarief', with: 6
+  xscenario 'een begindatum en een einddatum' do
+    within '#from' do
+      select '2017', from: 'Jaar'
+      select 'III', from: 'Kwartaal'
+    end
 
-    # Een centrale lijst met te verzenden orders.
+    within '#to' do
+      select '2017', from: 'Jaar'
+      select 'III', from: 'Kwartaal'
+    end
+
     within('#paid') do
-      expect(page).to have_content '20,00'
+      expect(page).to have_content '42,00'
     end
   end
 

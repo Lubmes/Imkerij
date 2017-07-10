@@ -3,12 +3,13 @@
 <div id='payment' class='success'>
 
 	<div id='controls'>
-		<h2>SUCCES!</h2>
+		<h2 class='success'>SUCCES!</h2>
 		<%= link_to shop_path, class: 'success' do %>
 	    <i class='fa fa-arrow-left'></i> terug naar winkel
 	  <% end %>
 		<%= link_to "Download PDF", [@order, @order.first_invoice],
 					target: "_blank",
+					class: 'download-pdf',
 					format: :pdf %>
 	</div>
 

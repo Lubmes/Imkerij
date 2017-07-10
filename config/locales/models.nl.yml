@@ -78,6 +78,7 @@ nl:
         status: Orderstatus
         total_price: Totaalbedrag
         total_mail_weight: Totaal verzendgewicht
+        year_start: Start jaar
       invoice:
         closed: Gesloten
 

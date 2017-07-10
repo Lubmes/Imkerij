@@ -14,7 +14,7 @@
 		@extend .w3-bar-item;
 		@extend .w3-button;
 		@extend .w3-hover-none;
-		@extend .w3-hover-text-yellow;
+		color: $light-teal!important;
 	}
 	.up-down-action {
 		@extend .w3-padding;

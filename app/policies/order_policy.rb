@@ -14,26 +14,30 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def empty?
-    guest_user || (customers_own_domain_only && bookable_order)
+    (guest_user || (customers_own_domain_only && bookable_order)) && !all_ready_empty && !record.confirmed?
   end
 
   def check_out?
-    guest_user || (user && bookable_order)
+    (guest_user || (user && bookable_order)) && !all_ready_empty && !record.confirmed?
   end
 
   def confirm?
-    user && bookable_order && sendable_order
+    user && bookable_order && sendable_order && !all_ready_empty
   end
 
   def pay?
-    user && record.status == 'confirmed' && sendable_order
+    user && record.confirmed? && sendable_order && !all_ready_empty
   end
 
   def success?
-    user && record.status == 'paid' && sendable_order
+    user && record.paid? && sendable_order
   end
 
   private
+
+  def all_ready_empty
+    record.total_price == 0
+  end
 
   def guest_user
     user == nil

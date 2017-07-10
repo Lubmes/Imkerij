@@ -42,12 +42,18 @@
 }
 
 #order, #order-processing {
+	.record-bar {
+		a {
+			@extend .w3-text-dark-grey;
+			@extend .w3-hover-text-yellow;
+		}
+	}
 	.fa-trash-o {
-		@extend .w3-hover-text-red;
+		@extend .w3-hover-text-yellow;
 	}
 	.to-check-out {
 		@extend .w3-right;
-		@extend .w3-hover-text-green;
+		@extend .w3-hover-text-yellow;
 	}
 	table {
 		padding-left: 8px;
@@ -153,5 +159,28 @@
 			@extend .w3-dark-grey;
 			@extend .w3-hover-text-white;
 			@extend .w3-hover-green; }
+	}
+}
+
+#sorting {
+	h3 {
+		@extend .w3-center;
+	}
+	#form {
+		// margin: 0;
+		// padding: 0;
+		#sales-tax, #from, #to {
+			@extend .w3-show-inline-block;
+		}
+		.button {
+			margin: 0;
+		}
+	}
+	table {
+		margin-bottom: 10px;
+		text-align: right;
+		th {
+			width: 200px;
+		}
 	}
 }

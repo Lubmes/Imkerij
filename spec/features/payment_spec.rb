@@ -53,7 +53,7 @@ feature 'User kan bij het afrekenen', js: true do
 
     context 'in het vervolg verzendadres-formulier een adres opgeven' do
       before do
-        find('.add-address', :text => 'ADRES').click
+        # find('.add-address', :text => 'ADRES').click
         fill_in 'Straat', with: 'Korteweg'
         fill_in 'Huisnummer', with: '12A'
         fill_in 'Postcode', with: '1234AB'
@@ -68,7 +68,7 @@ feature 'User kan bij het afrekenen', js: true do
       end
       scenario 'en op "Bevestig" kunnen klikken' do
         click_link 'Bevestig'
-        expect(page).to have_content 'Betalen'
+        expect(page).to have_content 'Naar de bank'
       end
     end
   end

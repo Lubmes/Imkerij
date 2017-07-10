@@ -3,9 +3,15 @@ require 'rails_helper'
 describe OrderPolicy do
   context 'toegang' do
     subject { OrderPolicy.new(user, order) }
-    let(:user) { FactoryGirl.create :user }
-    let(:order) { FactoryGirl.create :order, customer: user, status: 'open' }
-    let(:delivery) { FactoryGirl.create :delivery }
+    let(:user) { create :user }
+    let(:order) { create :order, customer: user, status: 'open' }
+    let(:delivery) { create :delivery }
+    let!(:selection) { create( :selection, :product_name         => 'Honingpot',
+                                           :product_quantity     => 4,
+                                           :product_price        => '5,00',
+                                           :product_mail_weight  => '460',
+                                           :product_sales_tax    => 6,
+                                           :order                => order) }
 
     context 'voor anonieme (gast) gebruikers' do
       let(:user) { nil }

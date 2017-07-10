@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  # scope :starts_at -> (start_time) { where "updated_at >= start_time"  }
+  # scope :ends_at -> (end_time) { where "updated_at <= end_time"  }
   # Money: total
   monetize :total_price_cents
   # Statuses

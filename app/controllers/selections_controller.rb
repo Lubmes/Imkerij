@@ -2,7 +2,6 @@ class SelectionsController < ApplicationController
   include ShoppingOrder
   # Om AJAX op de boekingen te laten werken.
   skip_before_action :verify_authenticity_token, :only => [:create]
-  # before_action :set_order, only: [:create, :update, :destroy]
   before_action :set_shopping_order, only: [:create, :update, :destroy]
   before_action :set_selection, only: [:update, :destroy]
   # (Geen after_action update_order. Werkt niet met AJAX.)
@@ -31,7 +30,6 @@ class SelectionsController < ApplicationController
   end
 
   def update
-    # authorize @selection
     @selection.product_quantity = params[:selection][:product_quantity]
     @selection.save
     update_order
@@ -58,11 +56,6 @@ class SelectionsController < ApplicationController
   def selection_params
     params.require(:selection).permit(:product_quantity, :product_id)
   end
-
-  # def set_shopping_order
-  #   set_shopping_order
-  #   # @order = current_order
-  # end
 
   def set_selection
     @selection = Selection.find(params[:id])

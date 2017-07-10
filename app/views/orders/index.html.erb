@@ -1,8 +1,73 @@
 <%= content_for :secondary_navigation do render 'layouts/secondary_navigations/navigation_admin' end %>
 
+<div id='sorting' class='w3-container w3-card w3-white w3-margin'>
+	<h3>Gegevens opvraag</h3>
+	<%= form_tag :orders, method: :get, id: 'form' do %>
+		<div id='sales-tax'>
+			<strong class='w3-large'>BTW</strong>
+			<%= select_tag :sales_tax, options_for_select(['Alle', '6%', '21%']) %>
+			van
+		</div>
+
+		<div id='from'>
+			<strong class='w3-large'>Start</strong>
+			<%= select_tag :year_start, options_for_select([2017, 2018]) %>
+			<%= select_tag :quarter_start, options_for_select(['I', 'II', 'III', 'IV']) %>
+			tot en met
+		</div>
+
+		<div id='to'>
+			<strong class='w3-large'>Eind</strong></td>
+			<%= select_tag :year_end, options_for_select([2017, 2018]) %>
+			<%= select_tag :quarter_end, options_for_select(['I', 'II', 'III', 'IV']) %>
+		</div>
+		<%= submit_tag "Sorteren", class: 'button w3-button w3-blue w3-margin w3-round-large' %>
+	<% end %>
+
+	<hr>
+	<table id='result'>
+		<thead>
+			<th>Percentage</th>
+			<th>Totale omzet</th>
+			<th>BTW</th>
+		</thead>
+		<tbody>
+			<tr>
+				<th>6%</th>
+				<td>€ 123,45</td>
+				<td>€ 7,41<%123.45 * 0.06%></td>
+			</tr>
+			<tr>
+				<th>21%</th>
+				<td>€ 123,45</td>
+				<td>€ 25,42<%123.45 * 0.21%></td>
+			</tr>
+			<tr>
+				<th>Alle</th>
+				<td>€ 123,45</td>
+				<td>€ 123,45</td>
+			</tr>
+		</tbody>
+
+	</table>
+
+	<% if false %>
+	<hr>
+	<table>
+		<% @invoices.each do |invoice| %>
+			<tr>
+				<th><%= invoice.id %></th>
+				<td><%= invoice.paid %></td>
+				<td><%= invoice.paid_back %></td>
+			</tr>
+		<% end %>
+	</table>
+	<% end %>
+</div>
 
 
-<div id='orders'>
+
+<div id='orders' class='w3-container'>
 	<table>
 
 		<% if @problem_orders.any? %>
