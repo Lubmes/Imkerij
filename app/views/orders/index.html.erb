@@ -19,10 +19,12 @@
 		<%= submit_tag "Filter", class: 'button' %>
 	<% end %>
 
-	<%= @start_time %> <%= l @start_time, format: :long %><br>
-	<%= @end_time %> <%= l @end_time, format: :long %>
+	<% if @start_time %>
+		<%= @start_time %> <%= l @start_time, format: :long %><br>
+		<%= @end_time %> <%= l @end_time, format: :long %>
+	<% end %>
 
-	<% if true %>
+	<% if @start_time %>
 		<hr>
 		<table id='result'>
 			<thead>
@@ -50,7 +52,7 @@
 		</table>
 	<% end %>
 
-	<% if true %>
+	<% if @start_time %>
 		<hr>
 		<table>
 			<% @invoices.each do |invoice| %>

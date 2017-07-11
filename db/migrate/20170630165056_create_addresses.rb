@@ -21,7 +21,7 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
     remove_column :deliveries, :address_state_code, :string
     remove_column :deliveries, :address_country, :string
     remove_column :deliveries, :address_country_code, :string
-    remove_column :deliveries, :address_lat
-    remove_column :deliveries, :address_lng
+    remove_column :deliveries, :address_lat, :string
+    remove_column :deliveries, :address_lng, :string
   end
 end
