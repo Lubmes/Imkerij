@@ -12,7 +12,49 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @invoices = Invoice.where('updated_at < ?', Time.now )
+    if params[:year_start].blank?
+
+    else
+      @start_time = DateTime.civil(params[:year_start].to_i, 1, 1).beginning_of_day.in_time_zone
+      @end_time   = DateTime.civil(params[:year_end].to_i, 12, 31).at_noon.in_time_zone
+
+      ####
+      # @invoices = Invoice.filter(@start_time)
+      @invoices = Invoice.where('updated_at > ?', @start_time).where('updated_at < ?', @end_time)
+      @turnover_6 = 0
+      @turnover_21 = 0
+
+      @invoices.each do |invoice|
+        # Selections
+        if invoice.sequence_number == 1
+          invoice.order.selections.each do |selection|
+            q = selection.product_quantity
+            p = selection.product_price
+            if selection.product_sales_tax == 6.0
+              @turnover_6 += q * p
+            else selection.product_sales_tax == 21.0
+              @turnover_21 += q * p
+            end
+          end
+        # Corrections
+        else
+          invoice.corrections.each do |correction|
+            q = correction.quantity
+            p = correction.selection.product_price
+            if correction.selection.product_sales_tax == 6.0
+              @turnover_6 += q * p
+            else correction.selection.product_sales_tax == 21.0
+              @turnover_21 += q * p
+            end
+          end
+        end
+      end
+      # Belasting-resultaat invioce
+      @turnover_tax_6 = @turnover_6 * 0.06
+      @turnover_tax_21 = @turnover_21 * 0.21
+    end
+
+    ### Zoals het was.
     all_orders = Order.all.order(updated_at: :asc)
     @open_orders = all_orders.open
     @problem_orders = all_orders.problem
@@ -259,6 +301,7 @@ class OrdersController < ApplicationController
   end
 
   def problem
+    authorize @order
     @order.problem!
   end
 

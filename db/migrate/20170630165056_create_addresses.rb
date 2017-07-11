@@ -9,17 +9,19 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
       t.string :country
     end
 
-    remove_column :deliveries, :address_formatted_address
-    remove_column :deliveries, :address_street_number
-    remove_column :deliveries, :address_street_name
-    remove_column :deliveries, :address_street
-    remove_column :deliveries, :address_city
-    remove_column :deliveries, :address_zip_code
-    remove_column :deliveries, :address_department
-    remove_column :deliveries, :address_department_code
-    remove_column :deliveries, :address_state
-    remove_column :deliveries, :address_state_code
-    remove_column :deliveries, :address_country
-    remove_column :deliveries, :address_country_code
+    remove_column :deliveries, :address_formatted_address, :string
+    remove_column :deliveries, :address_street_number, :string
+    remove_column :deliveries, :address_street_name, :string
+    remove_column :deliveries, :address_street, :string
+    remove_column :deliveries, :address_city, :string
+    remove_column :deliveries, :address_zip_code, :string
+    remove_column :deliveries, :address_department, :string
+    remove_column :deliveries, :address_department_code, :string
+    remove_column :deliveries, :address_state, :string
+    remove_column :deliveries, :address_state_code, :string
+    remove_column :deliveries, :address_country, :string
+    remove_column :deliveries, :address_country_code, :string
+    remove_column :deliveries, :address_lat
+    remove_column :deliveries, :address_lng
   end
 end

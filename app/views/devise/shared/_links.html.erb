@@ -19,7 +19,7 @@
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <tr>
     <td colspan='2'>
-  <%= link_to I18n.t('devise.shared.forgot_password').upcase, new_password_path(resource_name) %><br />
+  <%= link_to I18n.t('devise.shared.forgot_password').upcase, new_password_path(resource_name), class: 'forgot-password' %><br />
 </td>
 </tr>
 <% end -%>

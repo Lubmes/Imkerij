@@ -44,7 +44,7 @@ feature 'Admin kan orders filteren met:' do
     visit orders_path
   end
 
-  scenario 'niets' do
+  xscenario 'niets' do
     within('#paid') do
       expect(page).to have_content '20,00'
     end

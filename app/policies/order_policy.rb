@@ -33,6 +33,10 @@ class OrderPolicy < ApplicationPolicy
     user && record.paid? && sendable_order
   end
 
+  def problem?
+    admins_only
+  end
+
   private
 
   def all_ready_empty

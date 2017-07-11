@@ -53,32 +53,39 @@
   <% if invoice.sequence_number == invoice.order.invoices.size %>
     <div class='invoice-actions'>
 
-      <% if invoice.paid_back < 0 && !invoice.closed %>
+      <% if policy(invoice).refund? && invoice.paid_back < 0 && !invoice.closed %>
         <%= link_to "RESTITUEREN", [:refund, invoice.order, invoice], class: 'print' %>
       <% else %>
-        <%= link_to "AFDRUKKEN",[:print, invoice.order, invoice], class: 'print' %>
+        <% if policy(invoice).refund? %>
+          <%= link_to "AFDRUKKEN",[:print, invoice.order, invoice], class: 'print' %>
+        <% end %>
       <% end %>
 
-
-      <%= link_to "PDF",
-            [invoice.order, invoice],
-            target: "_blank",
-            format: :pdf,
-            class: "pdf" %>
+      <% if policy(invoice).pdf? %>
+        <%= link_to "PDF",
+              [invoice.order, invoice],
+              target: "_blank",
+              format: :pdf,
+              class: "pdf" %>
+      <% end %>
       <!-- Niet als probleem te markeren:
            wanneer al een probleem, wanneer niet laatste factuur,
            wanneer in te verwerken (paid) (want dirrect corr.) -->
-      <%= link_to "PROBLEEM", [:problem, invoice.order],
-            remote: true,
-            class: "problem #{'inactive' if invoice.order.problem? ||
-                                            invoice.sequence_number < invoice.order.invoices.size ||
-                                            invoice.order.paid?}" %>
+      <% if policy(invoice).problem? %>
+        <%= link_to "PROBLEEM", [:problem, invoice.order],
+              remote: true,
+              class: "problem #{'inactive' if invoice.order.problem? ||
+                                              invoice.sequence_number < invoice.order.invoices.size ||
+                                              invoice.order.paid?}" %>
+      <% end %>
       <!-- Niet als verzonden te markeren:
           wanneer al in verzonden, wanneer niet laatste factuur,  -->
-      <%= link_to "VERZONDEN", [:sent_out, invoice.order, invoice],
-            remote: true,
-            class: "mail #{'inactive' if invoice.order.problem? || invoice.order.sent? ||
-                                         invoice.sequence_number < invoice.order.invoices.size }" %>
+      <% if policy(invoice).sent_out? %>
+        <%= link_to "VERZONDEN", [:sent_out, invoice.order, invoice],
+              remote: true,
+              class: "mail #{'inactive' if invoice.order.problem? || invoice.order.sent? ||
+                                           invoice.sequence_number < invoice.order.invoices.size }" %>
+      <% end %>
     </div>
   <% end %>
 

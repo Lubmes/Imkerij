@@ -60,4 +60,8 @@ class Invoice < ApplicationRecord
     order = self.order
     order.total_mail_weight
   end
+
+  def self.filter(start_time)
+    where('updated_at < 0', Time.zone.now)
+  end
 end

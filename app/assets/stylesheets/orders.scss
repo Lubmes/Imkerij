@@ -162,19 +162,24 @@
 	}
 }
 
-#sorting {
+#filtering {
+	@extend .w3-container;
+	@extend .w3-card;
+	@extend .w3-white;
+	@extend .w3-margin;
+	.button{
+		@extend .w3-button;
+		@extend .w3-blue;
+		@extend .w3-margin;
+		@extend .w3-round-large;
+	}
 	h3 {
 		@extend .w3-center;
 	}
 	#form {
-		// margin: 0;
-		// padding: 0;
-		#sales-tax, #from, #to {
-			@extend .w3-show-inline-block;
-		}
-		.button {
-			margin: 0;
-		}
+		strong{ @extend .w3-large; }
+		#sales-tax, #from, #to { @extend .w3-show-inline-block; }
+		.button { margin: 0; }
 	}
 	table {
 		margin-bottom: 10px;

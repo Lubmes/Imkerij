@@ -18,6 +18,7 @@ class InvoicesController < ApplicationController
 
   def sent_out
     @invoice = Invoice.find(params[:id])
+    authorize @invoice
     @order = @invoice.order
     @order.sent!
   end
@@ -52,6 +53,7 @@ class InvoicesController < ApplicationController
 
   def print
     @invoice = Invoice.find(params[:id])
+    authorize @invoice
     @order = @invoice.order
     @customer = @order.customer
 

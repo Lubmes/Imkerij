@@ -42,10 +42,8 @@ ActiveRecord::Schema.define(version: 20170630165056) do
 
   create_table "deliveries", force: :cascade do |t|
     t.integer  "kind_of"
-    t.float    "address_lat"
-    t.float    "address_lng"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "sender_id"
     t.index ["sender_id"], name: "index_deliveries_on_sender_id", using: :btree
   end

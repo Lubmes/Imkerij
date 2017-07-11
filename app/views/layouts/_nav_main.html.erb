@@ -12,8 +12,8 @@
       <%= link_to 'log uit', destroy_user_session_path, method: :delete %>
     <% end %>
     <% unless user_signed_in? %>
-      <%= active_link_to 'inloggen', new_user_session_path %>
-      <%= active_link_to 'nieuwe account', new_user_registration_path %>
+      <%= active_link_to "<i class='icon-user'></i>".html_safe, new_user_session_path,
+            title: 'inloggen', class: 'login' %>
     <% end %>
   </div>
 

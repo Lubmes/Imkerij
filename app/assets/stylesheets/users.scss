@@ -178,17 +178,23 @@ h1 {
 	.user-col {
 		@extend .w3-center;
 		@extend .w3-col;
-		@extend .l8;
-		@extend .m8;
-		@extend .s8;
-		margin-left: 16.67%;
+		@extend .l6;
+		@extend .m6;
+		@extend .s6;
+		margin-left: 25%;
 	}
 	table {
+		@extend .w3-card;
 		@extend .w3-table;
-		@extend .w3-border;
-		@extend .w3-border-green;
+		// @extend .w3-border;
+		// @extend .w3-border-green;
 		@extend .w3-bottombar;
 		@extend .w3-padding;
+		.forgot-password {
+			@extend .w3-text-orange;
+			@extend .w3-hover-text-red;
+			text-decoration: none;
+		}
 	}
 	tbody {
 		input {

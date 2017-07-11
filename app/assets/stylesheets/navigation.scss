@@ -28,6 +28,18 @@
 	}
 	.profile {
 		@extend .w3-right;
+		.login {
+			@extend .w3-text-light-teal;
+			@extend .w3-opacity;
+			// @extend .w3-hover-text-green;
+		}
+		.login:hover {
+			@extend .w3-text-green;
+		}
+		.login.active {
+			@extend .w3-text-brown;
+			@extend .w3-opacity-off;
+		}
 	}
 }
 
