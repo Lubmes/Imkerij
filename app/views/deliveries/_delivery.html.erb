@@ -12,8 +12,8 @@
     <div class='title'>
       <h4 class='address'><%= card_title %></h4>
     </div>
-    <% if policy(delivery).edit? %>
-      <% unless order.nil? && order.confirmed? %>
+    <% unless order.nil?  %>
+      <% if policy(delivery).edit? && order.confirmed? %>
         <div class='actions'>
             <%= link_to [:edit, delivery.sender, delivery], remote: true do %>
               <i class='icon-edit'></i>
