@@ -35,6 +35,7 @@
 		}
 		.login:hover {
 			@extend .w3-text-green;
+			@extend .w3-opacity-off;
 		}
 		.login.active {
 			@extend .w3-text-brown;

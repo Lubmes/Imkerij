@@ -20,42 +20,43 @@
 	<% end %>
 
 	<% if @start_time %>
-		<%= @start_time %> <%= l @start_time, format: :long %><br>
-		<%= @end_time %> <%= l @end_time, format: :long %>
-	<% end %>
-
-	<% if @start_time %>
 		<hr>
-		<table id='result'>
-			<thead>
-				<th>Percentage</th>
-				<th>Totale omzet</th>
-				<th>BTW</th>
-			</thead>
-			<tbody>
-				<tr>
-					<th>6%</th>
-					<td>€ <%= @turnover_6 %></td>
-					<td>€ <%= @turnover_tax_6 %></td>
-				</tr>
-				<tr>
-					<th>21%</th>
-					<td>€ <%= @turnover_21 %></td>
-					<td>€ <%= @turnover_tax_21 %></td>
-				</tr>
-				<tr>
-					<th>Alle</th>
-					<td>€ <%= @turnover_6 + @turnover_21 %></td>
-					<td>€ <%= @turnover_tax_6 + @turnover_tax_21 %></td>
-				</tr>
-			</tbody>
-		</table>
+		<p class='selected-time'><em>van </em><%= l @start_time, format: :invoice %><em> tot </em><%= l @end_time, format: :invoice %></p>
 	<% end %>
 
 	<% if @start_time %>
+		<div id='result'>
+			<table>
+				<thead>
+					<th>Percentage</th>
+					<th>Totale omzet</th>
+					<th>BTW</th>
+				</thead>
+				<tbody>
+					<tr>
+						<th>6%</th>
+						<td>€ <%= @turnover_6 %></td>
+						<td>€ <%= @turnover_tax_6 %></td>
+					</tr>
+					<tr>
+						<th>21%</th>
+						<td>€ <%= @turnover_21 %></td>
+						<td>€ <%= @turnover_tax_21 %></td>
+					</tr>
+					<tr>
+						<th>Alle</th>
+						<td>€ <%= @turnover_6 + @turnover_21 %></td>
+						<td>€ <%= @turnover_tax_6 + @turnover_tax_21 %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<% end %>
+
+	<% if false %>
 		<hr>
 		<table>
-			<% @invoices.each do |invoice| %>
+			<% @invoices.order(:updated_at).each do |invoice| %>
 				<tr>
 					<th><%= invoice.id %></th>
 					<td><%= invoice.sequence_number %></td>
@@ -73,18 +74,24 @@
 
 <div id='orders' class='w3-container'>
 	<table>
+		<tr>
+			<th>Klant</th>
+			<th>Laatst bijgewerkt</th>
+			<th>Bedrag</th>
+			<th>Status</th>
+		</tr>
 
 		<% if @problem_orders.any? %>
 		<thead>
-			<tr>
+			<!-- <tr>
 				<th colspan="4"><h3><span class='status-tag problem'>probleem</span></h3></th>
-			</tr>
-			<tr>
+			</tr> -->
+			<!-- <tr>
 				<th>Klant</th>
 				<th>Laatst bijgewerkt</th>
 				<th>Bedrag</th>
 				<th>Status</th>
-			</tr>
+			</tr> -->
 		</thead>
 		<tbody>
 			<% @problem_orders.each do |order| %>
@@ -95,15 +102,15 @@
 
 		<% if @paid_orders.any? %>
 		<thead>
-			<tr>
+			<!-- <tr>
 				<th colspan="4"><h3><span class='status-tag paid'>betaald</span></h3></th>
-			</tr>
-			<tr>
+			</tr> -->
+			<!-- <tr>
 				<th>Klant</th>
 				<th>Laatst bijgewerkt</th>
 				<th>Bedrag</th>
 				<th>Status</th>
-			</tr>
+			</tr> -->
 		</thead>
 		<tbody id='paid'>
 			<% @paid_orders.each do |order| %>
@@ -114,15 +121,15 @@
 
 		<% if @sent_orders.any? %>
 		<thead>
-			<tr>
+			<!-- <tr>
 				<th colspan="4"><h3><span class='status-tag sent'>verzonden</span></h3></th>
-			</tr>
-			<tr>
+			</tr> -->
+			<!-- <tr>
 				<th>Klant</th>
 				<th>Laatst bijgewerkt</th>
 				<th>Bedrag</th>
 				<th>Status</th>
-			</tr>
+			</tr> -->
 		</thead>
 		<tbody>
 			<% @sent_orders.each do |order| %>
@@ -135,15 +142,15 @@
 <% if false %>
 		<% if @open_orders.any? %>
 		<thead>
-			<tr>
+			<!-- <tr>
 				<th colspan="4"><h3><span class='status-tag open'>open</span></h3></th>
-			</tr>
-			<tr>
+			</tr> -->
+			<!-- <tr>
 				<th>Klant</th>
 				<th>Laatst bijgewerkt</th>
 				<th>Bedrag</th>
 				<th>Status</th>
-			</tr>
+			</tr> -->
 		</thead>
 		<tbody>
 			<% @open_orders.each do |order| %>
@@ -154,15 +161,15 @@
 
 		<% if @guest_orders.any? %>
 			<thead>
-				<tr>
+				<!-- <tr>
 					<th colspan="4"><h3><span class='status-tag open'>open (gast)</span></h3></th>
-				</tr>
-				<tr>
+				</tr> -->
+				<!-- <tr>
 					<th>Klant</th>
 					<th>Laatst bijgewerkt</th>
 					<th>Bedrag</th>
 					<th>Status</th>
-				</tr>
+				</tr> -->
 			</thead>
 			<tbody>
 				<% @guest_orders.each do |order| %>

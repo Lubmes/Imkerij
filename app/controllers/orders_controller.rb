@@ -15,8 +15,42 @@ class OrdersController < ApplicationController
     if params[:year_start].blank?
 
     else
-      @start_time = DateTime.civil(params[:year_start].to_i, 1, 1).beginning_of_day.in_time_zone
-      @end_time   = DateTime.civil(params[:year_end].to_i, 12, 31).at_noon.in_time_zone
+      case params[:quarter_start]
+      when "I"
+        m_s = 1
+        d_s = 1
+      when "II"
+        m_s = 4
+        d_s = 1
+      when "III"
+        m_s = 7
+        d_s = 1
+      when "IV"
+        m_s = 10
+        d_s = 1
+      else
+        m_s = 1
+        d_s = 1
+      end
+      case params[:quarter_end]
+      when "I"
+        m_e = 3
+        d_e = 31
+      when "II"
+        m_e = 6
+        d_e = 30
+      when "III"
+        m_e = 9
+        d_e = 30
+      when "IV"
+        m_e = 12
+        d_e = 31
+      else
+        m_e = 12
+        d_e = 31
+      end
+      @start_time = DateTime.civil(params[:year_start].to_i, m_s, d_s).beginning_of_day.in_time_zone
+      @end_time   = DateTime.civil(params[:year_end].to_i, m_e, d_e).end_of_day.in_time_zone
 
       ####
       # @invoices = Invoice.filter(@start_time)

@@ -26,6 +26,10 @@
 	}
 }
 #orders{
+	table {
+		@extend .w3-card;
+		@extend .w3-white;
+	}
 	td:first-child { @extend .w3-leftbar; }
 	tr.order.problem td:first-child { @extend .w3-border-yellow; }
 	tr.order.paid td:first-child { @extend .w3-border-red; }
@@ -176,16 +180,23 @@
 	h3 {
 		@extend .w3-center;
 	}
+	.selected-time {
+		@extend .w3-center;
+		@extend .w3-text-blue;
+		em { @extend .w3-text-black;}
+	}
 	#form {
 		strong{ @extend .w3-large; }
 		#sales-tax, #from, #to { @extend .w3-show-inline-block; }
 		.button { margin: 0; }
 	}
-	table {
-		margin-bottom: 10px;
-		text-align: right;
-		th {
-			width: 200px;
+	#result {
+		table {
+			margin-bottom: 10px;
+			text-align: right;
+			th {
+				width: 200px;
+			}
 		}
 	}
 }

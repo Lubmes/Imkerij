@@ -14,7 +14,7 @@ feature 'Admin kan orders filteren met:' do
                                             :order                => order_1) }
   # totaalbedrag: € 22,00
   let!(:order_2)   { create( :order, :customer => customer ) }
-  let!(:selection_2) { create( :selection,  :product_name         => 'Handoeken',
+  let!(:selection_2) { create( :selection,  :product_name         => 'Handdoeken',
                                             :product_quantity     => 2,
                                             :product_price        =>'10,50',
                                             :product_mail_weight  => '1600',

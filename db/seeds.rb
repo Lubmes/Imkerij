@@ -328,3 +328,63 @@ Invoice.delete_all
 Order.delete_all
 Address.delete_all
 Delivery.delete_all
+
+# Invoices seed START
+if false
+101.times do |c|
+  u = User.find_by(email: "klant_#{c}@example.com")
+  unless u
+    u = User.create!(email: "klant_#{c}@example.com", password: 'password', first_name: "Klant_#{c}", last_name: 'Klanterman', admin: false)
+  end
+  o = u.orders.create!
+  s1 = Selection.new( :product_name        => 'Honingpot',
+                      :product_quantity     => rand(1..10),
+                      :product_price        => '5,00',
+                      :product_mail_weight  => '460',
+                      :product_sales_tax    => 6,
+                      # :order                => o)
+                      )
+  s2 = Selection.new( :product_name        => 'Handoeken',
+                      :product_quantity     => rand(1..10),
+                      :product_price        => '10,50',
+                      :product_mail_weight  => '800',
+                      :product_sales_tax    => 21,
+                      # :order                => o)
+                      )
+  o.selections << s1
+  o.selections << s2
+  s1.save
+  s2.save
+  o.sum_all_selections
+  o.status = :paid
+  o.save
+  i = o.invoices.create(paid: o.total_price,
+                        total_mail_weight: o.total_mail_weight,
+                        #invoice_delivery: @delivery
+                        )
+  i.update_attributes(closed: true)
+
+  # 2017 III
+  if c <= 33
+    date = DateTime.civil(2017, rand(6..12), rand(1..30)).at_noon
+    i.update_attributes(created_at: date,
+                        updated_at: date)
+  # 2017 IV
+  elsif c <= 66
+    date = DateTime.civil(2017, rand(9..12), rand(1..30)).at_noon
+    i.update_attributes(created_at: date,
+                        updated_at: date)
+  # 2018
+  elsif c <= 99
+    date = DateTime.civil(2018, rand(1..12), rand(1..28)).at_noon
+    i.update_attributes(created_at: date,
+                        updated_at: date)
+  else
+    date = DateTime.civil(2017, 12, 31).end_of_day
+    i.update_attributes(created_at: date,
+                        updated_at: date)
+  end
+  print "#{c}\n"
+end
+end
+# Invoices seed END
