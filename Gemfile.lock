@@ -348,7 +348,6 @@ DEPENDENCIES
   rails_12factor
   rails_real_favicon
   redcarpet
-  rest-client (~> 2.0, >= 2.0.1)
   rspec-rails (~> 3.5, >= 3.5.2)
   sass-rails (~> 5.0)
   savon (~> 2.11, >= 2.11.1)

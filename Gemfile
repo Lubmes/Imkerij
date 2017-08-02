@@ -23,7 +23,6 @@ gem 'redcarpet' # Markdown verwerking naar views.
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'mailgun-ruby', '~> 1.1', '>= 1.1.5'
 gem 'faraday', '~> 0.9.2'
-gem 'rest-client', '~> 2.0', '>= 2.0.1'
 gem 'savon', '~> 2.11', '>= 2.11.1'
 
 # heroku

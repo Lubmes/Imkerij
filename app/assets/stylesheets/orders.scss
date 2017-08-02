@@ -171,12 +171,13 @@
 	@extend .w3-card;
 	@extend .w3-white;
 	@extend .w3-margin;
-	.button{
+	padding-bottom: 13px;
+	.filter-button, .reset-button {
 		@extend .w3-button;
-		@extend .w3-blue;
-		@extend .w3-margin;
 		@extend .w3-round-large;
 	}
+	.filter-button { @extend .w3-blue; margin-left: 34px;}
+	.reset-button { @extend .w3-yellow; }
 	h3 {
 		@extend .w3-center;
 	}

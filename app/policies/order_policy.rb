@@ -13,6 +13,10 @@ class OrderPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    admins_only
+  end
+
   def empty?
     (guest_user || (customers_own_domain_only && bookable_order)) && !all_ready_empty && !record.confirmed?
   end

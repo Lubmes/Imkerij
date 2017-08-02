@@ -127,3 +127,8 @@ nl:
       log_in: Inloggen
       sign_up: Nieuwe account
       forgot_password: Wachtwoord vergeten?
+
+  pundit:
+    default: 'Verboden toegang !'
+    order_policy:
+      index?: 'VERBODEN   TOEGANG'

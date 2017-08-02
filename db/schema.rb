@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630165056) do
+ActiveRecord::Schema.define(version: 20170720050816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,16 @@ ActiveRecord::Schema.define(version: 20170630165056) do
     t.integer  "content_weight"
     t.integer  "content_volume"
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
+  end
+
+  create_table "runs", force: :cascade do |t|
+    t.integer  "delivery_id"
+    t.integer  "invoice_id"
+    t.string   "barcode"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["delivery_id"], name: "index_runs_on_delivery_id", using: :btree
+    t.index ["invoice_id"], name: "index_runs_on_invoice_id", using: :btree
   end
 
   create_table "selections", force: :cascade do |t|

@@ -7,8 +7,8 @@ class EventsController < ApplicationController
   end
 
   def new
+    authorize :event
     @event = Event.new
-    authorize @event
   end
 
   def create

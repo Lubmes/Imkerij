@@ -8,17 +8,17 @@ class SessionsController < Devise::SessionsController
 
   protected
 
-  def after_sign_up_path_for(resource)
-    @order = Order.find(session[:order_id])
-
-    if Rails.application.routes.recognize_path(request.referrer)[:action] == 'check_out'
-      [:check_out, @order]
-    else
-      if current_user.admin?
-        [:admin, :welcome]
-      else
-        shop_path
-      end
-    end
-  end
+  # def after_sign_up_path_for(resource)
+  #   @order = Order.find(session[:order_id])
+  #
+  #   if Rails.application.routes.recognize_path(request.referrer)[:action] == 'check_out'
+  #     [:check_out, @order]
+  #   else
+  #     if current_user.admin?
+  #       [:admin, :welcome]
+  #     else
+  #       shop_path
+  #     end
+  #   end
+  # end
 end

@@ -6,12 +6,13 @@ class OrdersController < ApplicationController
 
   require 'mollie/api/client'
   require 'mailgun'
-  require 'savon'
 
   def show
   end
 
   def index
+    authorize :order
+
     if params[:year_start].blank?
 
     else
@@ -83,13 +84,15 @@ class OrdersController < ApplicationController
           end
         end
       end
-      # Belasting-resultaat invioce
+      # Belasting-resultaat invoices.
       @turnover_tax_6 = @turnover_6 * 0.06
       @turnover_tax_21 = @turnover_21 * 0.21
+      # Gefilterde collectie orders.
+      @orders = Order.includes(:invoices).where(invoices: { id: @invoices }).order(updated_at: :asc)
     end
 
     ### Zoals het was.
-    all_orders = Order.all.order(updated_at: :asc)
+    all_orders = @orders ? @orders : Order.all.order(updated_at: :asc)
     @open_orders = all_orders.open
     @problem_orders = all_orders.problem
     @paid_orders = all_orders.paid
@@ -159,24 +162,29 @@ class OrdersController < ApplicationController
   end
 
   def success
+    # 1. Controleer of de gebruiker überhaupt ingelogd is.
     if @user == nil
       flash.now[:alert] = 'U moet eerst inloggen of aanmelden.'
       render 'check_out'
     end
+    # 2. Haal de aan de order gekoppelde payment op bij Mollie.
     mollie = Mollie::API::Client.new ENV["mollie_api_key"]
     payment  = mollie.payments.get @order.payment_id
+    # 3. Controleer de payment op het slagen van de betaling.
     if payment.paid?
+      # 4a. Betaling geslaagd? Dan kunnen alle gegevens compleet gemaakt worden.
       session[:order_id] = nil
       @customer = @order.customer
       @delivery = @order.package_delivery
       @order.paid!
+      # 5a. En een nieuwe invoice worden gemaakt in het geval deze nog niet bestond.
       if @order.invoices.empty?
         @invoice = @order.invoices.create(paid: @order.total_price,
                                           total_mail_weight: @order.total_mail_weight,
                                           invoice_delivery: @delivery)
         @invoice.update_attributes(closed: true)
 
-        # Mail factuur naar interne printer.
+        # Mail naar interne printer.
         mg_client = Mailgun::Client.new ENV["mailgun_api_key"]
         message_params_to_printer = {
           :from     => 'postmaster@mg.rexcopa.nl',
@@ -184,155 +192,171 @@ class OrdersController < ApplicationController
           :subject  => @invoice.storewide_identification_number,
           :html     => (render_to_string('../views/invoices/printer_mail', layout: 'invoice_pdf.html')).to_str
         }
-
+        # Mail naar klant
         message_params_to_customer = {
           :from     => 'postmaster@mg.rexcopa.nl',
           :to       => 'lmschukking@icloud.com',
-          :subject  => "Customer: Invoice id: #{@invoice.id}",
-          :text     => order_received_confirmation(@invoice)
+          :subject  => "Bedankt voor uw bestelling! [#{@invoice.storewide_identification_number}]",
+          :text     => order_received_confirmation_to_customer(@invoice)
         }
         mg_client.send_message 'mg.rexcopa.nl', message_params_to_printer
         mg_client.send_message 'mg.rexcopa.nl', message_params_to_customer
       else
+        # 5b. Invoice bestaat wel.
         @invoice = @order.active_invoice
       end
-      # Initiatie verzendproces
-      # soap_header = {
-      #                 "Action" =>  "http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode",
-      #                 "Security" => {
-      #                   "UsernameToken" => {
-      #                     "Username" => ENV['postnl_username'],
-      #                     "Password" => ENV['postnl_password']
-      #                   }
-      #                 },
-      #                 :attributes! => {
-      #                   "Envelope" => {
-      #                     "xmlns:s" => "http://schemas.xmlsoap.org/soap/envelope/"
-      #                   },
-      #                   "Action" => {
-      #                     "s:mustUnderstand" => "1",
-      #                     "xmlns" => "http://schemas.microsoft.com/ws/2005/05/addressing/none"
-      #                   },
-      #                   "Security" => {
-      #                     "xmlns" => "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-      #                   },
-      #                   "GenerateBarcode" => {
-      #                     "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
-      #                     "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
-      #                     "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"
-      #                     }
-      #                 }
-      #               }
-      #
-      # message = {
-      #             "d6p1:Customer" => {
-      #               "d6p1:CustomerCode"    => 'DEVC',
-      #               "d6p1:CustomerNumber"  => 11223344
-      #             },
-      #             "d6p1:Barcode" => {
-      #               "d6p1:Type" => '3S',
-      #               "d6p1:Range" => 'DEVC',
-      #               "d6p1:Serie" => '1000000-2000000'
-      #             },
-      #             # :attributes! => {
-      #             #
-      #             #   }
-      #           }
-      #
-      # @client = Savon.client(
-      #   :soap_header => soap_header,
-      #   # :namespace_identifier => :none,
-      #   :env_namespace => :s,
-      #   :convert_request_keys_to => :camelcase,
-      #   :raise_errors => false,
-      #   :pretty_print_xml => true,
-      #   :endpoint => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/BarcodeWebService.svc',
-      #   :wsdl => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl')
-      #
-      # @request = @client.build_request(:generate_barcode) do
-      #   message message
+      @run = Run.find_by(invoice_id: @invoice.id)
+      unless @run
+        @run = @invoice.runs.build( delivery: @delivery )
+        # (6.) Een PostNL SOAP-call wordt gemaakt.
+        @client_barcode = Savon.client(
+          :wsdl                    => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl',
+          :log                     => true,
+          :wsse_auth               => ['devc_!R4xc8p9', ENV['postnl_password']],
+          :pretty_print_xml        => true,
+          :convert_request_keys_to => :camelcase,
+          :env_namespace           => :s,
+          :namespace_identifier    => nil
+        )
+
+         message = {
+           "d6p1:Message" => {
+             "d6p1:MessageID" =>  "10",
+             "d6p1:MessageTimeStamp" => Time.now.strftime("%d-%m-%Y %H:%M:%S")
+           },
+           "d6p1:Customer" => {
+             "d6p1:CustomerCode" => "DEVC",
+             "d6p1:CustomerNumber" =>  "11223344"},
+             "d6p1:Barcode" => {
+               "d6p1:Type" => "3S",
+               "d6p1:Range" => "DEVC",
+               "d6p1:Serie" => "1000000-2000000" }
+        }
+
+        attributes = { "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
+                       "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
+                       "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"}
+
+        @response_barcode = @client_barcode.call( :generate_barcode, :attributes => attributes,
+                                  :message => message,
+                                  :soap_header => { "Action" => "http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode"}).to_hash
+
+        @run.barcode = @response_barcode[:generate_barcode_response][:barcode]
+        @run.save
+      end # tijdelijk todat label ook werkt
+        # 7. Label ophalen.
+        # message_for_label =  {
+        #   "d6p1:Customer" => {
+        #     "d6p1:Address" => {
+        #       "d6p1:AddressType" => "02",
+        #       "d6p1:City"        => "Hoofddorp",
+        #       "d6p1:CompanyName" => "PostNL",
+        #       "d6p1:CountryCode" => "NL",
+        #       "d6p1:FirstName"   => "Frank",
+        #       "d6p1:HouseNr"     => "9",
+        #       "d6p1:HouseNrNext" => "",
+        #       "d6p1:Name"        => "Peeters",
+        #       "d6p1:Street"      => "Siriusdreef",
+        #       "d6p1:Zipcode"     => "2132WT"
+        #     },
+        #     "d6p1:CollectionLocation" => "123456",
+        #     "d6p1:CustomerCode"       => "DEVC",
+        #     "d6p1:CustomerNumber"     => "11223344"
+        #   },
+        #   "d6p1:Message" => {
+        #     "d6p1:MessageID"        =>  "10",
+        #     "d6p1:MessageTimeStamp" => Time.now.strftime("%d-%m-%Y %H:%M:%S"),
+        #     "d6p1:PrinterType"      =>  "GraphicFile|PDF"
+        #   },
+        #   "d6p1:Shipments" => {
+        #     "d6p1:Shipment" => {
+        #       "d6p1:Addresses" => {
+        #         "d6p1:Address" => {
+        #           "d6p1:AddressType" =>  "01",
+        #           "d6p1:City"        => "Utrecht",
+        #           "d6p1:CompanyName" => "PostNL",
+        #           "d6p1:CountryCode" => "NL",
+        #           "d6p1:FirstName"   => "Peter",
+        #           "d6p1:HouseNr"     => "12",
+        #           "d6p1:HouseNrNext" => "",
+        #           "d6p1:Name"        => "de Ruiter",
+        #           "d6p1:Name"        => "Oldenburgerstraat",
+        #           "d6p1:Zipcode"     => "3573SJ"
+        #         }
+        #       }
+        #     }
+        #   },
+        #   "d6p1:Barcode" => @run.barcode,
+        #   "d6p1:Contacts" => {
+        #     "d6p1:Contact" => {
+        #       "d6p1:ContactType" => "01",
+        #       "d6p1:Email"       => "receiver@gmail.com",
+        #       "d6p1:SMSNr"       => "0612345678"
+        #     }
+        #   },
+        #   "d6p1:Dimension" => {
+        #     "d6p1:Weight" => "100"
+        #   },
+        #   "d6p1:ProductCodeDelivery" => "03085"
+        # }
+        #
+        # attributes_label = {  "xmlns:d6p1" => "http://postnl.nl/cif/domain/LabellingWebService/",
+        #                       "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
+        #                       "xmlns" => "http://postnl.nl/cif/services/LabellingService/" }
+        #
+        # @client_label = Savon.client(
+        #   :wsdl                    => 'https://testservice.postnl.com/CIF_SB/LabellingWebService/2_1/?wsdl',
+        #   :log                     => true,
+        #   :wsse_auth               => ['devc_!R4xc8p9', ENV['postnl_password']],
+        #   :pretty_print_xml        => true,
+        #   :convert_request_keys_to => :camelcase,
+        #   :env_namespace           => :s,
+        #   :namespace_identifier    => nil
+        # )
+        #
+        # @response_label = @client_label.call( :generate_label, :attributes => attributes_label,
+        #                           :message => message_for_label,
+        #                           :soap_header => { "Action" => "http://postnl.nl/cif/services/LabellingWebService/ILabellingWebService/GenerateLabel"}).to_hash
       # end
-
-      # XML direct gemanipuleerd.
-#       @client = Savon.client(
-#         :endpoint => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/BarcodeWebService.svc',
-#         :wsdl => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl')
-#
-#       @request = @client.build_request(:generate_barcode,
-#         xml: %Q{<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-#   <s:Header>
-#     <Action s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode</Action>
-#     <Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
-#       <wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
-#         <wsse:Username>devc_!R4xc8p9</wsse:Username>
-#         <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">098fd559930983af31ef6630a0bb0c1974156561</wsse:Password>
-#       </wsse:UsernameToken>
-#     </Security>
-#   </s:Header>
-#   <s:Body>
-#     <GenerateBarcode xmlns:d6p1="http://postnl.nl/cif/domain/BarcodeWebService/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://postnl.nl/cif/services/BarcodeWebService/">
-#       <d6p1:Message>
-#         <d6p1:MessageID>5</d6p1:MessageID>
-#         <d6p1:MessageTimeStamp>#{l Time.now, format: :postnl_api}</d6p1:MessageTimeStamp>
-#       </d6p1:Message>
-#       <d6p1:Customer>
-#         <d6p1:CustomerCode>DEVC</d6p1:CustomerCode>
-#         <d6p1:CustomerNumber>11223344</d6p1:CustomerNumber>
-#       </d6p1:Customer>
-#       <d6p1:Barcode>
-#         <d6p1:Type>3S</d6p1:Type>
-#         <d6p1:Range>DEVC</d6p1:Range>
-#         <d6p1:Serie>100000000-200000000</d6p1:Serie>
-#       </d6p1:Barcode>
-#     </GenerateBarcode>
-#   </s:Body>
-# </s:Envelope>})
-
-# @response = @client.call(:generate_barcode,
-#   xml: %Q{<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-# <s:Header>
-# <Action s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode</Action>
-# <Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
-# <wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
-#   <wsse:Username>devc_!R4xc8p9</wsse:Username>
-#   <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">098fd559930983af31ef6630a0bb0c1974156561</wsse:Password>
-# </wsse:UsernameToken>
-# </Security>
-# </s:Header>
-# <s:Body>
-# <GenerateBarcode xmlns:d6p1="http://postnl.nl/cif/domain/BarcodeWebService/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://postnl.nl/cif/services/BarcodeWebService/">
-# <d6p1:Message>
-#   <d6p1:MessageID>5</d6p1:MessageID>
-#   <d6p1:MessageTimeStamp>#{l Time.now, format: :postnl_api}</d6p1:MessageTimeStamp>
-# </d6p1:Message>
-# <d6p1:Customer>
-#   <d6p1:CustomerCode>DEVC</d6p1:CustomerCode>
-#   <d6p1:CustomerNumber>11223344</d6p1:CustomerNumber>
-# </d6p1:Customer>
-# <d6p1:Barcode>
-#   <d6p1:Type>3S</d6p1:Type>
-#   <d6p1:Range>DEVC</d6p1:Range>
-#   <d6p1:Serie>100000000-200000000</d6p1:Serie>
-# </d6p1:Barcode>
-# </GenerateBarcode>
-# </s:Body>
-# </s:Envelope>})
-
-
     else
+      # 4b. Betaling niet geslaagd? Dan terug naar het scherm voor het naar de bank gaan.
       flash.now[:alert] = 'Uw betaling is niet geslaagd.'
       redirect_to [:confirm, @order]
     end
-    # InvoiceMailer.paid_notification(@order.invoices.last, @user).deliver_now
-    # mg_client = Mailgun::Client.new ENV["mailgun_api_key"]
-    # message_params_to_printer = {
-    #   :from     => 'postmaster@mg.rexcopa.nl',
-    #   :to       => 'lmschukking@icloud.com',
-    #   :subject  => "Printer: Invoice id: #{@invoice.storewide_identification_number}",
-    #   :html     => (render_to_string(
-    #                   '../views/invoices/printer_mail')).to_str
-    # }
   end
+
+#   @client = Savon.client(
+#              :wsdl                    => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl',
+#              :log                     => true,
+#              :wsse_auth               => ['devc_!R4xc8p9', 'xxx'],
+#              :pretty_print_xml        => true,
+#              :convert_request_keys_to => :camelcase,
+#              :env_namespace           => :s,
+#              :namespace_identifier    => nil
+#             )
+#
+#  message =  {
+#               "d6p1:Message" => {
+#                 "d6p1:MessageID" =>  "10",
+#                 "d6p1:MessageTimeStamp" => Time.now.strftime("%d-%m-%Y %H:%M:%S")
+#             },
+#               "d6p1:Customer" => {
+#                 "d6p1:CustomerCode" => "DEVC",
+#                 "d6p1:CustomerNumber" =>  "11223344"},
+#                 "d6p1:Barcode" => {
+#                   "d6p1:Type" => "3S",
+#                   "d6p1:Range" => "DEVC",
+#                   "d6p1:Serie" => "1000000-2000000" }
+#             }
+#
+#
+# attributes = { "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
+#                "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
+#                "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"}
+#
+# @client.call(:generate_barcode, :attributes => attributes,
+#              :message => message,
+#              :soap_header => { "Action" => "http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode"})
 
   def problem
     authorize @order
@@ -361,11 +385,14 @@ class OrdersController < ApplicationController
     @user = current_user
   end
 
-  def order_received_confirmation(invoice)
+  def order_received_confirmation_to_customer(invoice)
     <<~EOF
       Uw bestelling is ontvangen. Deze wordt zo spoedig mogelijk naar u opgestuurd.
 
-      Here should be a pdf of an invoice with amount paid: #{invoice.paid}
+      Wilt u uw bestellingen volgen of uw facturen inzien?
+      Op uw profiel heeft u direct toegang tot al de gegevens die u nodig heeft.
+
+      #{root_url}users/#{invoice.order.customer.id}
     EOF
   end
 end

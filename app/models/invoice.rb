@@ -6,6 +6,7 @@ class Invoice < ApplicationRecord
   belongs_to :order
   has_many :corrections
   belongs_to :invoice_delivery, class_name: 'Delivery', optional: true
+  has_many :runs
 
   def sequence_number
     order = self.order

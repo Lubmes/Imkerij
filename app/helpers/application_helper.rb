@@ -1,16 +1,14 @@
 module ApplicationHelper
 
-  # waarom deze method?
+  # Devise formulieren ook functioneel beschikbaar maken in partials.
   def resource_name
     :user
   end
 
-  # waarom deze method?
   def resource
     @resource ||= User.new
   end
 
-  # waarom deze method?
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end

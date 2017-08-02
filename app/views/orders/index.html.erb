@@ -16,7 +16,9 @@
 			<%= select_tag :year_end, options_for_select([2017, 2018]) %>
 			<%= select_tag :quarter_end, options_for_select(['Gehele jaar', 'I', 'II', 'III', 'IV']) %>
 		</div>
-		<%= submit_tag "Filter", class: 'button' %>
+		<%= submit_tag "Filter", class: 'filter-button' %>
+		<%= active_link_to "<i class='icon-close'></i>".html_safe, orders_path,
+					title: 'reset', class: 'reset-button' %>
 	<% end %>
 
 	<% if @start_time %>

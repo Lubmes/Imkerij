@@ -34,11 +34,10 @@
 			<div>
 				naar: <%= ' ' %><br>
 				pakket: <%= ' ' %><br>
-				<strong>PostNL:</strong> <%= @client.operations %><br>
-				<strong>PostNLreq:<br>
-				</strong> <%= @request.body %><br>
+				<strong>PostNL:</strong> <%= '@client.operations' %><br>
 				<strong>PostNLresp:<br>
-				</strong> <%= '@response.body' %><br>
+				</strong> <%= '@response[:generate_barcode_response][:barcode]' %><br>
+			</strong> <%= @run.barcode %><br>
 			</div>
 		</div>
 	<% end %>
