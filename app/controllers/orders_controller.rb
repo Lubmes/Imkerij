@@ -205,44 +205,44 @@ class OrdersController < ApplicationController
         # 5b. Invoice bestaat wel.
         @invoice = @order.active_invoice
       end
-      @run = Run.find_by(invoice_id: @invoice.id)
-      unless @run
-        @run = @invoice.runs.build( delivery: @delivery )
-        # (6.) Een PostNL SOAP-call wordt gemaakt.
-        @client_barcode = Savon.client(
-          :wsdl                    => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl',
-          :log                     => true,
-          :wsse_auth               => ['devc_!R4xc8p9', ENV['postnl_password']],
-          :pretty_print_xml        => true,
-          :convert_request_keys_to => :camelcase,
-          :env_namespace           => :s,
-          :namespace_identifier    => nil
-        )
-
-         message = {
-           "d6p1:Message" => {
-             "d6p1:MessageID" =>  "10",
-             "d6p1:MessageTimeStamp" => Time.now.strftime("%d-%m-%Y %H:%M:%S")
-           },
-           "d6p1:Customer" => {
-             "d6p1:CustomerCode" => "DEVC",
-             "d6p1:CustomerNumber" =>  "11223344"},
-             "d6p1:Barcode" => {
-               "d6p1:Type" => "3S",
-               "d6p1:Range" => "DEVC",
-               "d6p1:Serie" => "1000000-2000000" }
-        }
-
-        attributes = { "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
-                       "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
-                       "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"}
-
-        @response_barcode = @client_barcode.call( :generate_barcode, :attributes => attributes,
-                                  :message => message,
-                                  :soap_header => { "Action" => "http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode"}).to_hash
-
-        @run.barcode = @response_barcode[:generate_barcode_response][:barcode]
-        @run.save
+      # @run = Run.find_by(invoice_id: @invoice.id)
+      # unless @run
+      #   @run = @invoice.runs.build( delivery: @delivery )
+      #   # (6.) Een PostNL SOAP-call wordt gemaakt.
+      #   @client_barcode = Savon.client(
+      #     :wsdl                    => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl',
+      #     :log                     => true,
+      #     :wsse_auth               => ['devc_!R4xc8p9', ENV['postnl_password']],
+      #     :pretty_print_xml        => true,
+      #     :convert_request_keys_to => :camelcase,
+      #     :env_namespace           => :s,
+      #     :namespace_identifier    => nil
+      #   )
+      #
+      #    message = {
+      #      "d6p1:Message" => {
+      #        "d6p1:MessageID" =>  "10",
+      #        "d6p1:MessageTimeStamp" => Time.now.strftime("%d-%m-%Y %H:%M:%S")
+      #      },
+      #      "d6p1:Customer" => {
+      #        "d6p1:CustomerCode" => "DEVC",
+      #        "d6p1:CustomerNumber" =>  "11223344"},
+      #        "d6p1:Barcode" => {
+      #          "d6p1:Type" => "3S",
+      #          "d6p1:Range" => "DEVC",
+      #          "d6p1:Serie" => "1000000-2000000" }
+      #   }
+      #
+      #   attributes = { "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
+      #                  "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
+      #                  "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"}
+      #
+      #   @response_barcode = @client_barcode.call( :generate_barcode, :attributes => attributes,
+      #                             :message => message,
+      #                             :soap_header => { "Action" => "http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode"}).to_hash
+      #
+      #   @run.barcode = @response_barcode[:generate_barcode_response][:barcode]
+      #   @run.save
       end # tijdelijk todat label ook werkt
         # 7. Label ophalen.
         # message_for_label =  {
