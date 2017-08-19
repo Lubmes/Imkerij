@@ -243,7 +243,7 @@ class OrdersController < ApplicationController
       #
       #   @run.barcode = @response_barcode[:generate_barcode_response][:barcode]
       #   @run.save
-      end # tijdelijk todat label ook werkt
+      # end # tijdelijk todat label ook werkt
         # 7. Label ophalen.
         # message_for_label =  {
         #   "d6p1:Customer" => {
