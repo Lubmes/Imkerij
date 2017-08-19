@@ -1,7 +1,5 @@
 class CustomFailure < Devise::FailureApp
     def redirect_url
-      #  new_user_session_url(:subdomain => 'secure')
-      # check_out_order_url
       if request.referrer == "#{root_url}u/sign_in"
         "#{root_url}u/sign_in"
       else
