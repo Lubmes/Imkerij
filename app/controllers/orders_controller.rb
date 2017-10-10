@@ -6,6 +6,8 @@ class OrdersController < ApplicationController
 
   require 'mollie/api/client'
   require 'mailgun'
+  require 'mini_magick'
+  require 'tempfile'
 
   def show
   end
@@ -205,119 +207,150 @@ class OrdersController < ApplicationController
         # 5b. Invoice bestaat wel.
         @invoice = @order.active_invoice
       end
-      # @run = Run.find_by(invoice_id: @invoice.id)
-      # unless @run
-      #   @run = @invoice.runs.build( delivery: @delivery )
-      #   # (6.) Een PostNL SOAP-call wordt gemaakt.
-      #   @client_barcode = Savon.client(
-      #     :wsdl                    => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl',
-      #     :log                     => true,
-      #     :wsse_auth               => ['devc_!R4xc8p9', ENV['postnl_password']],
-      #     :pretty_print_xml        => true,
-      #     :convert_request_keys_to => :camelcase,
-      #     :env_namespace           => :s,
-      #     :namespace_identifier    => nil
-      #   )
-      #
-      #    message = {
-      #      "d6p1:Message" => {
-      #        "d6p1:MessageID" =>  "10",
-      #        "d6p1:MessageTimeStamp" => Time.now.strftime("%d-%m-%Y %H:%M:%S")
-      #      },
-      #      "d6p1:Customer" => {
-      #        "d6p1:CustomerCode" => "DEVC",
-      #        "d6p1:CustomerNumber" =>  "11223344"},
-      #        "d6p1:Barcode" => {
-      #          "d6p1:Type" => "3S",
-      #          "d6p1:Range" => "DEVC",
-      #          "d6p1:Serie" => "1000000-2000000" }
-      #   }
-      #
-      #   attributes = { "xmlns:d6p1" => "http://postnl.nl/cif/domain/BarcodeWebService/",
-      #                  "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
-      #                  "xmlns" => "http://postnl.nl/cif/services/BarcodeWebService/"}
-      #
-      #   @response_barcode = @client_barcode.call( :generate_barcode, :attributes => attributes,
-      #                             :message => message,
-      #                             :soap_header => { "Action" => "http://postnl.nl/cif/services/BarcodeWebService/IBarcodeWebService/GenerateBarcode"}).to_hash
-      #
-      #   @run.barcode = @response_barcode[:generate_barcode_response][:barcode]
-      #   @run.save
-      # end # tijdelijk todat label ook werkt
+      @run = Run.find_by(invoice_id: @invoice.id)
+      unless @run
+        @run = @invoice.runs.build( delivery: @delivery )
+        # (6.) Een PostNL SOAP-call wordt gemaakt.
+        @client_barcode = Savon.client(
+          :wsdl                    => 'https://testservice.postnl.com/CIF_SB/BarcodeWebService/1_1/?wsdl',
+          :log                     => true,
+          :pretty_print_xml        => true
+        )
+
+        @response_barcode = @client_barcode.call( :generate_barcode, xml: %Q{
+          <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bar="http://postnl.nl/cif/services/BarcodeWebService/" xmlns:tpp="http://postnl.nl/cif/domain/BarcodeWebService/">
+            <soapenv:Header>
+              <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:UsernameToken>
+                  <wsse:Username>devc_!R4xc8p9</wsse:Username>
+                  <wsse:Password>#{ENV['postnl_password']}</wsse:Password>
+                </wsse:UsernameToken>
+              </wsse:Security>
+            </soapenv:Header>
+            <soapenv:Body>
+              <bar:GenerateBarcode>
+                <tpp:Message>
+                  <tpp:MessageID>1</tpp:MessageID>
+                  <tpp:MessageTimeStamp>02-05-2014 12:00:00</tpp:MessageTimeStamp>
+                </tpp:Message>
+                <tpp:Customer>
+                  <tpp:CustomerCode>DEVC</tpp:CustomerCode>
+                  <tpp:CustomerNumber>11223344</tpp:CustomerNumber>
+                </tpp:Customer>
+                <tpp:Barcode>
+                  <tpp:Type>3S</tpp:Type>
+                  <tpp:Range>DEVC</tpp:Range>
+                  <tpp:Serie>000000000-999999999</tpp:Serie>
+                </tpp:Barcode>
+              </bar:GenerateBarcode>
+            </soapenv:Body>
+          </soapenv:Envelope>} ).to_hash
+
+        @run.barcode = @response_barcode[:generate_barcode_response][:barcode]
+        @run.save
+      end # tijdelijk todat label ook werkt
         # 7. Label ophalen.
-        # message_for_label =  {
-        #   "d6p1:Customer" => {
-        #     "d6p1:Address" => {
-        #       "d6p1:AddressType" => "02",
-        #       "d6p1:City"        => "Hoofddorp",
-        #       "d6p1:CompanyName" => "PostNL",
-        #       "d6p1:CountryCode" => "NL",
-        #       "d6p1:FirstName"   => "Frank",
-        #       "d6p1:HouseNr"     => "9",
-        #       "d6p1:HouseNrNext" => "",
-        #       "d6p1:Name"        => "Peeters",
-        #       "d6p1:Street"      => "Siriusdreef",
-        #       "d6p1:Zipcode"     => "2132WT"
-        #     },
-        #     "d6p1:CollectionLocation" => "123456",
-        #     "d6p1:CustomerCode"       => "DEVC",
-        #     "d6p1:CustomerNumber"     => "11223344"
-        #   },
-        #   "d6p1:Message" => {
-        #     "d6p1:MessageID"        =>  "10",
-        #     "d6p1:MessageTimeStamp" => Time.now.strftime("%d-%m-%Y %H:%M:%S"),
-        #     "d6p1:PrinterType"      =>  "GraphicFile|PDF"
-        #   },
-        #   "d6p1:Shipments" => {
-        #     "d6p1:Shipment" => {
-        #       "d6p1:Addresses" => {
-        #         "d6p1:Address" => {
-        #           "d6p1:AddressType" =>  "01",
-        #           "d6p1:City"        => "Utrecht",
-        #           "d6p1:CompanyName" => "PostNL",
-        #           "d6p1:CountryCode" => "NL",
-        #           "d6p1:FirstName"   => "Peter",
-        #           "d6p1:HouseNr"     => "12",
-        #           "d6p1:HouseNrNext" => "",
-        #           "d6p1:Name"        => "de Ruiter",
-        #           "d6p1:Name"        => "Oldenburgerstraat",
-        #           "d6p1:Zipcode"     => "3573SJ"
-        #         }
-        #       }
-        #     }
-        #   },
-        #   "d6p1:Barcode" => @run.barcode,
-        #   "d6p1:Contacts" => {
-        #     "d6p1:Contact" => {
-        #       "d6p1:ContactType" => "01",
-        #       "d6p1:Email"       => "receiver@gmail.com",
-        #       "d6p1:SMSNr"       => "0612345678"
-        #     }
-        #   },
-        #   "d6p1:Dimension" => {
-        #     "d6p1:Weight" => "100"
-        #   },
-        #   "d6p1:ProductCodeDelivery" => "03085"
-        # }
-        #
-        # attributes_label = {  "xmlns:d6p1" => "http://postnl.nl/cif/domain/LabellingWebService/",
-        #                       "xmlns:i" => "http://www.w3.org/2001/XMLSchema-instance",
-        #                       "xmlns" => "http://postnl.nl/cif/services/LabellingService/" }
-        #
-        # @client_label = Savon.client(
-        #   :wsdl                    => 'https://testservice.postnl.com/CIF_SB/LabellingWebService/2_1/?wsdl',
-        #   :log                     => true,
-        #   :wsse_auth               => ['devc_!R4xc8p9', ENV['postnl_password']],
-        #   :pretty_print_xml        => true,
-        #   :convert_request_keys_to => :camelcase,
-        #   :env_namespace           => :s,
-        #   :namespace_identifier    => nil
-        # )
-        #
-        # @response_label = @client_label.call( :generate_label, :attributes => attributes_label,
-        #                           :message => message_for_label,
-        #                           :soap_header => { "Action" => "http://postnl.nl/cif/services/LabellingWebService/ILabellingWebService/GenerateLabel"}).to_hash
-      # end
+        @client_label = Savon.client(
+          :wsdl                    => 'https://testservice.postnl.com/CIF_SB/LabellingWebService/2_1/?wsdl',
+          :log                     => true,
+          :pretty_print_xml        => true
+        )
+
+        @response_label = @client_label.call( :generate_label, xml: %Q{
+          <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                            xmlns:lab="http://postnl.nl/cif/services/LabellingWebService/"
+                            xmlns:tpp="http://postnl.nl/cif/domain/LabellingWebService/">
+            <soapenv:Header>
+              <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:UsernameToken>
+                  <wsse:Username>devc_!R4xc8p9</wsse:Username>
+                  <wsse:Password>#{ENV['postnl_password']}</wsse:Password>
+                </wsse:UsernameToken>
+              </wsse:Security>
+            </soapenv:Header>
+            <soapenv:Body>
+              <lab:GenerateLabel>
+                <tpp:Customer>
+                  <tpp:Address>
+                    <tpp:AddressType>02</tpp:AddressType>
+                    <tpp:City>#{ENV['business_city']}</tpp:City>
+                    <tpp:CompanyName>PostNL</tpp:CompanyName>
+                    <tpp:Countrycode>NL</tpp:Countrycode>
+                    <tpp:FirstName></tpp:FirstName>
+                    <tpp:HouseNr>#{ENV['business_street_number']}</tpp:HouseNr>
+                    <tpp:HouseNrExt></tpp:HouseNrExt>
+                    <tpp:Name>#{ENV['business_name']}</tpp:Name>
+                    <tpp:Street>#{ENV['business_street_name']}</tpp:Street>
+                    <tpp:Zipcode>#{ENV['business_zipcode']}</tpp:Zipcode>
+                  </tpp:Address>
+                  <tpp:CollectionLocation>123456</tpp:CollectionLocation>
+                  <tpp:CustomerCode>DEVC</tpp:CustomerCode>
+                  <tpp:CustomerNumber>11223344</tpp:CustomerNumber>
+                </tpp:Customer>
+                <tpp:Message>
+                  <tpp:MessageID>1</tpp:MessageID>
+                  <tpp:MessageTimeStamp>29-06-2016 12:00:00</tpp:MessageTimeStamp>
+                  <tpp:Printertype>GraphicFile|PDF</tpp:Printertype>
+                </tpp:Message>
+                <tpp:Shipments>
+                  <tpp:Shipment>
+                    <tpp:Addresses>
+                      <tpp:Address>
+                         <tpp:AddressType>01</tpp:AddressType>
+                         <tpp:City>Utrecht</tpp:City>
+                         <tpp:CompanyName>PostNL</tpp:CompanyName>
+                         <tpp:Countrycode>NL</tpp:Countrycode>
+                         <tpp:FirstName>Peter</tpp:FirstName>
+                         <tpp:HouseNr>137</tpp:HouseNr>
+                         <tpp:HouseNrExt/>
+                         <tpp:Name>de Ruiter</tpp:Name>
+                         <tpp:Street>Oldenburgerstraat</tpp:Street>
+                         <tpp:Zipcode>3573SJ</tpp:Zipcode>
+                      </tpp:Address>
+                    </tpp:Addresses>
+                    <tpp:Barcode>#{@run.barcode}</tpp:Barcode>
+                    <tpp:Contacts>
+                      <tpp:Contact>
+                         <tpp:ContactType>01</tpp:ContactType>
+                         <tpp:Email>receiver@gmail.com</tpp:Email>
+                         <tpp:SMSNr>0612345678</tpp:SMSNr>
+                      </tpp:Contact>
+                    </tpp:Contacts>
+                    <tpp:Dimension>
+                      <tpp:Weight>4300</tpp:Weight>
+                    </tpp:Dimension>
+                    <tpp:ProductCodeDelivery>3085</tpp:ProductCodeDelivery>
+                  </tpp:Shipment>
+                </tpp:Shipments>
+              </lab:GenerateLabel>
+            </soapenv:Body>
+          </soapenv:Envelope>} ).to_hash
+
+      base_64_binary_data = @response_label[:generate_label_response][:response_shipments][:response_shipment][:labels][:label][:content]
+
+      @pdf_file = File.open('label.pdf', 'wb') do |file|
+        content = Base64.decode64 base_64_binary_data
+        file << content
+      end
+
+      
+
+      # @pdf = MiniMagick::Image.new(@pdf_file.path)
+      # @pdf.pages.first.write("label.png")
+
+      # @pdf.format "png"
+      # @pdf.write "tmp/labeling/output.png"
+      # pdf.pages.first.write("preview.png")
+
+
+      # @label = MiniMagick::Image.new(jpg_file.path)
+      # image.format "png"
+
+      # @png = pdf.pages.first.write("preview.png")
+
+      # @image = send_data( @png.body.string,
+      #                     type: @png.content_type || 'image/png',
+      #                     disposition: 'inline' )
     else
       # 4b. Betaling niet geslaagd? Dan terug naar het scherm voor het naar de bank gaan.
       flash.now[:alert] = 'Uw betaling is niet geslaagd.'

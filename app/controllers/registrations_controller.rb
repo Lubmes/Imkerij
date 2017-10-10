@@ -40,7 +40,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def response_to_sign_up_failure(resource)
     if resource.email == "" && resource.password == nil
-      redirect_to "#{root_url}orders/#{session[:order_id]}/check_out", alert: "Uw registratie formulier was leeg."
+      redirect_to "#{root_url}orders/#{session[:order_id]}/check_out", alert: "Uw registratieformulier was leeg."
     elsif User.pluck(:email).include? resource.email
       redirect_to "#{root_url}orders/#{session[:order_id]}/check_out", alert: "Opgegeven e-mailadres bestaat al."
     end

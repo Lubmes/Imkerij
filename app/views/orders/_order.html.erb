@@ -58,6 +58,6 @@
 <p id='last-name'>order.customer.last_name: <%= order.customer.nil? ? "nil" : order.customer.last_name %></p>
 <p>order.id: <%= order.id %></p>
 <p>order.status: <%= order.status %></p>
-<p>order.package_delivery: <%= order.package_delivery.nil? ? "nil" : order.package_delivery.address_zip_code + ", " + order.package_delivery.address_street_number %></p>
+<p>order.package_delivery: <%= order.package_delivery.nil? ? "nil" : order.package_delivery.address_short %></p>
 <p>order.payment_id: <%= order.payment_id.nil? ? "nil" : order.payment_id %></p>
 <% end %>

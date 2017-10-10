@@ -29,15 +29,16 @@
 		</div>
 	</div>
 
-	<% if false %>
+	<% if true %>
 		<div class='co-order-col'>
 			<div>
-				naar: <%= ' ' %><br>
-				pakket: <%= ' ' %><br>
-				<strong>PostNL:</strong> <%= '@client.operations' %><br>
-				<strong>PostNLresp:<br>
-				</strong> <%= '@response[:generate_barcode_response][:barcode]' %><br>
-			</strong> <%= @run.barcode %><br>
+				<strong>PostNL barcode</strong>
+				<p>run.barcode: <%= @run.barcode %></p>
+				<strong>PostNLresp:</strong>
+				<p>label content: <%= '"/#{@pdf_file.path}"' %></p>
+				<p>label content: <%= '"/#{@pdf.path}"' %></p>
+
+				<img src='./label.pdf'>
 			</div>
 		</div>
 	<% end %>

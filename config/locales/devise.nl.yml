@@ -6,7 +6,7 @@ nl:
       send_paranoid_instructions: 'Als uw e-mailadres bestaat in de database, ontvangt u via e-mail instructies hoe u uw account kunt bevestigen.'
     failure:
       already_authenticated: 'U bent al ingelogd.'
-      unauthenticated: 'U dient in te loggen of u in te schrijven.'
+      unauthenticated: 'U dient uzelf eerst in te loggen of in te schrijven.'
       unconfirmed: 'U dient eerst uw account te bevestigen.'
       locked: 'Uw account is vergrendeld.'
       invalid: 'Ongeldig e-mail of wachtwoord.'

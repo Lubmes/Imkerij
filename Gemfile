@@ -14,7 +14,7 @@ gem 'devise', '~> 4.2'
 gem 'pundit', '~> 1.1'
 gem 'money-rails', '~> 1.7'
 gem 'mollie-api-ruby'
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 2.10', '>= 2.10.61'
 gem 'paperclip', '~> 5.1'
 gem 'active_link_to'
 gem 'font-awesome-rails'
@@ -23,7 +23,8 @@ gem 'redcarpet' # Markdown verwerking naar views.
 gem 'flatpickr_rails', '~> 0.0.2'
 gem 'mailgun-ruby', '~> 1.1', '>= 1.1.5'
 gem 'faraday', '~> 0.9.2'
-gem 'savon', '~> 2.11', '>= 2.11.1'
+gem 'savon', '~> 2.11', '>= 2.11.1' # om postnl api calls mee te maken.
+gem 'mini_magick' # voor ontvangen postnl (base 64 binary data)=>pdf verdere conversie naar image.
 
 # heroku
 gem 'rails_12factor', group: :production
