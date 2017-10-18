@@ -186,14 +186,8 @@ class OrdersController < ApplicationController
                                           invoice_delivery: @delivery)
         @invoice.update_attributes(closed: true)
 
-        # Mail naar interne printer.
         mg_client = Mailgun::Client.new ENV["mailgun_api_key"]
-        message_params_to_printer = {
-          :from     => 'postmaster@mg.rexcopa.nl',
-          :to       => 'lmschukking@icloud.com',
-          :subject  => @invoice.storewide_identification_number,
-          :html     => (render_to_string('../views/invoices/printer_mail', layout: 'invoice_pdf.html')).to_str
-        }
+
         # Mail naar klant
         message_params_to_customer = {
           :from     => 'postmaster@mg.rexcopa.nl',
@@ -201,7 +195,6 @@ class OrdersController < ApplicationController
           :subject  => "Bedankt voor uw bestelling! [#{@invoice.storewide_identification_number}]",
           :text     => order_received_confirmation_to_customer(@invoice)
         }
-        mg_client.send_message 'mg.rexcopa.nl', message_params_to_printer
         mg_client.send_message 'mg.rexcopa.nl', message_params_to_customer
       else
         # 5b. Invoice bestaat wel.
@@ -297,15 +290,15 @@ class OrdersController < ApplicationController
                     <tpp:Addresses>
                       <tpp:Address>
                          <tpp:AddressType>01</tpp:AddressType>
-                         <tpp:City>Utrecht</tpp:City>
+                         <tpp:City>#{@delivery.address.city}</tpp:City>
                          <tpp:CompanyName>PostNL</tpp:CompanyName>
                          <tpp:Countrycode>NL</tpp:Countrycode>
-                         <tpp:FirstName>Peter</tpp:FirstName>
-                         <tpp:HouseNr>137</tpp:HouseNr>
+                         <tpp:FirstName>#{@customer.first_name}</tpp:FirstName>
+                         <tpp:HouseNr>#{@delivery.address.street_number}</tpp:HouseNr>
                          <tpp:HouseNrExt/>
-                         <tpp:Name>de Ruiter</tpp:Name>
-                         <tpp:Street>Oldenburgerstraat</tpp:Street>
-                         <tpp:Zipcode>3573SJ</tpp:Zipcode>
+                         <tpp:Name>#{@customer.last_name}</tpp:Name>
+                         <tpp:Street>#{@delivery.address.street_name}</tpp:Street>
+                         <tpp:Zipcode>#{@delivery.address.zip_code}</tpp:Zipcode>
                       </tpp:Address>
                     </tpp:Addresses>
                     <tpp:Barcode>#{@run.barcode}</tpp:Barcode>
@@ -326,14 +319,33 @@ class OrdersController < ApplicationController
             </soapenv:Body>
           </soapenv:Envelope>} ).to_hash
 
-      base_64_binary_data = @response_label[:generate_label_response][:response_shipments][:response_shipment][:labels][:label][:content]
+      @run.label_data = @response_label[:generate_label_response][:response_shipments][:response_shipment][:labels][:label][:content]
+      @run.save
 
-      @pdf_file = File.open('label.pdf', 'wb') do |file|
-        content = Base64.decode64 base_64_binary_data
-        file << content
-      end
+      mg_client = Mailgun::Client.new ENV["mailgun_api_key"]
 
-      
+      # Mail naar interne printer.
+      message_params_to_printer = {
+        :from     => 'postmaster@mg.rexcopa.nl',
+        :to       => 'lmschukking@icloud.com',
+        :subject  => @invoice.storewide_identification_number,
+        :html     => (render_to_string('../views/invoices/printer_mail', layout: 'invoice_pdf.html')).to_str
+      }
+      mg_client.send_message 'mg.rexcopa.nl', message_params_to_printer
+
+      # @pdf_file = File.open('label.pdf', 'wb') do |file|
+      #   content = Base64.decode64 base_64_binary_data
+      #   file << content
+      # end
+
+      # signature = Paperclip.io_adapters.for(base_64_string)
+      # base_name = File.basename(image_name,File.extname("order-run: #{@order}-#{@order.runs.size}"))
+      # signature.original_filename = "#{base_name}.pdf"
+      # media_img = Run::Image.new()
+      # media_img.image = signature
+      # media_img.company_id = current_company_id
+      # media_img.type = cat
+      # media_img.save
 
       # @pdf = MiniMagick::Image.new(@pdf_file.path)
       # @pdf.pages.first.write("label.png")

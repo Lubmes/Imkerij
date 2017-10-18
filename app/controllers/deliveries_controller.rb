@@ -6,12 +6,11 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.new(delivery_params)
     # authorize @delivery
 
-    @customer = @delivery.sender
-    # @order = @customer.orders.open.last
-    @deliveries = @customer.deliveries
+    # customer = @delivery.sender
+    @deliveries = @delivery.sender.deliveries
 
     @order.package_delivery = @delivery
-    @order.save
+    @order.save!
     if @delivery.save
       # flash[:notice] = 'Adres is toegevoegd.'
       # ^ is storend in betaalproces.
@@ -28,7 +27,6 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find(params[:id])
 
     @customer = @delivery.sender
-    # @order = @customer.orders.open.last
     @deliveries = @customer.deliveries
 
     if @delivery.update(delivery_params)

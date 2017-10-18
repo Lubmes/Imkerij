@@ -14,8 +14,9 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     authorize @event
+
     if params[:image]
-      @event.pictures.new(image: params[:image])
+      @event.pictures.build(image: params[:image])
     end
 
     if @event.save
@@ -35,7 +36,7 @@ class EventsController < ApplicationController
     authorize @event
     if params[:image]
       @event.pictures.delete_all
-      @event.pictures.new(image: params[:image])
+      @event.pictures.build(image: params[:image])
     end
 
     if @event.update(event_params)

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin kan agendapunten verwijderen' do
   create_navigation
-  let(:picture) { FactoryGirl.create :picture }
+  let(:picture) { FactoryGirl.build :picture }
   let!(:event) { create(:event, name: 'Vlindernacht',
                                 description: 'Verhalen van een vlinderexpert.',
                                 date: 14.days.from_now,

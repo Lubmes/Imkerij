@@ -1,6 +1,6 @@
 class Picture < ApplicationRecord
   acts_as_list
-  belongs_to :imageable, polymorphic: true
+  belongs_to :imageable, polymorphic: true, optional: true
 
   has_attached_file :image,
     :storage    => :s3,

@@ -11,6 +11,7 @@
 <% end %>
 
 <% if order && order.at_check_out? && !deliveries.map(&:editable?).any? %>
+  <% sender = order.customer %>
 
   <header>
     <h3 class='add-address' title='nieuw adres'><i class='fa fa-plus'></i> ADRES</h3>

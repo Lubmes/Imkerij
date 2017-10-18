@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PicturePolicy do
   context 'toegang' do
     subject { PicturePolicy.new(user, picture) }
-    let(:picture) { FactoryGirl.create :picture }
+    let(:picture) { build :picture }
 
     context 'voor anonieme gebruikers' do
       let(:user) { nil }

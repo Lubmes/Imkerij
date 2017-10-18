@@ -29,16 +29,16 @@
 		</div>
 	</div>
 
-	<% if true %>
+	<% if false %>
 		<div class='co-order-col'>
 			<div>
 				<strong>PostNL barcode</strong>
 				<p>run.barcode: <%= @run.barcode %></p>
 				<strong>PostNLresp:</strong>
-				<p>label content: <%= '"/#{@pdf_file.path}"' %></p>
-				<p>label content: <%= '"/#{@pdf.path}"' %></p>
+				<p>run.label_data: <%= @run.label_data %></p>
+				<p>run.label.url: <%= @run.label.url %></p>
 
-				<img src='./label.pdf'>
+				<%= image_tag @run.label.url %>
 			</div>
 		</div>
 	<% end %>

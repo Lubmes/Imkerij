@@ -56,24 +56,39 @@ class InvoicesController < ApplicationController
     authorize @invoice
     @order = @invoice.order
     @customer = @order.customer
+    @run = @invoice.runs.last
 
-    pdf = WickedPdf.new.pdf_from_string(
-      ActionController::Base.new().render_to_string(
-        :pdf          => 'invoice',
-        :template     => 'invoices/invoice.pdf.erb',
-        :layout       => 'invoice_pdf.html',
-        :locals       => {
-          :@invoice  => @invoice,
-          :@order    => @order,
-          :@customer => @customer
-        }
-    ))
+    # pdf = WickedPdf.new.pdf_from_string(
+    #   ActionController::Base.new().render_to_string(
+    #     :pdf          => 'invoice',
+    #     :template     => 'invoices/invoice.pdf.erb',
+    #     :layout       => 'invoice_pdf.html',
+    #     :locals       => {
+    #       :@invoice  => @invoice,
+    #       :@order    => @order,
+    #       :@customer => @customer
+    #     }
+    # ))
 
-    mg_client = Mailgun::Client.new Figaro.env.mailgun_api_key
-    mb_object = Mailgun::MessageBuilder.new
+    # mg_client = Mailgun::Client.new Figaro.env.mailgun_api_key
+    # mb_object = Mailgun::MessageBuilder.new
+    #
+    # mb_object.add_attachment send_data pdf
+    # mg_client.send_message 'mg.rexcopa.nl', mb_object
 
-    mb_object.add_attachment send_data pdf
-    mg_client.send_message 'mg.rexcopa.nl', mb_object
+
+    mg_client = Mailgun::Client.new ENV["mailgun_api_key"]
+
+    # Mail naar interne printer.
+    message_params_to_printer = {
+      :from     => 'postmaster@mg.rexcopa.nl',
+      :to       => 'lmschukking@icloud.com',
+      :subject  => @invoice.storewide_identification_number,
+      :html     => (render_to_string('../views/invoices/printer_mail', layout: 'invoice_pdf.html')).to_str
+    }
+    mg_client.send_message 'mg.rexcopa.nl', message_params_to_printer
+
+    redirect_to @customer
   end
 
   private

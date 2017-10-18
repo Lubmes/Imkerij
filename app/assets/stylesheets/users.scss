@@ -71,6 +71,7 @@ h1 {
 	#order-processing {
 		.order {
 			@extend .w3-card-2;
+			background-color: white;
 		}
 		.order-totals {
 			padding-top: 8px;

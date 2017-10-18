@@ -75,7 +75,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(policy(@product).permitted_attributes)
+    params.require(:product).permit(policy(:product).permitted_attributes)
   end
 
   def set_product

@@ -1,5 +1,9 @@
 <div id='invoice-pdf' class='printer'>
 
+  <% if true %>
+    <%= image_tag @run.label.url, class: 'label' %>
+  <% end %>
+
   <%= render 'invoices/content' %>
 
 </div>

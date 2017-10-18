@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720050816) do
+ActiveRecord::Schema.define(version: 20171011075337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 20170720050816) do
 
   create_table "deliveries", force: :cascade do |t|
     t.integer  "kind_of"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "address_lat"
+    t.float    "address_lng"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "sender_id"
     t.index ["sender_id"], name: "index_deliveries_on_sender_id", using: :btree
   end
@@ -138,8 +140,13 @@ ActiveRecord::Schema.define(version: 20170720050816) do
     t.integer  "delivery_id"
     t.integer  "invoice_id"
     t.string   "barcode"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "label_file_name"
+    t.string   "label_content_type"
+    t.integer  "label_file_size"
+    t.datetime "label_updated_at"
+    t.text     "label_data"
     t.index ["delivery_id"], name: "index_runs_on_delivery_id", using: :btree
     t.index ["invoice_id"], name: "index_runs_on_invoice_id", using: :btree
   end

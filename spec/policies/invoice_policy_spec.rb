@@ -3,7 +3,8 @@ require 'rails_helper'
 describe InvoicePolicy do
   context 'toegang' do
     subject { InvoicePolicy.new(user, invoice) }
-    let(:invoice) { FactoryGirl.create :invoice }
+    let(:order) { FactoryGirl.create :order }
+    let(:invoice) { FactoryGirl.create :invoice, order: order }
 
     context 'voor anonieme gebruikers' do
       let(:user) { nil }

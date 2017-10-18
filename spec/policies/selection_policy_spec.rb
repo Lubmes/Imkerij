@@ -4,7 +4,8 @@ describe SelectionPolicy do
   context 'toegang' do
     subject { SelectionPolicy.new(user, selection) }
     let(:order) { FactoryGirl.create( :order, customer: user) }
-    let(:product) { FactoryGirl.create( :product) }
+    let(:category)  { FactoryGirl.create :category }
+    let(:product) { FactoryGirl.create( :product, category: category) }
     let(:selection) { FactoryGirl.create :selection, order: order, product: product }
 
     context 'voor anonieme gebruikers' do

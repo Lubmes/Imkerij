@@ -4,8 +4,7 @@ RSpec.describe ProductPolicy do
   context 'toegang' do
     subject { ProductPolicy.new(user, product) }
     let(:category)  { FactoryGirl.create :category }
-    let(:product)   { FactoryGirl.create :product,
-                        category: category }
+    let(:product)   { FactoryGirl.create :product, category: category }
 
     context 'voor anonieme gebruikers' do
       let(:user) { nil }

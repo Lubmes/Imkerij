@@ -4,7 +4,7 @@ class Delivery < ApplicationRecord
   has_many :orders, foreign_key: "package_delivery_id"
   has_many :invoices, foreign_key: "invoices_delivery_id"
   has_one :address
-  has_many :runs
+  has_many :runs, dependent: :destroy
   accepts_nested_attributes_for :address
 
   def address_short
