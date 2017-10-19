@@ -43,9 +43,10 @@
 		}
 		a.success {
 			@extend .w3-text-teal;
-			@extend .w3-hover-text-yellow;
+			@extend .w3-hover-text-green;
 		}
 		a.download-pdf {
+			@extend .w3-btn;
 			@extend .w3-grey;
 			@extend .w3-round-xlarge;
 			@extend .w3-text-indigo;

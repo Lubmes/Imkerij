@@ -34,7 +34,7 @@
 		</tr>
 	</thead>
 
-	<tbody>
+	<tbody class='large-screens'>
 		<% order.selections.order(created_at: :desc).each do |selection| %>
 			<div class='selection'>
 				<%= render selection %>

@@ -6,13 +6,14 @@
 .shopping-col {
 	@extend .w3-col;
 	@extend .l5;
-	@extend .m5;
-	@extend .s10;
+	@extend .m7;
+	@extend .s9;
 }
 .order-col {
 	@extend .w3-col;
 	@extend .l5;
-	@extend .s10;
+	@extend .m5;
+	@extend .s6;
 	@extend .w3-right;
 }
 
@@ -28,15 +29,28 @@
   	@extend .w3-text-dark-grey;
     @extend .w3-large;
   }
+	.large-screens {
+		@extend .w3-hide-small;
+		@extend .w3-hide-medium;
+	}
+
 	#order {
 		position: fixed;
 		right: 0;
-    .selections {
-      @extend .w3-leftbar;
-			@extend .w3-border-grey;
-			width: 95%;
-    }
-		@extend .w3-white;
+
+		@media (min-width:993px) {
+			.selections {
+				border-left: 5px grey solid;
+				width: 95%;
+	    }
+		}
+
+		@media (max-width:992px) {
+			background-color: white;
+			border: 4px grey solid;
+			border-radius: 32px;
+			margin-right: 4px;
+		}
   }
 }
 
